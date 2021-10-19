@@ -4,3 +4,18 @@
   padding: 2.5em;
   flex: 1;
 }
+
+.section {
+  margin-top: 1.5em;
+
+  .section-title {
+    margin-bottom: 1em;
+  }
+
+  &:first-child {
+    margin-top: 0!important;
+    .section-title {
+      margin-bottom: 0!important;
+    }
+  }
+}

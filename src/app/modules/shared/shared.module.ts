@@ -16,6 +16,10 @@ import {MatCardModule} from "@angular/material/card";
 import { UnitIndicatorComponent } from './components/unit-indicator/unit-indicator.component';
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { AccessHistoryComponent } from './components/access-history/access-history.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 
@@ -26,10 +30,12 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     UnitsGridComponent,
     LoadingShadeComponent,
     UnitIndicatorComponent,
+    AccessHistoryComponent,
   ],
   exports: [
     SidebarComponent,
-    UnitsGridComponent
+    UnitsGridComponent,
+    AccessHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +50,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatCardModule,
     MatRippleModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class SharedModule { }
