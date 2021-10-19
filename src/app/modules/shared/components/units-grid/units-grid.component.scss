@@ -1,0 +1,24 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.units-grid-inner {
+  span {
+    font-size: 1.6em;
+    font-weight: 500;
+  }
+}
+
+.unit-tile::ng-deep {
+  .mat-grid-tile-content {
+    flex-direction: column;
+    justify-content: unset!important;
+    align-items: unset!important;
+  }
+}
+
+.grid-list-wrapper {
+  margin-top: 1em;
+}

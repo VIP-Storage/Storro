@@ -1,0 +1,13 @@
+.main-container {
+  flex: 1;
+}
+
+
+.main-toolbar .spacer {
+    flex: 1 1 auto;
+}
+
+.mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+}

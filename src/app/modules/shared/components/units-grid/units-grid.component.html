@@ -1,0 +1,11 @@
+<div class="units-grid-inner">
+  <app-loading-shade *ngIf="isLoading|async"></app-loading-shade>
+  <div class="grid-list-wrapper">
+    <mat-grid-list cols="2" rowHeight="200px" gutterSize="15px">
+      <mat-grid-tile class="unit-tile" *ngFor="let unit of units|async">
+        <app-unit-preview [unit]="unit"></app-unit-preview>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+</div>

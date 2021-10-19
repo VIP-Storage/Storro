@@ -1,0 +1,17 @@
+:host {
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-title {
+  text-align: center;
+  font-weight: normal;
+  padding: 0.5em;
+  font-size: 1.3rem;
+}
+
+.sidebar-list {
+  margin-top: 0!important;
+  padding-top: 0!important;
+}

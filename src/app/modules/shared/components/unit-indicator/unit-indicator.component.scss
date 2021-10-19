@@ -1,0 +1,62 @@
+@use '~@angular/material' as mat;
+
+$primary: mat.define-palette(mat.$deep-purple-palette);
+$accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
+
+:host {
+  background-color: mat.get-color-from-palette($primary, 200, 0.2);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  flex: 1;
+
+  &.clickable {
+    cursor: pointer;
+  }
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem;
+  background: white;
+  border-radius: 8px;
+  margin-right: 8px;
+  margin-left: -2px;
+
+  &.has-badge .mat-badge-content {
+    font-family: 'Material Icons', emoji;
+    background-color: red;
+    font-size: 13px;
+    line-height: 17px;
+    pointer-events: none;
+  }
+}
+
+.indicator-text {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .indicator-title {
+    color: mat.get-color-from-palette($primary, 300, 0.9);
+  }
+
+  .indicator-value {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
+
+.ripple-wrapper {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
