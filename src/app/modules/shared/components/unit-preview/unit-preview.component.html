@@ -8,11 +8,14 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-
-    <mat-grid-list cols="2" rowHeight="60px" gutterSize="5px">
-      <mat-grid-tile class="chart-tile" rowspan="4" *ngFor="let chart of unitCharts">
+    <mat-divider></mat-divider>
+    <mat-grid-list class="chart-grid" cols="2" rowHeight="2:2" gutterSize="10px">
+      <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts">
         <app-unit-chart [type]="chart" [unit]="unit"></app-unit-chart>
       </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list class="indicator-grid" cols="2" rowHeight="3:1" gutterSize="10px">
       <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators">
         <app-unit-indicator [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
       </mat-grid-tile>
