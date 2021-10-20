@@ -2,14 +2,20 @@
 
 <mat-nav-list class="sidebar-list">
   <ng-container *ngFor="let item of sidebarItems">
-    <a mat-list-item *ngIf="!item.isExternal" [routerLink]="item.link">
-      <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-      <span matLine>{{ item.title }}</span>
-    </a>
+    <ng-container *ngIf="!isSection(item); else sectionTemplate">
+      <a mat-list-item *ngIf="!item.isExternal" [routerLink]="item.link">
+        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+        <span matLine>{{ item.title }}</span>
+      </a>
 
-    <a mat-list-item *ngIf="item.isExternal" [href]="item.link" target="_blank">
-      <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-      <span matLine>{{ item.title }}</span>
-    </a>
+      <a mat-list-item *ngIf="item.isExternal" [href]="item.link" target="_blank">
+        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+        <span matLine>{{ item.title }}</span>
+      </a>
+    </ng-container>
+
+    <ng-template #sectionTemplate>
+      <div mat-subheader>{{item.title}}</div>
+    </ng-template>
   </ng-container>
 </mat-nav-list>

@@ -7,10 +7,4 @@ export const ClientSidebarItems: SidebarItem[] = [
     isExternal: false,
     link: '/client/dashboard'
   },
-  {
-    title: 'Units',
-    icon: 'place',
-    isExternal: false,
-    link: '/client/units'
-  }
 ]

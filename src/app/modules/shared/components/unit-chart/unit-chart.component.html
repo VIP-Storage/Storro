@@ -1,0 +1,20 @@
+<div class="chart-meta">
+  <span class="chart-title">{{title|titlecase}}</span>
+</div>
+<div class="chart-wrapper">
+  <ngx-charts-line-chart [results]="chartData"
+                         [autoScale]="true"
+                         [scheme]="chartScheme">
+    <ng-template #seriesTooltipTemplate let-model="model">
+      {{model[0]['value']}}{{measurementUnit}}
+    </ng-template>
+  </ngx-charts-line-chart>
+</div>
+<div class="chart-details">
+  <div class="chart-measurement" [matTooltip]="getTooltipText('max')|titlecase" matTooltipPosition="below">
+    <mat-icon>arrow_drop_up</mat-icon>{{maxValue}}
+  </div>
+  <div class="chart-measurement" [matTooltip]="getTooltipText('min')|titlecase" matTooltipPosition="below">
+    <mat-icon>arrow_drop_down</mat-icon>{{minValue}}
+  </div>
+</div>

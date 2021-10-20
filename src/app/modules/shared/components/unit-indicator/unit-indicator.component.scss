@@ -60,3 +60,7 @@ $accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
   left: 0;
   right: 0;
 }
+
+* {
+  user-select: none;
+}

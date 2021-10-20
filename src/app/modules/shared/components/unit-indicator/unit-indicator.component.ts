@@ -9,6 +9,7 @@ import {MatRipple} from "@angular/material/core";
 import {BadgeType} from "../../../../data/types/badge.type";
 import {UnitIndicatorFactory} from "../../factory/unit-indicator.factory";
 import {UnitIndicatorDataType} from "../../../../data/enums/unit-indicator.enum";
+import {UnitState} from "../../../../data/enums/unit-state.enum";
 
 @Component({
   selector: 'app-unit-indicator',
@@ -74,6 +75,7 @@ export class UnitIndicatorComponent implements OnInit {
           case UnitIndicatorDataType.TEMP:
             return UnitIndicatorFactory.getTemperatureData(rawData!.lastTemperature)
           case UnitIndicatorDataType.STATE:
+            this.clickable = true;
             return UnitIndicatorFactory.getUnitStateData(rawData!.state)
         }
       })
@@ -96,6 +98,9 @@ export class UnitIndicatorComponent implements OnInit {
       case UnitIndicatorDataType.DOOR:
         this.updateDoorState();
         break
+      case UnitIndicatorDataType.STATE:
+        this.updateState();
+        break;
       default:
         break
     }
@@ -106,5 +111,17 @@ export class UnitIndicatorComponent implements OnInit {
 
   private updateDoorState() {
     this._currentData.doorState = (this._currentData.doorState === DoorState.OPEN) ? DoorState.CLOSED : DoorState.OPEN;
+  }
+
+  private updateState() {
+    switch (this._currentData.state) {
+      case UnitState.UNLOCKED:
+      case UnitState.ALARM:
+        this._currentData.state = UnitState.LOCKED;
+        break;
+      case UnitState.LOCKED:
+        this._currentData.state = UnitState.UNLOCKED;
+        break;
+    }
   }
 }

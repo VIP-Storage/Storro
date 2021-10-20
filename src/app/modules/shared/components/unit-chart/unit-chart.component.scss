@@ -1,0 +1,46 @@
+@use '~@angular/material' as mat;
+
+$primary: mat.define-palette(mat.$deep-purple-palette);
+$accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+
+:host {
+  flex: 1;
+  background-color: mat.get-color-from-palette($primary, 200, 0.2);
+  border-radius: 8px;
+  display: flex;
+  padding: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.chart-meta {
+  padding-top: 10px;
+  padding-left: 10px;
+
+
+  .chart-title {
+    color: gray;
+  }
+}
+
+.chart-wrapper {
+  flex: 1;
+  max-height: calc(100% - 60px);
+}
+
+.chart-details {
+  padding: 1px 10px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chart-measurement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}
+
+* {
+  user-select: none;
+}

@@ -5,6 +5,7 @@ import {UnitDataType} from "../../../../data/types/unit-data.type";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {filter} from "rxjs/operators";
 import {UnitIndicatorDataType} from "../../../../data/enums/unit-indicator.enum";
+import {ChartDataType} from "../../../../data/enums/chart-data.enum";
 
 @Component({
   selector: 'app-unit-preview',
@@ -14,20 +15,27 @@ import {UnitIndicatorDataType} from "../../../../data/enums/unit-indicator.enum"
 export class UnitPreviewComponent implements OnInit {
 
   @Input()
-  set unit(newValue: UnitType) {
-    this._unit = newValue;
-    this.unitsService.getUnitData(newValue).subscribe(this._unitData);
+  set unit(newValue: UnitType|null) {
+    if (!!newValue) {
+      this._unit = newValue;
+      this.unitsService.getUnitData(newValue).subscribe(this._unitData);
+    }
   }
 
   get unit(): UnitType {
     return this._unit!;
   }
 
-  unitIndicators: Array<UnitIndicatorDataType> = [
-    UnitIndicatorDataType.DOOR,
+  unitIndicators: UnitIndicatorDataType[] = [
     UnitIndicatorDataType.HUMIDITY,
+    UnitIndicatorDataType.TEMP,
     UnitIndicatorDataType.STATE,
-    UnitIndicatorDataType.TEMP
+    UnitIndicatorDataType.DOOR,
+  ];
+
+  unitCharts: ChartDataType[] = [
+    ChartDataType.HUMIDITY,
+    ChartDataType.TEMPERATURE
   ];
 
   unitData: Observable<UnitDataType>;
@@ -36,7 +44,7 @@ export class UnitPreviewComponent implements OnInit {
   private _unit?: UnitType
 
   constructor(private unitsService: UnitsService) {
-    this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>
+    this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>;
   }
 
   ngOnInit(): void {
