@@ -11,6 +11,11 @@ import {MatGridListModule} from "@angular/material/grid-list";
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard'
+  },
+  {
     path: 'dashboard',
     component: ClientDashboardComponent
   },
