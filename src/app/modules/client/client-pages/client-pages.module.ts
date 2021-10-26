@@ -7,6 +7,7 @@ import {ClientUnitComponent} from './client-unit/client-unit.component';
 import {UnitResolver} from "../unit.resolver";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
+import { ClientBillingComponent } from './client-billing/client-billing.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ClientDashboardComponent,
-    ClientUnitComponent
+    ClientUnitComponent,
+    ClientBillingComponent
   ],
   imports: [
     CommonModule,

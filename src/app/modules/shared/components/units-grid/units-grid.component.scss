@@ -11,13 +11,6 @@
   }
 }
 
-.unit-tile {
-  min-width: 420px;
-  padding: 1em;
-  flex: 1;
-  max-width: 620px;
-}
-
 .unit-tile::ng-deep {
   .mat-grid-tile-content {
     flex-direction: column;
@@ -28,6 +21,4 @@
 
 .grid-list-wrapper {
   margin-top: 1em;
-  display: flex;
-  flex-wrap: wrap;
 }

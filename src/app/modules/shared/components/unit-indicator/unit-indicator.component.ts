@@ -18,6 +18,8 @@ import {UnitState} from "../../../../data/enums/unit-state.enum";
 })
 export class UnitIndicatorComponent implements OnInit {
 
+  showIcons = true;
+
   @ViewChild(MatRipple) ripple!: MatRipple;
 
   @HostListener('click', ['$event']) indicatorClicked = (e: { x: number, y: number }) => {

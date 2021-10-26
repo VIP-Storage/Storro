@@ -1,24 +1,3 @@
-<ng-template #iconWrapper>
-  <mat-icon [style]="iconColorStyle" *ngIf="hasLoaded|async; else iconLoading">{{icon}}</mat-icon>
-  <ng-template #iconLoading>
-    <mat-spinner diameter="18"></mat-spinner>
-  </ng-template>
-</ng-template>
-
-<div class="icon-wrapper has-badge" *ngIf="badge"
-     [matBadge]="badge.icon"
-     matBadgeOverlap="true"
-     matBadgeSize="small"
-     [matTooltip]="badge.text"
-     matTooltipPosition="after">
-  <ng-template [ngTemplateOutlet]="iconWrapper"></ng-template>
-</div>
-
-<div class="icon-wrapper no-badge" *ngIf="!badge">
-  <ng-template [ngTemplateOutlet]="iconWrapper"></ng-template>
-</div>
-
-
 <div class="indicator-text">
   <span class="indicator-title">{{title|titlecase}}</span>
   <span class="indicator-value" *ngIf="hasLoaded|async; else textLoading">{{text}}</span>
@@ -26,4 +5,28 @@
     <mat-spinner diameter="18"></mat-spinner>
   </ng-template>
 </div>
+
+<ng-container *ngIf="showIcons">
+  <ng-template #iconWrapper>
+    <mat-icon inline [style]="iconColorStyle" *ngIf="hasLoaded|async; else iconLoading">{{icon}}</mat-icon>
+    <ng-template #iconLoading>
+      <mat-spinner diameter="18"></mat-spinner>
+    </ng-template>
+  </ng-template>
+
+  <div class="icon-wrapper has-badge" *ngIf="badge"
+       [matBadge]="badge.icon"
+       matBadgeOverlap="true"
+       matBadgeSize="small"
+       [matTooltip]="badge.text"
+       matTooltipPosition="after">
+    <ng-template [ngTemplateOutlet]="iconWrapper"></ng-template>
+  </div>
+
+  <div class="icon-wrapper no-badge" *ngIf="!badge">
+    <ng-template [ngTemplateOutlet]="iconWrapper"></ng-template>
+  </div>
+
+</ng-container>
+
 <div class="ripple-wrapper" matRipple></div>

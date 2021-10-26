@@ -7,4 +7,10 @@ export const ClientSidebarItems: SidebarItem[] = [
     isExternal: false,
     link: '/client/dashboard'
   },
+  {
+    title: 'Billing',
+    icon: 'attach_money',
+    isExternal: false,
+    link: '/client/billing'
+  },
 ]

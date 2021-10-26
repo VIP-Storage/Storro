@@ -43,13 +43,13 @@ $dark-theme: mat.define-dark-theme((
 ));
 
 
-@media (prefers-color-scheme: light) {
+.light-theme {
   @include mat.all-component-themes($light-theme);
   @include unit-indicator.theme($light-theme);
   @include unit-chart.theme($light-theme);
 }
 
-@media (prefers-color-scheme: dark) {
+.dark-theme {
   @include mat.all-component-colors($dark-theme);
   @include unit-indicator.theme($dark-theme);
   @include unit-chart.theme($dark-theme);

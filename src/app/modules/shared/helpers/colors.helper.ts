@@ -5,7 +5,7 @@ export const getIconColor = (color: string): string => {
     case 'red':
       return '#ff1744';
     case 'blue':
-      return '#2962ff';
+      return '#65acf3';
     default:
       return '#000';
   }
