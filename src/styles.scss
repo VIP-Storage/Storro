@@ -50,7 +50,7 @@ $dark-theme: mat.define-dark-theme((
 }
 
 @media (prefers-color-scheme: dark) {
-  @include mat.all-component-themes($dark-theme);
+  @include mat.all-component-colors($dark-theme);
   @include unit-indicator.theme($dark-theme);
   @include unit-chart.theme($dark-theme);
 }
