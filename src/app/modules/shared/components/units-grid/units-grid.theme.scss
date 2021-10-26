@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin color($border-color) {
+  .unit-tile {
+    border-color: $border-color;
+  }
+}
+
+
+@mixin theme($theme, $border-color) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($border-color);
+  }
+}

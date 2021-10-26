@@ -10,6 +10,12 @@
     font-weight: 500;
   }
 }
+.unit-tile {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
 .unit-tile::ng-deep {
   .mat-grid-tile-content {

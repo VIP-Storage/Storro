@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ClientSidebarItems} from "../../../../data/client-sidebar.data";
 import {SidebarItem} from "../../../../data/types/sidebar-item.type";
 import {UnitsService} from "../../../../api/backend/services/units.service";
+import {ThemeService} from "../../../../services/theme.service";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-sidebar',
@@ -12,9 +15,16 @@ export class SidebarComponent implements OnInit {
 
   showClientNavigation = true;
 
+  isDarkMode: Observable<boolean>;
   sidebarItems: SidebarItem[] = [];
 
-  constructor(private unitsService: UnitsService) {
+  constructor(private unitsService: UnitsService,
+              public themeService: ThemeService) {
+
+    this.isDarkMode = this.themeService.theme.pipe(
+      map(theme => theme === 'dark-theme')
+    );
+
     if (this.showClientNavigation) {
       this.unitsService.getUnits().subscribe(clientUnits => {
         const clientUnitItems: SidebarItem[] = clientUnits.map(unit => ({
@@ -42,5 +52,9 @@ export class SidebarComponent implements OnInit {
 
   isSection(item: SidebarItem) {
     return !!item.isSection;
+  }
+
+  updateTheme(darkMode: boolean) {
+    this.themeService.changeTheme(darkMode);
   }
 }

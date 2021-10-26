@@ -19,3 +19,11 @@
     </ng-template>
   </ng-container>
 </mat-nav-list>
+
+<div class="toggles">
+  <mat-slide-toggle
+    [ngModel]="isDarkMode|async"
+  (ngModelChange)="updateTheme($event)">
+    Dark Mode
+  </mat-slide-toggle>
+</div>

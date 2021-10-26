@@ -22,6 +22,8 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {UnitChartComponent} from './components/unit-chart/unit-chart.component';
 import {LineChartModule} from "@swimlane/ngx-charts";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import {LineChartModule} from "@swimlane/ngx-charts";
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    LineChartModule
+    LineChartModule,
+    MatSlideToggleModule,
+    FormsModule
   ]
 })
 export class SharedModule {

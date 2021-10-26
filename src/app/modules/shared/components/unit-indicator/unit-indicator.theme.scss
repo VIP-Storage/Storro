@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin color($theme) {
+@mixin color($theme, $isDarkTheme) {
   $color-config: mat.get-color-config($theme);
   $primary: map.get($color-config, 'primary');
   $accent: map.get($color-config, 'accent');
@@ -10,8 +10,9 @@
     background-color: mat.get-color-from-palette($primary, 200, 0.2);
 
     .indicator-title {
-      color: mat.get-color-from-palette($accent, 100, 0.9);
-      @media (prefers-color-scheme: light) {
+      @if $isDarkTheme {
+        color: mat.get-color-from-palette($accent, 100, 0.9);
+      } @else {
         color: gray;
       }
     }
@@ -19,9 +20,9 @@
 }
 
 
-@mixin theme($theme) {
+@mixin theme($theme, $isDarkTheme) {
   $color-config: mat.get-color-config($theme);
   @if $color-config != null {
-    @include color($theme);
+    @include color($theme, $isDarkTheme);
   }
 }
