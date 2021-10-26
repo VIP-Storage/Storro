@@ -1,10 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+// Imports for Angular Material Theming
+@use '~@angular/material' as mat;
+@use './app/modules/shared/components/unit-indicator/unit-indicator.theme' as unit-indicator;
+@use './app/modules/shared/components/unit-chart/unit-chart.theme' as unit-chart;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@include mat.core();
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 app-root {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+// Light theme
+$light-primary: mat.define-palette(mat.$indigo-palette, 500);
+$light-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $light-primary,
+    accent: $light-accent,
+  )
+));
+
+// Dark theme
+$dark-primary: mat.define-palette(mat.$blue-palette);
+$dark-accent: mat.define-palette(mat.$blue-gray-palette);
+$dark-warn: mat.define-palette(mat.$deep-orange-palette);
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn
+  )
+));
+
+
+@media (prefers-color-scheme: light) {
+  @include mat.all-component-themes($light-theme);
+  @include unit-indicator.theme($light-theme);
+  @include unit-chart.theme($light-theme);
+}
+
+@media (prefers-color-scheme: dark) {
+  @include mat.all-component-themes($dark-theme);
+  @include unit-indicator.theme($dark-theme);
+  @include unit-chart.theme($dark-theme);
 }

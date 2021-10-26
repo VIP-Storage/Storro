@@ -1,11 +1,5 @@
-@use '~@angular/material' as mat;
-
-$primary: mat.define-palette(mat.$deep-purple-palette);
-$accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
-
 :host {
   flex: 1;
-  background-color: mat.get-color-from-palette($primary, 200, 0.2);
   border-radius: 8px;
   display: flex;
   padding: 0;
@@ -16,11 +10,6 @@ $accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 .chart-meta {
   padding-top: 10px;
   padding-left: 10px;
-
-
-  .chart-title {
-    color: gray;
-  }
 }
 
 .chart-wrapper {
@@ -38,7 +27,6 @@ $accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: gray;
 }
 
 * {

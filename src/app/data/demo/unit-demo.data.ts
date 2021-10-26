@@ -7,22 +7,22 @@ import {UnitAccessEntryType} from "../types/unit-access-entry.type";
 const DemoUnits: UnitType[] = [
   {
     name: 'Demo Unit 1',
-    location: 'Your Mom\'s House',
+    location: 'Cordova, TN',
     id: 0,
   },
   {
     name: 'Demo Unit 2',
-    location: 'Your Mom\'s Mom\'s House',
+    location: 'Collierville, TN',
     id: 1,
   },
   {
     name: 'Demo Unit 3',
-    location: 'Hell',
+    location: 'Helsinki, FI',
     id: 2,
   },
   {
     name: 'Demo Unit 4',
-    location: 'Comcast World Headquarters',
+    location: 'Austin, TX',
     id: 3
   }
 ]
