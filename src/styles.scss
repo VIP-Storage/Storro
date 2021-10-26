@@ -1,9 +1,6 @@
 // Imports for Angular Material Theming
 @use '~@angular/material' as mat;
-@use './app/modules/shared/components/unit-indicator/unit-indicator.theme' as unit-indicator;
-@use './app/modules/shared/components/unit-chart/unit-chart.theme' as unit-chart;
-@use './app/modules/shared/components/units-grid/units-grid.theme' as units-grid;
-
+@use './app/modules/shared/components/components.theme' as components;
 
 @include mat.core();
 
@@ -47,14 +44,10 @@ $dark-theme: mat.define-dark-theme((
 
 .light-theme {
   @include mat.all-component-themes($light-theme);
-  @include unit-indicator.theme($light-theme, false);
-  @include unit-chart.theme($light-theme, false);
-  @include units-grid.theme($light-theme, #e7e7e7);
+  @include components.light-components-theme($light-theme);
 }
 
 .dark-theme {
   @include mat.all-component-colors($dark-theme);
-  @include unit-indicator.theme($dark-theme, true);
-  @include unit-chart.theme($dark-theme, true);
-  @include units-grid.theme($dark-theme, #4e4d4d);
+  @include components.dark-components-theme($dark-theme);
 }

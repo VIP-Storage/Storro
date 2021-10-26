@@ -1,0 +1,11 @@
+<h3 class="subtitle" *ngIf="!!subtitle">{{subtitle}}</h3>
+<div class="amount">
+  <span class="dollar-amount">${{dollars}}</span>
+  <span class="cents-amount">.{{cents}}</span>
+</div>
+<h1 class="title">{{title}}</h1>
+<div class="button-wrapper">
+  <button mat-flat-button [color]="color" *ngIf="!!routerLink" [routerLink]="routerLink">
+    {{actionTitle}}
+  </button>
+</div>

@@ -1,0 +1,50 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin color($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  $primary: map.get($color-config, 'primary');
+  $accent: map.get($color-config, 'accent');
+
+  app-billing-card {
+    background-color: mat.get-color-from-palette($primary, 200, 0.2);
+
+    @if $isDarkTheme {
+      &.show-background {
+        background-image: url("/assets/dark-blobs.svg");
+      }
+
+      border-color: #4e4d4d;
+    } @else {
+      &.show-background {
+        background-image: url("/assets/light-blobs.svg");
+      }
+
+      border-color: #e7e7e7
+    }
+
+    .title {
+      @if $isDarkTheme {
+        color: mat.get-color-from-palette($accent, 100, 0.9);
+      } @else {
+        color: #484848;
+      }
+    }
+
+    .subtitle {
+      @if $isDarkTheme {
+        color: #ffffff9e;
+      } @else {
+        color: #444444;
+      }
+    }
+  }
+}
+
+
+@mixin theme($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme, $isDarkTheme);
+  }
+}

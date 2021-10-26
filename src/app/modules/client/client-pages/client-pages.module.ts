@@ -8,6 +8,7 @@ import {UnitResolver} from "../unit.resolver";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {ClientBillingComponent} from './client-billing/client-billing.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 const routes: Routes = [
@@ -44,7 +45,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSidenavModule,
   ],
   exports: [
     RouterModule

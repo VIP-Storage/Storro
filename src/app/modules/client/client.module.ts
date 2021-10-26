@@ -13,10 +13,10 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ]
 })
 export class ClientModule {

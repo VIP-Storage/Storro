@@ -24,6 +24,9 @@ import {UnitChartComponent} from './components/unit-chart/unit-chart.component';
 import {LineChartModule} from "@swimlane/ngx-charts";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
+import {PaymentMethodComponent} from './components/payment-method/payment-method.component';
+import {PaymentHistoryComponent} from './components/payment-history/payment-history.component';
+import {BillingCardComponent} from "./components/billing-card/billing-card.component";
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import {FormsModule} from "@angular/forms";
     UnitIndicatorComponent,
     AccessHistoryComponent,
     UnitChartComponent,
+    PaymentMethodComponent,
+    PaymentHistoryComponent,
+    BillingCardComponent
   ],
   exports: [
     SidebarComponent,
@@ -42,7 +48,9 @@ import {FormsModule} from "@angular/forms";
     AccessHistoryComponent,
     UnitPreviewComponent,
     UnitChartComponent,
-    UnitIndicatorComponent
+    UnitIndicatorComponent,
+    PaymentMethodComponent,
+    BillingCardComponent
   ],
   imports: [
     CommonModule,

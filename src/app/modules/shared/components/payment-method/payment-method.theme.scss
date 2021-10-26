@@ -1,0 +1,20 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin color($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  $primary: map.get($color-config, 'primary');
+  $accent: map.get($color-config, 'accent');
+
+  app-payment-method {
+    background-color: mat.get-color-from-palette($primary, 100, 0.1);
+  }
+}
+
+
+@mixin theme($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme, $isDarkTheme);
+  }
+}

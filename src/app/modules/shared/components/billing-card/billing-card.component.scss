@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 2em 2.8em;
+
+  &.show-borders {
+    border-width: 2px;
+    border-style: solid;
+  }
+}
+
+.title {
+  font-size: 24px;
+  margin-top: 0.6em;
+}
+
+.amount {
+  display: flex;
+  align-items: baseline;
+  margin-top: 1.8em;
+
+  .dollar-amount, .cents-amount {
+    font-weight: bold;
+  }
+
+  .dollar-amount {
+    font-size: 48px;
+  }
+
+  .cents-amount {
+    font-size: 28px;
+  }
+}
+
+.subtitle {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.button-wrapper {
+  margin-top: 1em;
+}

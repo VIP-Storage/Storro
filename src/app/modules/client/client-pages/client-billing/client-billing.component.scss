@@ -1,0 +1,42 @@
+:host {
+  flex: 1;
+  display: flex;
+}
+
+.billing-container {
+  flex: 1;
+}
+
+.billing-sidebar {
+  padding: 1.2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.billing-main {
+  padding: 1.2em;
+  display: flex;
+  flex-direction: column;
+
+  .billing-info {
+    display: flex;
+    flex-direction: row;
+
+    app-billing-card {
+      flex: 1;
+      margin-left: 1em;
+      margin-right: 1em;
+      background-repeat: no-repeat;
+
+      &:first-child {
+        margin-left: 0;
+        background-position-x: right;
+      }
+
+      &:last-child {
+        margin-right: 0;
+        background-position-x: left;
+      }
+    }
+  }
+}

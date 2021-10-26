@@ -1,0 +1,21 @@
+@use './unit-indicator/unit-indicator.theme' as unit-indicator;
+@use './unit-chart/unit-chart.theme' as unit-chart;
+@use './units-grid/units-grid.theme' as units-grid;
+@use './payment-method/payment-method.theme' as payment-method;
+@use './billing-card/billing-card.theme' as billing-card;
+
+@mixin light-components-theme($theme) {
+  @include unit-indicator.theme($theme, false);
+  @include unit-chart.theme($theme, false);
+  @include payment-method.theme($theme, false);
+  @include units-grid.theme($theme, false);
+  @include billing-card.theme($theme, false);
+}
+
+@mixin dark-components-theme($theme) {
+  @include unit-indicator.theme($theme, true);
+  @include unit-chart.theme($theme, true);
+  @include payment-method.theme($theme, true);
+  @include units-grid.theme($theme, true);
+  @include billing-card.theme($theme, true);
+}
