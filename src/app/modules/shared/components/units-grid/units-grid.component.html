@@ -2,8 +2,8 @@
   <app-loading-shade *ngIf="isLoading|async"></app-loading-shade>
   <div class="grid-list-wrapper">
     <mat-grid-list cols="2" rowHeight="675px" gutterSize="0px">
-      <mat-grid-tile class="unit-tile" *ngFor="let unit of units|async">
-        <app-unit-preview [unit]="unit"></app-unit-preview>
+      <mat-grid-tile class="unit-tile" *ngFor="let unit of units|async; index as index">
+        <app-unit-preview [unit]="unit" [@onEnterLeft]="{params: { delay: 100 * index}}"></app-unit-preview>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

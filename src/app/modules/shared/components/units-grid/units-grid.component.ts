@@ -3,11 +3,13 @@ import {UnitsService} from "../../../../api/backend/services/units.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {UnitType} from "../../../../data/types/unit.type";
 import {tap} from "rxjs/operators";
+import {storroAnimations} from "../../animations";
 
 @Component({
   selector: 'app-units-grid',
   templateUrl: './units-grid.component.html',
-  styleUrls: ['./units-grid.component.scss']
+  styleUrls: ['./units-grid.component.scss'],
+  animations: storroAnimations
 })
 export class UnitsGridComponent implements OnInit {
 
