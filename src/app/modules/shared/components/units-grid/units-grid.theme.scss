@@ -2,14 +2,13 @@
 @use '~@angular/material' as mat;
 
 @mixin color($color-config, $isDarkMode) {
-  .unit-tile {
-
-    @if $isDarkMode {
-      border-color: #4e4d4d;
-    } @else {
-      border-color: #e7e7e7
-    }
+app-unit-preview .mat-card {
+  @if $isDarkMode {
+    border-color: #4e4d4d;
+  } @else {
+    border-color: #e7e7e7
   }
+}
 }
 
 

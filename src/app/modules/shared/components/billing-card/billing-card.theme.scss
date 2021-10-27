@@ -11,13 +11,18 @@
 
     @if $isDarkTheme {
       &.show-background {
-        background-image: url("assets/dark-blobs.svg");
+        background-image: url("~src/assets/dark-blobs.svg");
+      }
+
+      .background-overlay {
+        background-color: black;
+        opacity: 0.5;
       }
 
       border-color: #4e4d4d;
     } @else {
       &.show-background {
-        background-image: url("assets/light-blobs.svg");
+        background-image: url("~src/assets/light-blobs.svg");
       }
 
       border-color: #e7e7e7

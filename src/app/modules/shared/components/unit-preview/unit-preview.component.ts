@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {UnitType} from "../../../../data/types/unit.type";
 import {BehaviorSubject, Observable} from "rxjs";
 import {UnitDataType} from "../../../../data/types/unit-data.type";
@@ -25,6 +25,10 @@ export class UnitPreviewComponent implements OnInit {
   get unit(): UnitType {
     return this._unit!;
   }
+
+  @Input()
+  @HostBinding('class.mat-elevation-z3')
+  showShadow: boolean = true;
 
   unitIndicators: UnitIndicatorDataType[] = [
     UnitIndicatorDataType.HUMIDITY,

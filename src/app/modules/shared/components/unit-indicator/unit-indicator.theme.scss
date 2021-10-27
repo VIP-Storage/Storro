@@ -7,7 +7,22 @@
   $accent: map.get($color-config, 'accent');
 
   app-unit-indicator {
-    background-color: mat.get-color-from-palette($primary, 200, 0.2);
+    @include mat.elevation-transition();
+
+    @if $isDarkTheme {
+      background-color: #1a1a1a;
+    } @else {
+      background-color: rgb(213 213 213 / 20%);
+    }
+
+
+    .icon-wrapper {
+      @if $isDarkTheme {
+        background: white;
+      } @else {
+        background: #3458c52e;
+      }
+    }
 
     .indicator-title {
       @if $isDarkTheme {

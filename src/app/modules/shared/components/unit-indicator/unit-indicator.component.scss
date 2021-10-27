@@ -1,9 +1,11 @@
 :host {
-  border-radius: 8px;
+  border-radius: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 12px;
+  margin: 0.8em 1.2em;
+  padding: 0 24px 4px;
+
   flex: 1;
   overflow: hidden;
 
@@ -16,10 +18,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.4rem;
-  border-radius: 8px;
-  margin-right: 8px;
   margin-left: -2px;
+  margin-top: 6px;
+  height: 100%;
+  border-radius: 0;
+  margin-right: -2em;
+  width: 4em;
+  padding: 0.4rem 1.2em 0.4rem 0.5em;
 
   .mat-icon {
     $icon-size: 30px;
@@ -61,12 +66,14 @@
 .ripple-wrapper {
   pointer-events: none;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+
+  $innerMargin: 0.8em;
+  top: $innerMargin;
+  bottom: $innerMargin;
+  left: $innerMargin;
+  right: $innerMargin;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 * {

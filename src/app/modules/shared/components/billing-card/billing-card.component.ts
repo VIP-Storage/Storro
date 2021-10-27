@@ -29,6 +29,10 @@ export class BillingCardComponent implements OnInit {
   showBackground: boolean = false;
 
   @Input()
+  @HostBinding('class.mat-elevation-z3')
+  showShadow: boolean = true;
+
+  @Input()
   set amount(newValue: number | string) {
     this._amount = Number(newValue);
   }

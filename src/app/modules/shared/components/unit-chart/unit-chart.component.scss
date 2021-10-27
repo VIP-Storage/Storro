@@ -1,6 +1,6 @@
 :host {
   flex: 1;
-  border-radius: 8px;
+  border-radius: 16px;
   display: flex;
   padding: 0;
   overflow: hidden;
@@ -8,25 +8,37 @@
 }
 
 .chart-meta {
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 18px;
+  padding-left: 18px;
+
+  .chart-title {
+    font-size: 20px;
+  }
 }
 
 .chart-wrapper {
   flex: 1;
-  max-height: calc(100% - 60px);
+  max-height: calc(100% - 70px);
+  margin-left: -1.6em;
+  width: 120%;
+
+ ::ng-deep .line-highlight {
+    display: block;
+  }
 }
 
 .chart-details {
-  padding: 1px 10px 10px;
+  padding: 1px 18px 28px;
   display: flex;
   justify-content: space-between;
+  margin-top: -0.5em;
 }
 
 .chart-measurement {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
 }
 
 * {

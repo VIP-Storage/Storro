@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z0 unit-card">
+<mat-card class="unit-card">
   <mat-card-header>
     <mat-card-title>
       {{unit.name}}
@@ -8,15 +8,15 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <mat-grid-list class="chart-grid" cols="2" gutterSize="10px" rowHeight="325px">
+    <mat-grid-list class="chart-grid" cols="2" gutterSize="0px" rowHeight="360px">
       <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts">
-        <app-unit-chart [type]="chart" [unit]="unit"></app-unit-chart>
+        <app-unit-chart hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
       </mat-grid-tile>
     </mat-grid-list>
 
-    <mat-grid-list class="indicator-grid" cols="2" rowHeight="85px"  gutterSize="10px">
+    <mat-grid-list class="indicator-grid" cols="2" rowHeight="100px"  gutterSize="0">
       <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators">
-        <app-unit-indicator [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
+        <app-unit-indicator  hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>

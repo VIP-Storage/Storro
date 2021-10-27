@@ -27,6 +27,7 @@ import {FormsModule} from "@angular/forms";
 import {PaymentMethodComponent} from './components/payment-method/payment-method.component';
 import {PaymentHistoryComponent} from './components/payment-history/payment-history.component';
 import {BillingCardComponent} from "./components/billing-card/billing-card.component";
+import {HoverElevationDirective} from './directives/hover-elevation.directive';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {BillingCardComponent} from "./components/billing-card/billing-card.compo
     UnitChartComponent,
     PaymentMethodComponent,
     PaymentHistoryComponent,
-    BillingCardComponent
+    BillingCardComponent,
+    HoverElevationDirective
   ],
   exports: [
     SidebarComponent,
@@ -50,7 +52,8 @@ import {BillingCardComponent} from "./components/billing-card/billing-card.compo
     UnitChartComponent,
     UnitIndicatorComponent,
     PaymentMethodComponent,
-    BillingCardComponent
+    BillingCardComponent,
+    HoverElevationDirective
   ],
   imports: [
     CommonModule,

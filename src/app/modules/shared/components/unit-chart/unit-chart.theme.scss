@@ -7,7 +7,13 @@
   $accent: map.get($color-config, 'accent');
 
   app-unit-chart {
-    background-color: mat.get-color-from-palette($primary, 200, 0.2);
+    @include mat.elevation-transition();
+
+    @if $isDarkTheme {
+      background-color: #1a1a1a;
+    } @else {
+      background-color: rgb(213 213 213 / 20%);
+    }
 
     .chart-measurement, .chart-title {
       @if $isDarkTheme {
@@ -16,6 +22,11 @@
         color: gray;
       }
     }
+  }
+
+  g.line-chart  path {
+    stroke-width: 4;
+    stroke-linecap: round!important;
   }
 }
 

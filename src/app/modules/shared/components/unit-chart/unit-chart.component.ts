@@ -41,6 +41,7 @@ export class UnitChartComponent implements OnInit {
   data: BehaviorSubject<ChartData|null> = new BehaviorSubject<ChartData | null>(null);
   chartScheme!: Color;
 
+  private _domain: string[] | number[] = [];
   private _unit!: UnitType;
   private _type!: ChartDataType;
 
@@ -76,6 +77,7 @@ export class UnitChartComponent implements OnInit {
     this.minValue = `${min}${data.unit}`
     this.maxValue = `${max}${data.unit}`
 
+    this._domain = data.values.map(v => v.value);
     this.chartData = [
       {
         name: data.name,
