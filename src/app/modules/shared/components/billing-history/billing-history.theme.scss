@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin color($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  $foreground: map.get($color-config, foreground);
+  $background: map.get($color-config, background);
+
+  app-billing-history {
+    @include mat.elevation-transition();
+    background-color: mat.get-color-from-palette($background, card);
+  }
+}
+
+
+@mixin theme($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme, $isDarkTheme);
+  }
+}

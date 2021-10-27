@@ -16,15 +16,20 @@
 .billing-main {
   padding: 2.5em;
   display: flex;
+  flex: 1;
   flex-direction: column;
 
   .billing-info {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+
+    .title {
+      width: 100%;
+    }
 
     app-billing-card {
       flex: 1;
-      margin-left: 1em;
       margin-right: 1em;
       background-repeat: no-repeat;
 
@@ -35,8 +40,25 @@
 
       &:last-child {
         margin-right: 0;
+        margin-left: 1em;
         background-position-x: left;
       }
     }
   }
+}
+
+.billing-history {
+  margin-top: 4.2em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.billing-main, .billing-history .title {
+  color: gray;
+}
+
+.mat-drawer-content {
+  display: flex;
+  flex-direction: column;
 }

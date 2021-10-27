@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+
+  &.show-borders {
+    border-width: 2px;
+    border-style: solid;
+  }
+}
+
+.billing-history-table-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: scroll;
+}

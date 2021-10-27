@@ -25,11 +25,11 @@ import {LineChartModule} from "@swimlane/ngx-charts";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
 import {PaymentMethodComponent} from './components/payment-method/payment-method.component';
-import {PaymentHistoryComponent} from './components/payment-history/payment-history.component';
 import {BillingCardComponent} from "./components/billing-card/billing-card.component";
 import {HoverElevationDirective} from './directives/hover-elevation.directive';
-import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
-import { UnitSnapshotComponent } from './components/unit-snapshot/unit-snapshot.component';
+import {ToggleButtonComponent} from './components/toggle-button/toggle-button.component';
+import {UnitSnapshotComponent} from './components/unit-snapshot/unit-snapshot.component';
+import {BillingHistoryComponent} from './components/billing-history/billing-history.component';
 
 
 @NgModule({
@@ -42,11 +42,11 @@ import { UnitSnapshotComponent } from './components/unit-snapshot/unit-snapshot.
     AccessHistoryComponent,
     UnitChartComponent,
     PaymentMethodComponent,
-    PaymentHistoryComponent,
     BillingCardComponent,
     HoverElevationDirective,
     ToggleButtonComponent,
-    UnitSnapshotComponent
+    UnitSnapshotComponent,
+    BillingHistoryComponent
   ],
   exports: [
     SidebarComponent,
@@ -57,7 +57,8 @@ import { UnitSnapshotComponent } from './components/unit-snapshot/unit-snapshot.
     UnitIndicatorComponent,
     PaymentMethodComponent,
     BillingCardComponent,
-    HoverElevationDirective
+    HoverElevationDirective,
+    BillingHistoryComponent
   ],
   imports: [
     CommonModule,

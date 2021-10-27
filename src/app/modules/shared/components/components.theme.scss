@@ -5,6 +5,7 @@
 @use './billing-card/billing-card.theme' as billing-card;
 @use './toggle-button/toggle-button.theme' as toggle-button;
 @use './unit-snapshot/unit-snapshot.theme' as unit-snapshot;
+@use './billing-history/billing-history.theme' as billing-history;
 
 @mixin light-components-theme($theme) {
   @include unit-indicator.theme($theme, false);
@@ -14,6 +15,7 @@
   @include billing-card.theme($theme, false);
   @include toggle-button.theme($theme, false);
   @include unit-snapshot.theme($theme, false);
+  @include billing-history.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -24,4 +26,5 @@
   @include billing-card.theme($theme, true);
   @include toggle-button.theme($theme, true);
   @include unit-snapshot.theme($theme, true);
+  @include billing-history.theme($theme, true);
 }

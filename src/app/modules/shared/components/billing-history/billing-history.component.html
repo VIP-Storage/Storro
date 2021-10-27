@@ -1,0 +1,36 @@
+<app-loading-shade *ngIf="isLoading"></app-loading-shade>
+
+<div class="billing-history-table-container">
+  <table mat-table [dataSource]="billingHistoryData" class="billing-history-table"
+         matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let row">{{row['amount']|currency:'USD'}}</td>
+    </ng-container>
+
+    <!-- Paid On Column -->
+    <ng-container matColumnDef="paidOn">
+      <th mat-header-cell *matHeaderCellDef>Paid</th>
+      <td mat-cell *matCellDef="let row">{{row['paidOn']|date}}</td>
+    </ng-container>
+
+    <!-- Paid in Full Column -->
+    <ng-container matColumnDef="paidInFull">
+      <th mat-header-cell *matHeaderCellDef>Paid in Full</th>
+      <td mat-cell *matCellDef="let row">{{row['paidInFull'] ? 'Yes' : 'No'}}</td>
+    </ng-container>
+
+
+    <!-- Payment Method Column -->
+    <ng-container matColumnDef="paymentMethod">
+      <th mat-header-cell *matHeaderCellDef>Payment Method</th>
+      <td mat-cell *matCellDef="let row">{{row['paymentMethod']}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<mat-paginator [length]="total" [pageSize]="itemsPerPage"></mat-paginator>
