@@ -1,13 +1,10 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {UnitType} from "../../../../data/types/unit.type";
 import {BehaviorSubject, Observable} from "rxjs";
-import {UnitDataType} from "../../../../data/types/unit-data.type";
-import {UnitsService} from "../../../../api/backend/services/units.service";
 import {filter} from "rxjs/operators";
-import {UnitIndicatorDataType} from "../../../../data/enums/unit-indicator.enum";
-import {ChartDataType} from "../../../../data/enums/chart-data.enum";
-import {ToggleOptionType} from "../../../../data/types/toggle-option.type";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {ToggleOptionType, UnitDataType, UnitType} from "../../../../../data/types";
+import {ChartDataType, UnitIndicatorDataType} from "../../../../../data/enums";
+import {UnitsService} from "../../../../../api/backend/services/units.service";
 
 @Component({
   selector: 'app-unit-preview',

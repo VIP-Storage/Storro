@@ -1,0 +1,15 @@
+@use './payment-method/payment-method.theme' as payment-method;
+@use './billing-card/billing-card.theme' as billing-card;
+@use './billing-history/billing-history.theme' as billing-history;
+
+@mixin light-theme($theme) {
+  @include payment-method.theme($theme, false);
+  @include billing-card.theme($theme, false);
+  @include billing-history.theme($theme, false);
+}
+
+@mixin dark-theme($theme) {
+  @include payment-method.theme($theme, true);
+  @include billing-card.theme($theme, true);
+  @include billing-history.theme($theme, true);
+}

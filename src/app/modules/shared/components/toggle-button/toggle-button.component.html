@@ -1,4 +1,7 @@
-<div class="toggle-option" (click)="click(option)" [class.selected]="isSelected(option)" *ngFor="let option of options"
+<div class="toggle-option"
+     (click)="click(option)"
+     [class.selected]="isSelected(option)"
+     *ngFor="let option of options"
      matRipple>
   <mat-icon *ngIf="hasIcon(option)" [matTooltip]="title(option)">{{option.icon}}</mat-icon>
   <span class="toggle-text" *ngIf="!hasIcon(option)">{{title(option)}}</span>

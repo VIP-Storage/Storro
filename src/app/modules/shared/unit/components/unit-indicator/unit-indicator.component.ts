@@ -1,15 +1,11 @@
 import {Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BehaviorSubject, ReplaySubject} from "rxjs";
-import {UnitIndicatorType} from "../../../../data/types/unit-indicator.type";
 import {filter, map, tap} from "rxjs/operators";
-import {DoorState} from "../../../../data/enums/door-state.enum";
-import {UnitDataType} from "../../../../data/types/unit-data.type";
-import {getIconColor} from "../../helpers/colors.helper";
 import {MatRipple} from "@angular/material/core";
-import {BadgeType} from "../../../../data/types/badge.type";
-import {UnitIndicatorFactory} from "../../factory/unit-indicator.factory";
-import {UnitIndicatorDataType} from "../../../../data/enums/unit-indicator.enum";
-import {UnitState} from "../../../../data/enums/unit-state.enum";
+import {getIconColor} from "../../../helpers/colors.helper";
+import {BadgeType, UnitDataType, UnitIndicatorType} from "../../../../../data/types";
+import {UnitIndicatorFactory} from "../../../factory/unit-indicator.factory";
+import {DoorState, UnitIndicatorDataType, UnitState} from "../../../../../data/enums";
 
 @Component({
   selector: 'app-unit-indicator',

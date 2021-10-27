@@ -1,12 +1,12 @@
-import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
-import {ToggleOptionType} from "../../../../data/types/toggle-option.type";
+import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+import {ToggleOptionType} from "../../../../data/types";
 
 @Component({
   selector: 'app-toggle-button',
   templateUrl: './toggle-button.component.html',
   styleUrls: ['./toggle-button.component.scss']
 })
-export class ToggleButtonComponent implements OnInit {
+export class ToggleButtonComponent {
 
   @Input()
   @HostBinding('class.reversed')
@@ -36,11 +36,6 @@ export class ToggleButtonComponent implements OnInit {
 
   private _selected!: ToggleOptionType;
   private _options: ToggleOptionType[] = [];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   hasIcon(option: ToggleOptionType): boolean {
     return !!option.icon

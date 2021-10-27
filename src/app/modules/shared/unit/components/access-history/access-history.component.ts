@@ -1,11 +1,10 @@
 import {Component, Input, AfterViewInit, ViewChild} from '@angular/core';
-import {UnitAccessEntryType} from "../../../../data/types/unit-access-entry.type";
-import {merge, Observable, of} from "rxjs";
-import {UnitsService} from "../../../../api/backend/services/units.service";
+import {merge, of} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
-import {UnitType} from "../../../../data/types/unit.type";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
+import {UnitsService} from "../../../../../api/backend/services/units.service";
+import {UnitAccessEntryType, UnitType} from "../../../../../data/types";
 
 @Component({
   selector: 'app-access-history',
