@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {ClientSidebarItems} from "../../../../data/client-sidebar.data";
-import {SidebarItem} from "../../../../data/types/sidebar-item.type";
+import {SidebarItem} from "../../../../data/types";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {ThemeService} from "../../../../services/theme.service";
 import {Observable} from "rxjs";
@@ -11,7 +11,7 @@ import {map} from "rxjs/operators";
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
   showClientNavigation = true;
 
@@ -45,9 +45,6 @@ export class SidebarComponent implements OnInit {
         ];
       })
     }
-  }
-
-  ngOnInit(): void {
   }
 
   isSection(item: SidebarItem) {

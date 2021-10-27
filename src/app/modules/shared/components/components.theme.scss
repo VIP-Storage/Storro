@@ -1,30 +1,15 @@
-@use './unit-indicator/unit-indicator.theme' as unit-indicator;
-@use './unit-chart/unit-chart.theme' as unit-chart;
-@use './units-grid/units-grid.theme' as units-grid;
-@use './payment-method/payment-method.theme' as payment-method;
-@use './billing-card/billing-card.theme' as billing-card;
 @use './toggle-button/toggle-button.theme' as toggle-button;
-@use './unit-snapshot/unit-snapshot.theme' as unit-snapshot;
-@use './billing-history/billing-history.theme' as billing-history;
+@use '../billing/components/billing.theme' as billing-components;
+@use '../unit/components/unit.theme' as unit-components;
 
 @mixin light-components-theme($theme) {
-  @include unit-indicator.theme($theme, false);
-  @include unit-chart.theme($theme, false);
-  @include payment-method.theme($theme, false);
-  @include units-grid.theme($theme, false);
-  @include billing-card.theme($theme, false);
   @include toggle-button.theme($theme, false);
-  @include unit-snapshot.theme($theme, false);
-  @include billing-history.theme($theme, false);
+  @include billing-components.light-theme($theme);
+  @include unit-components.light-theme($theme);
 }
 
 @mixin dark-components-theme($theme) {
-  @include unit-indicator.theme($theme, true);
-  @include unit-chart.theme($theme, true);
-  @include payment-method.theme($theme, true);
-  @include units-grid.theme($theme, true);
-  @include billing-card.theme($theme, true);
   @include toggle-button.theme($theme, true);
-  @include unit-snapshot.theme($theme, true);
-  @include billing-history.theme($theme, true);
+  @include billing-components.dark-theme($theme);
+  @include unit-components.dark-theme($theme);
 }

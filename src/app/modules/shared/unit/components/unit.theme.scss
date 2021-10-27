@@ -1,0 +1,18 @@
+@use './unit-indicator/unit-indicator.theme' as unit-indicator;
+@use './unit-chart/unit-chart.theme' as unit-chart;
+@use './units-grid/units-grid.theme' as units-grid;
+@use './unit-snapshot/unit-snapshot.theme' as unit-snapshot;
+
+@mixin light-theme($theme) {
+  @include unit-indicator.theme($theme, false);
+  @include unit-chart.theme($theme, false);
+  @include units-grid.theme($theme, false);
+  @include unit-snapshot.theme($theme, false);
+}
+
+@mixin dark-theme($theme) {
+  @include unit-indicator.theme($theme, true);
+  @include unit-chart.theme($theme, true);
+  @include units-grid.theme($theme, true);
+  @include unit-snapshot.theme($theme, true);
+}

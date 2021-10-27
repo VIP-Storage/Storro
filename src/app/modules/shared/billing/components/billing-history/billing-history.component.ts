@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, HostBinding, Input, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {BillingHistoryType} from "../../../../data/types/billing-history.type";
-import {BillingService} from "../../../../api/backend/services/billing.service";
 import {merge} from "rxjs";
 import {map, startWith, switchMap} from 'rxjs/operators';
+import {BillingHistoryType} from "../../../../../data/types";
+import {BillingService} from "../../../../../api/backend/services/billing.service";
 
 @Component({
   selector: 'app-billing-history',

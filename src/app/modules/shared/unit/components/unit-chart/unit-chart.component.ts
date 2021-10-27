@@ -1,11 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChartData} from "../../../../data/types/chart/chart-data.type";
-import {ChartDataType} from "../../../../data/enums/chart-data.enum";
-import {SensorsService} from "../../../../api/backend/services/sensors.service";
 import {BehaviorSubject} from "rxjs";
-import {UnitType} from "../../../../data/types/unit.type";
 import {filter} from "rxjs/operators";
 import {Color, colorSets} from "@swimlane/ngx-charts";
+import {ChartDataType} from "../../../../../data/enums";
+import {ChartData, UnitType} from "../../../../../data/types";
+import {SensorsService} from "../../../../../api/backend/services/sensors.service";
 
 @Component({
   selector: 'app-unit-chart',

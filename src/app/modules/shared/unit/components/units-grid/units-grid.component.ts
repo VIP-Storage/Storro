@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {UnitsService} from "../../../../api/backend/services/units.service";
 import {BehaviorSubject, Observable} from "rxjs";
-import {UnitType} from "../../../../data/types/unit.type";
 import {tap} from "rxjs/operators";
-import {storroAnimations} from "../../animations";
+import {Component} from "@angular/core";
+import {UnitsService} from "../../../../../api/backend/services/units.service";
+import {storroAnimations} from "../../../animations";
+import {UnitType} from "../../../../../data/types";
 
 @Component({
   selector: 'app-units-grid',
@@ -11,7 +11,7 @@ import {storroAnimations} from "../../animations";
   styleUrls: ['./units-grid.component.scss'],
   animations: storroAnimations
 })
-export class UnitsGridComponent implements OnInit {
+export class UnitsGridComponent {
 
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   units: Observable<UnitType[]>;
@@ -21,8 +21,4 @@ export class UnitsGridComponent implements OnInit {
       tap(() => this.isLoading.next(false))
     );
   }
-
-  ngOnInit(): void {
-  }
-
 }
