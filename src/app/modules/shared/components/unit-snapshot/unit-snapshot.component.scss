@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  position: relative;
+}
+
+.snapshot-wrapper {
+  flex: 1;
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 1em;
+
+  img {
+    object-fit: cover;
+    border-radius: 8px;
+    flex: 1;
+  }
+
+  .download-button {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+  }
+}

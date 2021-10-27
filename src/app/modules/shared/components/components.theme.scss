@@ -3,6 +3,8 @@
 @use './units-grid/units-grid.theme' as units-grid;
 @use './payment-method/payment-method.theme' as payment-method;
 @use './billing-card/billing-card.theme' as billing-card;
+@use './toggle-button/toggle-button.theme' as toggle-button;
+@use './unit-snapshot/unit-snapshot.theme' as unit-snapshot;
 
 @mixin light-components-theme($theme) {
   @include unit-indicator.theme($theme, false);
@@ -10,6 +12,8 @@
   @include payment-method.theme($theme, false);
   @include units-grid.theme($theme, false);
   @include billing-card.theme($theme, false);
+  @include toggle-button.theme($theme, false);
+  @include unit-snapshot.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -18,4 +22,6 @@
   @include payment-method.theme($theme, true);
   @include units-grid.theme($theme, true);
   @include billing-card.theme($theme, true);
+  @include toggle-button.theme($theme, true);
+  @include unit-snapshot.theme($theme, true);
 }

@@ -24,20 +24,29 @@
       display: flex;
       flex-direction: column;
     }
-
-    .mat-card-header-text {
-      margin-left: 1.6rem;
-      margin-top: 8px;
-
-      mat-card-subtitle {
-        margin-bottom: 8px;
-      }
-    }
   }
 }
 
-.chart-grid {
-  margin-top: 35px;
+.unit-card-header {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1.6rem;
+  margin-right: 0.7rem;
+  padding-top: 10px;
+
+  .header-text {
+    flex: 1;
+    .mat-card-title {
+      margin-bottom: 12px;
+      display: block;
+      font-size: 20px;
+    }
+
+    .mat-card-subtitle {
+      margin-bottom: 8px;
+      margin-top: -8px;
+    }
+  }
 }
 
 .indicator-grid {
@@ -60,4 +69,13 @@
   app-unit-indicator {
     margin: 0.8em;
   }
+}
+
+.carousel-wrapper {
+  height: 360px;
+}
+
+.unit-snapshot-wrapper {
+  margin: 0.8em;
+  height: 95%;
 }

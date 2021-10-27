@@ -28,6 +28,8 @@ import {PaymentMethodComponent} from './components/payment-method/payment-method
 import {PaymentHistoryComponent} from './components/payment-history/payment-history.component';
 import {BillingCardComponent} from "./components/billing-card/billing-card.component";
 import {HoverElevationDirective} from './directives/hover-elevation.directive';
+import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
+import { UnitSnapshotComponent } from './components/unit-snapshot/unit-snapshot.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import {HoverElevationDirective} from './directives/hover-elevation.directive';
     PaymentMethodComponent,
     PaymentHistoryComponent,
     BillingCardComponent,
-    HoverElevationDirective
+    HoverElevationDirective,
+    ToggleButtonComponent,
+    UnitSnapshotComponent
   ],
   exports: [
     SidebarComponent,

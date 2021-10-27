@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PageTitleService} from "../../../../services/page-title.service";
 
 @Component({
   selector: 'app-client-billing',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientBillingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pageTitleService: PageTitleService) {
+  }
 
   ngOnInit(): void {
+    this.pageTitleService.title = 'Billing';
   }
 
 }

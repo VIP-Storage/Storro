@@ -1,0 +1,21 @@
+:host {
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+
+  &.reversed {
+    flex-direction: row-reverse;
+  }
+}
+
+.toggle-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 8px;
+  min-width: 35px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
