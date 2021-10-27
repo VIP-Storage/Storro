@@ -12,6 +12,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatRippleModule} from "@angular/material/core";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { SimpleTableComponent } from './components/simple-table/simple-table.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSortModule} from "@angular/material/sort";
+import { SimpleTableRowComponent } from './components/simple-table-row/simple-table-row.component';
 
 
 @NgModule({
@@ -20,12 +24,15 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     LoadingShadeComponent,
     HoverElevationDirective,
     ToggleButtonComponent,
+    SimpleTableComponent,
+    SimpleTableRowComponent,
   ],
   exports: [
     SidebarComponent,
     HoverElevationDirective,
     ToggleButtonComponent,
-    LoadingShadeComponent
+    LoadingShadeComponent,
+    SimpleTableComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +43,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatIconModule,
     MatSlideToggleModule,
     MatRippleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatToolbarModule,
+    MatSortModule
   ]
 })
 export class SharedModule {

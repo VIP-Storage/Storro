@@ -1,8 +1,5 @@
-import {AfterViewInit, Component, HostBinding, Input, ViewChild} from '@angular/core';
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {merge} from "rxjs";
-import {map, startWith, switchMap} from 'rxjs/operators';
+import {AfterViewInit, Component, HostBinding, Input} from '@angular/core';
+import {map} from 'rxjs/operators';
 import {BillingHistoryType} from "../../../../../data/types";
 import {BillingService} from "../../../../../api/backend/services/billing.service";
 
@@ -18,12 +15,18 @@ export class BillingHistoryComponent implements AfterViewInit {
   showShadow: boolean = true;
 
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-
   isLoading = true;
-  displayedColumns: string[] = ['amount', 'paidOn', 'paidInFull', 'paymentMethod'];
+  displayedColumns: {name: string; title: string}[] = [
+    {
+      name: 'amount',
+      title: 'Amount'
+    },
+    {
+      name: 'status',
+      title: 'Status'
+    },
+
+  ];
   billingHistoryData: BillingHistoryType[] = [];
   total = 0;
   itemsPerPage = 18;
@@ -33,25 +36,17 @@ export class BillingHistoryComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.billingService.getBillingHistory(this.itemsPerPage, 1).pipe(
+      map(response => {
+        this.isLoading = false;
 
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoading = true;
-          return this.billingService.getBillingHistory(this.itemsPerPage, this.paginator.pageIndex + 1);
-        }),
-        map(response => {
-          this.isLoading = false;
+        if (response === null) {
+          return [];
+        }
 
-          if (response === null) {
-            return [];
-          }
-
-          this.total = response.total;
-          return response.data;
-        })
-      ).subscribe(data => this.billingHistoryData = data);
+        this.total = response.total;
+        return response.data;
+      })
+    ).subscribe(data => this.billingHistoryData = data);
   }
 }

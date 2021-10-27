@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <table matSort (matSortChange)="sortData($event)">
+    <tr>
+      <th *ngFor="let column of columns" [mat-sort-header]="column.name">{{column.title}}</th>
+    </tr>
+  </table>
+</mat-toolbar>
+
+<app-simple-table-row *ngFor="let item of data">
+  <ng-container *ngTemplateOutlet="rowTemplate; context: {item}"></ng-container>
+</app-simple-table-row>
