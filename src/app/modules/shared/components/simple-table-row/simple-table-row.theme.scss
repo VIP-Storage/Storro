@@ -6,10 +6,9 @@
   $foreground: map.get($color-config, foreground);
   $background: map.get($color-config, background);
 
-  app-billing-history {
-    .amount, .status, .paidOn, .paymentMethod {
-      color: mat.get-color-from-palette($foreground, text);
-    }
+  app-simple-table-row {
+    @include mat.elevation-transition();
+    background-color: mat.get-color-from-palette($background, card);
   }
 }
 

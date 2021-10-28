@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostBinding, Input} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {BillingHistoryType} from "../../../../../data/types";
 import {BillingService} from "../../../../../api/backend/services/billing.service";
@@ -9,10 +9,6 @@ import {BillingService} from "../../../../../api/backend/services/billing.servic
   styleUrls: ['./billing-history.component.scss']
 })
 export class BillingHistoryComponent implements AfterViewInit {
-
-  @Input()
-  @HostBinding('class.mat-elevation-z3')
-  showShadow: boolean = true;
 
 
   isLoading = true;
@@ -25,7 +21,14 @@ export class BillingHistoryComponent implements AfterViewInit {
       name: 'status',
       title: 'Status'
     },
-
+    {
+      name: 'paidOn',
+      title: 'Paid On'
+    },
+    {
+      name: 'paymentMethod',
+      title: 'Payment Method'
+    }
   ];
   billingHistoryData: BillingHistoryType[] = [];
   total = 0;

@@ -1,7 +1,14 @@
 <app-loading-shade *ngIf="isLoading"></app-loading-shade>
 
 <ng-template #rowTemplate let-item>
-  <span>{{item}}</span>
+  <div class="line-item-row">
+    <span class="amount">{{item['amount']|currency: 'USD'}}</span>
+    <span class="status">
+      <span class="status-badge status-badge-{{item['status']|lowercase}}">{{item['status']}}</span>
+    </span>
+    <span class="paidOn">{{item['paidOn']|date}}</span>
+    <span class="paymentMethod">{{item['paymentMethod']}}</span>
+  </div>
 </ng-template>
 
 <div class="billing-history-table-container">

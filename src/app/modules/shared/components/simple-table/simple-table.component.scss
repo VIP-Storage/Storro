@@ -3,3 +3,19 @@
   flex: 1;
   flex-direction: column;
 }
+
+.sort-toolbar {
+  border-radius: 8px;
+  height: 40px;
+  font-size: 16px;
+}
+
+table {
+  flex: 1;
+  tr {
+    display: flex;
+    th {
+      flex: 1;
+    }
+  }
+}

@@ -1,20 +1,36 @@
 :host {
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
   position: relative;
   overflow: hidden;
   flex: 1;
-
-  &.show-borders {
-    border-width: 2px;
-    border-style: solid;
-  }
 }
 
 .billing-history-table-container {
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow: scroll;
+}
+
+.line-item-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+
+  .amount, .status, .paidOn, .paymentMethod {
+    flex: 1;
+  }
+
+  .amount {
+    font-size: 20px;
+  }
+
+  .status .status-badge {
+    padding: 5px 1em;
+    border-radius: 8px;
+    &.status-badge-paid {
+      background-color: #dff4f5;
+      color: #05ccbf;
+    }
+  }
 }
