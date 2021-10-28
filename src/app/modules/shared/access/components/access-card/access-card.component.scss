@@ -1,0 +1,107 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  padding: 2em 2.8em;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  align-self: stretch;
+  max-height: 70%;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &.show-borders {
+    border-width: 2px;
+    border-style: solid;
+  }
+}
+
+.access-meta {
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.access-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .access-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5em;
+    padding: 3px 15px;
+    border-radius: 16px;
+    min-height: 35px;
+
+    .username {
+      font-size: 16px;
+      line-height: 23px;
+
+      &.owner-name {
+        font-weight: bold;
+      }
+    }
+
+    .revoke-access {
+      width: 24px;
+      height: 24px;
+      line-height: 23px;
+      color: red;
+    }
+  }
+}
+
+.title {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.button-wrapper {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.amount {
+  display: flex;
+  align-items: baseline;
+  margin-top: 1.8em;
+  flex-direction: column;
+  flex: 1;
+
+  .access-count {
+    font-weight: bold;
+    font-size: 48px;
+  }
+
+  .access-details {
+    font-size: 18px;
+    color: gray;
+    margin-top: 1em;
+  }
+}
+
+.amount,
+.title,
+.button-wrapper {
+  user-select: none;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+

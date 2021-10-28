@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {UnitType} from "../../../data/types/unit.type";
 import {Observable, of} from "rxjs";
-import {getDemoUnitAccessHistory, getDemoUnitData, getDemoUnits} from "../../../data/demo/unit-demo.data";
 import {delay} from "rxjs/operators";
-import {UnitDataType} from "../../../data/types/unit-data.type";
-import {UnitAccessEntryType} from "../../../data/types/unit-access-entry.type";
+import {getDemoUnitAccessHistory, getDemoUnitData, getDemoUnits} from "../../../data/demo";
+import {UnitAccessEntryType, UnitDataType, UnitType} from "../../../data/types";
 
 @Injectable({
   providedIn: 'root'

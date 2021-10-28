@@ -1,0 +1,9 @@
+@use './access-card/access-card.theme' as access-card;
+
+@mixin light-theme($theme) {
+  @include access-card.theme($theme, false);
+}
+
+@mixin dark-theme($theme) {
+  @include access-card.theme($theme, true);
+}

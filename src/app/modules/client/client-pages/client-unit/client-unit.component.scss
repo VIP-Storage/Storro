@@ -80,6 +80,13 @@
       height: 75%;
     }
   }
+
+  .access-grid-tile {
+    app-access-card {
+      margin: 0.8em;
+      height: 90%;
+    }
+  }
 }
 
 .unit-snapshot-wrapper {

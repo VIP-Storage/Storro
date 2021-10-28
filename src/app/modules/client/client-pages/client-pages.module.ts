@@ -14,6 +14,7 @@ import {BillingModule} from "../../shared/billing/billing.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {AccessModule} from "../../shared/access/access.module";
 
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    AccessModule,
   ],
   exports: [
     RouterModule

@@ -5,7 +5,6 @@ import {UnitPreviewComponent} from './components/unit-preview/unit-preview.compo
 import {UnitChartComponent} from './components/unit-chart/unit-chart.component';
 import {UnitSnapshotComponent} from './components/unit-snapshot/unit-snapshot.component';
 import {UnitsGridComponent} from './components/units-grid/units-grid.component';
-import {AccessHistoryComponent} from './components/access-history/access-history.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -16,9 +15,6 @@ import {SharedModule} from "../shared.module";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {MatTableModule} from "@angular/material/table";
-import {MatSortModule} from "@angular/material/sort";
-import {MatPaginatorModule} from "@angular/material/paginator";
 import {RouterModule} from "@angular/router";
 
 @NgModule({
@@ -28,7 +24,6 @@ import {RouterModule} from "@angular/router";
     UnitChartComponent,
     UnitSnapshotComponent,
     UnitsGridComponent,
-    AccessHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -42,9 +37,6 @@ import {RouterModule} from "@angular/router";
     MatCardModule,
     MatGridListModule,
     NgxChartsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
     RouterModule
   ],
   exports: [
@@ -52,7 +44,6 @@ import {RouterModule} from "@angular/router";
     UnitPreviewComponent,
     UnitChartComponent,
     UnitSnapshotComponent,
-    AccessHistoryComponent,
     UnitsGridComponent,
   ]
 })

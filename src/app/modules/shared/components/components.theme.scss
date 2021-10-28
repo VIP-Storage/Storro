@@ -1,21 +1,28 @@
 @use './toggle-button/toggle-button.theme' as toggle-button;
-@use '../billing/components/billing.theme' as billing-components;
-@use '../unit/components/unit.theme' as unit-components;
 @use './simple-table/simple-table.theme' as simple-table;
 @use './simple-table-row/simple-table-row.theme' as simple-table-row;
 
+
+@use '../billing/components/billing.theme' as billing-components;
+@use '../unit/components/unit.theme' as unit-components;
+@use '../access/components/access.theme' as access-components;
+
 @mixin light-components-theme($theme) {
   @include toggle-button.theme($theme, false);
-  @include billing-components.light-theme($theme);
-  @include unit-components.light-theme($theme);
   @include simple-table.theme($theme, false);
   @include simple-table-row.theme($theme, false);
+
+  @include billing-components.light-theme($theme);
+  @include unit-components.light-theme($theme);
+  @include access-components.light-theme($theme);
 }
 
 @mixin dark-components-theme($theme) {
   @include toggle-button.theme($theme, true);
-  @include billing-components.dark-theme($theme);
-  @include unit-components.dark-theme($theme);
   @include simple-table.theme($theme, true);
   @include simple-table-row.theme($theme, true);
+
+  @include billing-components.dark-theme($theme);
+  @include unit-components.dark-theme($theme);
+  @include access-components.dark-theme($theme);
 }

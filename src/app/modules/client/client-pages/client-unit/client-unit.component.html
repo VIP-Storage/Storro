@@ -45,6 +45,12 @@
           <app-unit-indicator  hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
         </mat-grid-tile>
       </mat-grid-list>
+
+      <mat-grid-list class="manage-grid" cols="4" rowHeight="1:1"  gutterSize="0">
+        <mat-grid-tile class="access-grid-tile" colspan="2" [@onEnterLeft]="{params: {delay: 120}}">
+          <app-access-card [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-card>
+        </mat-grid-tile>
+      </mat-grid-list>
     </mat-card-content>
   </mat-card>
 
