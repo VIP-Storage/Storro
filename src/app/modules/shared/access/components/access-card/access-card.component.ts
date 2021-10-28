@@ -1,14 +1,16 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {UnitType, User} from "../../../../../data/types";
 import {UserService} from "../../../../../api/backend/services/user.service";
 import {BehaviorSubject} from "rxjs";
+import {storroAnimations} from "../../../animations";
 
 @Component({
   selector: 'app-access-card',
   templateUrl: './access-card.component.html',
-  styleUrls: ['./access-card.component.scss']
+  styleUrls: ['./access-card.component.scss'],
+  animations: storroAnimations
 })
-export class AccessCardComponent implements OnInit {
+export class AccessCardComponent {
 
   @Input()
   @HostBinding('class.show-borders')
@@ -33,9 +35,6 @@ export class AccessCardComponent implements OnInit {
   private _unit?: UnitType;
 
   constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-  }
 
   private fetchUsers() {
     if (!!this._unit) {

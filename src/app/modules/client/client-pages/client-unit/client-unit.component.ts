@@ -6,6 +6,7 @@ import {UnitsService} from "../../../../api/backend/services/units.service";
 import {ChartDataType, UnitIndicatorDataType} from "../../../../data/enums";
 import {UnitDataType, UnitType} from "../../../../data/types";
 import {storroAnimations} from "../../../shared/animations";
+import {PageTitleService} from "../../../../services/page-title.service";
 
 @Component({
   selector: 'app-client-unit',
@@ -35,10 +36,12 @@ export class ClientUnitComponent implements OnInit {
   private _unitData: BehaviorSubject<UnitDataType | null> = new BehaviorSubject<UnitDataType | null>(null);
 
   constructor(private activatedRoute: ActivatedRoute,
-              private unitsService: UnitsService) {
+              private unitsService: UnitsService,
+              private pageTitleService: PageTitleService) {
     this.unit = this.activatedRoute.data.pipe(
       map(data => data.unit),
-      tap(unit => this.unitsService.getUnitData(unit).subscribe(this._unitData))
+      tap(unit => this.pageTitleService.title = unit.name),
+      tap(unit => this.unitsService.getUnitData(unit).subscribe(this._unitData)),
     );
 
     this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>;
