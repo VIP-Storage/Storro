@@ -16,6 +16,7 @@ import { SimpleTableComponent } from './components/simple-table/simple-table.com
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSortModule} from "@angular/material/sort";
 import { SimpleTableRowComponent } from './components/simple-table-row/simple-table-row.component';
+import { CustomColorDirective } from './directives/custom-color.directive';
 
 
 @NgModule({
@@ -26,13 +27,15 @@ import { SimpleTableRowComponent } from './components/simple-table-row/simple-ta
     ToggleButtonComponent,
     SimpleTableComponent,
     SimpleTableRowComponent,
+    CustomColorDirective,
   ],
   exports: [
     SidebarComponent,
     HoverElevationDirective,
     ToggleButtonComponent,
     LoadingShadeComponent,
-    SimpleTableComponent
+    SimpleTableComponent,
+    CustomColorDirective
   ],
   imports: [
     CommonModule,

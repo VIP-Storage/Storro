@@ -1,21 +1,48 @@
 <ng-container *ngIf="unit|async as unit">
   <mat-card class="mat-elevation-z0 unit-card">
-    <mat-card-header>
-      <mat-card-title>
-        {{unit.name}}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{unit.location}}
-      </mat-card-subtitle>
-    </mat-card-header>
+    <div class="unit-card-header">
+      <div class="header-action" [@onEnterLeft]="{params: {delay: 0}}">
+        <button mat-icon-button routerLink="/client/dashboard">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div class="header-text" [@onEnterLeft]="{params: {delay: 200, speed: 650}}">
+        <mat-card-title>
+          {{unit.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{unit.location}}
+        </mat-card-subtitle>
+      </div>
+      <div class="header-right" [@onEnterLeft]="{params: { delay: 300}}">
+        <div class="buttons">
+          <button mat-icon-button color="primary" matTooltip="Edit" [@onEnterLeft]="{params: { delay: 310}}">
+            <mat-icon>settings</mat-icon>
+          </button>
+          <button mat-icon-button customColor="#76ff03" matTooltip="Billing" [@onEnterLeft]="{params: { delay: 320}}">
+            <mat-icon>paid</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" matTooltip="Terminate Contract" [@onEnterLeft]="{params: { delay: 330}}">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
     <mat-card-content class="unit-content">
-
-      <mat-grid-list cols="2" rowHeight="150px" gutterSize="10px">
-        <mat-grid-tile class="chart-tile" rowspan="3" *ngFor="let chart of unitCharts">
-          <app-unit-chart [type]="chart" [unit]="unit"></app-unit-chart>
+      <mat-grid-list class="chart-grid" cols="4" gutterSize="0px" rowHeight="1:1">
+        <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts; index as index" [@onEnterLeft]="{params: {delay: 110 * index}}">
+          <app-unit-chart hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
         </mat-grid-tile>
-        <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators">
-          <app-unit-indicator [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
+        <mat-grid-tile class="snapshot-tile" colspan="2" [@onEnterLeft]="{params: {delay: 100 * (unitCharts.length)}}">
+          <div class="unit-snapshot-wrapper">
+            <app-unit-snapshot ></app-unit-snapshot>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list class="indicator-grid" cols="4" rowHeight="100px"  gutterSize="0">
+        <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators; index as index" [@onEnterLeft]="{params: {delay: 120 * index}}">
+          <app-unit-indicator  hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>

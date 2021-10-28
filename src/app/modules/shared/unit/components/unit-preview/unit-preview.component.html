@@ -1,12 +1,17 @@
 <mat-card class="unit-card">
   <div class="unit-card-header">
     <div class="header-text">
-      <mat-card-title>
-        {{unit.name}}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{unit.location}}
-      </mat-card-subtitle>
+      <div class="header-text-inner">
+        <mat-card-title>
+          {{unit.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{unit.location}}
+        </mat-card-subtitle>
+      </div>
+      <button mat-icon-button [routerLink]="getLink(unit)">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
     </div>
     <div class="header-right">
       <app-toggle-button [options]="toggleOptions" [(selected)]="toggleSelected"></app-toggle-button>

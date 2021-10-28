@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {BehaviorSubject, Observable} from "rxjs";
-import {UnitType} from "../../../../data/types/unit.type";
 import {filter, map, tap} from "rxjs/operators";
-import {UnitIndicatorDataType} from "../../../../data/enums/unit-indicator.enum";
-import {ChartDataType} from "../../../../data/enums/chart-data.enum";
-import {UnitDataType} from "../../../../data/types/unit-data.type";
 import {UnitsService} from "../../../../api/backend/services/units.service";
+import {ChartDataType, UnitIndicatorDataType} from "../../../../data/enums";
+import {UnitDataType, UnitType} from "../../../../data/types";
+import {storroAnimations} from "../../../shared/animations";
 
 @Component({
   selector: 'app-client-unit',
   templateUrl: './client-unit.component.html',
-  styleUrls: ['./client-unit.component.scss']
+  styleUrls: ['./client-unit.component.scss'],
+  animations: storroAnimations
 })
 export class ClientUnitComponent implements OnInit {
 

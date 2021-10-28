@@ -87,4 +87,8 @@ export class UnitPreviewComponent implements OnInit {
   get selected() {
     return this.toggleSelected.value;
   }
+
+  getLink(forUnit: UnitType): string {
+    return `/client/unit/${forUnit.id}`;
+  }
 }

@@ -11,6 +11,9 @@ import {ClientBillingComponent} from './client-billing/client-billing.component'
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {UnitModule} from "../../shared/unit/unit.module";
 import {BillingModule} from "../../shared/billing/billing.module";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 const routes: Routes = [
@@ -51,6 +54,9 @@ const routes: Routes = [
     MatSidenavModule,
     UnitModule,
     BillingModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
   exports: [
     RouterModule

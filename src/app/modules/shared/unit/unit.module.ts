@@ -19,6 +19,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     NgxChartsModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule
   ],
   exports: [
     UnitIndicatorComponent,
