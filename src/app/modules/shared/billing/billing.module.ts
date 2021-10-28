@@ -9,6 +9,8 @@ import {SharedModule} from "../shared.module";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     SharedModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   exports: [
     PaymentMethodComponent,

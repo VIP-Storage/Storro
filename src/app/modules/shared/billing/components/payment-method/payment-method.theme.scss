@@ -5,9 +5,16 @@
   $color-config: mat.get-color-config($theme);
   $primary: map.get($color-config, 'primary');
   $accent: map.get($color-config, 'accent');
+  $foreground: map.get($color-config, foreground);
 
   app-payment-method {
-    background-color: mat.get-color-from-palette($primary, 100, 0.1);
+    .payment-method-card {
+      background-color: mat.get-color-from-palette($primary, 100, 0.1);
+    }
+
+    &.current {
+      border-bottom-color: mat.get-color-from-palette($foreground, divider);
+    }
   }
 }
 

@@ -1,7 +1,15 @@
 <mat-drawer-container class="billing-container">
   <mat-drawer mode="side" position="end" opened>
     <div class="billing-sidebar">
-      <app-payment-method></app-payment-method>
+      <h1 class="title">Payment Methods</h1>
+      <app-payment-method *ngFor="let method of paymentMethods|async"
+                          [title]="method.name"
+                          [current]="method.current"
+                          [type]="method.type"
+                          [identifier]="method.identifier"
+                          [expiry]="method.expiry">
+
+      </app-payment-method>
     </div>
   </mat-drawer>
   <mat-drawer-content>
