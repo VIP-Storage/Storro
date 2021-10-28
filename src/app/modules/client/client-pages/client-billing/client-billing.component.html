@@ -1,5 +1,5 @@
 <mat-drawer-container class="billing-container">
-  <mat-drawer mode="side" position="end" opened>
+  <mat-drawer mode="side" position="end">
     <div class="billing-sidebar">
       <h1 class="title">Payment Methods</h1>
       <app-payment-method *ngFor="let method of paymentMethods|async"
@@ -15,8 +15,6 @@
   <mat-drawer-content>
     <div class="billing-main">
       <div class="billing-info">
-        <h1 class="title">Billing Details</h1>
-
         <app-billing-card
           @onEnterLeft
           amount="228.55"
@@ -29,9 +27,10 @@
         ></app-billing-card>
 
         <app-billing-card
-          amount="165.22"
+          amount="223.49"
           [@onEnterLeft]="{params: { delay: 100}}"
           [showBorders]="true"
+          [chargedTo]="paymentMethodCurrent|async"
           subtitle="Last Payment"
           title="on May 12th, 2022"
           actionTitle="View Details"

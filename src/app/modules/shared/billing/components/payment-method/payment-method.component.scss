@@ -13,7 +13,7 @@
 .payment-method-actions {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   margin-top: 12px;
 
   h3 {
@@ -30,10 +30,18 @@
 
   .header {
     margin-right: 1em;
+    user-select: none;
   }
 
   .buttons {
     margin-right: 5px;
+    padding-right: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 5px;
+    border-radius: 16px;
+    margin-bottom: 2px;
 
     .mat-icon-button {
       width: 20px;
@@ -60,8 +68,10 @@
   align-items: center;
 
   .type-image {
-    width: 60px;
+    width: 75px;
     margin-right: 2em;
+    pointer-events: none;
+    user-select: none;
   }
 
 
@@ -71,12 +81,19 @@
     text-align: right;
   }
 
+  .card-meta {
+    flex: 1;
+  }
+
+
   .card-info {
     display: flex;
+    flex: 1;
 
     span:nth-child(odd) {
       margin-right: 1em;
       width: 70px;
+      user-select: none;
     }
 
     span:nth-child(even) {
@@ -85,5 +102,4 @@
       flex: 1;
     }
   }
-
 }

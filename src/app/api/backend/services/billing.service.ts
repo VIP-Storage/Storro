@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
-import {delay} from "rxjs/operators";
+import {delay, map} from "rxjs/operators";
 import {getBillingDemoData, getPaymentMethodDemoData} from "../../../data/demo";
 import {BillingHistoryResponse} from "../../../data/response/billing-history.response";
 import {PaymentMethod} from "../../../data/types";
@@ -22,6 +22,12 @@ export class BillingService {
   getPaymentMethods(): Observable<PaymentMethod[]> {
     return of(getPaymentMethodDemoData()).pipe(
       delay(150)
+    )
+  }
+
+  getCurrentPaymentMethod(): Observable<PaymentMethod|undefined> {
+    return this.getPaymentMethods().pipe(
+      map(methods => methods.find(m => m.current))
     )
   }
 }

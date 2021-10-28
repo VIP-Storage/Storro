@@ -1,5 +1,6 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {ThemePalette} from "@angular/material/core/common-behaviors/color";
+import {PaymentMethod} from "../../../../../data/types";
 
 @Component({
   selector: 'app-billing-card',
@@ -16,6 +17,9 @@ export class BillingCardComponent implements OnInit {
 
   @Input()
   routerLink?: string;
+
+  @Input()
+  chargedTo?: PaymentMethod|null;
 
   @Input()
   actionTitle: string = 'Go to';
@@ -57,5 +61,9 @@ export class BillingCardComponent implements OnInit {
 
   get cents(): string {
     return this.amountString.split('.')[1] || '00';
+  }
+
+  get chargedToMethod(): string | undefined {
+    return this.chargedTo?.name;
   }
 }

@@ -52,4 +52,8 @@ export class BillingHistoryComponent implements AfterViewInit {
       })
     ).subscribe(data => this.billingHistoryData = data);
   }
+
+  getImageType(type: string): string {
+    return `assets/payment/${type.toLowerCase()}.svg`;
+  }
 }
