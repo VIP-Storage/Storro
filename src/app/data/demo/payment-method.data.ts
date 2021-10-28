@@ -27,6 +27,12 @@ const PaymentMethodData: PaymentMethod[] = [
     identifier: "4124",
     current: false,
     expiry: '02/27',
+  },
+  {
+    type: PaymentMethodType.MASTERCARD,
+    identifier: "4124",
+    current: false,
+    expiry: '02/27',
   }
 ]
 
