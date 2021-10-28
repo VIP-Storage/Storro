@@ -1,4 +1,4 @@
-import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, ContentChild, Input, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'app-simple-table-row',
@@ -8,14 +8,11 @@ import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core
   `,
   styleUrls: ['./simple-table-row.component.scss']
 })
-export class SimpleTableRowComponent implements OnInit {
+export class SimpleTableRowComponent {
 
-  @Input() item: any;
-  @ContentChild(TemplateRef) templateOutlet!: TemplateRef<any>
+  @Input()
+  item: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  @ContentChild(TemplateRef)
+  templateOutlet!: TemplateRef<any>
 }

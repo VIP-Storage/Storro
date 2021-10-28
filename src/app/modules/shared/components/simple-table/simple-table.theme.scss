@@ -6,10 +6,13 @@
   $foreground: map.get($color-config, foreground);
   $background: map.get($color-config, background);
 
-  app-simple-table-row {
+  app-simple-table {
     @include mat.elevation-transition();
-    background-color: mat.get-color-from-palette($background, card);
-    border: 1px solid  mat.get-color-from-palette($foreground, divider);
+
+    .sort-toolbar {
+      @include mat.elevation-transition();
+      background: mat.get-color-from-palette($background, app-bar);
+    }
   }
 }
 

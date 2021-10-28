@@ -16,10 +16,10 @@ export class HoverElevationDirective {
   }
 
   @Input()
-  defaultElevation = 2;
+  defaultElevation = 0;
 
   @Input()
-  raisedElevation = 8;
+  raisedElevation = 2;
 
   constructor(private element: ElementRef, private renderer: Renderer2) {
     this.setElevation(this.defaultElevation);

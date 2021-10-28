@@ -5,15 +5,29 @@
 }
 
 .sort-toolbar {
-  border-radius: 8px;
+  border-radius: 16px;
   height: 40px;
   font-size: 16px;
+  display: flex;
+  padding: 16px 16px 0;
+  margin: 6px 6px 3px;
+  overflow: hidden;
+
+  * {
+    user-select: none;
+  }
+
+  th {
+    font-weight: normal !important;
+  }
 }
 
 table {
   flex: 1;
+
   tr {
     display: flex;
+
     th {
       flex: 1;
     }

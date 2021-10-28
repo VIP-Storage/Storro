@@ -24,7 +24,7 @@ const BillingDemoData: BillingHistoryType[] = [
   {
     paidOn: new Date("Mar 17, 2021"),
     amount: 228.57,
-    status: BillStatus.PAID,
+    status: BillStatus.ERROR,
     paymentMethod: "Visa"
   },
   {
@@ -54,7 +54,7 @@ const BillingDemoData: BillingHistoryType[] = [
   {
     paidOn: new Date("Aug 4, 2021"),
     amount: 220.81,
-    status: BillStatus.PAID,
+    status: BillStatus.ERROR,
     paymentMethod: "Visa"
   },
   {

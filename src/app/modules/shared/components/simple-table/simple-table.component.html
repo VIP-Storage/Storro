@@ -1,11 +1,11 @@
-<mat-toolbar class="sort-toolbar">
+<div class="sort-toolbar" hoverElevation [raisedElevation]="2">
   <table matSort (matSortChange)="sortData($event)">
     <tr>
       <th *ngFor="let column of columns" [mat-sort-header]="column.name">{{column.title}}</th>
     </tr>
   </table>
-</mat-toolbar>
+</div>
 
-<app-simple-table-row *ngFor="let item of data" [item]="item">
+<app-simple-table-row *ngFor="let item of data" [item]="item"  hoverElevation [raisedElevation]="1">
   <ng-container *ngTemplateOutlet="rowTemplate; context: {$implicit: item}"></ng-container>
 </app-simple-table-row>
