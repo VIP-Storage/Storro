@@ -9,13 +9,12 @@ export const storroAnimations = [
     transition(
       'void => *',
       [
-        style({transform: 'translate{{direction}}(0/**/)'}),
         style({
           opacity: '0',
-          transform: 'translate{{direction}}(-50%)'
+          transform: 'translateX(-50%)'
         }), animate('{{speed}}ms {{delay}}ms ease-in-out')
       ],
-      {params: {delay: 0, speed: 250, direction: 'X'}}
+      {params: {delay: 0, speed: 250}}
     )
   ]),
   trigger('onEnterRight', [
@@ -26,10 +25,9 @@ export const storroAnimations = [
     transition(
       'void => *',
       [
-        style({transform: 'translate{{direction}}(-50%)'}),
-        style({opacity: '0', transform: 'translate{{direction}}(50%)'}), animate('{{speed}}ms {{delay}}ms ease-in-out')
+        style({opacity: '0', transform: 'translateX(50%)'}), animate('{{speed}}ms {{delay}}ms ease-in-out')
       ],
-      {params: {delay: 0, speed: 250, direction: 'X'}}
+      {params: {delay: 0, speed: 250}}
     )
   ])
 ]

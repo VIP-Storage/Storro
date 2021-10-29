@@ -1,0 +1,55 @@
+@use '~@angular/material' as mat;
+
+@mixin host-style {
+  :host {
+    display: flex;
+    flex-direction: row;
+    border-radius: 16px;
+    padding: 2em 2.8em;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    align-self: stretch;
+    max-height: 70%;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include mat.elevation-transition();
+
+    &.show-borders {
+      border-width: 2px;
+      border-style: solid;
+    }
+  }
+}
+
+@mixin title-style {
+  .title {
+    margin-top: 0;
+    font-size: 20px;
+  }
+}
+
+@mixin button-wrapper-style {
+  .button-wrapper {
+    margin-top: 1em;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    button {
+      margin-top: 1em;
+
+      &:first-child {
+        margin-top: 0 !important;
+      }
+    }
+  }
+}
+
+@mixin all-styles {
+  @include host-style;
+  @include title-style;
+  @include button-wrapper-style;
+
+}

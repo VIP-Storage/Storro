@@ -1,0 +1,15 @@
+<div class="background-overlay"></div>
+<div class="access-list">
+  <h3 class="title">Recent Access</h3>
+  <div class="list-wrapper">
+    <mat-list>
+      <mat-list-item class="access-list-item" *ngFor="let accessItem of $accessHistory|async; index as index"
+                     [@onEnterLeft]="{params: {delay: 120 + (index * 100)}}"
+                     hoverElevation [defaultElevation]="0" [raisedElevation]="5">
+        <span class="access-credential" matLine>{{accessItem.credential}}</span>
+        <p class="access-date" matLine>at {{accessItem.date|date}}</p>
+        <mat-icon mat-list-icon>arrow_forward_ios</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

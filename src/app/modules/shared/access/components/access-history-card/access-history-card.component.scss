@@ -1,0 +1,42 @@
+@use '../access-card.common' as common;
+
+@include common.host-style;
+@include common.title-style;
+
+.access-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .list-wrapper {
+    flex: 1;
+
+    .mat-list {
+      flex: 1;
+    }
+
+    .access-list-item {
+      border-radius: 8px;
+      margin-bottom: 1em;
+      height: 60px;
+      user-select: none;
+      border-width: 1px;
+      border-style: solid;
+
+      .access-credential {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      ::ng-deep {
+        .mat-list-item-content {
+          flex-direction: row-reverse;
+
+          .mat-list-text {
+            padding-left: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}

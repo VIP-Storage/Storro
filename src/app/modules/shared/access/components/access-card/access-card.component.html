@@ -7,16 +7,6 @@
   </div>
   <div class="button-wrapper">
     <button mat-flat-button color="primary">Manage Access</button>
-  </div>
-</div>
-<div class="access-items" [@onEnterLeft]="{params: {delay: (200)}}">
-  <div class="access-item" *ngFor="let user of users|async">
-    <span class="username" [class.owner-name]="user.isOwner">{{user.displayName}}</span>
-    <mat-icon *ngIf="user.isOwner; else regularActions" color="primary" matTooltip="Owner" class="owner-indicator">perm_identity</mat-icon>
-    <ng-template #regularActions>
-      <button mat-icon-button class="revoke-access" matTooltip="Revoke Access">
-        <mat-icon>remove_circle_outline</mat-icon>
-      </button>
-    </ng-template>
+    <button mat-flat-button color="secondary">Request New Credential</button>
   </div>
 </div>

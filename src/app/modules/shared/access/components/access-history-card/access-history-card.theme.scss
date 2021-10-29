@@ -1,0 +1,37 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin color($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  $primary: map.get($color-config, 'primary');
+  $accent: map.get($color-config, 'accent');
+  $foreground: map.get($color-config, foreground);
+  $background: map.get($color-config, background);
+
+  app-access-history-card {
+    @if $isDarkTheme {
+      background-color: #242424;
+    } @else {
+      background-color: rgb(213 213 213 / 20%);
+    }
+
+    .access-list-item {
+      @include mat.elevation-transition();
+
+      background-color: mat.get-color-from-palette($background, card);
+      border-color: mat.get-color-from-palette($foreground, divider); ;
+
+      .access-date {
+        color: mat.get-color-from-palette($foreground, secondary-text);
+      }
+    }
+  }
+}
+
+
+@mixin theme($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme, $isDarkTheme);
+  }
+}

@@ -1,22 +1,5 @@
-:host {
-  display: flex;
-  flex-direction: row;
-  border-radius: 16px;
-  padding: 2em 2.8em;
-  position: relative;
-  overflow: hidden;
-  flex: 1;
-  align-self: stretch;
-  max-height: 70%;
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  &.show-borders {
-    border-width: 2px;
-    border-style: solid;
-  }
-}
+@use '../access-card.common' as common;
+@include common.all-styles;
 
 .access-meta {
   z-index: 2;
@@ -58,20 +41,9 @@
   }
 }
 
-.title {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.button-wrapper {
-  margin-top: 1em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 
 .amount {
+  margin-top: 1em;
   display: flex;
   align-items: baseline;
   justify-content: center;
