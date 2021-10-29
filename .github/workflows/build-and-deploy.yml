@@ -13,8 +13,7 @@ jobs:
       - name: Angular Deploy gh-pages Actions
         uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
         with:
-          github_access_token: ${{ secrets.ACCESS_TOKEN }}
-          build_configuration: production
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
           base_href: /Storro/
           deploy_branch: gh-pages
           angular_dist_build_folder: dist/storro
