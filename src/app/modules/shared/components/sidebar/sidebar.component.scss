@@ -13,8 +13,8 @@
 }
 
 .sidebar-list {
-  margin-top: 0!important;
-  padding-top: 0!important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
   flex: 1;
 }
 
@@ -22,4 +22,16 @@
   padding: 0.5em 1em;
   display: flex;
   flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    padding: 1.5em;
+    width: 120px;
+    text-align: center;
+  }
 }
