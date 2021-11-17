@@ -2,12 +2,14 @@
 @use './unit-chart/unit-chart.theme' as unit-chart;
 @use './units-grid/units-grid.theme' as units-grid;
 @use './unit-snapshot/unit-snapshot.theme' as unit-snapshot;
+@use './unit-map-card/unit-map-card.theme' as unit-map-theme;
 
 @mixin light-theme($theme) {
   @include unit-indicator.theme($theme, false);
   @include unit-chart.theme($theme, false);
   @include units-grid.theme($theme, false);
   @include unit-snapshot.theme($theme, false);
+  @include unit-map-theme.theme($theme, false);
 }
 
 @mixin dark-theme($theme) {
@@ -15,4 +17,5 @@
   @include unit-chart.theme($theme, true);
   @include units-grid.theme($theme, true);
   @include unit-snapshot.theme($theme, true);
+  @include unit-map-theme.theme($theme, true);
 }

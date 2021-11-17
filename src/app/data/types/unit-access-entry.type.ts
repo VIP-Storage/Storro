@@ -1,6 +1,6 @@
 export interface UnitAccessEntryType {
   credential: string;
   date: Date;
-  unitID: number;
+  unitID: string;
   unitName?: string;
 }

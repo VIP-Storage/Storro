@@ -1,26 +1,25 @@
-import {User} from "../types/user.type";
-import {UnitType} from "../types";
+import {UnitType, User} from "../types";
 
 const UsersDemoData: User[] = [
   {
     displayName: 'Storry Hardlock',
-    ownedUnits: [2],
-    accessUnits: [3, 0]
+    ownedUnits: ['A101'],
+    accessUnits: ['F100', 'C105']
   },
   {
     displayName: 'Rollo P. Door',
-    ownedUnits: [0],
-    accessUnits: [2]
+    ownedUnits: ['C105'],
+    accessUnits: ['A101']
   },
   {
     displayName: 'Moe Tionsens',
-    ownedUnits: [3],
-    accessUnits: [1, 0]
+    ownedUnits: ['F100'],
+    accessUnits: ['P118', 'C105']
   },
   {
     displayName: 'Conta C. Treader',
-    ownedUnits: [1],
-    accessUnits: [0]
+    ownedUnits: ['P118'],
+    accessUnits: ['C105']
   }
 ]
 

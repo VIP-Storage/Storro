@@ -18,7 +18,7 @@ export class UnitsService {
     return UnitsService.getDemoUnits();
   }
 
-  getUnit(id: number): Observable<UnitType | undefined> {
+  getUnit(id: string): Observable<UnitType | undefined> {
     // TODO: Replace this with proper backend call
     return UnitsService.getDemoUnit(id);
   }
@@ -38,7 +38,7 @@ export class UnitsService {
     return of(getDemoUnits()).pipe(delay(150))
   }
 
-  private static getDemoUnit(id: number): Observable<UnitType | undefined> {
+  private static getDemoUnit(id: string): Observable<UnitType | undefined> {
     return of(getDemoUnits().find(u => u.id === id)).pipe(delay(150))
   }
 

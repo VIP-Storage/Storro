@@ -16,6 +16,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {RouterModule} from "@angular/router";
+import { UnitMapCardComponent } from './components/unit-map-card/unit-map-card.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {RouterModule} from "@angular/router";
     UnitChartComponent,
     UnitSnapshotComponent,
     UnitsGridComponent,
+    UnitMapCardComponent,
   ],
   imports: [
     CommonModule,
@@ -39,13 +41,14 @@ import {RouterModule} from "@angular/router";
     NgxChartsModule,
     RouterModule
   ],
-  exports: [
-    UnitIndicatorComponent,
-    UnitPreviewComponent,
-    UnitChartComponent,
-    UnitSnapshotComponent,
-    UnitsGridComponent,
-  ]
+    exports: [
+        UnitIndicatorComponent,
+        UnitPreviewComponent,
+        UnitChartComponent,
+        UnitSnapshotComponent,
+        UnitsGridComponent,
+        UnitMapCardComponent,
+    ]
 })
 export class UnitModule {
 }
