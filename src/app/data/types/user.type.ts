@@ -1,6 +1,6 @@
 export interface User {
-  ownedUnits: number[];
-  accessUnits: number[];
+  ownedUnits: string[];
+  accessUnits: string[];
   displayName: string;
   isOwner?: boolean;
 }

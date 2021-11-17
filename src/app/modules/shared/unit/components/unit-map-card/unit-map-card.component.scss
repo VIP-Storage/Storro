@@ -1,0 +1,23 @@
+@use '~@angular/material' as mat;
+
+
+:host {
+  flex: 1;
+  border-radius: 16px;
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+  padding: 1.5em;
+  position: relative;
+  align-self: stretch;
+  max-height: 73%;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include mat.elevation-transition();
+}
+
+app-unit-map {
+  border-radius: 8px;
+  overflow: hidden;
+}

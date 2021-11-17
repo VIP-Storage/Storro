@@ -12,11 +12,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatRippleModule} from "@angular/material/core";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { SimpleTableComponent } from './components/simple-table/simple-table.component';
+import {SimpleTableComponent} from './components/simple-table/simple-table.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSortModule} from "@angular/material/sort";
-import { SimpleTableRowComponent } from './components/simple-table-row/simple-table-row.component';
-import { CustomColorDirective } from './directives/custom-color.directive';
+import {SimpleTableRowComponent} from './components/simple-table-row/simple-table-row.component';
+import {CustomColorDirective} from './directives/custom-color.directive';
+import {UnitMapComponent} from './components/unit-map/unit-map.component';
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -28,6 +31,7 @@ import { CustomColorDirective } from './directives/custom-color.directive';
     SimpleTableComponent,
     SimpleTableRowComponent,
     CustomColorDirective,
+    UnitMapComponent,
   ],
   exports: [
     SidebarComponent,
@@ -35,11 +39,13 @@ import { CustomColorDirective } from './directives/custom-color.directive';
     ToggleButtonComponent,
     LoadingShadeComponent,
     SimpleTableComponent,
-    CustomColorDirective
+    CustomColorDirective,
+    UnitMapComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
     FormsModule,
     MatProgressSpinnerModule,
     MatListModule,
@@ -48,7 +54,11 @@ import { CustomColorDirective } from './directives/custom-color.directive';
     MatRippleModule,
     MatTooltipModule,
     MatToolbarModule,
-    MatSortModule
+    MatSortModule,
+    LeafletModule,
+  ],
+  providers: [
+    HttpClient
   ]
 })
 export class SharedModule {

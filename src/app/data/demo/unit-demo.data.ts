@@ -1,29 +1,26 @@
-import {UnitType} from "../types/unit.type";
-import {UnitDataType} from "../types/unit-data.type";
-import {DoorState} from "../enums/door-state.enum";
-import {UnitState} from "../enums/unit-state.enum";
-import {UnitAccessEntryType} from "../types/unit-access-entry.type";
+import {DoorState, UnitState} from "../enums";
+import {UnitAccessEntryType, UnitDataType, UnitType} from "../types";
 
 const DemoUnits: UnitType[] = [
   {
     name: 'Demo Unit 1',
     location: 'Cordova, TN',
-    id: 0,
+    id: 'C105',
   },
   {
     name: 'Demo Unit 2',
     location: 'Collierville, TN',
-    id: 1,
+    id: 'P118',
   },
   {
     name: 'Demo Unit 3',
     location: 'Helsinki, FI',
-    id: 2,
+    id: 'A101',
   },
   {
     name: 'Demo Unit 4',
     location: 'Austin, TX',
-    id: 3
+    id: 'F100'
   }
 ]
 
@@ -34,7 +31,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 69.0,
     doorState: DoorState.OPEN,
     state: UnitState.ALARM,
-    unitID: 0,
+    unitID: 'C105',
   },
   {
     lastAccessed: new Date(),
@@ -42,7 +39,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 55.0,
     doorState: DoorState.CLOSED,
     state: UnitState.LOCKED,
-    unitID: 1,
+    unitID: 'P118',
   },
   {
     lastAccessed: new Date(),
@@ -50,7 +47,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 102.0,
     doorState: DoorState.OPEN,
     state: UnitState.UNLOCKED,
-    unitID: 2,
+    unitID: 'A101',
   },
   {
     lastAccessed: new Date(),
@@ -58,33 +55,33 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 88.2,
     doorState: DoorState.CLOSED,
     state: UnitState.LOCKED,
-    unitID: 3
+    unitID: 'F100'
   }
 ]
 
 const DemoUnitAccessData: UnitAccessEntryType[] = [
   {
-    unitID: 0,
+    unitID: 'C105',
     credential: 'Bob',
     date: new Date()
   },
   {
-    unitID: 0,
+    unitID: 'C105',
     credential: 'Bill',
     date: new Date()
   },
   {
-    unitID: 2,
+    unitID: 'A101',
     credential: 'Justin',
     date: new Date()
   },
   {
-    unitID: 3,
+    unitID: 'F100',
     credential: 'Dustin',
     date: new Date()
   },
   {
-    unitID: 1,
+    unitID: 'P118',
     credential: 'Bustin',
     date: new Date()
   }

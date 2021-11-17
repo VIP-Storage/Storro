@@ -7,5 +7,5 @@ export interface UnitDataType {
   lastAccessed: Date;
   state: UnitState;
   doorState: DoorState
-  unitID: number;
+  unitID: string;
 }
