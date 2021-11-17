@@ -64,6 +64,10 @@
   margin-top: -0.5em;
 }
 
+.manage-grid {
+  max-height: 45%;
+}
+
 .unit-content {
   padding: 15px;
 
@@ -84,14 +88,14 @@
   .access-grid-tile {
     app-access-card, app-access-history-card {
       margin: 0.8em;
-      height: 90%;
+      flex: 1;
     }
   }
 
   .map-grid-tile {
     app-unit-map-card {
       margin: 0.8em;
-      height: 90%;
+      flex: 1;
     }
   }
 }

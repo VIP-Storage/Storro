@@ -47,13 +47,13 @@
       </mat-grid-list>
 
       <mat-grid-list class="manage-grid" cols="4" rowHeight="1:1"  gutterSize="0">
-        <mat-grid-tile class="access-grid-tile" colspan="1" [@onEnterLeft]="{params: {delay: 120}}">
+        <mat-grid-tile class="access-grid-tile" colspan="2" [@onEnterLeft]="{params: {delay: 120}}">
           <app-access-card [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-card>
         </mat-grid-tile>
-        <mat-grid-tile class="access-grid-tile" rowspan="2" colspan="1" [@onEnterLeft]="{params: {delay: 120}}">
+        <mat-grid-tile class="access-grid-tile" rowspan="1" colspan="2" [@onEnterLeft]="{params: {delay: 120}}">
           <app-access-history-card [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-history-card>
         </mat-grid-tile>
-        <mat-grid-tile class="map-grid-tile" rowspan="2" colspan="2" [@onEnterLeft]="{params: {delay: 120}}">
+        <mat-grid-tile class="map-grid-tile" rowspan="2" colspan="4" [@onEnterLeft]="{params: {delay: 120}}">
           <app-unit-map-card [unit]="unit"></app-unit-map-card>
         </mat-grid-tile>
       </mat-grid-list>
