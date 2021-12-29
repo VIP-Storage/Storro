@@ -1,41 +1,64 @@
 import {Injectable} from '@angular/core';
-import {UnitType} from "../../../data/types/unit.type";
-import {Observable, of} from "rxjs";
-import {ChartData} from "../../../data/types/chart/chart-data.type";
-import {delay} from "rxjs/operators";
-import {getDemoHumidityData, getDemoTemperatureData} from "../../../data/demo/sensors-demo.data";
-import {ChartDataType} from "../../../data/enums/chart-data.enum";
+import {BehaviorSubject, Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import {MqttService} from "ngx-mqtt";
+import {ChartDataType} from "../../../data/enums";
+import {ChartData, UnitType} from "../../../data/types";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
+import {Burly} from "kb-burly";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SensorsService {
 
-  constructor() {
+  private readonly apiEndpoint: string = environment.http.url;
+
+  constructor(private mqttService: MqttService,
+              private httpClient: HttpClient) {
   }
 
-  getChartData(unit: UnitType, dataType: ChartDataType): Observable<ChartData> {
+  getChartData(unit: UnitType, dataType: ChartDataType, take: number|null = null): Observable<ChartData> {
     switch (dataType) {
       case ChartDataType.HUMIDITY:
-        return this.getHumidityChartData(unit);
+        return this.getHumidityChartData(unit, take);
       case ChartDataType.TEMPERATURE:
-        return this.getTemperatureChartData(unit);
+        return this.getTemperatureChartData(unit, take);
     }
   }
 
-  getHumidityChartData(unit: UnitType): Observable<ChartData> {
-    return SensorsService.getHumidityChartDemoData(unit);
+  getHumidityChartData(unit: UnitType, take: number|null = null): Observable<ChartData> {
+    return this.httpClient.get<ChartData>(
+      Burly(this.apiEndpoint)
+        .addSegment('/stats')
+        .addSegment('/humidity')
+        .addSegment('/unit69')
+        .addQuery('take', take, false)
+        .get
+    );
   }
 
-  getTemperatureChartData(unit: UnitType): Observable<ChartData> {
-    return SensorsService.getTemperatureChartDemoData(unit);
+  getTemperatureChartData(unit: UnitType, take: number|null = null): Observable<ChartData> {
+    return this.httpClient.get<ChartData>(
+      Burly(this.apiEndpoint)
+        .addSegment('/stats')
+        .addSegment('/temperature')
+        .addSegment('/unit69')
+        .addQuery('take', take, false)
+        .get
+    );
   }
 
-  private static getHumidityChartDemoData(unit: UnitType): Observable<ChartData> {
-    return of(getDemoHumidityData(unit)).pipe(delay(150));
+  getLiveTemperatureChartData(unit: UnitType): Observable<number> {
+    return this.mqttService.observe("sensors/unit69/temperature/").pipe(
+      map(message => Number(message.payload.toString()))
+    );
   }
 
-  private static getTemperatureChartDemoData(unit: UnitType): Observable<ChartData> {
-    return of(getDemoTemperatureData(unit)).pipe(delay(150));
+  getLiveHumidityChartData(unit: UnitType): Observable<number> {
+    return this.mqttService.observe("sensors/unit69/humidity/").pipe(
+      map(message => Number(message.payload.toString()))
+    );
   }
 }

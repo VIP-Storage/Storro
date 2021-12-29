@@ -5,9 +5,9 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import {from, Observable, of} from 'rxjs';
-import {UnitsService} from "../../api/backend/services/units.service";
 import {switchMap} from "rxjs/operators";
-import {UnitType} from "../../data/types";
+import {UnitsService} from "../../../api/backend/services/units.service";
+import {UnitType} from "../../../data/types";
 
 @Injectable({
   providedIn: 'root'

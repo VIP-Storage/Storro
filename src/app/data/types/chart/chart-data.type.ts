@@ -2,6 +2,6 @@ import {ChartDataPoint} from "./chart-data-point.type";
 
 export interface ChartData {
   values: ChartDataPoint[];
-  unit: string;
+  measurementUnit: string;
   name: string;
 }

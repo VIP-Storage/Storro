@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {ChangeDetectorRef, Component, Input} from '@angular/core';
+import {BehaviorSubject, Subscription} from "rxjs";
 import {filter} from "rxjs/operators";
 import {Color, colorSets} from "@swimlane/ngx-charts";
 import {ChartDataType} from "../../../../../data/enums";
@@ -11,9 +11,9 @@ import {SensorsService} from "../../../../../api/backend/services/sensors.servic
   templateUrl: './unit-chart.component.html',
   styleUrls: ['./unit-chart.component.scss']
 })
-export class UnitChartComponent implements OnInit {
+export class UnitChartComponent {
 
-  @Input() set type(newValue: ChartDataType) {
+  @Input() set type(newValue: ChartDataType | null) {
     if (!!newValue) {
       this._type = newValue;
 
@@ -29,29 +29,55 @@ export class UnitChartComponent implements OnInit {
     }
   }
 
+  @Input() set large(newValue: any) {
+    if (!!newValue && newValue !== 'false') {
+      this._large = true;
+    }
+  }
+
+  @Input() set paused(newValue: boolean) {
+    if (newValue && !this._paused) {
+      this.changeDetector.detach();
+      this._paused = true;
+    } else if (!newValue && this._paused) {
+      this.changeDetector.reattach();
+      this._paused = false;
+    }
+  }
+
   get title(): string {
     return this._type.toString().toLowerCase();
+  }
+
+  get large(): boolean {
+    return this._large;
   }
 
   maxValue?: string;
   minValue?: string;
   measurementUnit!: string;
-  chartData: {name: string, series: {name: any, value: any}[]}[] = [];
-  data: BehaviorSubject<ChartData|null> = new BehaviorSubject<ChartData | null>(null);
+  chartData: { name: string, series: { name: any, value: any }[] }[] = [];
+  data: BehaviorSubject<ChartData | null> = new BehaviorSubject<ChartData | null>(null);
   chartScheme!: Color;
 
+  private _queue: any[] = [];
+  private _paused = false;
+  private _large = false;
+  private _liveSub?: Subscription;
   private _domain: string[] | number[] = [];
   private _unit!: UnitType;
   private _type!: ChartDataType;
 
 
-  constructor(private sensorsService: SensorsService) {
+  constructor(private sensorsService: SensorsService,
+              private changeDetector: ChangeDetectorRef) {
     this.data.pipe(
       filter(d => !!d)
     ).subscribe(data => this.parseData(data as ChartData));
   }
 
-  ngOnInit(): void {
+  private get maxEventLen() {
+    return this._large ? 100 : 35;
   }
 
   getTooltipText(type: 'max' | 'min'): string {
@@ -64,30 +90,92 @@ export class UnitChartComponent implements OnInit {
       return;
     }
 
-    this.sensorsService.getChartData(this._unit, this._type).subscribe(this.data);
+    this.sensorsService.getChartData(this._unit, this._type, this.maxEventLen).subscribe(this.data);
+    this.attachLiveData(this._type);
   }
 
   private parseData(data: ChartData) {
-    const min = Math.min.apply(null, data.values.map(v => v.value));
-    const max = Math.max.apply(null, data.values.map(v => v.value));
+    this.measurementUnit = data.measurementUnit;
 
-    this.measurementUnit = data.unit;
+    this.updateMinMax(data.values.map(v => v.value));
 
-    this.minValue = `${min}${data.unit}`
-    this.maxValue = `${max}${data.unit}`
 
-    this._domain = data.values.map(v => v.value);
     this.chartData = [
       {
         name: data.name,
         series: [
           ...data.values.map(v => ({
             value: `${v.value}`,
-            name: v.date.toDateString()
+            name: v.date
           }))
         ]
       }
     ];
+  }
+
+  private updateMinMax(values: number[]) {
+    const min = Math.min.apply(null, values);
+    const max = Math.max.apply(null, values);
+
+    this.minValue = `${min}${this.measurementUnit}`
+    this.maxValue = `${max}${this.measurementUnit}`
+    this._domain = values;
+  }
+
+  private attachLiveData(type: ChartDataType) {
+    switch (type) {
+      case ChartDataType.TEMPERATURE:
+        this._liveSub = this.sensorsService.getLiveTemperatureChartData(this._unit).subscribe(
+          newData => this.appendPoint(newData)
+        );
+
+        break;
+      case ChartDataType.HUMIDITY:
+        this._liveSub = this.sensorsService.getLiveHumidityChartData(this._unit).subscribe(
+          newData => this.appendPoint(newData)
+        );
+        break;
+    }
+  }
+
+
+  private appendPoint(value: number) {
+    const currentData = this.chartData[0];
+    const now = new Date();
+
+    if (!currentData || !currentData.series) {
+      return;
+    }
+
+    if (this._paused) {
+      this._queue.push({
+        value: `${value}`,
+        name: now.toISOString()
+      });
+
+      return;
+    }
+
+    const currentSeries = currentData.series;
+    const newSeries = [
+      ...currentSeries,
+      ...this._queue,
+      {
+        value: `${value}`,
+        name: now.toISOString()
+      }
+    ];
+
+    this.updateMinMax(newSeries.map(v => v.value));
+
+    this.chartData = [
+      {
+        name: currentData.name,
+        series: newSeries.slice(Math.max(newSeries.length - this.maxEventLen, 0))
+      }
+    ];
+
+    this._queue = [];
   }
 
   private applyChartScheme(type: ChartDataType) {

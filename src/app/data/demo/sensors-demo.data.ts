@@ -1,417 +1,422 @@
-import {ChartData} from "../types/chart/chart-data.type";
-import {UnitType} from "../types/unit.type";
+import {UnitType, ChartData} from "../types";
+
+
+const HumidityDemoValues = [
+  {
+    date: new Date("2021-09-12T21:46:52.000-05:00"),
+    value: 84.0
+  },
+  {
+    date: new Date("2022-07-27T20:34:11.000-05:00"),
+    value: 52.1
+  },
+  {
+    date: new Date("2021-11-18T07:01:29.000-06:00"),
+    value: 79.0
+  },
+  {
+    date: new Date("2021-04-29T07:11:54.000-05:00"),
+    value: 73.7
+  },
+  {
+    date: new Date("2021-04-11T08:39:15.000-05:00"),
+    value: 77.7
+  },
+  {
+    date: new Date("2021-01-14T21:55:43.000-06:00"),
+    value: 104.3
+  },
+  {
+    date: new Date("2022-06-12T11:38:15.000-05:00"),
+    value: 88.9
+  },
+  {
+    date: new Date("2021-10-22T23:54:03.000-05:00"),
+    value: 66.1
+  },
+  {
+    date: new Date("2021-02-17T18:08:09.000-06:00"),
+    value: 59.5
+  },
+  {
+    date: new Date("2022-03-26T04:39:04.000-05:00"),
+    value: 76.7
+  },
+  {
+    date: new Date("2022-05-30T13:14:46.000-05:00"),
+    value: 14.1
+  },
+  {
+    date: new Date("2021-10-27T11:49:53.000-05:00"),
+    value: 56.0
+  },
+  {
+    date: new Date("2021-01-10T13:27:15.000-06:00"),
+    value: 70.9
+  },
+  {
+    date: new Date("2021-03-31T15:25:14.000-05:00"),
+    value: 85.8
+  },
+  {
+    date: new Date("2022-05-15T12:19:58.000-05:00"),
+    value: 75.5
+  },
+  {
+    date: new Date("2020-11-24T04:47:29.000-06:00"),
+    value: 88.6
+  },
+  {
+    date: new Date("2022-07-20T11:30:02.000-05:00"),
+    value: 39.6
+  },
+  {
+    date: new Date("2022-03-19T18:25:44.000-05:00"),
+    value: 102.6
+  },
+  {
+    date: new Date("2021-08-26T03:10:31.000-05:00"),
+    value: 84.9
+  },
+  {
+    date: new Date("2020-11-10T06:57:30.000-06:00"),
+    value: 87.5
+  },
+  {
+    date: new Date("2022-02-05T18:37:17.000-06:00"),
+    value: 63.3
+  },
+  {
+    date: new Date("2022-06-23T18:35:43.000-05:00"),
+    value: 37.1
+  },
+  {
+    date: new Date("2022-05-14T20:47:28.000-05:00"),
+    value: 82.3
+  },
+  {
+    date: new Date("2021-04-08T08:23:01.000-05:00"),
+    value: 46.7
+  },
+  {
+    date: new Date("2022-09-23T09:39:47.000-05:00"),
+    value: 48.0
+  },
+  {
+    date: new Date("2021-08-05T17:52:06.000-05:00"),
+    value: 88.0
+  },
+  {
+    date: new Date("2022-08-23T02:08:51.000-05:00"),
+    value: 58.7
+  },
+  {
+    date: new Date("2021-10-08T17:32:19.000-05:00"),
+    value: 107.9
+  },
+  {
+    date: new Date("2021-09-18T00:33:47.000-05:00"),
+    value: 72.6
+  },
+  {
+    date: new Date("2021-05-03T06:23:13.000-05:00"),
+    value: 82.4
+  },
+  {
+    date: new Date("2022-01-21T02:13:55.000-06:00"),
+    value: 101.0
+  },
+  {
+    date: new Date("2020-12-01T12:00:20.000-06:00"),
+    value: 97.4
+  },
+  {
+    date: new Date("2022-09-18T04:33:35.000-05:00"),
+    value: 64.7
+  },
+  {
+    date: new Date("2020-12-18T08:20:23.000-06:00"),
+    value: 100.1
+  },
+  {
+    date: new Date("2022-04-28T23:58:25.000-05:00"),
+    value: 115.5
+  },
+  {
+    date: new Date("2020-11-13T01:10:21.000-06:00"),
+    value: 99.7
+  },
+  {
+    date: new Date("2021-10-08T08:18:08.000-05:00"),
+    value: 103.6
+  },
+  {
+    date: new Date("2022-02-25T12:24:41.000-06:00"),
+    value: 67.9
+  },
+  {
+    date: new Date("2022-09-05T13:06:15.000-05:00"),
+    value: 76.9
+  },
+  {
+    date: new Date("2022-04-01T10:35:46.000-05:00"),
+    value: 56.6
+  },
+  {
+    date: new Date("2021-10-28T17:38:46.000-05:00"),
+    value: 74.1
+  },
+  {
+    date: new Date("2020-12-13T09:10:41.000-06:00"),
+    value: 61.7
+  },
+  {
+    date: new Date("2021-09-19T11:54:21.000-05:00"),
+    value: 146.2
+  },
+  {
+    date: new Date("2021-09-24T16:20:04.000-05:00"),
+    value: 70.2
+  },
+  {
+    date: new Date("2021-05-03T16:57:55.000-05:00"),
+    value: 71.9
+  },
+  {
+    date: new Date("2022-08-21T01:11:10.000-05:00"),
+    value: 54.7
+  },
+  {
+    date: new Date("2020-12-08T23:48:43.000-06:00"),
+    value: 88.2
+  },
+  {
+    date: new Date("2022-07-03T14:05:37.000-05:00"),
+    value: 59.1
+  },
+  {
+    date: new Date("2021-08-12T22:37:00.000-05:00"),
+    value: 76.1
+  },
+  {
+    date: new Date("2021-10-19T22:01:33.000-05:00"),
+    value: 49.8
+  },
+  {
+    date: new Date("2021-05-24T01:12:20.000-05:00"),
+    value: 50.1
+  },
+  {
+    date: new Date("2021-04-25T08:39:02.000-05:00"),
+    value: 81.7
+  },
+  {
+    date: new Date("2022-06-28T19:21:22.000-05:00"),
+    value: 89.5
+  },
+  {
+    date: new Date("2022-06-15T04:13:23.000-05:00"),
+    value: 98.6
+  },
+  {
+    date: new Date("2020-11-02T20:56:02.000-06:00"),
+    value: 15.5
+  },
+  {
+    date: new Date("2021-08-30T07:25:27.000-05:00"),
+    value: 96.1
+  },
+  {
+    date: new Date("2021-03-22T04:57:14.000-05:00"),
+    value: 68.6
+  },
+  {
+    date: new Date("2022-06-02T02:47:48.000-05:00"),
+    value: 104.8
+  },
+  {
+    date: new Date("2022-09-16T11:21:53.000-05:00"),
+    value: 58.3
+  },
+  {
+    date: new Date("2022-04-26T17:34:40.000-05:00"),
+    value: 63.2
+  },
+  {
+    date: new Date("2021-05-11T20:42:10.000-05:00"),
+    value: 60.6
+  },
+  {
+    date: new Date("2022-07-10T17:03:22.000-05:00"),
+    value: 87.5
+  },
+  {
+    date: new Date("2022-05-20T16:19:52.000-05:00"),
+    value: 10.4
+  },
+  {
+    date: new Date("2021-09-14T10:18:07.000-05:00"),
+    value: 82.1
+  },
+  {
+    date: new Date("2021-12-15T09:29:23.000-06:00"),
+    value: 6.9
+  },
+  {
+    date: new Date("2021-06-07T14:53:25.000-05:00"),
+    value: 80.9
+  },
+  {
+    date: new Date("2021-08-28T17:46:21.000-05:00"),
+    value: 57.5
+  },
+  {
+    date: new Date("2021-09-27T17:42:28.000-05:00"),
+    value: 36.5
+  },
+  {
+    date: new Date("2020-11-08T13:12:44.000-06:00"),
+    value: 79.2
+  },
+  {
+    date: new Date("2022-05-18T16:47:39.000-05:00"),
+    value: 66.5
+  },
+  {
+    date: new Date("2021-12-30T06:39:35.000-06:00"),
+    value: 134.1
+  },
+  {
+    date: new Date("2021-02-23T19:05:22.000-06:00"),
+    value: 45.8
+  },
+  {
+    date: new Date("2022-01-13T10:24:09.000-06:00"),
+    value: 60.4
+  },
+  {
+    date: new Date("2021-01-07T05:13:50.000-06:00"),
+    value: 79.4
+  },
+  {
+    date: new Date("2022-09-07T13:18:35.000-05:00"),
+    value: 77.9
+  },
+  {
+    date: new Date("2021-08-10T16:21:10.000-05:00"),
+    value: 87.7
+  },
+  {
+    date: new Date("2021-03-08T21:38:23.000-06:00"),
+    value: 119.9
+  },
+  {
+    date: new Date("2022-04-23T23:03:12.000-05:00"),
+    value: 83.0
+  },
+  {
+    date: new Date("2021-09-16T15:28:42.000-05:00"),
+    value: 124.1
+  },
+  {
+    date: new Date("2021-11-22T23:14:45.000-06:00"),
+    value: 62.5
+  },
+  {
+    date: new Date("2021-02-02T05:39:24.000-06:00"),
+    value: 81.2
+  },
+  {
+    date: new Date("2020-11-17T08:22:21.000-06:00"),
+    value: 95.5
+  },
+  {
+    date: new Date("2021-03-22T14:37:56.000-05:00"),
+    value: 48.3
+  },
+  {
+    date: new Date("2020-12-14T11:24:46.000-06:00"),
+    value: 67.3
+  },
+  {
+    date: new Date("2021-04-04T23:44:13.000-05:00"),
+    value: 86.9
+  },
+  {
+    date: new Date("2021-07-15T15:15:57.000-05:00"),
+    value: 90.4
+  },
+  {
+    date: new Date("2020-11-04T00:46:16.000-06:00"),
+    value: 82.7
+  },
+  {
+    date: new Date("2022-03-19T03:44:54.000-05:00"),
+    value: 92.1
+  },
+  {
+    date: new Date("2021-01-26T05:34:41.000-06:00"),
+    value: 103.5
+  },
+  {
+    date: new Date("2020-10-31T21:43:03.000-05:00"),
+    value: 71.4
+  },
+  {
+    date: new Date("2021-08-03T09:45:11.000-05:00"),
+    value: 98.0
+  },
+  {
+    date: new Date("2022-01-21T17:34:15.000-06:00"),
+    value: 76.6
+  },
+  {
+    date: new Date("2021-07-12T04:55:09.000-05:00"),
+    value: 55.9
+  },
+  {
+    date: new Date("2022-07-28T17:41:35.000-05:00"),
+    value: 101.1
+  },
+  {
+    date: new Date("2020-10-19T18:58:50.000-05:00"),
+    value: 109.1
+  },
+  {
+    date: new Date("2022-10-18T14:52:46.000-05:00"),
+    value: 39.2
+  },
+  {
+    date: new Date("2022-06-16T10:29:08.000-05:00"),
+    value: 53.0
+  },
+  {
+    date: new Date("2021-07-17T01:23:29.000-05:00"),
+    value: 59.4
+  },
+  {
+    date: new Date("2021-02-28T15:36:30.000-06:00"),
+    value: 82.8
+  },
+  {
+    date: new Date("2020-12-26T15:51:33.000-06:00"),
+    value: 46.7
+  }
+].map(v => {
+  return {
+    date: v.date.toDateString(),
+    value: v.value
+  }
+});
 
 const HumidityDemoData: ChartData = {
-  unit: '%',
+  measurementUnit: '%',
   name: 'Humidity',
-  values: [
-    {
-      date: new Date("2021-09-12T21:46:52.000-05:00"),
-      value: 84.0
-    },
-    {
-      date: new Date("2022-07-27T20:34:11.000-05:00"),
-      value: 52.1
-    },
-    {
-      date: new Date("2021-11-18T07:01:29.000-06:00"),
-      value: 79.0
-    },
-    {
-      date: new Date("2021-04-29T07:11:54.000-05:00"),
-      value: 73.7
-    },
-    {
-      date: new Date("2021-04-11T08:39:15.000-05:00"),
-      value: 77.7
-    },
-    {
-      date: new Date("2021-01-14T21:55:43.000-06:00"),
-      value: 104.3
-    },
-    {
-      date: new Date("2022-06-12T11:38:15.000-05:00"),
-      value: 88.9
-    },
-    {
-      date: new Date("2021-10-22T23:54:03.000-05:00"),
-      value: 66.1
-    },
-    {
-      date: new Date("2021-02-17T18:08:09.000-06:00"),
-      value: 59.5
-    },
-    {
-      date: new Date("2022-03-26T04:39:04.000-05:00"),
-      value: 76.7
-    },
-    {
-      date: new Date("2022-05-30T13:14:46.000-05:00"),
-      value: 14.1
-    },
-    {
-      date: new Date("2021-10-27T11:49:53.000-05:00"),
-      value: 56.0
-    },
-    {
-      date: new Date("2021-01-10T13:27:15.000-06:00"),
-      value: 70.9
-    },
-    {
-      date: new Date("2021-03-31T15:25:14.000-05:00"),
-      value: 85.8
-    },
-    {
-      date: new Date("2022-05-15T12:19:58.000-05:00"),
-      value: 75.5
-    },
-    {
-      date: new Date("2020-11-24T04:47:29.000-06:00"),
-      value: 88.6
-    },
-    {
-      date: new Date("2022-07-20T11:30:02.000-05:00"),
-      value: 39.6
-    },
-    {
-      date: new Date("2022-03-19T18:25:44.000-05:00"),
-      value: 102.6
-    },
-    {
-      date: new Date("2021-08-26T03:10:31.000-05:00"),
-      value: 84.9
-    },
-    {
-      date: new Date("2020-11-10T06:57:30.000-06:00"),
-      value: 87.5
-    },
-    {
-      date: new Date("2022-02-05T18:37:17.000-06:00"),
-      value: 63.3
-    },
-    {
-      date: new Date("2022-06-23T18:35:43.000-05:00"),
-      value: 37.1
-    },
-    {
-      date: new Date("2022-05-14T20:47:28.000-05:00"),
-      value: 82.3
-    },
-    {
-      date: new Date("2021-04-08T08:23:01.000-05:00"),
-      value: 46.7
-    },
-    {
-      date: new Date("2022-09-23T09:39:47.000-05:00"),
-      value: 48.0
-    },
-    {
-      date: new Date("2021-08-05T17:52:06.000-05:00"),
-      value: 88.0
-    },
-    {
-      date: new Date("2022-08-23T02:08:51.000-05:00"),
-      value: 58.7
-    },
-    {
-      date: new Date("2021-10-08T17:32:19.000-05:00"),
-      value: 107.9
-    },
-    {
-      date: new Date("2021-09-18T00:33:47.000-05:00"),
-      value: 72.6
-    },
-    {
-      date: new Date("2021-05-03T06:23:13.000-05:00"),
-      value: 82.4
-    },
-    {
-      date: new Date("2022-01-21T02:13:55.000-06:00"),
-      value: 101.0
-    },
-    {
-      date: new Date("2020-12-01T12:00:20.000-06:00"),
-      value: 97.4
-    },
-    {
-      date: new Date("2022-09-18T04:33:35.000-05:00"),
-      value: 64.7
-    },
-    {
-      date: new Date("2020-12-18T08:20:23.000-06:00"),
-      value: 100.1
-    },
-    {
-      date: new Date("2022-04-28T23:58:25.000-05:00"),
-      value: 115.5
-    },
-    {
-      date: new Date("2020-11-13T01:10:21.000-06:00"),
-      value: 99.7
-    },
-    {
-      date: new Date("2021-10-08T08:18:08.000-05:00"),
-      value: 103.6
-    },
-    {
-      date: new Date("2022-02-25T12:24:41.000-06:00"),
-      value: 67.9
-    },
-    {
-      date: new Date("2022-09-05T13:06:15.000-05:00"),
-      value: 76.9
-    },
-    {
-      date: new Date("2022-04-01T10:35:46.000-05:00"),
-      value: 56.6
-    },
-    {
-      date: new Date("2021-10-28T17:38:46.000-05:00"),
-      value: 74.1
-    },
-    {
-      date: new Date("2020-12-13T09:10:41.000-06:00"),
-      value: 61.7
-    },
-    {
-      date: new Date("2021-09-19T11:54:21.000-05:00"),
-      value: 146.2
-    },
-    {
-      date: new Date("2021-09-24T16:20:04.000-05:00"),
-      value: 70.2
-    },
-    {
-      date: new Date("2021-05-03T16:57:55.000-05:00"),
-      value: 71.9
-    },
-    {
-      date: new Date("2022-08-21T01:11:10.000-05:00"),
-      value: 54.7
-    },
-    {
-      date: new Date("2020-12-08T23:48:43.000-06:00"),
-      value: 88.2
-    },
-    {
-      date: new Date("2022-07-03T14:05:37.000-05:00"),
-      value: 59.1
-    },
-    {
-      date: new Date("2021-08-12T22:37:00.000-05:00"),
-      value: 76.1
-    },
-    {
-      date: new Date("2021-10-19T22:01:33.000-05:00"),
-      value: 49.8
-    },
-    {
-      date: new Date("2021-05-24T01:12:20.000-05:00"),
-      value: 50.1
-    },
-    {
-      date: new Date("2021-04-25T08:39:02.000-05:00"),
-      value: 81.7
-    },
-    {
-      date: new Date("2022-06-28T19:21:22.000-05:00"),
-      value: 89.5
-    },
-    {
-      date: new Date("2022-06-15T04:13:23.000-05:00"),
-      value: 98.6
-    },
-    {
-      date: new Date("2020-11-02T20:56:02.000-06:00"),
-      value: 15.5
-    },
-    {
-      date: new Date("2021-08-30T07:25:27.000-05:00"),
-      value: 96.1
-    },
-    {
-      date: new Date("2021-03-22T04:57:14.000-05:00"),
-      value: 68.6
-    },
-    {
-      date: new Date("2022-06-02T02:47:48.000-05:00"),
-      value: 104.8
-    },
-    {
-      date: new Date("2022-09-16T11:21:53.000-05:00"),
-      value: 58.3
-    },
-    {
-      date: new Date("2022-04-26T17:34:40.000-05:00"),
-      value: 63.2
-    },
-    {
-      date: new Date("2021-05-11T20:42:10.000-05:00"),
-      value: 60.6
-    },
-    {
-      date: new Date("2022-07-10T17:03:22.000-05:00"),
-      value: 87.5
-    },
-    {
-      date: new Date("2022-05-20T16:19:52.000-05:00"),
-      value: 10.4
-    },
-    {
-      date: new Date("2021-09-14T10:18:07.000-05:00"),
-      value: 82.1
-    },
-    {
-      date: new Date("2021-12-15T09:29:23.000-06:00"),
-      value: 6.9
-    },
-    {
-      date: new Date("2021-06-07T14:53:25.000-05:00"),
-      value: 80.9
-    },
-    {
-      date: new Date("2021-08-28T17:46:21.000-05:00"),
-      value: 57.5
-    },
-    {
-      date: new Date("2021-09-27T17:42:28.000-05:00"),
-      value: 36.5
-    },
-    {
-      date: new Date("2020-11-08T13:12:44.000-06:00"),
-      value: 79.2
-    },
-    {
-      date: new Date("2022-05-18T16:47:39.000-05:00"),
-      value: 66.5
-    },
-    {
-      date: new Date("2021-12-30T06:39:35.000-06:00"),
-      value: 134.1
-    },
-    {
-      date: new Date("2021-02-23T19:05:22.000-06:00"),
-      value: 45.8
-    },
-    {
-      date: new Date("2022-01-13T10:24:09.000-06:00"),
-      value: 60.4
-    },
-    {
-      date: new Date("2021-01-07T05:13:50.000-06:00"),
-      value: 79.4
-    },
-    {
-      date: new Date("2022-09-07T13:18:35.000-05:00"),
-      value: 77.9
-    },
-    {
-      date: new Date("2021-08-10T16:21:10.000-05:00"),
-      value: 87.7
-    },
-    {
-      date: new Date("2021-03-08T21:38:23.000-06:00"),
-      value: 119.9
-    },
-    {
-      date: new Date("2022-04-23T23:03:12.000-05:00"),
-      value: 83.0
-    },
-    {
-      date: new Date("2021-09-16T15:28:42.000-05:00"),
-      value: 124.1
-    },
-    {
-      date: new Date("2021-11-22T23:14:45.000-06:00"),
-      value: 62.5
-    },
-    {
-      date: new Date("2021-02-02T05:39:24.000-06:00"),
-      value: 81.2
-    },
-    {
-      date: new Date("2020-11-17T08:22:21.000-06:00"),
-      value: 95.5
-    },
-    {
-      date: new Date("2021-03-22T14:37:56.000-05:00"),
-      value: 48.3
-    },
-    {
-      date: new Date("2020-12-14T11:24:46.000-06:00"),
-      value: 67.3
-    },
-    {
-      date: new Date("2021-04-04T23:44:13.000-05:00"),
-      value: 86.9
-    },
-    {
-      date: new Date("2021-07-15T15:15:57.000-05:00"),
-      value: 90.4
-    },
-    {
-      date: new Date("2020-11-04T00:46:16.000-06:00"),
-      value: 82.7
-    },
-    {
-      date: new Date("2022-03-19T03:44:54.000-05:00"),
-      value: 92.1
-    },
-    {
-      date: new Date("2021-01-26T05:34:41.000-06:00"),
-      value: 103.5
-    },
-    {
-      date: new Date("2020-10-31T21:43:03.000-05:00"),
-      value: 71.4
-    },
-    {
-      date: new Date("2021-08-03T09:45:11.000-05:00"),
-      value: 98.0
-    },
-    {
-      date: new Date("2022-01-21T17:34:15.000-06:00"),
-      value: 76.6
-    },
-    {
-      date: new Date("2021-07-12T04:55:09.000-05:00"),
-      value: 55.9
-    },
-    {
-      date: new Date("2022-07-28T17:41:35.000-05:00"),
-      value: 101.1
-    },
-    {
-      date: new Date("2020-10-19T18:58:50.000-05:00"),
-      value: 109.1
-    },
-    {
-      date: new Date("2022-10-18T14:52:46.000-05:00"),
-      value: 39.2
-    },
-    {
-      date: new Date("2022-06-16T10:29:08.000-05:00"),
-      value: 53.0
-    },
-    {
-      date: new Date("2021-07-17T01:23:29.000-05:00"),
-      value: 59.4
-    },
-    {
-      date: new Date("2021-02-28T15:36:30.000-06:00"),
-      value: 82.8
-    },
-    {
-      date: new Date("2020-12-26T15:51:33.000-06:00"),
-      value: 46.7
-    }
-  ]
+  values: HumidityDemoValues
 }
 
-const TemperatureDemoData: ChartData = {
-  unit: 'F',
-  name: 'Temperature',
-  values: [
+const TemperatureDemoValues =
+  [
     {
       date: new Date("2021-11-08T04:11:32.000-06:00"),
       value: 89.1
@@ -812,7 +817,17 @@ const TemperatureDemoData: ChartData = {
       date: new Date("2021-12-08T04:34:16.000-06:00"),
       value: 126.4
     }
-  ]
+  ].map(v => {
+    return {
+      date: v.date.toDateString(),
+      value: v.value
+    }
+  });
+
+const TemperatureDemoData: ChartData = {
+  measurementUnit: 'F',
+  name: 'Temperature',
+  values: TemperatureDemoValues
 }
 
 const getRandomValues = (arr: any[], count: number) => {
@@ -829,7 +844,7 @@ const getRandomValues = (arr: any[], count: number) => {
 export const getDemoHumidityData = (unit: UnitType): ChartData => {
   console.log('DEMO > Fetching humidity demo data for unit', unit);
   const sortedData = HumidityDemoData;
-  sortedData.values = getRandomValues(sortedData.values.sort((a, b) => a.date.getDate() - b.date.getDate()), 20)
+  sortedData.values = getRandomValues(sortedData.values.sort((a, b) => new Date(a.date).getDate() - new Date(b.date).getDate()), 20)
 
   return sortedData;
 }
@@ -837,7 +852,7 @@ export const getDemoHumidityData = (unit: UnitType): ChartData => {
 export const getDemoTemperatureData = (unit: UnitType): ChartData => {
   console.log('DEMO > Fetching demo temperature data for unit', unit);
   const sortedData = TemperatureDemoData;
-  sortedData.values = getRandomValues(sortedData.values.sort((a, b) => a.date.getDate() - b.date.getDate()), 20)
+  sortedData.values = getRandomValues(sortedData.values.sort((a, b) => new Date(a.date).getDate() - new Date(b.date).getDate()), 20)
 
   return sortedData
 }

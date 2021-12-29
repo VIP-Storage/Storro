@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {BehaviorSubject, Observable} from "rxjs";
 import {filter, map, tap} from "rxjs/operators";
@@ -14,7 +14,7 @@ import {PageTitleService} from "../../../../services/page-title.service";
   styleUrls: ['./client-unit.component.scss'],
   animations: storroAnimations
 })
-export class ClientUnitComponent implements OnInit {
+export class ClientUnitComponent {
 
 
   unit: Observable<UnitType>;
@@ -47,7 +47,9 @@ export class ClientUnitComponent implements OnInit {
     this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>;
   }
 
-  ngOnInit(): void {
+
+  getChartURL(chartType: ChartDataType) {
+    return `./chart/${chartType.toLowerCase()}`;
   }
 
 }

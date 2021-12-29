@@ -1,0 +1,17 @@
+<div class="action-bar">
+  <mat-toolbar>
+    <button mat-icon-button routerLink="../../">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="flexy-title">
+      {{title|async|titlecase}}
+    </span>
+    <button mat-icon-button (click)="paused = !paused" matTooltip="Pause/play the incoming data">
+      <mat-icon>{{paused ? 'play_circle_filled' : 'pause_circle_filled'}}</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+</div>
+<div class="full-chart-wrapper" *ngIf="unit|async as unit">
+  <app-unit-chart large="true" [paused]="paused" [type]="chartType|async" [unit]="unit"></app-unit-chart>
+</div>

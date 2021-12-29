@@ -4,7 +4,6 @@ import {ClientDashboardComponent} from './client-dashboard/client-dashboard.comp
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {ClientUnitComponent} from './client-unit/client-unit.component';
-import {UnitResolver} from "../unit.resolver";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {ClientBillingComponent} from './client-billing/client-billing.component';
@@ -15,6 +14,11 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AccessModule} from "../../shared/access/access.module";
+import {ClientUnitChartComponent} from './client-unit-chart/client-unit-chart.component';
+import {UnitChartResolver} from "../resolvers/unit-chart.resolver";
+import {UnitResolver} from "../resolvers/unit.resolver";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 const routes: Routes = [
@@ -35,6 +39,18 @@ const routes: Routes = [
     }
   },
   {
+    path: 'unit/:id/chart/:type',
+    component: ClientUnitChartComponent,
+    resolve: {
+      unit: UnitResolver,
+      type: UnitChartResolver
+    }
+  },
+  {
+    path: 'unit/:id/chart',
+    redirectTo: 'unit/:id'
+  },
+  {
     path: 'billing',
     component: ClientBillingComponent
   }
@@ -44,7 +60,8 @@ const routes: Routes = [
   declarations: [
     ClientDashboardComponent,
     ClientUnitComponent,
-    ClientBillingComponent
+    ClientBillingComponent,
+    ClientUnitChartComponent
   ],
   imports: [
     CommonModule,
@@ -59,6 +76,8 @@ const routes: Routes = [
     MatIconModule,
     MatTooltipModule,
     AccessModule,
+    MatToolbarModule,
+    MatDividerModule,
   ],
   exports: [
     RouterModule

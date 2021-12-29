@@ -1,7 +1,7 @@
 <div class="chart-meta">
   <span class="chart-title">{{title|titlecase}}</span>
 </div>
-<div class="chart-wrapper">
+<div class="chart-wrapper" [class.large]="large">
   <ngx-charts-line-chart [results]="chartData"
                          [autoScale]="true"
 

@@ -9,6 +9,18 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {SharedModule} from "./modules/shared/shared.module";
+import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+import {environment} from "../environments/environment";
+
+const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: environment.mqtt.server,
+  port: environment.mqtt.port,
+  protocol: (environment.mqtt.protocol === "wss") ? "wss" : "ws",
+  path: '/ws',
+  username: 'tibbo',
+  password: 'tibbo'
+};
+
 
 @NgModule({
   declarations: [
@@ -22,7 +34,8 @@ import {SharedModule} from "./modules/shared/shared.module";
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}

@@ -25,6 +25,12 @@
  ::ng-deep .line-highlight {
     display: block;
   }
+
+  &.large {
+    max-height: calc(100% - 120px);
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
 }
 
 .chart-details {

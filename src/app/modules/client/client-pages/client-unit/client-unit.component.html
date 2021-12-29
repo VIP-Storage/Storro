@@ -31,7 +31,7 @@
     <mat-card-content class="unit-content">
       <mat-grid-list class="chart-grid" cols="4" gutterSize="0px" rowHeight="1:1">
         <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts; index as index" [@onEnterLeft]="{params: {delay: 110 * index}}">
-          <app-unit-chart hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
+          <app-unit-chart [routerLink]="getChartURL(chart)" hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
         </mat-grid-tile>
         <mat-grid-tile class="snapshot-tile" colspan="2" [@onEnterLeft]="{params: {delay: 100 * (unitCharts.length)}}">
           <div class="unit-snapshot-wrapper">
