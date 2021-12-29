@@ -21,7 +21,7 @@
     <div [ngSwitch]="selected" class="carousel-wrapper">
       <mat-grid-list *ngSwitchCase="'charts'" [@chartsTrigger]="'true'" class="chart-grid" cols="2" gutterSize="0px" rowHeight="360px">
         <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts">
-          <app-unit-chart hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
+          <app-unit-chart [routerLink]="getChartURL(unit, chart)" hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
         </mat-grid-tile>
       </mat-grid-list>
 

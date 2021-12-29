@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {filter} from "rxjs/operators";
 import {animate, state, style, transition, trigger} from "@angular/animations";
@@ -27,7 +27,7 @@ import {UnitsService} from "../../../../../api/backend/services/units.service";
     ])
   ]
 })
-export class UnitPreviewComponent implements OnInit {
+export class UnitPreviewComponent {
 
   @Input()
   set unit(newValue: UnitType|null) {
@@ -81,14 +81,15 @@ export class UnitPreviewComponent implements OnInit {
     this.toggleSelected = this.toggleOptions[0];
   }
 
-  ngOnInit(): void {
-  }
-
   get selected() {
     return this.toggleSelected.value;
   }
 
   getLink(forUnit: UnitType): string {
     return `/client/unit/${forUnit.id}`;
+  }
+
+  getChartURL(unit: UnitType, chartType: ChartDataType) {
+    return `../unit/${unit.id}/chart/${chartType.toLowerCase()}`;
   }
 }
