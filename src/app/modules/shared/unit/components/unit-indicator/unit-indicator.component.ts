@@ -1,11 +1,12 @@
 import {Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {BehaviorSubject, ReplaySubject} from "rxjs";
+import {BehaviorSubject, Observable, ReplaySubject, Subscription} from "rxjs";
 import {filter, map, tap} from "rxjs/operators";
 import {MatRipple} from "@angular/material/core";
 import {getIconColor} from "../../../helpers/colors.helper";
 import {BadgeType, UnitDataType, UnitIndicatorType} from "../../../../../data/types";
 import {UnitIndicatorFactory} from "../../../factory/unit-indicator.factory";
 import {DoorState, UnitIndicatorDataType, UnitState} from "../../../../../data/enums";
+import {SensorsService} from "../../../../../api/backend/services/sensors.service";
 
 @Component({
   selector: 'app-unit-indicator',
@@ -52,10 +53,11 @@ export class UnitIndicatorComponent implements OnInit {
   hasLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
+  private _liveSub?: Subscription;
   private _indicatorType!: UnitIndicatorDataType;
   private _currentData!: UnitDataType;
 
-  constructor() {
+  constructor(private sensorsService: SensorsService) {
   }
 
 
@@ -64,6 +66,8 @@ export class UnitIndicatorComponent implements OnInit {
       filter(d => !!d),
       tap(currentData => this._currentData = currentData),
       map(rawData => {
+        this.attachLiveData(this._indicatorType, rawData.unit);
+
         switch (this._indicatorType) {
           case UnitIndicatorDataType.DOOR:
             this.clickable = true;
@@ -78,11 +82,7 @@ export class UnitIndicatorComponent implements OnInit {
         }
       })
     ).subscribe(unitIndicatorData => {
-      this.icon = unitIndicatorData.icon;
-      this.iconColorStyle = `color: ${getIconColor(unitIndicatorData.iconColor)};`;
-      this.text = unitIndicatorData.text;
-      this.badge = unitIndicatorData.badge;
-
+      this.update(unitIndicatorData);
       this.hasLoaded.next(true);
     })
   }
@@ -120,6 +120,41 @@ export class UnitIndicatorComponent implements OnInit {
       case UnitState.LOCKED:
         this._currentData.state = UnitState.UNLOCKED;
         break;
+    }
+  }
+
+  private update(data: UnitIndicatorType) {
+    this.icon = data.icon;
+    this.iconColorStyle = `color: ${getIconColor(data.iconColor)};`;
+    this.text = data.text;
+    this.badge = data.badge;
+  }
+
+  private attachLiveData(type: UnitIndicatorDataType, unit: string) {
+    let observable: Observable<any> | null = null;
+
+    switch (type) {
+      case UnitIndicatorDataType.TEMP:
+        observable = this.sensorsService.getLiveTemperatureChartData(unit).pipe(
+          map(raw => UnitIndicatorFactory.getTemperatureData(raw))
+        );
+        break;
+      case UnitIndicatorDataType.HUMIDITY:
+        observable = this.sensorsService.getLiveHumidityChartData(unit).pipe(
+          map(raw => UnitIndicatorFactory.getHumidityData(raw))
+        );
+        break;
+      case UnitIndicatorDataType.DOOR:
+        observable = this.sensorsService.getLiveDoorState(unit).pipe(
+          map(raw => UnitIndicatorFactory.getDoorStateData(raw))
+        );
+        break;
+    }
+
+    if (!!observable) {
+      this._liveSub = observable.subscribe(data => {
+        this.update(data);
+      });
     }
   }
 }

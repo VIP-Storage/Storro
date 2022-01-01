@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {MqttService} from "ngx-mqtt";
-import {ChartDataType} from "../../../data/enums";
+import {ChartDataType, DoorState} from "../../../data/enums";
 import {ChartData, UnitType} from "../../../data/types";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
@@ -32,8 +32,8 @@ export class SensorsService {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
         .addSegment('/stats')
-        .addSegment('/humidity')
-        .addSegment('/unit69')
+        .addSegment('/humidity/')
+        .addSegment(unit.id)
         .addQuery('take', take, false)
         .get
     );
@@ -43,22 +43,54 @@ export class SensorsService {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
         .addSegment('/stats')
-        .addSegment('/temperature')
-        .addSegment('/unit69')
+        .addSegment('/temperature/')
+        .addSegment(unit.id)
         .addQuery('take', take, false)
         .get
     );
   }
 
-  getLiveTemperatureChartData(unit: UnitType): Observable<number> {
-    return this.mqttService.observe("sensors/unit69/temperature/").pipe(
+  getLiveTemperatureChartData(unit: UnitType|string): Observable<number> {
+    let _unit = unit;
+
+    if (unit.hasOwnProperty('id')) {
+      _unit = (unit as UnitType).id;
+    }
+
+    return this.mqttService.observe(`sensors/${_unit}/temperature`).pipe(
       map(message => Number(message.payload.toString()))
     );
   }
 
-  getLiveHumidityChartData(unit: UnitType): Observable<number> {
-    return this.mqttService.observe("sensors/unit69/humidity/").pipe(
+  getLiveHumidityChartData(unit: UnitType|string): Observable<number> {
+    let _unit = unit;
+
+    if (unit.hasOwnProperty('id')) {
+      _unit = (unit as UnitType).id;
+    }
+
+    return this.mqttService.observe(`sensors/${_unit}/humidity`).pipe(
       map(message => Number(message.payload.toString()))
+    );
+  }
+
+  getLiveDoorState(unit: UnitType|string): Observable<DoorState> {
+    let _unit = unit;
+
+    if (unit.hasOwnProperty('id')) {
+      _unit = (unit as UnitType).id;
+    }
+
+    return this.mqttService.observe(`sensors/${_unit}/door/state`).pipe(
+      map(message => {
+        const rawState = message.payload.toString();
+
+        if (rawState === 'closed') {
+          return DoorState.CLOSED;
+        }
+
+        return DoorState.OPEN;
+      })
     );
   }
 }

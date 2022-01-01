@@ -1,5 +1,5 @@
 <div class="snapshot-wrapper">
-  <img src="./assets/demo/sample-camera.png" alt="Snapshot">
+  <img [src]="snapshotURL|async" alt="Snapshot">
   <button class="download-button" color="warn" matTooltip="Download Snapshot" mat-icon-button>
     <mat-icon>download</mat-icon>
   </button>

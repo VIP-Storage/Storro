@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CRS, MapOptions, Map, LatLngTuple, GeoJSON, Layer, LatLngBoundsExpression, Polygon} from "leaflet";
+import {CRS, MapOptions, Map, LatLngTuple, GeoJSON, Polygon} from "leaflet";
 import {HttpClient} from "@angular/common/http";
 import * as L from 'leaflet';
 import {GeoJSONObject, UnitType} from "../../../../data/types";
@@ -60,9 +60,6 @@ export class UnitMapComponent implements OnInit {
         const unitID = this.unit.id;
 
         this.unitsGeoJSON = this.unitsGeoJSON.setStyle((layer: any) => {
-          console.log(layer);
-
-
           if (!!layer.properties) {
             const layerUnitID = layer.properties.id;
 
@@ -86,7 +83,11 @@ export class UnitMapComponent implements OnInit {
 
           this.unitsGeoJSON.getLayers().forEach((layer: any) => {
             if (!!layer['feature'] && !!layer['feature'].properties && unitID === layer['feature'].properties.id) {
-              layer.bindPopup((layer: any) => `Unit ${layer['feature'].properties.id}`, {closeOnClick: false, closeOnEscapeKey: true, closeButton: false});
+              layer.bindPopup((layer: any) => `Unit ${layer['feature'].properties.id}`, {
+                closeOnClick: false,
+                closeOnEscapeKey: true,
+                closeButton: false
+              });
               (layer as Polygon).openPopup(layer.getBounds().getCenter());
               map.setView(layer.getBounds().getCenter(), -2);
             }

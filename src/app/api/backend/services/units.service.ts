@@ -3,13 +3,19 @@ import {Observable, of} from "rxjs";
 import {delay} from "rxjs/operators";
 import {getDemoUnitAccessHistory, getDemoUnitData, getDemoUnits} from "../../../data/demo";
 import {UnitAccessEntryType, UnitDataType, UnitType} from "../../../data/types";
+import {environment} from "../../../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {Burly} from "kb-burly";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UnitsService {
 
-  constructor() {
+  private readonly apiEndpoint: string = environment.http.url;
+
+
+  constructor(private httpClient: HttpClient) {
   }
 
   // TODO: Add parameter to check for client/admin
@@ -23,9 +29,23 @@ export class UnitsService {
     return UnitsService.getDemoUnit(id);
   }
 
+  getUnitSnapshotURL(unit: UnitType) {
+    return Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/snapshot/')
+      .addSegment(unit.id)
+      .addQuery('now',  Math.random())
+      .get
+  }
+
   getUnitData(unit: UnitType): Observable<UnitDataType> {
-    // TODO: Replace this with proper backend call
-    return UnitsService.getDemoUnitData(unit);
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/state/')
+      .addSegment(unit.id)
+      .get;
+
+    return this.httpClient.get<UnitDataType>(url);
   }
 
   getUnitAccessHistory(unit?: UnitType): Observable<UnitAccessEntryType[]> {
@@ -42,10 +62,6 @@ export class UnitsService {
     return of(getDemoUnits().find(u => u.id === id)).pipe(delay(150))
   }
 
-
-  private static getDemoUnitData(unit: UnitType): Observable<UnitDataType> {
-    return of(getDemoUnitData(unit) as UnitDataType).pipe(delay(150))
-  }
 
   private static getDemoUnitAccessHistory(unit?: UnitType): Observable<UnitAccessEntryType[]> {
     return of(getDemoUnitAccessHistory(unit)).pipe(delay(150))

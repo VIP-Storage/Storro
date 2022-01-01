@@ -4,7 +4,7 @@
 <div class="chart-wrapper" [class.large]="large">
   <ngx-charts-line-chart [results]="chartData"
                          [autoScale]="true"
-
+                         [animations]="animations"
                          [scheme]="chartScheme">
     <ng-template #seriesTooltipTemplate let-model="model">
       {{model[0]['value']}}{{measurementUnit}}
@@ -13,9 +13,11 @@
 </div>
 <div class="chart-details">
   <div class="chart-measurement" [matTooltip]="getTooltipText('max')|titlecase" matTooltipPosition="below">
-    <mat-icon>arrow_drop_up</mat-icon>{{maxValue}}
+    <mat-icon>arrow_drop_up</mat-icon>
+    {{maxValue}}
   </div>
   <div class="chart-measurement" [matTooltip]="getTooltipText('min')|titlecase" matTooltipPosition="below">
-    <mat-icon>arrow_drop_down</mat-icon>{{minValue}}
+    <mat-icon>arrow_drop_down</mat-icon>
+    {{minValue}}
   </div>
 </div>

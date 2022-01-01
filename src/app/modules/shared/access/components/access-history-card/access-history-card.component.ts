@@ -16,7 +16,6 @@ export class AccessHistoryCardComponent {
   @Input() set unit(newValue: UnitType) {
     if (!!newValue) {
       this.$currentUnit.next(newValue);
-      console.log('Set unit', newValue);
     }
   }
 
@@ -29,10 +28,7 @@ export class AccessHistoryCardComponent {
     this.$accessHistory = this.$currentUnit.pipe(
       filter(u => !!u),
       switchMap(unit => this.unitsService.getUnitAccessHistory(unit)),
-      tap((access) => {
-        this.isLoading = false;
-        console.log('done', access);
-      })
+      tap(() => this.isLoading = false)
     );
   }
 

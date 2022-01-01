@@ -15,7 +15,6 @@ export class CustomColorDirective {
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
   private updateColor(colorValue: string) {
-    console.log('updateColor', colorValue);
     this.renderer.setStyle(this.element.nativeElement, 'color', colorValue);
   }
 }

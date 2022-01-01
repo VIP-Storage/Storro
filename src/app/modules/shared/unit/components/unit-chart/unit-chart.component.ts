@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject, Subscription} from "rxjs";
 import {filter} from "rxjs/operators";
 import {Color, colorSets} from "@swimlane/ngx-charts";
@@ -37,13 +37,13 @@ export class UnitChartComponent {
 
   @Input() set paused(newValue: boolean) {
     if (newValue && !this._paused) {
-      this.changeDetector.detach();
       this._paused = true;
     } else if (!newValue && this._paused) {
-      this.changeDetector.reattach();
       this._paused = false;
     }
   }
+
+  @Output() current = new EventEmitter<string>();
 
   get title(): string {
     return this._type.toString().toLowerCase();
@@ -53,6 +53,7 @@ export class UnitChartComponent {
     return this._large;
   }
 
+  hasLoadedInitial = false;
   maxValue?: string;
   minValue?: string;
   measurementUnit!: string;
@@ -69,11 +70,18 @@ export class UnitChartComponent {
   private _type!: ChartDataType;
 
 
-  constructor(private sensorsService: SensorsService,
-              private changeDetector: ChangeDetectorRef) {
+  constructor(private sensorsService: SensorsService) {
     this.data.pipe(
       filter(d => !!d)
     ).subscribe(data => this.parseData(data as ChartData));
+  }
+
+  get animations() {
+    if (this.large) {
+      return this.hasLoadedInitial;
+    }
+
+    return true;
   }
 
   private get maxEventLen() {
@@ -98,7 +106,6 @@ export class UnitChartComponent {
     this.measurementUnit = data.measurementUnit;
 
     this.updateMinMax(data.values.map(v => v.value));
-
 
     this.chartData = [
       {
@@ -138,21 +145,23 @@ export class UnitChartComponent {
     }
   }
 
-
   private appendPoint(value: number) {
     const currentData = this.chartData[0];
     const now = new Date();
+
+    this.current.emit(`${value}`);
 
     if (!currentData || !currentData.series) {
       return;
     }
 
-    if (this._paused) {
-      this._queue.push({
-        value: `${value}`,
-        name: now.toISOString()
-      });
+    const newData = {
+      value: `${value}`,
+      name: now.toISOString()
+    };
 
+    if (this._paused) {
+      this._queue.push(newData);
       return;
     }
 
@@ -160,13 +169,11 @@ export class UnitChartComponent {
     const newSeries = [
       ...currentSeries,
       ...this._queue,
-      {
-        value: `${value}`,
-        name: now.toISOString()
-      }
+      newData
     ];
 
     this.updateMinMax(newSeries.map(v => v.value));
+
 
     this.chartData = [
       {

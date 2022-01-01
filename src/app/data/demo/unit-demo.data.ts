@@ -10,7 +10,7 @@ const DemoUnits: UnitType[] = [
   {
     name: 'Demo Unit 2',
     location: 'Collierville, TN',
-    id: 'P118',
+    id: 'M120',
   },
   {
     name: 'Demo Unit 3',
@@ -31,7 +31,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 69.0,
     doorState: DoorState.OPEN,
     state: UnitState.ALARM,
-    unitID: 'C105',
+    unit: 'C105',
   },
   {
     lastAccessed: new Date(),
@@ -39,7 +39,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 55.0,
     doorState: DoorState.CLOSED,
     state: UnitState.LOCKED,
-    unitID: 'P118',
+    unit: 'M120',
   },
   {
     lastAccessed: new Date(),
@@ -47,7 +47,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 102.0,
     doorState: DoorState.OPEN,
     state: UnitState.UNLOCKED,
-    unitID: 'A101',
+    unit: 'A101',
   },
   {
     lastAccessed: new Date(),
@@ -55,7 +55,7 @@ const DemoUnitData: UnitDataType[] = [
     lastTemperature: 88.2,
     doorState: DoorState.CLOSED,
     state: UnitState.LOCKED,
-    unitID: 'F100'
+    unit: 'F100'
   }
 ]
 
@@ -81,7 +81,7 @@ const DemoUnitAccessData: UnitAccessEntryType[] = [
     date: new Date()
   },
   {
-    unitID: 'P118',
+    unitID: 'M120',
     credential: 'Bustin',
     date: new Date()
   }
@@ -92,7 +92,7 @@ export const getDemoUnits = (): UnitType[] => {
 }
 
 export const getDemoUnitData = (unit: UnitType): UnitDataType | undefined => {
-  return DemoUnitData.find(data => data.unitID === unit.id);
+  return DemoUnitData.find(data => data.unit === unit.id);
 }
 
 export const getDemoUnitAccessHistory = (unit?: UnitType): UnitAccessEntryType[] => {

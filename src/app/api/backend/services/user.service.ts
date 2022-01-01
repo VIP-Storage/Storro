@@ -27,7 +27,6 @@ export class UserService {
   countUsersAssociated(unit: UnitType): Observable<number> {
     return this.getUsersAssociated(unit).pipe(
       map(users => {
-        console.log('USERS', users);
         return users.length;
       })
     );

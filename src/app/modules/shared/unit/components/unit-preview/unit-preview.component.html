@@ -26,7 +26,7 @@
       </mat-grid-list>
 
       <div class="unit-snapshot-wrapper" *ngSwitchCase="'snapshot'" [@snapshotTrigger]="'true'">
-        <app-unit-snapshot ></app-unit-snapshot>
+        <app-unit-snapshot [unit]="unit"></app-unit-snapshot>
       </div>
     </div>
 
