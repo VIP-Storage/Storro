@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
   mqtt: {
-    server: 'localhost',
+    server: $ENV.mqttWSURL,
     protocol: "ws",
-    port: 15675,
+    port: $ENV.mqttWSPort
   },
   http: {
-    url: 'http://localhost:3000'
+    url: $ENV.apiURL
   }
 };
 

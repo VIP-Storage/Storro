@@ -11,6 +11,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {SharedModule} from "./modules/shared/shared.module";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 import {environment} from "../environments/environment";
+import {AuthInterceptor} from "./modules/shared/interceptors/auth.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -38,6 +40,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   bootstrap: [AppComponent]

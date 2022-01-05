@@ -38,8 +38,7 @@ export class AccessCardComponent {
 
   private fetchUsers() {
     if (!!this._unit) {
-      this.userService.getUsersAssociated(this._unit!, 3).subscribe(this.users);
-      this.userService.countUsersAssociated(this._unit!).subscribe(this.userAccessCount);
+
     }
   }
 

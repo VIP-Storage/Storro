@@ -1,6 +1,7 @@
 // Imports for Angular Material Theming
-@use '~@angular/material' as mat;
+@use 'node_modules/@angular/material' as mat;
 @use './app/modules/shared/components/components.theme' as components;
+@use './app/modules/auth/auth-base/auth-base.theme' as auth-base;
 
 @include mat.core();
 
@@ -45,9 +46,11 @@ $dark-theme: mat.define-dark-theme((
 .light-theme {
   @include mat.all-component-themes($light-theme);
   @include components.light-components-theme($light-theme);
+  @include auth-base.theme($light-theme, false);
 }
 
 .dark-theme {
   @include mat.all-component-colors($dark-theme);
   @include components.dark-components-theme($dark-theme);
+  @include auth-base.theme($dark-theme, true);
 }

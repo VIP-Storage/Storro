@@ -28,7 +28,7 @@ export class SidebarComponent {
     if (this.showClientNavigation) {
       this.unitsService.getUnits().subscribe(clientUnits => {
         const clientUnitItems: SidebarItem[] = clientUnits.map(unit => ({
-          title: unit.name,
+          title: unit.id,
           link: `/client/unit/${unit.id}`,
           isExternal: false,
           icon: 'house_siding'

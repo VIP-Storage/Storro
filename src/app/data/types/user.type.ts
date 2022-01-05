@@ -1,6 +1,8 @@
 export interface User {
-  ownedUnits: string[];
-  accessUnits: string[];
-  displayName: string;
-  isOwner?: boolean;
+  id: number;
+  updatedAt: Date;
+  createdAt: Date;
+  email: string;
+  roles: string[];
+
 }

@@ -2,13 +2,13 @@
 @use 'node_modules/@angular/material' as mat;
 
 @mixin color($color-config, $isDarkMode) {
-app-unit-preview .mat-card {
-  @if $isDarkMode {
-    border-color: #4e4d4d;
-  } @else {
-    border-color: #e7e7e7
+  app-auth-base{
+    @if $isDarkMode {
+      background-color: #4e4d4d;
+    } @else {
+      background-color: #e7e7e7
+    }
   }
-}
 }
 
 

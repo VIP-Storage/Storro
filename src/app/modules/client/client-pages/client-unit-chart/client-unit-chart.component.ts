@@ -26,7 +26,7 @@ export class ClientUnitChartComponent {
 
     this.unit = this.activatedRoute.data.pipe(
       map(data => data.unit),
-      tap(unit => this.pageTitleService.title = `${unit.name} Chart`),
+      tap(unit => this.pageTitleService.title = `${unit.id} Chart`),
     );
 
     this.chartType = this.activatedRoute.data.pipe(
