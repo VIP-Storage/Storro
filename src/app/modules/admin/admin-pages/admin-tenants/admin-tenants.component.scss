@@ -1,0 +1,26 @@
+:host {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tenants-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tenants-table-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  table {
+    flex: 1;
+  }
+}
+
+.tenants-loading-shade {
+  position: absolute;
+}

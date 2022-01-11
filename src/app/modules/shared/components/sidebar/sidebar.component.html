@@ -3,7 +3,7 @@
 </div>
 
 <mat-nav-list class="sidebar-list">
-  <ng-container *ngFor="let item of sidebarItems">
+  <ng-container *ngFor="let item of sidebarItems|async">
     <ng-container *ngIf="!isSection(item); else sectionTemplate">
       <a mat-list-item *ngIf="!item.isExternal" [routerLink]="item.link">
         <mat-icon mat-list-icon>{{item.icon}}</mat-icon>

@@ -3,8 +3,11 @@ import {ClientSidebarItems} from "../../../../data/client-sidebar.data";
 import {SidebarItem} from "../../../../data/types";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {ThemeService} from "../../../../services/theme.service";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {Observable, of} from "rxjs";
+import {map, switchMap} from "rxjs/operators";
+import {UserService} from "../../../../api/backend/services/user.service";
+import {Role} from "../../../../data/enums";
+import {SidebarService} from "../../../../api/backend/services/sidebar.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -13,38 +16,20 @@ import {map} from "rxjs/operators";
 })
 export class SidebarComponent {
 
-  showClientNavigation = true;
-
   isDarkMode: Observable<boolean>;
-  sidebarItems: SidebarItem[] = [];
+  sidebarItems: Observable<SidebarItem[]>;
 
-  constructor(private unitsService: UnitsService,
+  constructor(private sidebarService: SidebarService,
+              private userService: UserService,
               public themeService: ThemeService) {
+
+
 
     this.isDarkMode = this.themeService.theme.pipe(
       map(theme => theme === 'dark-theme')
     );
 
-    if (this.showClientNavigation) {
-      this.unitsService.getUnits().subscribe(clientUnits => {
-        const clientUnitItems: SidebarItem[] = clientUnits.map(unit => ({
-          title: unit.id,
-          link: `/client/unit/${unit.id}`,
-          isExternal: false,
-          icon: 'house_siding'
-        }))
-
-
-        this.sidebarItems = [
-          ...ClientSidebarItems,
-          {
-            title: 'Units',
-            isSection: true
-          },
-          ...clientUnitItems
-        ];
-      })
-    }
+    this.sidebarItems = this.sidebarService.getSidebarItems();
   }
 
   isSection(item: SidebarItem) {
@@ -53,5 +38,22 @@ export class SidebarComponent {
 
   updateTheme(darkMode: boolean) {
     this.themeService.changeTheme(darkMode);
+  }
+
+  get clientSidebarBase(): SidebarItem[] {
+    return [
+      {
+        title: 'Dashboard',
+        icon: 'grid_view',
+        isExternal: false,
+        link: '/client/dashboard'
+      },
+      {
+        title: 'Billing',
+        icon: 'attach_money',
+        isExternal: false,
+        link: '/client/billing'
+      },
+    ]
   }
 }

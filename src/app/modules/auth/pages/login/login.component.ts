@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../api/backend/services/auth.service";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
@@ -12,12 +12,15 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  error: string|null = null;
+  error: string | null = null;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.min(6)]);
+  loginForm: FormGroup = new FormGroup({
+    email: this.email,
+    password: this.password
+  });
 
   constructor(private authService: AuthService, private router: Router) {
-
   }
 
   getEmailErrorMessage() {

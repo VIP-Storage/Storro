@@ -2,21 +2,22 @@
   <h1>Storro</h1>
   <h2>Login</h2>
 </div>
-<div class="form-container">
-  <mat-form-field appearance="outline">
-    <mat-label>Email address</mat-label>
-    <input matInput autofill="off" placeholder="pat@example.com" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="" type="password" [formControl]="password" required>
-    <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
-  </mat-form-field>
 
-  <div class="error-wrapper">
-    <mat-error *ngIf="error">{{error}}</mat-error>
-  </div>
+  <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field appearance="outline">
+      <mat-label>Email address</mat-label>
+      <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="" type="password" [formControl]="password" required>
+      <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+    </mat-form-field>
 
-  <button mat-stroked-button [disabled]="password.invalid || email.invalid" (click)="login()">Login</button>
-</div>
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+
+    <button type="submit" mat-stroked-button [disabled]="password.invalid || email.invalid" (click)="login()">Login</button>
+  </form>
