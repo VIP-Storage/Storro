@@ -26,6 +26,16 @@ export class AuthService {
     )
   }
 
+  sendPasswordResetEmail(email: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/forgot-password/')
+      .addSegment(email)
+      .get;
+
+    return this.httpClient.get<LoginResponse>(url)
+  }
+
   private static setSession(authResult: LoginResponse | null) {
     if (!!authResult) {
       const expiresAt = DateTime.now().plus({

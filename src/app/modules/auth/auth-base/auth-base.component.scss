@@ -7,11 +7,25 @@
 }
 
 mat-card {
-  flex: 1;
-  max-height: 65%;
   min-width: 650px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 4em;
+  min-height: 600px;
+}
+
+.title-wrapper {
+  h1 {
+    font-size: 4em;
+    text-align: center;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-size: 2em;
+    text-align: center;
+    font-weight: normal;
+  }
 }

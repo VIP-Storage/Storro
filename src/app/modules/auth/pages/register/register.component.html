@@ -1,0 +1,55 @@
+<h2>Register</h2>
+
+<form class="form-container" [formGroup]="registrationForm" (ngSubmit)="register()">
+  <mat-form-field appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput autocomplete="off" placeholder="Pat" [formControl]="firstName" required>
+    <mat-error *ngIf="firstName.invalid">You must enter a first name</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput autocomplete="off" placeholder="Smith" [formControl]="lastName" required>
+    <mat-error *ngIf="firstName.invalid">You must enter a last name</mat-error>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email address</mat-label>
+    <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email" required>
+    <span matSuffix>
+        <mat-icon>alternate_email</mat-icon>
+      </span>
+    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="" type="password" [formControl]="password" required>
+    <span matSuffix>
+        <mat-icon>lock</mat-icon>
+      </span>
+    <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password (again)</mat-label>
+    <input matInput placeholder="" type="password" [formControl]="passwordConfirm" required [errorStateMatcher]="matcher">
+    <span matSuffix>
+        <mat-icon>lock</mat-icon>
+      </span>
+    <mat-error *ngIf="registrationForm.hasError('notSame')">
+      Passwords do not match
+    </mat-error>
+  </mat-form-field>
+
+  <div class="error-wrapper">
+    <mat-error *ngIf="error">{{error}}</mat-error>
+  </div>
+
+  <button type="submit" mat-stroked-button [disabled]="disableButton()" (click)="register()">Register</button>
+
+  <span class="existing-message">Already have an account?</span>
+  <button class="login" mat-stroked-button routerLink="/auth/login">Login</button>
+</form>

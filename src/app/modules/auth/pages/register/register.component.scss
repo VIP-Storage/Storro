@@ -10,6 +10,14 @@
   margin-top: 4em;
   display: flex;
   flex-direction: column;
+  width: 400px;
+
+  .mat-divider {
+    position: relative;
+    flex: 1;
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
 }
 
 
@@ -18,7 +26,8 @@
   margin-bottom: 1em;
 }
 
-
-button.reset-password, button.register {
-  margin-top: 1em;
+span.existing-message {
+  margin-top: 3em;
+  margin-bottom: 12px;
+  text-align: center;
 }
