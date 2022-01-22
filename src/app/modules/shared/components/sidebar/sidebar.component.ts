@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ClientSidebarItems} from "../../../../data/client-sidebar.data";
-import {SidebarItem} from "../../../../data/types";
+import {SidebarItem, User} from "../../../../data/types";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {ThemeService} from "../../../../services/theme.service";
 import {Observable, of} from "rxjs";
@@ -16,6 +16,8 @@ import {SidebarService} from "../../../../api/backend/services/sidebar.service";
 })
 export class SidebarComponent {
 
+  currentUser: Observable<User>;
+  currentRole: Observable<Role>;
   isDarkMode: Observable<boolean>;
   sidebarItems: Observable<SidebarItem[]>;
 
@@ -23,7 +25,8 @@ export class SidebarComponent {
               private userService: UserService,
               public themeService: ThemeService) {
 
-
+    this.currentUser = this.userService.currentUser;
+    this.currentRole = this.userService.currentRole;
 
     this.isDarkMode = this.themeService.theme.pipe(
       map(theme => theme === 'dark-theme')

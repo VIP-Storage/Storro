@@ -14,26 +14,36 @@ import {ManyResponse} from "../../../data/response/many.response";
 export class UserService {
 
   private readonly apiEndpoint: string = environment.http.url;
+  private $currentUser: Observable<User>|null = null;
+  private $currentRole: Observable<Role>|null = null;
 
   constructor(private httpClient: HttpClient) {
   }
 
   get currentUser(): Observable<User> {
-      const url = Burly(this.apiEndpoint)
-        .addSegment('/users')
-        .addSegment('/me')
-        .get;
+      if (!this.$currentUser) {
+        const url = Burly(this.apiEndpoint)
+          .addSegment('/users')
+          .addSegment('/me')
+          .get;
 
-      return this.httpClient.get<User>(url).pipe(
-        shareReplay()
-      )
+        this.$currentUser = this.httpClient.get<User>(url).pipe(
+          shareReplay(1)
+        )
+      }
+
+    return this.$currentUser!;
   }
 
   get currentRole(): Observable<Role> {
-    return this.currentUser.pipe(
-      map(user => user.role),
-      shareReplay()
-    )
+    if (!this.$currentRole) {
+      this.$currentRole = this.currentUser.pipe(
+        map(user => user.role),
+        shareReplay(1)
+      )
+    }
+
+    return this.$currentRole!;
   }
 
   getTenants(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any) {

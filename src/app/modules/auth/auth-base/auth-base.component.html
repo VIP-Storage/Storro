@@ -1,8 +1,16 @@
 <mat-card>
   <div class="title-wrapper">
     <h1>Storro</h1>
+    <h2>{{title|async}}</h2>
   </div>
   <div class="inner-card">
-  <router-outlet></router-outlet>
+    <div class="animation-wrapper" [@triggerName]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    <div class="return-to-login" *ngIf="showLoginBackButton|async">
+      <button mat-icon-button routerLink="/auth/login">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
   </div>
 </mat-card>

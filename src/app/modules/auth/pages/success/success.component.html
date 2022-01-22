@@ -1,0 +1,7 @@
+<div class="message-wrapper">
+ <p *ngFor="let message of messages">{{message}}</p>
+</div>
+<div class="actions">
+  <button *ngIf="showLoginButton" class="login" mat-stroked-button (click)="goToLogin()">Login</button>
+  <button *ngIf="showVerifyButton" class="verify-account" mat-stroked-button routerLink="/auth/verify">Verify Account</button>
+</div>

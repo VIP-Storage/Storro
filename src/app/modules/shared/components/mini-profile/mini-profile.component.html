@@ -1,0 +1,9 @@
+<div class="user-details">
+  <h3>Welcome,</h3>
+  <h2 class="name" *ngIf="user as user">{{user.firstName}} {{user.lastName}}</h2>
+</div>
+<div class="user-actions">
+  <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
+</div>
+
+<span class="role" *ngIf="role as role">{{role}}</span>

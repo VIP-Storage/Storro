@@ -6,6 +6,7 @@
 @use '../billing/components/billing.theme' as billing-components;
 @use '../unit/components/unit.theme' as unit-components;
 @use '../access/components/access.theme' as access-components;
+@use './mini-profile/mini-profile.theme' as mini-profile;
 
 @mixin light-components-theme($theme) {
   @include toggle-button.theme($theme, false);
@@ -15,6 +16,7 @@
   @include billing-components.light-theme($theme);
   @include unit-components.light-theme($theme);
   @include access-components.light-theme($theme);
+  @include mini-profile.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -25,4 +27,5 @@
   @include billing-components.dark-theme($theme);
   @include unit-components.dark-theme($theme);
   @include access-components.dark-theme($theme);
+  @include mini-profile.theme($theme, true);
 }

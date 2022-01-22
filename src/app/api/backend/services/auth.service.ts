@@ -4,7 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {shareReplay, tap} from "rxjs/operators";
 import {DateTime} from "luxon";
-import {LoginResponse} from "../../../data/response/login.response";
+import {IResponse} from "../../../data/response/response.interface";
+import {Observable} from "rxjs";
 
 
 @Injectable({providedIn: 'root'})
@@ -20,10 +21,35 @@ export class AuthService {
       .addSegment('/login')
       .get;
 
-    return this.httpClient.post<LoginResponse>(url, {email, password}).pipe(
-      tap(response => AuthService.setSession(response)),
+    return this.httpClient.post<IResponse>(url, {email, password}).pipe(
+      tap(response => {
+       if (response.success) {
+         const authResponse:  {expiresIn: string, idToken: string} = response.data as any;
+
+         AuthService.setSession(authResponse)
+       }
+      }),
       shareReplay()
     )
+  }
+
+  register(email: string, password: string, firstName: string, lastName: string): Observable<IResponse>  {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/register')
+      .get;
+
+    return this.httpClient.post<IResponse>(url, {email, password, firstName, lastName});
+  }
+
+  verify(token: string): Observable<IResponse> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/verify/')
+      .addSegment(token)
+      .get;
+
+    return this.httpClient.get<IResponse>(url);
   }
 
   sendPasswordResetEmail(email: string) {
@@ -33,10 +59,19 @@ export class AuthService {
       .addSegment(email)
       .get;
 
-    return this.httpClient.get<LoginResponse>(url)
+    return this.httpClient.get<IResponse>(url)
   }
 
-  private static setSession(authResult: LoginResponse | null) {
+  sendPasswordResetRequest(token: string, newPassword: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/reset-password')
+      .get;
+
+    return this.httpClient.post<IResponse>(url, {newPassword, newPasswordToken: token})
+  }
+
+  private static setSession(authResult: {expiresIn: string, idToken: string} | null) {
     if (!!authResult) {
       const expiresAt = DateTime.now().plus({
         hours: Number(authResult.expiresIn.replace(/\D/g,''))
@@ -44,6 +79,8 @@ export class AuthService {
 
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+
+      console.log('Set session', authResult)
     }
   }
 

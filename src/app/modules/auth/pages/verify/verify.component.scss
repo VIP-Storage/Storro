@@ -13,30 +13,28 @@
   width: 400px;
   flex: 1;
   justify-content: center;
-
-  .mat-form-field {
-    margin-bottom: 1em;
-  }
 }
 
 
 .error-wrapper {
+  text-align: center;
   height: 22px;
   margin-bottom: 1em;
 }
 
-.actions {
-  width: 400px;
+.button-spinner {
+  height: 35px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 
-  button {
-    flex: 1;
-    margin-left: 1em;
-    margin-right: 1em;
-    min-width: 160px;
-    margin-top: 1em;
-  }
+.spinner-button {
+  height: 35px;
+  position: relative;
 }

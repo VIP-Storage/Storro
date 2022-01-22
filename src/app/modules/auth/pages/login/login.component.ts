@@ -1,16 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../api/backend/services/auth.service";
-import {catchError} from "rxjs/operators";
-import {of} from "rxjs";
-import {Router} from "@angular/router";
+import {filter} from "rxjs/operators";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthFrontendService} from "../../services/auth-frontend.service";
+import {AuthMessageService} from "../../../../services/auth-message.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   error: string | null = null;
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -20,7 +21,23 @@ export class LoginComponent {
     password: this.password
   });
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService,
+              private authMessageService: AuthMessageService,
+              private authFrontendService: AuthFrontendService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    this.authFrontendService.title = 'Login';
+    this.authFrontendService.showLoginBack = false;
+  }
+
+  ngOnInit() {
+    this.route.queryParams.pipe(
+      filter(params => params.email)
+    ).subscribe(params => {
+      if (params.hasOwnProperty('email') && !!params.email) {
+        this.email.setValue(params.email);
+      }
+    })
   }
 
   getEmailErrorMessage() {
@@ -42,15 +59,11 @@ export class LoginComponent {
   login() {
     this.error = null;
 
-    this.authService.login(this.email.value, this.password.value).pipe(
-      catchError((err) => {
-        this.error = 'Invalid username or password'
-        console.error(err);
-        return of(false);
-      })
-    ).subscribe(response => {
-      if (!!response) {
+    this.authService.login(this.email.value, this.password.value).subscribe(response => {
+      if (response.success) {
         this.router.navigate(['client', 'dashboard']).then();
+      } else {
+        this.error = this.authMessageService.getErrorMessage(response);
       }
     });
   }

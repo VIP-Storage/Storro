@@ -6,4 +6,7 @@ export interface User {
   createdAt: Date;
   email: string;
   role: Role;
+  firstName: string;
+  lastName: string;
+  stripeID: string;
 }

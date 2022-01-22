@@ -20,6 +20,8 @@ import {CustomColorDirective} from './directives/custom-color.directive';
 import {UnitMapComponent} from './components/unit-map/unit-map.component';
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {MatButtonModule} from "@angular/material/button";
+import { MiniProfileComponent } from './components/mini-profile/mini-profile.component';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     SimpleTableRowComponent,
     CustomColorDirective,
     UnitMapComponent,
+    MiniProfileComponent,
   ],
   exports: [
     SidebarComponent,
@@ -42,21 +45,22 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     CustomColorDirective,
     UnitMapComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatListModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatRippleModule,
-    MatTooltipModule,
-    MatToolbarModule,
-    MatSortModule,
-    LeafletModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatListModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatRippleModule,
+        MatTooltipModule,
+        MatToolbarModule,
+        MatSortModule,
+        LeafletModule,
+        MatButtonModule,
+    ],
   providers: [
     HttpClient
   ]

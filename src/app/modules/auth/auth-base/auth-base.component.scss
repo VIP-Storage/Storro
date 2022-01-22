@@ -7,16 +7,13 @@
 }
 
 mat-card {
-  min-width: 650px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 4em;
-  min-height: 600px;
+  min-width: 650px;
+  min-height: 780px;
 }
 
 .title-wrapper {
+  height: 15%;
   h1 {
     font-size: 4em;
     text-align: center;
@@ -28,4 +25,22 @@ mat-card {
     text-align: center;
     font-weight: normal;
   }
+}
+
+.inner-card {
+  height: 85%;
+
+  .animation-wrapper {
+    height: 100%;
+  }
+}
+
+.return-to-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1em;
+  left: 1.5em;
+  font-size: 30px;
 }

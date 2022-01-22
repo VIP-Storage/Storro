@@ -22,6 +22,8 @@
   </ng-container>
 </mat-nav-list>
 
+<app-mini-profile [user]="currentUser|async" [role]="currentRole|async"></app-mini-profile>
+
 <div class="toggles">
   <mat-slide-toggle
     [ngModel]="isDarkMode|async"

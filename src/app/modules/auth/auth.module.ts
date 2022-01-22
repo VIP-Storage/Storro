@@ -12,25 +12,52 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { RegisterComponent } from './pages/register/register.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
+import { VerifyComponent } from './pages/verify/verify.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { SuccessComponent } from './pages/success/success.component';
+import { ResetComponent } from './pages/reset/reset.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login'
+    redirectTo: 'login',
+    data: { animationState: 'Login' }
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    data: { animationState: 'Login' }
   },
   {
     path: 'forgot',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
+    data: { animationState: 'Forgot' }
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    data: { animationState: 'Register' }
+  },
+  {
+    path: 'verify',
+    component: VerifyComponent,
+    data: { animationState: 'Verify' }
+  },
+  {
+    path: 'reset',
+    component: ResetComponent,
+    data: { animationState: 'Reset' }
+  },
+  {
+    path: 'success/:message',
+    component: SuccessComponent,
+    data: { animationState: 'Success' }
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
   }
 ]
 
@@ -39,7 +66,10 @@ const routes: Routes = [
     LoginComponent,
     AuthBaseComponent,
     ForgotPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    VerifyComponent,
+    SuccessComponent,
+    ResetComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +80,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AuthModule {

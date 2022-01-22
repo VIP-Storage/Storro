@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../api/backend/services/auth.service";
 import {Router} from "@angular/router";
-import {catchError} from "rxjs/operators";
-import {of} from "rxjs";
+import {AuthFrontendService} from "../../services/auth-frontend.service";
+import {AuthMessageService} from "../../../../services/auth-message.service";
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,7 +18,12 @@ export class ForgotPasswordComponent {
     email: this.email,
   });
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService,
+              private authMessageService: AuthMessageService,
+              private authFrontendService: AuthFrontendService,
+              private router: Router) {
+    this.authFrontendService.title = 'Reset Password';
+    this.authFrontendService.showLoginBack = true;
   }
 
   getEmailErrorMessage() {
@@ -32,15 +37,11 @@ export class ForgotPasswordComponent {
   reset() {
     this.error = null;
 
-    this.authService.sendPasswordResetEmail(this.email.value).pipe(
-      catchError((err) => {
-        this.error = 'Invalid username or password'
-        console.error(err);
-        return of(false);
-      })
-    ).subscribe(response => {
-      if (!!response) {
-        this.router.navigate(['auth', 'login']).then();
+    this.authService.sendPasswordResetEmail(this.email.value).subscribe(res => {
+      if (!res.success) {
+        this.error = this.authMessageService.getErrorMessage(res);
+      } else {
+        this.router.navigate(['auth', 'success', res.message], {queryParams: {email: this.email.value}}).then();
       }
     });
   }

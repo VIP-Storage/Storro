@@ -1,27 +1,4 @@
-<form class="form-container" [formGroup]="registrationForm" (ngSubmit)="register()">
-  <mat-form-field appearance="fill">
-    <mat-label>First Name</mat-label>
-    <input matInput autocomplete="off" placeholder="Pat" [formControl]="firstName" required>
-    <mat-error *ngIf="firstName.invalid">You must enter a first name</mat-error>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name</mat-label>
-    <input matInput autocomplete="off" placeholder="Smith" [formControl]="lastName" required>
-    <mat-error *ngIf="firstName.invalid">You must enter a last name</mat-error>
-  </mat-form-field>
-
-  <mat-divider></mat-divider>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Email address</mat-label>
-    <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email" required>
-    <span matSuffix>
-        <mat-icon>alternate_email</mat-icon>
-      </span>
-    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-  </mat-form-field>
-
+<form class="form-container" [formGroup]="registrationForm" (ngSubmit)="reset()">
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
     <input matInput placeholder="" type="password" [formControl]="password" required>
@@ -52,7 +29,7 @@
       <mat-spinner diameter="20"></mat-spinner>
     </div>
     <div *ngIf="!submitted" @fade>
-      Register
+      Reset
     </div>
   </button>
 </form>
