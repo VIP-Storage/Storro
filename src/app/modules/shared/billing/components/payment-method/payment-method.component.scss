@@ -1,6 +1,7 @@
 :host {
-  min-width: 260px;
+  min-width: 300px;
   margin-bottom: 0.5em;
+  display: block;
 
   &.current {
     padding-bottom: 1.5em;

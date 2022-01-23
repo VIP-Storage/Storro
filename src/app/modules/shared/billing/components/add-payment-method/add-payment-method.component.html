@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <span>New Payment Method</span>
+</mat-toolbar>
+
+<form class="form-container" [formGroup]="addPaymentMethodForm" (ngSubmit)="addPaymentMethod()">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput autocomplete="off" placeholder="Pat's Visa" [formControl]="name" required>
+    <mat-error *ngIf="name.invalid">{{getNameError()}}</mat-error>
+  </mat-form-field>
+  <div class="error-wrapper">
+    <mat-error *ngIf="error">{{error}}</mat-error>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="card-wrapper">
+    <ngx-stripe-card class="stripe" (change)="cardChanges($event)" [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+    <div class="error-wrapper">
+      <mat-error *ngIf="cardError">{{cardError}}</mat-error>
+    </div>
+  </div>
+
+  <button class="spinner-button" type="submit" mat-stroked-button [disabled]="disableSubmit">
+    <div class="button-spinner" @fade *ngIf="submitted">
+      <mat-spinner diameter="20"></mat-spinner>
+    </div>
+    <div *ngIf="!submitted" @fade>
+      Add Method
+    </div>
+  </button>
+</form>

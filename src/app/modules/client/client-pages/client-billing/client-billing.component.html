@@ -1,15 +1,24 @@
 <mat-drawer-container class="billing-container">
   <mat-drawer mode="side" position="end">
     <div class="billing-sidebar">
-      <h1 class="title">Payment Methods</h1>
-      <app-payment-method *ngFor="let method of paymentMethods|async"
-                          [title]="method.name"
-                          [current]="method.current"
-                          [type]="method.type"
-                          [identifier]="method.identifier"
-                          [expiry]="method.expiry">
+      <div class="sidebar-header">
+        <h1 class="title">Payment Methods</h1>
+        <button mat-icon-button (click)="addPaymentMethod()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
 
-      </app-payment-method>
+      <div class="payment-methods" @staggerList>
+        <app-payment-method class="list-item" *ngFor="let method of paymentMethods|async"
+                            (deleteClicked)="deletePaymentMethod(method.id)"
+                            [title]="method.name"
+                            [type]="method.type"
+                            [identifier]="method.readableID"
+                            [expiry]="method.expires">
+        </app-payment-method>
+
+      </div>
+      <span *ngIf="totalPaymentMethods === 0">No Payment Methods</span>
     </div>
   </mat-drawer>
   <mat-drawer-content>
@@ -30,7 +39,6 @@
           amount="223.49"
           [@onEnterLeft]="{params: { delay: 100}}"
           [showBorders]="true"
-          [chargedTo]="paymentMethodCurrent|async"
           subtitle="Last Payment"
           title="on May 12th, 2022"
           actionTitle="View Details"

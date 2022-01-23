@@ -11,6 +11,18 @@
   padding: 1.2em;
   display: flex;
   flex-direction: column;
+  min-width: 340px;
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+
+    h1{
+      margin: 0;
+    }
+  }
 }
 
 .billing-main {

@@ -1,17 +1,10 @@
 <div class="payment-method-actions">
   <div class="header">
-    <span *ngIf="current" class="current">Current</span>
-    <h3>{{title||type}}</h3>
+    <h3>{{(title||type)|titlecase}}</h3>
   </div>
 
   <div class="buttons">
-    <button mat-icon-button color="primary" *ngIf="!current" matTooltip="Make Current">
-      <mat-icon>check_circle</mat-icon>
-    </button>
-    <button mat-icon-button color="primary" matTooltip="Edit">
-      <mat-icon>settings</mat-icon>
-    </button>
-    <button mat-icon-button color="warn" matTooltip="Delete">
+    <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteClicked.emit(true)">
       <mat-icon>remove_circle</mat-icon>
     </button>
   </div>
@@ -20,7 +13,7 @@
   <img class="type-image" [src]="typeImage">
   <div class="card-meta" *ngIf="isCreditCard; else simpleIdentifier">
     <div class="card-info">
-      <span>{{type}}</span><span>{{identifier||'XXXX'}}</span>
+      <span>{{type|titlecase}}</span><span>{{identifier||'XXXX'}}</span>
     </div>
     <div class="card-info">
       <span>Expires</span><span>{{expiry||'11/24'}}</span>

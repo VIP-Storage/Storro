@@ -1,9 +1,8 @@
-import {PaymentMethodType} from "../enums";
-
 export interface PaymentMethod {
-  type: PaymentMethodType;
-  current: boolean;
-  identifier: string;
-  expiry?: string;
-  name?: string;
+  id: string;
+  name: string;
+  type: string;
+  createdAt: Date;
+  readableID: string;
+  expires: string;
 }

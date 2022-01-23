@@ -1,4 +1,4 @@
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {animate, query, stagger, state, style, transition, trigger} from "@angular/animations";
 
 export const storroAnimations = [
   trigger('onEnterLeft', [
@@ -50,5 +50,15 @@ export const storroAnimations = [
         ]
       )
     ]
-  )
+  ),
+  trigger('staggerList', [
+    transition(':enter', [
+      query('.list-item', style({ opacity: 0, transform: 'translateX(-80px)'}), {optional: true}),
+      query('.list-item',
+        stagger('200ms',[
+          animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)'}))
+        ]),
+        {optional: true})
+    ])
+  ])
 ]

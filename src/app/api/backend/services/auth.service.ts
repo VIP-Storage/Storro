@@ -2,11 +2,10 @@ import {Injectable} from "@angular/core";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
-import {shareReplay, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {DateTime} from "luxon";
 import {IResponse} from "../../../data/response/response.interface";
 import {Observable} from "rxjs";
-
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -23,17 +22,16 @@ export class AuthService {
 
     return this.httpClient.post<IResponse>(url, {email, password}).pipe(
       tap(response => {
-       if (response.success) {
-         const authResponse:  {expiresIn: string, idToken: string} = response.data as any;
+        if (response.success) {
+          const authResponse: { expiresIn: string, idToken: string } = response.data as any;
 
-         AuthService.setSession(authResponse)
-       }
-      }),
-      shareReplay()
+          AuthService.setSession(authResponse)
+        }
+      })
     )
   }
 
-  register(email: string, password: string, firstName: string, lastName: string): Observable<IResponse>  {
+  register(email: string, password: string, firstName: string, lastName: string): Observable<IResponse> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/auth')
       .addSegment('/register')
@@ -71,16 +69,14 @@ export class AuthService {
     return this.httpClient.post<IResponse>(url, {newPassword, newPasswordToken: token})
   }
 
-  private static setSession(authResult: {expiresIn: string, idToken: string} | null) {
+  private static setSession(authResult: { expiresIn: string, idToken: string } | null) {
     if (!!authResult) {
       const expiresAt = DateTime.now().plus({
-        hours: Number(authResult.expiresIn.replace(/\D/g,''))
+        hours: Number(authResult.expiresIn.replace(/\D/g, ''))
       });
 
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-
-      console.log('Set session', authResult)
     }
   }
 

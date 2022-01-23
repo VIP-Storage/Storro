@@ -13,6 +13,7 @@ import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 import {environment} from "../environments/environment";
 import {AuthInterceptor} from "./modules/shared/interceptors/auth.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {NgxStripeModule} from "ngx-stripe";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -37,6 +38,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatIconModule,
     MatButtonModule,
     SharedModule,
+    NgxStripeModule.forRoot(environment.stripeKey),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [

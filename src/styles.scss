@@ -54,3 +54,9 @@ $dark-theme: mat.define-dark-theme((
   @include components.dark-components-theme($dark-theme);
   @include auth-base.theme($dark-theme, true);
 }
+
+.add-payment-method-dialog {
+  .mat-dialog-container {
+    padding: 0!important;
+  }
+}

@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
 import {PaymentMethodType} from "../../../../../data/enums";
 
 @Component({
@@ -6,17 +6,17 @@ import {PaymentMethodType} from "../../../../../data/enums";
   templateUrl: './payment-method.component.html',
   styleUrls: ['./payment-method.component.scss']
 })
-export class PaymentMethodComponent implements OnInit {
+export class PaymentMethodComponent {
 
   @Input()
   title?: string;
 
   @Input()
-  type: PaymentMethodType = PaymentMethodType.VISA;
+  type?: string;
 
   @Input()
   @HostBinding('class.current')
-  current: boolean = true;
+  current: boolean = false;
 
   @Input()
   identifier?: string;
@@ -24,13 +24,11 @@ export class PaymentMethodComponent implements OnInit {
   @Input()
   expiry?: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Output()
+  deleteClicked = new EventEmitter<boolean>();
 
   get typeImage(): string {
-    return `assets/payment/${this.type.toLowerCase()}.svg`;
+    return `assets/payment/${this.type!.toLowerCase()}.svg`;
   }
 
   get isCreditCard(): boolean {

@@ -19,6 +19,10 @@ import {UnitChartResolver} from "../resolvers/unit-chart.resolver";
 import {UnitResolver} from "../resolvers/unit.resolver";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDividerModule} from "@angular/material/divider";
+import {ClientBillingSetupComponent} from './client-billing-setup/client-billing-setup.component';
+import {BillingResolver} from "../resolvers/billing.resolver";
+import {NgxStripeModule} from "ngx-stripe";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 const routes: Routes = [
@@ -52,7 +56,14 @@ const routes: Routes = [
   },
   {
     path: 'billing',
-    component: ClientBillingComponent
+    component: ClientBillingComponent,
+    resolve: {
+      customer: BillingResolver
+    }
+  },
+  {
+    path: 'billing/setup',
+    component: ClientBillingSetupComponent
   }
 ];
 
@@ -61,7 +72,8 @@ const routes: Routes = [
     ClientDashboardComponent,
     ClientUnitComponent,
     ClientBillingComponent,
-    ClientUnitChartComponent
+    ClientUnitChartComponent,
+    ClientBillingSetupComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +90,8 @@ const routes: Routes = [
     AccessModule,
     MatToolbarModule,
     MatDividerModule,
+    NgxStripeModule,
+    MatDialogModule
   ],
   exports: [
     RouterModule

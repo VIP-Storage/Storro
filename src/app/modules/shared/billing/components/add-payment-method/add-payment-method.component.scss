@@ -1,0 +1,38 @@
+.form-container {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .mat-form-field {
+    margin-bottom: 1em;
+  }
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-wrapper {
+  flex: 1;
+  margin-top: 1em;
+}
+
+.button-spinner {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.spinner-button {
+  height: 35px;
+  position: relative;
+}
