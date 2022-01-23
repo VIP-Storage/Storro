@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UnitType} from "../../../../../data/types";
+import {Unit} from "../../../../../data/types";
 
 @Component({
   selector: 'app-unit-map-card',
@@ -9,7 +9,7 @@ import {UnitType} from "../../../../../data/types";
 export class UnitMapCardComponent implements OnInit {
 
   @Input()
-  unit?: UnitType;
+  unit?: Unit;
 
   constructor() { }
 

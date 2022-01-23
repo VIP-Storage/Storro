@@ -12,3 +12,4 @@ export * from './unit.type';
 export * from './payment-method.type';
 export * from './user.type';
 export * from './geo-json.type';
+export * from './unit-type.type';

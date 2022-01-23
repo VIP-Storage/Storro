@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {MqttService} from "ngx-mqtt";
 import {ChartDataType, DoorState} from "../../../data/enums";
-import {ChartData, UnitType} from "../../../data/types";
+import {ChartData, Unit} from "../../../data/types";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {Burly} from "kb-burly";
@@ -19,7 +19,7 @@ export class SensorsService {
               private httpClient: HttpClient) {
   }
 
-  getChartData(unit: UnitType, dataType: ChartDataType, take: number|null = null): Observable<ChartData> {
+  getChartData(unit: Unit, dataType: ChartDataType, take: number|null = null): Observable<ChartData> {
     switch (dataType) {
       case ChartDataType.HUMIDITY:
         return this.getHumidityChartData(unit, take);
@@ -28,7 +28,7 @@ export class SensorsService {
     }
   }
 
-  getHumidityChartData(unit: UnitType, take: number|null = null): Observable<ChartData> {
+  getHumidityChartData(unit: Unit, take: number|null = null): Observable<ChartData> {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
         .addSegment('/stats')
@@ -39,7 +39,7 @@ export class SensorsService {
     );
   }
 
-  getTemperatureChartData(unit: UnitType, take: number|null = null): Observable<ChartData> {
+  getTemperatureChartData(unit: Unit, take: number|null = null): Observable<ChartData> {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
         .addSegment('/stats')
@@ -50,11 +50,11 @@ export class SensorsService {
     );
   }
 
-  getLiveTemperatureChartData(unit: UnitType|string): Observable<number> {
+  getLiveTemperatureChartData(unit: Unit|string): Observable<number> {
     let _unit = unit;
 
     if (unit.hasOwnProperty('id')) {
-      _unit = (unit as UnitType).id;
+      _unit = (unit as Unit).id;
     }
 
     return this.mqttService.observe(`sensors/${_unit}/temperature`).pipe(
@@ -62,11 +62,11 @@ export class SensorsService {
     );
   }
 
-  getLiveHumidityChartData(unit: UnitType|string): Observable<number> {
+  getLiveHumidityChartData(unit: Unit|string): Observable<number> {
     let _unit = unit;
 
     if (unit.hasOwnProperty('id')) {
-      _unit = (unit as UnitType).id;
+      _unit = (unit as Unit).id;
     }
 
     return this.mqttService.observe(`sensors/${_unit}/humidity`).pipe(
@@ -74,11 +74,11 @@ export class SensorsService {
     );
   }
 
-  getLiveDoorState(unit: UnitType|string): Observable<DoorState> {
+  getLiveDoorState(unit: Unit|string): Observable<DoorState> {
     let _unit = unit;
 
     if (unit.hasOwnProperty('id')) {
-      _unit = (unit as UnitType).id;
+      _unit = (unit as Unit).id;
     }
 
     return this.mqttService.observe(`sensors/${_unit}/door/state`).pipe(

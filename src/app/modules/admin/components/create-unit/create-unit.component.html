@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <span>Create Unit</span>
+</mat-toolbar>
+<form class="form-container" [formGroup]="unitForm" (ngSubmit)="createUnit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Unit Number</mat-label>
+    <input matInput autocomplete="off" placeholder="A123" #unitNumberInput
+           (input)="unitNumberInput.value = unitNumberInput.value.toUpperCase()" maxlength="4"
+           [formControl]="unitNumber" required>
+    <mat-error *ngIf="unitNumber.invalid">{{getUnitNumberErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Unit Type</mat-label>
+    <mat-select required [formControl]="unitType">
+      <mat-option *ngFor="let type of unitTypes|async" [value]="type.id">{{getUnitTypeDisplayName(type)}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="error-wrapper">
+    <mat-error *ngIf="error">{{error}}</mat-error>
+  </div>
+
+  <button type="submit" mat-stroked-button [disabled]="unitNumber.invalid">Create Unit</button>
+</form>

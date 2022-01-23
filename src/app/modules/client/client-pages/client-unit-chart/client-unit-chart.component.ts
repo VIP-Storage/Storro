@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {map, tap} from "rxjs/operators";
 import {BehaviorSubject, Observable} from "rxjs";
-import {UnitType} from "../../../../data/types";
+import {Unit} from "../../../../data/types";
 import {ActivatedRoute} from "@angular/router";
 import {PageTitleService} from "../../../../services/page-title.service";
 import {ChartDataType} from "../../../../data/enums";
@@ -17,7 +17,7 @@ import {B} from "@angular/cdk/keycodes";
 export class ClientUnitChartComponent {
 
   paused = false;
-  unit: Observable<UnitType>;
+  unit: Observable<Unit>;
   chartType: Observable<ChartDataType>;
   chartValue = new BehaviorSubject<string>('');
 

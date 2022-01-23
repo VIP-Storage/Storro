@@ -1,0 +1,18 @@
+:host {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2em;
+}
+
+mat-toolbar {
+  justify-content: center;
+  span {
+    text-align: center;
+  }
+}

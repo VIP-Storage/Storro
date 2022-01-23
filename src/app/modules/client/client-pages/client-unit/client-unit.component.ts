@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {filter, map, tap} from "rxjs/operators";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {ChartDataType, UnitIndicatorDataType} from "../../../../data/enums";
-import {UnitDataType, UnitType} from "../../../../data/types";
+import {UnitDataType, Unit} from "../../../../data/types";
 import {storroAnimations} from "../../../shared/animations";
 import {PageTitleService} from "../../../../services/page-title.service";
 
@@ -17,7 +17,7 @@ import {PageTitleService} from "../../../../services/page-title.service";
 export class ClientUnitComponent {
 
 
-  unit: Observable<UnitType>;
+  unit: Observable<Unit>;
 
   unitIndicators: UnitIndicatorDataType[] = [
     UnitIndicatorDataType.HUMIDITY,

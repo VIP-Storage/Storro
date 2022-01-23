@@ -2,7 +2,7 @@ import {Component, HostBinding, Input} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {filter} from "rxjs/operators";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {ToggleOptionType, UnitDataType, UnitType} from "../../../../../data/types";
+import {ToggleOptionType, UnitDataType, Unit} from "../../../../../data/types";
 import {ChartDataType, UnitIndicatorDataType} from "../../../../../data/enums";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 
@@ -30,14 +30,14 @@ import {UnitsService} from "../../../../../api/backend/services/units.service";
 export class UnitPreviewComponent {
 
   @Input()
-  set unit(newValue: UnitType|null) {
+  set unit(newValue: Unit|null) {
     if (!!newValue) {
       this._unit = newValue;
       this.unitsService.getUnitData(newValue).subscribe(this._unitData);
     }
   }
 
-  get unit(): UnitType {
+  get unit(): Unit {
     return this._unit!;
   }
 
@@ -74,7 +74,7 @@ export class UnitPreviewComponent {
   unitData: Observable<UnitDataType>;
 
   private _unitData: BehaviorSubject<UnitDataType | null> = new BehaviorSubject<UnitDataType | null>(null);
-  private _unit?: UnitType
+  private _unit?: Unit
 
   constructor(private unitsService: UnitsService) {
     this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>;
@@ -85,11 +85,11 @@ export class UnitPreviewComponent {
     return this.toggleSelected.value;
   }
 
-  getLink(forUnit: UnitType): string {
+  getLink(forUnit: Unit): string {
     return `/client/unit/${forUnit.id}`;
   }
 
-  getChartURL(unit: UnitType, chartType: ChartDataType) {
+  getChartURL(unit: Unit, chartType: ChartDataType) {
     return `../unit/${unit.id}/chart/${chartType.toLowerCase()}`;
   }
 }

@@ -4,6 +4,15 @@ import {RouterModule, Routes} from "@angular/router";
 import {AdminBaseComponent} from './admin-base/admin-base.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {SharedModule} from "../shared/shared.module";
+import {MatDialogModule} from "@angular/material/dialog";
+import {CreateUnitComponent} from './components/create-unit/create-unit.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from "@angular/material/button";
+import {CreateUnitTypeComponent} from './components/create-unit-type/create-unit-type.component';
 
 const routes: Routes = [
   {
@@ -14,13 +23,22 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AdminBaseComponent
+    AdminBaseComponent,
+    CreateUnitComponent,
+    CreateUnitTypeComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MatSidenavModule,
     SharedModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatButtonModule
   ]
 })
 export class AdminModule {

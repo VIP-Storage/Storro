@@ -1,5 +1,5 @@
 <div class="sort-toolbar" hoverElevation [raisedElevation]="2">
-  <table matSort (matSortChange)="sortData($event)">
+  <table matSort>
     <tr>
       <th *ngFor="let column of columns" [mat-sort-header]="column.name">{{column.title}}</th>
     </tr>

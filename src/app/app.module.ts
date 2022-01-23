@@ -14,6 +14,7 @@ import {environment} from "../environments/environment";
 import {AuthInterceptor} from "./modules/shared/interceptors/auth.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {NgxStripeModule} from "ngx-stripe";
+import {HttpErrorInterceptor} from "./modules/shared/interceptors/http.interceptor";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -43,6 +44,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   bootstrap: [AppComponent]

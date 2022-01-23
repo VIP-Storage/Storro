@@ -22,6 +22,7 @@ import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import { MiniProfileComponent } from './components/mini-profile/mini-profile.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { MiniProfileComponent } from './components/mini-profile/mini-profile.com
         MatSortModule,
         LeafletModule,
         MatButtonModule,
+        MatPaginatorModule,
     ],
   providers: [
     HttpClient

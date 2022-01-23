@@ -7,17 +7,17 @@ import {
 import {from, Observable, of} from 'rxjs';
 import {switchMap} from "rxjs/operators";
 import {UnitsService} from "../../../api/backend/services/units.service";
-import {UnitType} from "../../../data/types";
+import {Unit} from "../../../data/types";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UnitResolver implements Resolve<UnitType | boolean> {
+export class UnitResolver implements Resolve<Unit | boolean> {
   constructor(private unitsService: UnitsService,
               private router: Router) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UnitType | boolean> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Unit | boolean> {
     const unitID = route.paramMap.get('id');
 
     if (!unitID) {
@@ -27,7 +27,7 @@ export class UnitResolver implements Resolve<UnitType | boolean> {
     return this.unitsService.getUnit(unitID).pipe(
       switchMap(unit => {
         if (!!unit) {
-          return of(unit as UnitType);
+          return of(unit as Unit);
         }
 
         return from(this.router.navigate(['client', 'dashboard']))

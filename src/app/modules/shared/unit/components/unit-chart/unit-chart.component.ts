@@ -3,7 +3,7 @@ import {BehaviorSubject, Subscription} from "rxjs";
 import {filter} from "rxjs/operators";
 import {Color, colorSets} from "@swimlane/ngx-charts";
 import {ChartDataType} from "../../../../../data/enums";
-import {ChartData, UnitType} from "../../../../../data/types";
+import {ChartData, Unit} from "../../../../../data/types";
 import {SensorsService} from "../../../../../api/backend/services/sensors.service";
 
 @Component({
@@ -22,7 +22,7 @@ export class UnitChartComponent {
     }
   }
 
-  @Input() set unit(newValue: UnitType) {
+  @Input() set unit(newValue: Unit) {
     if (!!newValue) {
       this._unit = newValue;
       this.fetchData();
@@ -66,7 +66,7 @@ export class UnitChartComponent {
   private _large = false;
   private _liveSub?: Subscription;
   private _domain: string[] | number[] = [];
-  private _unit!: UnitType;
+  private _unit!: Unit;
   private _type!: ChartDataType;
 
 

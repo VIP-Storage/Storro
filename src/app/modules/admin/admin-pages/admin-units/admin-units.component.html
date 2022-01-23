@@ -1,1 +1,51 @@
-<p>admin-units works!</p>
+<mat-drawer-container class="units-container">
+  <mat-drawer mode="side" position="end" [opened]="true">
+    <mat-toolbar class="unit-types-toolbar">
+      <span>Unit Types - {{totalUnitTypes}}</span>
+      <button mat-icon-button color="primary" (click)="openCreateUnitTypeDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-list>
+      <mat-list-item *ngFor="let type of unitTypes|async; last as last">
+        <div mat-line>{{type.name}}</div>
+        <div mat-line> {{getTypePricing(type)}} </div>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="page-header">
+      <h1 class="title">Units</h1>
+      <button mat-icon-button color="primary" (click)="openCreateUnitDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="table-container">
+      <app-loading-shade *ngIf="isLoadingUnits"></app-loading-shade>
+
+      <ng-template #rowTemplate let-item>
+        <div class="line-item-row">
+          <span class="amount">{{item['amount']|currency: 'USD'}}</span>
+          <span class="status">
+      <span class="status-badge status-badge-{{item['status']|lowercase}}">{{item['status']}}</span>
+    </span>
+          <span class="paidOn">{{item['paidOn']|date}}</span>
+          <span class="paymentMethod">
+    </span>
+        </div>
+      </ng-template>
+
+      <app-simple-table [data]="data" [columns]="displayedColumns" (tableEvent)="tableEventTriggered($event)" [rowTemplate]="rowTemplate">
+      </app-simple-table>
+
+      <div class="paginator-container">
+        <mat-paginator [length]="totalUnits" [pageSize]="pageSize"></mat-paginator>
+      </div>
+
+      <div class="no-data-shade">
+        <h1>No Units</h1>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

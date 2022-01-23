@@ -2,7 +2,7 @@ import {Component, HostBinding, Input} from '@angular/core';
 import {Observable, ReplaySubject, Subject} from "rxjs";
 import {filter, switchMap, tap} from "rxjs/operators";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
-import {UnitAccessEntryType, UnitType} from "../../../../../data/types";
+import {UnitAccessEntryType, Unit} from "../../../../../data/types";
 import {storroAnimations} from "../../../animations";
 
 @Component({
@@ -13,14 +13,14 @@ import {storroAnimations} from "../../../animations";
 })
 export class AccessHistoryCardComponent {
 
-  @Input() set unit(newValue: UnitType) {
+  @Input() set unit(newValue: Unit) {
     if (!!newValue) {
       this.$currentUnit.next(newValue);
     }
   }
 
   isLoading = true;
-  $currentUnit: ReplaySubject<UnitType> = new ReplaySubject<UnitType>();
+  $currentUnit: ReplaySubject<Unit> = new ReplaySubject<Unit>();
   $accessHistory: Observable<UnitAccessEntryType[]>;
 
 

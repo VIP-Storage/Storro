@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
-import {UnitType} from "../../../../../data/types";
+import {Unit} from "../../../../../data/types";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {BehaviorSubject, interval, Subject} from "rxjs";
 
@@ -11,7 +11,7 @@ import {BehaviorSubject, interval, Subject} from "rxjs";
 export class UnitSnapshotComponent implements AfterViewInit {
 
   @Input()
-  set unit(newValue: UnitType | null) {
+  set unit(newValue: Unit | null) {
     if (!!newValue) {
       this._unit = newValue;
       this.updateSnapshot();
@@ -20,7 +20,7 @@ export class UnitSnapshotComponent implements AfterViewInit {
 
   snapshotURL = new BehaviorSubject<string>('');
 
-  private _unit?: UnitType;
+  private _unit?: Unit;
 
   constructor(private unitsService: UnitsService) {
   }

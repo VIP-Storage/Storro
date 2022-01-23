@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UnitType, User} from "../../../data/types";
+import {Unit, User} from "../../../data/types";
 import {delay, map, shareReplay, tap} from "rxjs/operators";
 import {Burly} from "kb-burly";
 import {environment} from "../../../../environments/environment";

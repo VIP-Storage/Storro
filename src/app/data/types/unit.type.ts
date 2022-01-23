@@ -1,6 +1,6 @@
 import {User} from "./user.type";
 
-export interface UnitType {
+export interface Unit {
   ownerID: number;
   guests: User[];
   armed: boolean;
@@ -8,4 +8,6 @@ export interface UnitType {
   lastUpdated: Date;
   created: Date;
   location: string;
+  unitType: string;
+  unitTypeName: string;
 }

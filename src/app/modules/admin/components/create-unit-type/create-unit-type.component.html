@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+  <span>Create Unit Type</span>
+</mat-toolbar>
+<form class="form-container" [formGroup]="unitTypeForm" (ngSubmit)="createUnitType()">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput autocomplete="off" placeholder="Standard" [formControl]="unitTypeName" required>
+    <mat-error *ngIf="unitTypeName.invalid">{{getUnitTypeNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Price</mat-label>
+    <input matInput autocomplete="off" type="number" placeholder="500" [formControl]="unitTypePrice" required>
+    <mat-error *ngIf="unitTypeName.invalid">{{getUnitTypePriceErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <input matInput autocomplete="off"  [disabled]="true" [formControl]="unitTypeLocation" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput [formControl]="unitTypeDescription"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Billing Interval</mat-label>
+    <mat-select [formControl]="unitTypeBillingInterval">
+      <mat-option value="day">Daily</mat-option>
+      <mat-option value="week">Weekly</mat-option>
+      <mat-option value="month">Monthly</mat-option>
+      <mat-option value="year">Yearly</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <div class="error-wrapper">
+    <mat-error *ngIf="error">{{error}}</mat-error>
+  </div>
+
+  <button type="submit" mat-stroked-button [disabled]="disableSubmit">Create Unit Type</button>
+</form>

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CRS, MapOptions, Map, LatLngTuple, GeoJSON, Polygon} from "leaflet";
 import {HttpClient} from "@angular/common/http";
 import * as L from 'leaflet';
-import {GeoJSONObject, UnitType} from "../../../../data/types";
+import {GeoJSONObject, Unit} from "../../../../data/types";
 
 
 @Component({
@@ -13,7 +13,7 @@ import {GeoJSONObject, UnitType} from "../../../../data/types";
 export class UnitMapComponent implements OnInit {
 
   @Input()
-  unit?: UnitType;
+  unit?: Unit;
 
   mapOptions: MapOptions = {
     minZoom: -3,

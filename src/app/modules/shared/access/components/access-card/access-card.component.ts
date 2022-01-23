@@ -1,5 +1,5 @@
 import {Component, HostBinding, Input} from '@angular/core';
-import {UnitType, User} from "../../../../../data/types";
+import {Unit, User} from "../../../../../data/types";
 import {UserService} from "../../../../../api/backend/services/user.service";
 import {BehaviorSubject} from "rxjs";
 import {storroAnimations} from "../../../animations";
@@ -23,7 +23,7 @@ export class AccessCardComponent {
   showBackground: boolean = true;
 
   @Input()
-  set unit(unit: UnitType|null) {
+  set unit(unit: Unit|null) {
     if (!!unit) {
       this._unit = unit;
       this.fetchUsers();
@@ -32,7 +32,7 @@ export class AccessCardComponent {
 
   users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
-  private _unit?: UnitType;
+  private _unit?: Unit;
 
   constructor(private userService: UserService) { }
 

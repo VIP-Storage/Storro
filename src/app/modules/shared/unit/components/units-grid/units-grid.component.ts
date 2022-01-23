@@ -1,9 +1,9 @@
 import {BehaviorSubject, Observable} from "rxjs";
-import {tap} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
 import {Component} from "@angular/core";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {storroAnimations} from "../../../animations";
-import {UnitType} from "../../../../../data/types";
+import {Unit} from "../../../../../data/types";
 
 @Component({
   selector: 'app-units-grid',
@@ -14,11 +14,12 @@ import {UnitType} from "../../../../../data/types";
 export class UnitsGridComponent {
 
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  units: Observable<UnitType[]>;
+  units: Observable<Unit[]>;
 
   constructor(private unitsService: UnitsService) {
     this.units = this.unitsService.getUnits().pipe(
-      tap(() => this.isLoading.next(false))
+      tap(() => this.isLoading.next(false)),
+      map(response => response.items)
     );
   }
 }
