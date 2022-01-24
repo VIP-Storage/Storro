@@ -1,0 +1,22 @@
+mat-toolbar {
+  button {
+    margin-right: 1em;
+  }
+
+  span {
+    flex: 1;
+  }
+  app-search-bar {
+    width: 400px;
+  }
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+app-unit-map {
+  flex: 1;
+}

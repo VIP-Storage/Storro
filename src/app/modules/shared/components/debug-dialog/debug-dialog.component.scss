@@ -1,0 +1,48 @@
+.content {
+  padding: 1.2em;
+  background-color: black;
+}
+
+.mat-tree {
+  background-color: black;
+}
+
+.mat-tree-node {
+  color: white;
+  font-family: monospace;
+}
+
+
+span.number {
+  color: #0088ff;
+}
+
+span.boolean {
+  color: #2ab342;
+}
+
+span.string {
+  color: orange;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  overflow: hidden;
+  transition: height 300ms ease-in-out;
+  height: auto;
+}
+
+.example-tree-invisible {
+  height: 0!important;
+}
+
+:host {
+  display: block;
+  min-width: 420px;
+  min-height: 380px;
+  background-color: black;
+  transition: height 300ms ease-in-out;
+}

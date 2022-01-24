@@ -21,8 +21,13 @@ import {UnitMapComponent} from './components/unit-map/unit-map.component';
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
-import { MiniProfileComponent } from './components/mini-profile/mini-profile.component';
+import {MiniProfileComponent} from './components/mini-profile/mini-profile.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {SpinnerButtonComponent} from './components/spinner-button/spinner-button.component';
+import {DebugDialogComponent} from './components/debug-dialog/debug-dialog.component';
+import {MatTreeModule} from "@angular/material/tree";
+import {CircleButtonComponent} from './components/circle-button/circle-button.component';
+import {SearchBarComponent} from "./components/search-bar/search-bar.component";
 
 
 @NgModule({
@@ -36,6 +41,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     CustomColorDirective,
     UnitMapComponent,
     MiniProfileComponent,
+    SpinnerButtonComponent,
+    SpinnerButtonComponent,
+    DebugDialogComponent,
+    CircleButtonComponent,
+    SearchBarComponent,
   ],
   exports: [
     SidebarComponent,
@@ -44,25 +54,29 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     LoadingShadeComponent,
     SimpleTableComponent,
     CustomColorDirective,
-    UnitMapComponent
+    UnitMapComponent,
+    SpinnerButtonComponent,
+    CircleButtonComponent,
+    SearchBarComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        HttpClientModule,
-        FormsModule,
-        MatProgressSpinnerModule,
-        MatListModule,
-        MatIconModule,
-        MatSlideToggleModule,
-        MatRippleModule,
-        MatTooltipModule,
-        MatToolbarModule,
-        MatSortModule,
-        LeafletModule,
-        MatButtonModule,
-        MatPaginatorModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatRippleModule,
+    MatTooltipModule,
+    MatToolbarModule,
+    MatSortModule,
+    LeafletModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatTreeModule,
+  ],
   providers: [
     HttpClient
   ]

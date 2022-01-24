@@ -1,22 +1,32 @@
 <mat-drawer-container class="units-container">
   <mat-drawer mode="side" position="end" [opened]="true">
     <mat-toolbar class="unit-types-toolbar">
-      <span>Unit Types - {{totalUnitTypes}}</span>
-      <button mat-icon-button color="primary" (click)="openCreateUnitTypeDialog()">
+      <div class="metadata">
+        <span class="title">Unit Types</span>
+        <span class="count" *ngIf="!isLoadingUnitTypes">{{totalUnitTypes}}</span>
+        <mat-spinner [diameter]="20" *ngIf="isLoadingUnitTypes"></mat-spinner>
+      </div>
+      <button mat-icon-button color="accent" (click)="openCreateUnitTypeDialog()">
         <mat-icon>add</mat-icon>
       </button>
     </mat-toolbar>
-    <mat-list>
-      <mat-list-item *ngFor="let type of unitTypes|async; last as last">
-        <div mat-line>{{type.name}}</div>
+    <mat-action-list>
+      <button mat-list-item *ngFor="let type of unitTypes; last as last" @onEnterRight (click)="unitTypeSelected(type)">
+        <div mat-line class="unit-type-name">{{type.name}}</div>
         <div mat-line> {{getTypePricing(type)}} </div>
         <mat-divider *ngIf="!last"></mat-divider>
-      </mat-list-item>
-    </mat-list>
+      </button>
+    </mat-action-list>
   </mat-drawer>
   <mat-drawer-content>
     <div class="page-header">
       <h1 class="title">Units</h1>
+      <div class="actions">
+        <app-circle-button color="accent" matTooltip="Open Map View" routerLink="./map">
+          <mat-icon>map</mat-icon>
+        </app-circle-button>
+        <app-search-bar (searchValueChanged)="searchValueChanged.next($event)"></app-search-bar>
+      </div>
       <button mat-icon-button color="primary" (click)="openCreateUnitDialog()">
         <mat-icon>add</mat-icon>
       </button>
@@ -25,25 +35,27 @@
       <app-loading-shade *ngIf="isLoadingUnits"></app-loading-shade>
 
       <ng-template #rowTemplate let-item>
-        <div class="line-item-row">
-          <span class="amount">{{item['amount']|currency: 'USD'}}</span>
+        <div class="unit-row">
+          <span class="number">{{item['id']}}</span>
           <span class="status">
-      <span class="status-badge status-badge-{{item['status']|lowercase}}">{{item['status']}}</span>
-    </span>
-          <span class="paidOn">{{item['paidOn']|date}}</span>
-          <span class="paymentMethod">
-    </span>
+            <span class="status-badge status-badge-{{item['available']}}">{{item['available'] ? 'Available' : 'Unavailable' }}</span>
+          </span>
+          <span class="type">{{item['unitTypeName']}}</span>
+          <button mat-icon-button (click)="openUnitDebugDialog(item)">
+            <mat-icon>bug_report</mat-icon>
+          </button>
         </div>
       </ng-template>
 
-      <app-simple-table [data]="data" [columns]="displayedColumns" (tableEvent)="tableEventTriggered($event)" [rowTemplate]="rowTemplate">
+      <app-simple-table @onEnterLeft [data]="units" [columns]="displayedColumns" (tableEvent)="tableEventTriggered($event)"
+                        [rowTemplate]="rowTemplate">
       </app-simple-table>
 
       <div class="paginator-container">
         <mat-paginator [length]="totalUnits" [pageSize]="pageSize"></mat-paginator>
       </div>
 
-      <div class="no-data-shade">
+      <div class="no-data-shade" *ngIf="!isLoadingUnits && totalUnits === 0">
         <h1>No Units</h1>
       </div>
     </div>

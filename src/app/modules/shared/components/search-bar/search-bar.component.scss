@@ -1,0 +1,31 @@
+
+.search-wrapper {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: auto;
+
+  .no-display {
+    display: none;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
+    padding: 0 18px;
+    color: #000000;
+    background-color: #ffffff;
+
+    input {
+      width: 100%;
+      height: 33px;
+      padding: 0 16px;
+      border: none;
+      outline: none;
+    }
+  }
+}

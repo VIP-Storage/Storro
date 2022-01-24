@@ -16,6 +16,19 @@
     margin: 0;
     padding-left: 1rem;
   }
+
+  .actions {
+    flex: 1;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    align-items: center;
+
+    app-search-bar {
+      width: 480px;
+      margin-left: 1.2em;
+    }
+  }
 }
 
 .table-container {
@@ -65,4 +78,61 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .metadata {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    margin-top: 1px;
+    margin-right: 1em;
+  }
+}
+
+.unit-type-name {
+  font-weight: bold!important;
+}
+
+.unit-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 1em;
+  }
+
+  .number, .status, .type {
+    flex: 1;
+  }
+
+  .number {
+    font-size: 20px;
+  }
+
+  .paidOn, .paymentMethod {
+    font-size: 16px;
+  }
+
+  .paymentMethod .type-image {
+    width: 50px;
+  }
+
+  .status .status-badge {
+    padding: 5px 1em;
+    border-radius: 8px;
+
+    &.status-badge-true {
+      background-color: #00ffc433;
+      color: #11cec2;
+    }
+
+    &.status-badge-false {
+      background-color: #ff03265e;
+      color: #d10404;
+    }
+  }
 }

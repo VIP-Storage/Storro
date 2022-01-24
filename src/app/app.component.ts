@@ -17,6 +17,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.themeService.theme.subscribe((theme: string) => {
       this.cssClass = theme;
+      document.body.classList.remove('dark-theme');
+      document.body.classList.remove('light-theme');
+      document.body.classList.add(theme);
     });
   }
 }

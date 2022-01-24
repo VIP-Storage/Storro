@@ -6,6 +6,7 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {ManyResponse} from "../../../data/response/many.response";
+import {CreateUnitRequest} from "../../../data/requests/create-unit.request";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,15 @@ export class UnitsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getUnits(pageNumber: number = 0, pageSize: number = 25): Observable<ManyResponse<Unit>> {
+  getUnits(pageNumber: number = 0, pageSize: number = 25, sortDirection: any = 'desc', sortBy: string = 'id', search: string|null = null): Observable<ManyResponse<Unit>> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/list')
-      .addQuery('page', pageNumber)
+      .addQuery('page', pageNumber + 1)
       .addQuery('limit', pageSize)
+      .addQuery('sortDirection', sortDirection)
+      .addQuery('sortBy', sortBy)
+      .addQuery('search', search)
       .get
 
     return this.httpClient.get<ManyResponse<Unit>>(url);
@@ -35,7 +39,7 @@ export class UnitsService {
       .addSegment(id)
       .get
 
-    return this.httpClient.get<Unit|null>(url).pipe(
+    return this.httpClient.get<Unit | null>(url).pipe(
       catchError(err => {
         console.warn('Could not retrieve unit', err);
         return of(null)
@@ -58,12 +62,28 @@ export class UnitsService {
     )
   }
 
+  createUnit(id: string,
+             location: string,
+             unitType: string,
+             unitTypeName: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/create')
+      .get
+
+    const request: CreateUnitRequest = {
+      id, location, unitType, unitTypeName
+    };
+
+    return this.httpClient.post(url, request);
+  }
+
   getUnitSnapshotURL(unit: Unit) {
     return Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/snapshot/')
       .addSegment(unit.id)
-      .addQuery('now',  Math.random())
+      .addQuery('now', Math.random())
       .get
   }
 

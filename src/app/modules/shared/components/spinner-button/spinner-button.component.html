@@ -1,0 +1,8 @@
+<button class="spinner-button" type="submit" mat-stroked-button [disabled]="disabled">
+  <div class="button-spinner" @fade *ngIf="submitted">
+    <mat-spinner diameter="20"></mat-spinner>
+  </div>
+  <div *ngIf="!submitted" @fade>
+    <ng-content></ng-content>
+  </div>
+</button>

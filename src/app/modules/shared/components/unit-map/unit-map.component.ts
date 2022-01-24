@@ -78,8 +78,6 @@ export class UnitMapComponent implements OnInit {
           }
         });
 
-        if (!!this.unit) {
-          const unitID = this.unit.id;
 
           this.unitsGeoJSON.getLayers().forEach((layer: any) => {
             if (!!layer['feature'] && !!layer['feature'].properties && unitID === layer['feature'].properties.id) {
@@ -92,9 +90,10 @@ export class UnitMapComponent implements OnInit {
               map.setView(layer.getBounds().getCenter(), -2);
             }
           });
-        } else {
-          this.unitsGeoJSON.bindPopup((layer: any) => `Unit ${layer['feature'].properties.id}`);
-        }
+      } else {
+        this.unitsGeoJSON.getLayers().forEach((layer: any) => {
+          layer.bindPopup((layer: any) => `Unit ${layer['feature'].properties.id}`);
+        })
       }
     });
   }

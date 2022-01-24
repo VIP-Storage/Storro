@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Unit, UnitType} from "../../../../data/types";
-import {merge, Observable, of, Subject} from "rxjs";
+import {merge, of, Subject} from "rxjs";
 import {catchError, map, startWith, switchMap, tap} from "rxjs/operators";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
@@ -11,14 +11,17 @@ import {CurrencyPipe} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateUnitComponent} from "../../components/create-unit/create-unit.component";
 import {CreateUnitTypeComponent} from "../../components/create-unit-type/create-unit-type.component";
+import {storroAnimations} from "../../../shared/animations";
+import {DebugDialogService} from "../../../../services/debug-dialog.service";
 
 @Component({
   selector: 'app-admin-units',
   templateUrl: './admin-units.component.html',
-  styleUrls: ['./admin-units.component.scss']
+  styleUrls: ['./admin-units.component.scss'],
+  animations: storroAnimations
 })
 export class AdminUnitsComponent implements AfterViewInit {
-  displayedColumns: {name: string; title: string}[] = [
+  displayedColumns: { name: string; title: string }[] = [
     {
       name: 'id',
       title: 'Unit ID'
@@ -27,57 +30,97 @@ export class AdminUnitsComponent implements AfterViewInit {
       name: 'available',
       title: 'Available'
     },
+    {
+      name: 'unitTypeName',
+      title: 'Type'
+    },
   ];
 
-  unitTypes!: Observable<UnitType[]>;
-  data: Unit[] = [];
+  unitTypes: UnitType[] = [];
+  units: Unit[] = [];
 
-  pageIndex: number = 0;
+  pageIndex: number = 1;
   pageSize: number = 25;
   totalUnits = 0;
   totalUnitTypes = 0;
   isLoadingUnits = true;
+  isLoadingUnitTypes = true;
   didError = false;
+  searchValue: string|null = null;
 
+  searchValueChanged: Subject<string> = new Subject<string>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private currencyPipe: CurrencyPipe = new CurrencyPipe('en');
-  private lastTableEvent: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
+  private tableChange: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
+  private lastTableEvent: SimpleTableEvent|undefined;
 
   constructor(private unitsService: UnitsService,
               private unitTypesService: UnitTypesService,
               private pageTitleService: PageTitleService,
+              private debugDialogService: DebugDialogService,
               private matDialog: MatDialog) {
     this.pageTitleService.title = 'Units';
     this.reloadUnitTypes();
-  }
 
-  openCreateUnitDialog() {
-    const dialogRef = this.matDialog.open(CreateUnitComponent, {
-      panelClass: 'create-unit-dialog'
-    });
-  }
-
-  openCreateUnitTypeDialog() {
-    const dialogRef = this.matDialog.open(CreateUnitTypeComponent, {
-      panelClass: 'create-unit-type-dialog'
+    this.searchValueChanged.subscribe(value => {
+      if (!!value && value.length > 0) {
+        this.searchValue = value;
+      } else {
+        this.searchValue = null;
+      }
     })
   }
 
+  openCreateUnitDialog() {
+    this.matDialog.open(CreateUnitComponent, {
+      panelClass: 'create-unit-dialog'
+    }).afterClosed().subscribe((res: Unit|null) => {
+      if (!!res) {
+        this.units.push(res);
+        this.totalUnits += 1;
+      }
+    })
+  }
+
+  openCreateUnitTypeDialog() {
+    this.matDialog.open(CreateUnitTypeComponent, {
+      panelClass: 'create-unit-type-dialog'
+    }).afterClosed().subscribe((res: UnitType | null) => {
+      if (!!res) {
+        this.unitTypes.push(res);
+        this.totalUnitTypes += 1;
+      }
+    })
+  }
+
+  openUnitDebugDialog(unit: Unit) {
+    this.debugDialogService.openDebugDialog(unit.id, unit);
+  }
+
   tableEventTriggered(event: SimpleTableEvent) {
-    this.lastTableEvent.next(event);
+    this.lastTableEvent = event;
+    this.tableChange.next(event);
   }
 
   ngAfterViewInit() {
-    merge(this.lastTableEvent, this.paginator.page)
+    merge(this.tableChange, this.paginator.page, this.searchValueChanged)
       .pipe(
         startWith({}),
         switchMap(() => {
           const pageNumber = this.paginator.pageIndex;
           const pageSize = this.pageSize;
 
+          let sortDirection;
+          let sortBy;
+
+          if (!!this.lastTableEvent) {
+            sortDirection = this.lastTableEvent.direction;
+            sortBy = this.lastTableEvent.active;
+          }
+
           this.isLoadingUnits = true;
-          return this.unitsService.getUnits(pageNumber, pageSize).pipe(
+          return this.unitsService.getUnits(pageNumber, pageSize, sortDirection, sortBy, this.searchValue).pipe(
             catchError(() => of(null))
           )
         }),
@@ -93,7 +136,7 @@ export class AdminUnitsComponent implements AfterViewInit {
           return data.items;
         }),
       )
-      .subscribe(data => (this.data = data));
+      .subscribe(data => (this.units = data));
   }
 
   getTypePricing(unitType: UnitType) {
@@ -117,10 +160,18 @@ export class AdminUnitsComponent implements AfterViewInit {
     return `${this.currencyPipe.transform(unitType.price)}, billed ${billingInterval}`;
   }
 
+  unitTypeSelected(unitType: UnitType) {
+    this.debugDialogService.openDebugDialog(unitType.name, unitType);
+  }
+
   private reloadUnitTypes() {
-    this.unitTypes = this.unitTypesService.getUnitTypes().pipe(
+    this.isLoadingUnitTypes = true;
+    this.unitTypesService.getUnitTypes().pipe(
       tap(response => this.totalUnitTypes = response.meta.totalItems),
       map(response => response.items)
-    )
+    ).subscribe(unitTypes => {
+      this.unitTypes = unitTypes;
+      this.isLoadingUnitTypes = false;
+    });
   }
 }

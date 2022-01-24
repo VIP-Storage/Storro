@@ -19,6 +19,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { AdminUnitsMapComponent } from './admin-units-map/admin-units-map.component';
 
 
 const routes: Routes = [
@@ -36,6 +38,10 @@ const routes: Routes = [
     component: AdminUnitsComponent
   },
   {
+    path: 'units/map',
+    component: AdminUnitsMapComponent
+  },
+  {
     path: 'tenants',
     component: AdminTenantsComponent
   }
@@ -46,6 +52,7 @@ const routes: Routes = [
     AdminTenantsComponent,
     AdminUnitsComponent,
     AdminDashboardComponent,
+    AdminUnitsMapComponent,
   ],
     imports: [
         CommonModule,
@@ -65,7 +72,8 @@ const routes: Routes = [
         ReactiveFormsModule,
         MatSelectModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatTooltipModule
     ]
 })
 export class AdminPagesModule {

@@ -11,9 +11,14 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <input matInput autocomplete="off"[formControl]="unitLocation" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
     <mat-label>Unit Type</mat-label>
     <mat-select required [formControl]="unitType">
-      <mat-option *ngFor="let type of unitTypes|async" [value]="type.id">{{getUnitTypeDisplayName(type)}}</mat-option>
+      <mat-option *ngFor="let type of unitTypes|async" [value]="type">{{getUnitTypeDisplayName(type)}}</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -21,5 +26,7 @@
     <mat-error *ngIf="error">{{error}}</mat-error>
   </div>
 
-  <button type="submit" mat-stroked-button [disabled]="unitNumber.invalid">Create Unit</button>
+  <app-spinner-button [disabled]="disableSubmit" [submitted]="submitted">
+    Create Unit
+  </app-spinner-button>
 </form>
