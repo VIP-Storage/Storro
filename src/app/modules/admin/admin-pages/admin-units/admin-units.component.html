@@ -6,9 +6,9 @@
         <span class="count" *ngIf="!isLoadingUnitTypes">{{totalUnitTypes}}</span>
         <mat-spinner [diameter]="20" *ngIf="isLoadingUnitTypes"></mat-spinner>
       </div>
-      <button mat-icon-button color="accent" (click)="openCreateUnitTypeDialog()">
+      <app-circle-button color="accent" (click)="openCreateUnitTypeDialog()">
         <mat-icon>add</mat-icon>
-      </button>
+      </app-circle-button>
     </mat-toolbar>
     <mat-action-list>
       <button mat-list-item *ngFor="let type of unitTypes; last as last" @onEnterRight (click)="unitTypeSelected(type)">
