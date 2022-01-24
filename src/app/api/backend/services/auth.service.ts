@@ -6,6 +6,7 @@ import {tap} from "rxjs/operators";
 import {DateTime} from "luxon";
 import {IResponse} from "../../../data/response/response.interface";
 import {Observable} from "rxjs";
+import {Role} from "../../../data/enums";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -38,6 +39,15 @@ export class AuthService {
       .get;
 
     return this.httpClient.post<IResponse>(url, {email, password, firstName, lastName});
+  }
+
+  create(email: string, firstName: string, lastName: string, role: Role): Observable<IResponse> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/create')
+      .get;
+
+    return this.httpClient.post<IResponse>(url, {email, role, firstName, lastName});
   }
 
   verify(token: string): Observable<IResponse> {

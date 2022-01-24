@@ -62,6 +62,8 @@ export class CreateUnitComponent {
   getUnitNumberErrorMessage() {
     if (this.unitNumber.hasError('required')) {
       return 'You must enter a value';
+    } else if (this.unitNumber.hasError('invalidAsync')) {
+      return 'This unit already exists';
     }
 
     return this.unitNumber.hasError('pattern') ? `Unit number must be in format A123` : '';

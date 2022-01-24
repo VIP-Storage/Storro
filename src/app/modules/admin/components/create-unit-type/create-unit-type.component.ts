@@ -95,6 +95,6 @@ export class CreateUnitTypeComponent {
   }
 
   get disableSubmit() {
-    return this.unitTypeName.invalid || this.unitTypePrice.invalid || this.submitted;
+    return this.unitTypeName.invalid || this.unitTypePrice.invalid || this.submitted || this.unitTypeBillingInterval.invalid;
   }
 }

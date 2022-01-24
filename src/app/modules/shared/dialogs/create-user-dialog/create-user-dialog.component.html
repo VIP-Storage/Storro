@@ -1,0 +1,43 @@
+<mat-toolbar color="accent">
+  <span>Create User</span>
+</mat-toolbar>
+<div class="content">
+  <form class="form-container" [formGroup]="createForm" (ngSubmit)="createUser()">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput autocomplete="off" placeholder="Pat" [formControl]="firstName" required>
+      <mat-error *ngIf="firstName.invalid">You must enter a first name</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput autocomplete="off" placeholder="Smith" [formControl]="lastName" required>
+      <mat-error *ngIf="firstName.invalid">You must enter a last name</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email address</mat-label>
+      <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email" required>
+      <span matSuffix>
+        <mat-icon>alternate_email</mat-icon>
+      </span>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select [formControl]="role">
+        <mat-option *ngFor="let role of roles" [value]="role">{{role|role}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage(role)}}</mat-error>
+    </mat-form-field>
+
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+
+    <app-spinner-button [submitted]="submitted">
+      Create
+    </app-spinner-button>
+  </form>
+</div>

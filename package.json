@@ -9,7 +9,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "publish-demo": "ng deploy --base-href=/Storro/"
+    "publish-demo": "ng deploy --base-href=/Storro/",
+    "config": "ts-node ./src/config-env.ts",
+    "start:prod": "npm run config -- && node server.js",
+    "heroku-postbuild": "npm run config -- && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +29,8 @@
     "@asymmetrik/ngx-leaflet": "^8.1.0",
     "@stripe/stripe-js": "^1.22.0",
     "@swimlane/ngx-charts": "^19.1.0",
+    "dotenv": "^14.3.0",
+    "express": "^4.17.2",
     "jwt-decode": "^3.1.2",
     "kb-burly": "^0.1.2",
     "leaflet": "^1.7.1",

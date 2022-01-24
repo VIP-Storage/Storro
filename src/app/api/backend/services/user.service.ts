@@ -59,4 +59,19 @@ export class UserService {
 
     return this.httpClient.get<ManyResponse<User>>(url)
   }
+
+  getUsers(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any, searchValue?: string|null) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/users')
+      .addSegment('/list')
+      .addQuery('limit', pageSize)
+      .addQuery('page', pageNumber + 1)
+      .addQuery('sortBy', sortBy, false)
+      .addQuery('sortDirection', sortDirection, false)
+      .addQuery('search', searchValue, false)
+      .get;
+
+
+    return this.httpClient.get<ManyResponse<User>>(url)
+  }
 }

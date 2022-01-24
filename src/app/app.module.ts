@@ -16,6 +16,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {NgxStripeModule} from "ngx-stripe";
 import {HttpErrorInterceptor} from "./modules/shared/interceptors/http.interceptor";
 import {MatDialogModule} from "@angular/material/dialog";
+import {DialogsModule} from "./modules/shared/dialogs/dialogs.module";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -41,6 +42,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatButtonModule,
     MatDialogModule,
     SharedModule,
+    DialogsModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],

@@ -20,7 +20,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { AdminUnitsMapComponent } from './admin-units-map/admin-units-map.component';
+import {AdminUnitsMapComponent} from './admin-units-map/admin-units-map.component';
+import {AdminUsersComponent} from './admin-users/admin-users.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
     component: AdminUnitsMapComponent
   },
   {
+    path: 'users',
+    component: AdminUsersComponent,
+  },
+  {
     path: 'tenants',
     component: AdminTenantsComponent
   }
@@ -53,28 +58,29 @@ const routes: Routes = [
     AdminUnitsComponent,
     AdminDashboardComponent,
     AdminUnitsMapComponent,
+    AdminUsersComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatToolbarModule,
-        SharedModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatListModule,
-        MatTooltipModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    SharedModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTooltipModule
+  ]
 })
 export class AdminPagesModule {
 }

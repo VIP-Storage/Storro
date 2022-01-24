@@ -42,7 +42,7 @@ export class DebugDialogComponent {
     this.dataChange.subscribe(data => this.nestedDataSource.data = data);
   }
 
-  hasNestedChild = (_: number, nodeData: DebugNode) => nodeData.children;
+  hasNestedChild = (_: number, nodeData: DebugNode) => !!nodeData.children;
 
   private _getChildren = (node: DebugNode) => node.children;
 

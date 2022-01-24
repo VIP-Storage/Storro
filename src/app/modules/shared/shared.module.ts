@@ -24,10 +24,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {MiniProfileComponent} from './components/mini-profile/mini-profile.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {SpinnerButtonComponent} from './components/spinner-button/spinner-button.component';
-import {DebugDialogComponent} from './components/debug-dialog/debug-dialog.component';
-import {MatTreeModule} from "@angular/material/tree";
 import {CircleButtonComponent} from './components/circle-button/circle-button.component';
 import {SearchBarComponent} from "./components/search-bar/search-bar.component";
+import { RolePipe } from './pipes/role.pipe';
 
 
 @NgModule({
@@ -43,22 +42,23 @@ import {SearchBarComponent} from "./components/search-bar/search-bar.component";
     MiniProfileComponent,
     SpinnerButtonComponent,
     SpinnerButtonComponent,
-    DebugDialogComponent,
     CircleButtonComponent,
     SearchBarComponent,
+    RolePipe,
   ],
-  exports: [
-    SidebarComponent,
-    HoverElevationDirective,
-    ToggleButtonComponent,
-    LoadingShadeComponent,
-    SimpleTableComponent,
-    CustomColorDirective,
-    UnitMapComponent,
-    SpinnerButtonComponent,
-    CircleButtonComponent,
-    SearchBarComponent
-  ],
+    exports: [
+        SidebarComponent,
+        HoverElevationDirective,
+        ToggleButtonComponent,
+        LoadingShadeComponent,
+        SimpleTableComponent,
+        CustomColorDirective,
+        UnitMapComponent,
+        SpinnerButtonComponent,
+        CircleButtonComponent,
+        SearchBarComponent,
+        RolePipe
+    ],
   imports: [
     CommonModule,
     RouterModule,
@@ -75,7 +75,6 @@ import {SearchBarComponent} from "./components/search-bar/search-bar.component";
     LeafletModule,
     MatButtonModule,
     MatPaginatorModule,
-    MatTreeModule,
   ],
   providers: [
     HttpClient
