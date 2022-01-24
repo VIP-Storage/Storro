@@ -19,7 +19,7 @@ export const environment = {
     port: ${mqttPort},
   },
   http: {
-    url: 'http://localhost:3000'
+    url: '${apiURL}',
   },
   stripeKey: '${stripeKey}'
 };
