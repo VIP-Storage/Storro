@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Unit, UnitType} from "../../../../data/types";
-import {merge, of, Subject} from "rxjs";
-import {catchError, map, startWith, switchMap, tap} from "rxjs/operators";
+import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
+import {catchError, debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, tap} from "rxjs/operators";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
 import {PageTitleService} from "../../../../services/page-title.service";
@@ -46,9 +46,9 @@ export class AdminUnitsComponent implements AfterViewInit {
   isLoadingUnits = true;
   isLoadingUnitTypes = true;
   didError = false;
-  searchValue: string|null = null;
+  searchValue: BehaviorSubject<string|null> = new BehaviorSubject<string|null>(null);
+  searchValueChanged: Observable<string|null>;
 
-  searchValueChanged: Subject<string> = new Subject<string>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private currencyPipe: CurrencyPipe = new CurrencyPipe('en');
@@ -63,13 +63,10 @@ export class AdminUnitsComponent implements AfterViewInit {
     this.pageTitleService.title = 'Units';
     this.reloadUnitTypes();
 
-    this.searchValueChanged.subscribe(value => {
-      if (!!value && value.length > 0) {
-        this.searchValue = value;
-      } else {
-        this.searchValue = null;
-      }
-    })
+    this.searchValueChanged = this.searchValue.asObservable().pipe(
+      debounceTime(150),
+      distinctUntilChanged()
+    );
   }
 
   openCreateUnitDialog() {
@@ -98,6 +95,14 @@ export class AdminUnitsComponent implements AfterViewInit {
     this.debugDialogService.openDebugDialog(unit.id, unit);
   }
 
+  updateSearchValue(value: string) {
+    if (!!value && value.length > 0) {
+      this.searchValue.next(value);
+    } else {
+      this.searchValue.next(null)
+    }
+  }
+
   tableEventTriggered(event: SimpleTableEvent) {
     this.lastTableEvent = event;
     this.tableChange.next(event);
@@ -120,7 +125,7 @@ export class AdminUnitsComponent implements AfterViewInit {
           }
 
           this.isLoadingUnits = true;
-          return this.unitsService.getUnits(pageNumber, pageSize, sortDirection, sortBy, this.searchValue).pipe(
+          return this.unitsService.getUnits(pageNumber, pageSize, sortDirection, sortBy, this.searchValue.value).pipe(
             catchError(() => of(null))
           )
         }),

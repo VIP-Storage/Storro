@@ -20,19 +20,22 @@
   </mat-drawer>
   <mat-drawer-content>
     <div class="page-header">
-      <h1 class="title">Units</h1>
-      <div class="actions">
-        <app-circle-button color="accent" matTooltip="Open Map View" routerLink="./map">
-          <mat-icon>map</mat-icon>
-        </app-circle-button>
-        <app-search-bar (searchValueChanged)="searchValueChanged.next($event)"></app-search-bar>
+      <div class="metadata" @onEnterLeft>
+        <h1 class="title">Units</h1>
+        <div class="actions">
+          <app-circle-button hoverElevation [raisedElevation]="2" color="accent" matTooltip="Open Map View" routerLink="./map">
+            <mat-icon>map</mat-icon>
+          </app-circle-button>
+
+          <app-circle-button hoverElevation [raisedElevation]="2" color="primary" matTooltip="Create Unit" (click)="openCreateUnitDialog()">
+            <mat-icon>add</mat-icon>
+          </app-circle-button>
+        </div>
       </div>
-      <button mat-icon-button color="primary" (click)="openCreateUnitDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
+      <app-search-bar (searchValueChanged)="updateSearchValue($event)" @onEnterRight></app-search-bar>
     </div>
     <div class="table-container">
-      <app-loading-shade *ngIf="isLoadingUnits"></app-loading-shade>
+      <app-loading-shade *ngIf="isLoadingUnits" @fade></app-loading-shade>
 
       <ng-template #rowTemplate let-item>
         <div class="unit-row">
@@ -55,7 +58,7 @@
         <mat-paginator [length]="totalUnits" [pageSize]="pageSize"></mat-paginator>
       </div>
 
-      <div class="no-data-shade" *ngIf="!isLoadingUnits && totalUnits === 0">
+      <div class="no-data-shade" *ngIf="!isLoadingUnits && totalUnits === 0" @fade>
         <h1>No Units</h1>
       </div>
     </div>

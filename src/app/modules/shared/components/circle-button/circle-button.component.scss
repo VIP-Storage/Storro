@@ -11,6 +11,8 @@
   &:hover {
     cursor: pointer;
   }
+
+  transition: box-shadow 250ms ease-in-out;
 }
 
 .content {
