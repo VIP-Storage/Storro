@@ -1,19 +1,4 @@
-<div class="page-header">
-  <div class="metadata" @onEnterLeft>
-    <h1 class="title">Users</h1>
-    <mat-icon class="title-icon" inline>people</mat-icon>
-  </div>
-  <div class="actions">
-    <div class="action-bar" @onEnterLeft>
-      <button mat-flat-button color="primary" class="icon-text-button" (click)="openCreateUserDialog()">
-        <mat-icon inline>add_circle</mat-icon>
-        <span>Create User</span>
-      </button>
-    </div>
-
-    <app-search-bar (searchValueChanged)="updateSearchValue($event)" @onEnterRight></app-search-bar>
-  </div>
-</div>
+<app-page-header title="Users" (searchValueChanged)="updateSearchValue($event)" [actions]="pageHeaderActions"></app-page-header>
 <div class="table-container">
   <app-loading-shade *ngIf="isLoadingUsers" @fade></app-loading-shade>
 

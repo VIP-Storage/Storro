@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {CreateUnitTypeComponent} from './components/create-unit-type/create-unit-type.component';
+import {MatIconModule} from "@angular/material/icon";
 
 const routes: Routes = [
   {
@@ -22,24 +23,27 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AdminBaseComponent,
-    CreateUnitComponent,
-    CreateUnitTypeComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatSidenavModule,
-    SharedModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatButtonModule
-  ]
+    declarations: [
+        AdminBaseComponent,
+        CreateUnitComponent,
+        CreateUnitTypeComponent,
+    ],
+    exports: [
+    ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatSidenavModule,
+        SharedModule,
+        MatDialogModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatIconModule
+    ]
 })
 export class AdminModule {
 }

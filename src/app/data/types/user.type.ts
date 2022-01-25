@@ -9,4 +9,5 @@ export interface User {
   firstName: string;
   lastName: string;
   stripeID: string;
+  emailValidated: boolean;
 }

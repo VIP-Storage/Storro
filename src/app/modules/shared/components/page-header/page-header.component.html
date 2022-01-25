@@ -1,0 +1,14 @@
+<div class="page-header">
+  <div class="upper">
+    <div class="metadata">
+      <h1 class="title">{{title}}</h1>
+    </div>
+      <div class="action-bar">
+        <button mat-flat-button *ngFor="let action of actions" [color]="action.color || 'primary'" class="icon-text-button" (click)="actionClicked(action)">
+          <mat-icon inline>{{action.icon}}</mat-icon>
+          <span>{{action.title}}</span>
+        </button>
+      </div>
+  </div>
+  <app-search-bar *ngIf="search" (searchValueChanged)="searchValueChanged.emit($event)"></app-search-bar>
+</div>

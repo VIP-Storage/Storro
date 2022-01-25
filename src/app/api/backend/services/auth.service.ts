@@ -7,6 +7,7 @@ import {DateTime} from "luxon";
 import {IResponse} from "../../../data/response/response.interface";
 import {Observable} from "rxjs";
 import {Role} from "../../../data/enums";
+import {User} from "../../../data/types";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

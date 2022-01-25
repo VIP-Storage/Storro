@@ -1,37 +1,38 @@
-<mat-toolbar>
-  <span>Tenants</span>
-</mat-toolbar>
-<div class="tenants-container">
-  <div class="tenants-loading-shade"
-       *ngIf="isLoadingTenants || didError">
-    <mat-spinner *ngIf="isLoadingTenants"></mat-spinner>
-    <div class="example-rate-limit-reached" *ngIf="didError">
-     Could not fetch tenants
+<app-page-header title="Tenants" (searchValueChanged)="updateSearchValue($event)" [actions]="pageHeaderActions" @onEnterLeft></app-page-header>
+<div class="table-container">
+  <app-loading-shade *ngIf="isLoadingTenants" @fade></app-loading-shade>
+
+  <ng-template #rowTemplate let-item>
+    <div class="user-row">
+      <span class="firstName">{{item['firstName']}}</span>
+      <span class="lastName">{{item['lastName']}}</span>
+      <span class="role">{{item['role']|role}}</span>
+      <span class="email">{{item['email']}}</span>
+      <span class="emailValidated">
+            <span class="status-badge status-badge-{{item['emailValidated']}}">{{item['emailValidated'] ? 'Validated' : 'Pending Validation' }}</span>
+          </span>
+
+      <div class="actions">
+        <button mat-icon-button color="primary" (click)="openEditUserDialog(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="openUserDebugDialog(item)">
+          <mat-icon>bug_report</mat-icon>
+        </button>
+      </div>
     </div>
+  </ng-template>
+
+  <app-simple-table @onEnterLeft [data]="tenants" [columns]="displayedColumns" (tableEvent)="tableEventTriggered($event)"
+                    [rowTemplate]="rowTemplate">
+  </app-simple-table>
+
+  <div class="paginator-container">
+    <mat-paginator [length]="totalTenants" [pageSize]="pageSize"></mat-paginator>
   </div>
 
-  <div class="tenants-table-container">
-
-    <table mat-table [dataSource]="tenants" class="tenants-table"
-           matSort matSortActive="createdAt" matSortDisableClear matSortDirection="desc">
-      <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>Email Address</th>
-        <td mat-cell *matCellDef="let row">{{row.email}}</td>
-      </ng-container>
-
-      <!-- Created Column -->
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-          Created
-        </th>
-        <td mat-cell *matCellDef="let row">{{row['createdAt'] | date}}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+  <div class="no-data-shade" *ngIf="!isLoadingTenants && totalTenants === 0" @fade>
+    <h1>No Tenants</h1>
   </div>
-
-  <mat-paginator [length]="tenantsCount" [pageSize]="30"></mat-paginator>
 </div>

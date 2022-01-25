@@ -13,6 +13,7 @@ import {SharedModule} from "../shared.module";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatSelectModule} from "@angular/material/select";
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -24,19 +25,20 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
   exports: [
     DebugDialogComponent
   ],
-  imports: [
-    CommonModule,
-    MatTreeModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    SharedModule,
-    MatDividerModule,
-    MatSelectModule
-  ]
+    imports: [
+        CommonModule,
+        MatTreeModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        SharedModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatCheckboxModule
+    ]
 })
 export class DialogsModule {
 }

@@ -19,21 +19,9 @@
     </mat-action-list>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="page-header">
-      <div class="metadata" @onEnterLeft>
-        <h1 class="title">Units</h1>
-        <div class="actions">
-          <app-circle-button hoverElevation [raisedElevation]="2" color="accent" matTooltip="Open Map View" routerLink="./map">
-            <mat-icon>map</mat-icon>
-          </app-circle-button>
 
-          <app-circle-button hoverElevation [raisedElevation]="2" color="primary" matTooltip="Create Unit" (click)="openCreateUnitDialog()">
-            <mat-icon>add</mat-icon>
-          </app-circle-button>
-        </div>
-      </div>
-      <app-search-bar (searchValueChanged)="updateSearchValue($event)" @onEnterRight></app-search-bar>
-    </div>
+    <app-page-header [actions]="pageHeaderActions" title="Units" icon="home" (searchValueChanged)="updateSearchValue($event)" @onEnterLeft></app-page-header>
+
     <div class="table-container">
       <app-loading-shade *ngIf="isLoadingUnits" @fade></app-loading-shade>
 

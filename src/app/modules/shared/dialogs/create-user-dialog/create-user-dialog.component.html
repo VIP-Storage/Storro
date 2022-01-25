@@ -1,5 +1,5 @@
 <mat-toolbar color="accent">
-  <span>Create User</span>
+  <span>{{title}}</span>
 </mat-toolbar>
 <div class="content">
   <form class="form-container" [formGroup]="createForm" (ngSubmit)="createUser()">
@@ -24,7 +24,7 @@
       <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="showRoles">
       <mat-label>Role</mat-label>
       <mat-select [formControl]="role">
         <mat-option *ngFor="let role of roles" [value]="role">{{role|role}}</mat-option>

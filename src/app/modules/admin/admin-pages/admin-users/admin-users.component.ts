@@ -12,6 +12,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateUserDialogComponent} from "../../../shared/dialogs/create-user-dialog/create-user-dialog.component";
 import {Role} from "../../../../data/enums";
 import {EditUserDialogComponent} from "../../../shared/dialogs/edit-user-dialog/edit-user-dialog.component";
+import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
 
 @Component({
   selector: 'app-admin-users',
@@ -51,6 +52,15 @@ export class AdminUsersComponent implements AfterViewInit {
   ];
 
   users: User[] = [];
+  pageHeaderActions: PageHeaderAction[] = [
+    {
+      title: 'Add User',
+      icon: 'add',
+      clickAction: () => {
+        this.openCreateUserDialog()
+      }
+    },
+  ];
 
   pageIndex: number = 1;
   pageSize: number = 25;
@@ -61,6 +71,7 @@ export class AdminUsersComponent implements AfterViewInit {
 
   searchValue: BehaviorSubject<string|null> = new BehaviorSubject<string|null>(null);
   searchValueChanged: Observable<string|null>;
+  reloadUsers: Subject<boolean> = new Subject<boolean>();
 
   private tableChange: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
   private lastTableEvent: SimpleTableEvent|undefined;
@@ -81,7 +92,11 @@ export class AdminUsersComponent implements AfterViewInit {
     this.matDialog.open(CreateUserDialogComponent, {
       panelClass: CreateUserDialogComponent.panelClass,
       data: Role.StaffMember
-    });
+    }).afterClosed().subscribe(updatedUser => {
+      if (!!updatedUser) {
+        this.reloadUsers.next(true);
+      }
+    })
   }
 
   openUserDebugDialog(user: User) {
@@ -92,10 +107,14 @@ export class AdminUsersComponent implements AfterViewInit {
     this.matDialog.open(EditUserDialogComponent, {
       panelClass: EditUserDialogComponent.panelClass,
       data: user
-    });
+    }).afterClosed().subscribe(updatedUser => {
+      if (!!updatedUser) {
+        this.reloadUsers.next(true);
+      }
+    })
   }
 
-  updateSearchValue(value: string) {
+  updateSearchValue(value: string|null) {
     if (!!value && value.length > 0) {
       this.searchValue.next(value);
     } else {
@@ -109,7 +128,7 @@ export class AdminUsersComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    merge(this.tableChange, this.paginator.page, this.searchValueChanged)
+    merge(this.tableChange, this.paginator.page, this.searchValueChanged, this.reloadUsers)
       .pipe(
         startWith({}),
         switchMap(() => {

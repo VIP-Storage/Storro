@@ -29,7 +29,9 @@ export class CreateUserDialogComponent implements OnInit {
     role: this.role
   });
 
-  roles: Role[] = Object.values(Role) as unknown as Role[];
+  title: string = 'Create Tenant';
+  showRoles = false;
+  roles: Role[] = [];
 
   static panelClass = 'create-user-dialog';
 
@@ -37,6 +39,14 @@ export class CreateUserDialogComponent implements OnInit {
               private authMessageService: AuthMessageService,
               private matDialogRef: MatDialogRef<CreateUserDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public configuredRole: Role | null) {
+
+    if (!!configuredRole && configuredRole !== Role.Tenant) {
+      this.showRoles = true;
+      this.title = 'Create User';
+      this.roles = [Role.SiteOwner, Role.StaffMember];
+    } else {
+      this.roles = [Role.Tenant];
+    }
   }
 
   ngOnInit() {

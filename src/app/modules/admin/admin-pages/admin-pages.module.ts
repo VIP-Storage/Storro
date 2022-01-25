@@ -60,27 +60,27 @@ const routes: Routes = [
     AdminUnitsMapComponent,
     AdminUsersComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatToolbarModule,
-    SharedModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatListModule,
-    MatTooltipModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatProgressSpinnerModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatToolbarModule,
+        SharedModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTooltipModule,
+    ]
 })
 export class AdminPagesModule {
 }

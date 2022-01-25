@@ -58,6 +58,8 @@ export class AuthMessageService {
         return 'Your email has been verified successfully. \nClick the button below to login with your new account!'
       case 'EMAIL_RESENT':
         return 'A password reset email has been sent. \n Please check your inbox.';
+      case 'USER_NOT_FOUND':
+        return 'User cannot be found with that email address.';
       default:
         return message;
     }

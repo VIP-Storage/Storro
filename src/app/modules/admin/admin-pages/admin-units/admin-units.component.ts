@@ -13,6 +13,7 @@ import {CreateUnitComponent} from "../../components/create-unit/create-unit.comp
 import {CreateUnitTypeComponent} from "../../components/create-unit-type/create-unit-type.component";
 import {storroAnimations} from "../../../shared/animations";
 import {DebugDialogService} from "../../../../services/debug-dialog.service";
+import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
 
 @Component({
   selector: 'app-admin-units',
@@ -38,6 +39,21 @@ export class AdminUnitsComponent implements AfterViewInit {
 
   unitTypes: UnitType[] = [];
   units: Unit[] = [];
+  pageHeaderActions: PageHeaderAction[] = [
+    {
+      title: 'Add Unit',
+      icon: 'add',
+      clickAction: () => {
+        this.openCreateUnitDialog();
+      }
+    },
+    {
+      title: 'Map View',
+      icon: 'map',
+      color: 'accent',
+      routerLink: './map'
+    }
+  ]
 
   pageIndex: number = 1;
   pageSize: number = 25;
@@ -95,7 +111,7 @@ export class AdminUnitsComponent implements AfterViewInit {
     this.debugDialogService.openDebugDialog(unit.id, unit);
   }
 
-  updateSearchValue(value: string) {
+  updateSearchValue(value: string|null) {
     if (!!value && value.length > 0) {
       this.searchValue.next(value);
     } else {

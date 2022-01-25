@@ -27,6 +27,7 @@ import {SpinnerButtonComponent} from './components/spinner-button/spinner-button
 import {CircleButtonComponent} from './components/circle-button/circle-button.component';
 import {SearchBarComponent} from "./components/search-bar/search-bar.component";
 import { RolePipe } from './pipes/role.pipe';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { RolePipe } from './pipes/role.pipe';
     CircleButtonComponent,
     SearchBarComponent,
     RolePipe,
+    PageHeaderComponent,
   ],
     exports: [
         SidebarComponent,
@@ -57,7 +59,8 @@ import { RolePipe } from './pipes/role.pipe';
         SpinnerButtonComponent,
         CircleButtonComponent,
         SearchBarComponent,
-        RolePipe
+        RolePipe,
+        PageHeaderComponent
     ],
   imports: [
     CommonModule,

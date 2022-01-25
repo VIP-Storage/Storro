@@ -21,9 +21,12 @@ export class RoleGuard implements CanActivate {
     return this.userService.currentRole.pipe(
       map(role => {
         const isClientPath = route.url[0].path === 'client';
+        const isAdminPath = route.url[0].path === 'admin';
 
         if (role !== Role.Tenant && isClientPath) {
-          return this.router.createUrlTree(['/admin', 'dashboard'])
+          return this.router.createUrlTree(['/admin', 'dashboard']);
+        } else if (role === Role.Tenant && isAdminPath) {
+          return this.router.createUrlTree(['/client', 'dashboard']);
         }
 
         return true;

@@ -32,6 +32,10 @@
       <mat-error *ngIf="email.invalid">{{getErrorMessage(role)}}</mat-error>
     </mat-form-field>
 
+    <div class="checkbox-wrapper">
+      <mat-checkbox [formControl]="validated">Validated</mat-checkbox>
+    </div>
+
     <div class="error-wrapper">
       <mat-error *ngIf="error">{{error}}</mat-error>
     </div>

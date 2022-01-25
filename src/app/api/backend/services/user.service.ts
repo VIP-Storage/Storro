@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Role} from "../../../data/enums";
 import {ManyResponse} from "../../../data/response/many.response";
+import {IResponse} from "../../../data/response/response.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -46,14 +47,15 @@ export class UserService {
     return this.$currentRole!;
   }
 
-  getTenants(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any) {
+  getTenants(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any, searchValue?: string|null) {
     const url = Burly(this.apiEndpoint)
       .addSegment('/users')
       .addSegment('/tenants')
       .addQuery('limit', pageSize)
-      .addQuery('page', pageNumber)
+      .addQuery('page', pageNumber + 1)
       .addQuery('sortBy', sortBy, false)
       .addQuery('sortDirection', sortDirection, false)
+      .addQuery('search', searchValue, false)
       .get;
 
 
@@ -73,5 +75,14 @@ export class UserService {
 
 
     return this.httpClient.get<ManyResponse<User>>(url)
+  }
+
+  update(user: User): Observable<IResponse> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/users/')
+      .addSegment(`${user.id}`)
+      .get;
+
+    return this.httpClient.patch<IResponse>(url, user);
   }
 }
