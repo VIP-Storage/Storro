@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use 'node_modules/@angular/material' as mat;
+
+@mixin color($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  $foreground: map.get($color-config, foreground);
+  $background: map.get($color-config, background);
+
+  app-sidebar {
+
+    @if $isDarkTheme {
+      background-color: #212121!important;
+
+      a.active-link {
+        background-color: #303030;
+      }
+    }
+  }
+}
+
+
+@mixin theme($theme, $isDarkTheme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme, $isDarkTheme);
+  }
+}

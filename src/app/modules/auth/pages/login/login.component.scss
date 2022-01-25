@@ -11,7 +11,6 @@
   display: flex;
   flex-direction: column;
   width: 400px;
-  flex: 1;
   justify-content: center;
 
   .mat-form-field {
@@ -28,15 +27,43 @@
 .actions {
   width: 400px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
 
-  button {
-    flex: 1;
-    margin-left: 1em;
-    margin-right: 1em;
-    min-width: 160px;
+  .horizontal-divider {
+    margin-top: 0.5em;
+    position: relative;
+    width: 100%;
+    margin-bottom: 2em;
+  }
+
+  .sign-up-message {
     margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: center;
   }
 }
+
+.spacer {
+  flex: 1;
+}
+
+.iforgot {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+
+  mat-divider {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  span:hover {
+    cursor: pointer;
+  }
+}
+

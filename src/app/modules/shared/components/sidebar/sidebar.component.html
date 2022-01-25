@@ -5,12 +5,12 @@
 <mat-nav-list class="sidebar-list">
   <ng-container *ngFor="let item of sidebarItems|async">
     <ng-container *ngIf="!isSection(item); else sectionTemplate">
-      <a mat-list-item *ngIf="!item.isExternal" [routerLink]="item.link">
+      <a mat-list-item routerLinkActive="active-link" *ngIf="!item.isExternal" [routerLink]="item.link">
         <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
         <span matLine>{{ item.title }}</span>
       </a>
 
-      <a mat-list-item *ngIf="item.isExternal" [href]="item.link" target="_blank">
+      <a mat-list-item routerLinkActive="active-link" *ngIf="item.isExternal" [href]="item.link" target="_blank">
         <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
         <span matLine>{{ item.title }}</span>
       </a>
@@ -27,7 +27,7 @@
 <div class="toggles">
   <mat-slide-toggle
     [ngModel]="isDarkMode|async"
-  (ngModelChange)="updateTheme($event)">
+    (ngModelChange)="updateTheme($event)">
     Dark Mode
   </mat-slide-toggle>
 </div>

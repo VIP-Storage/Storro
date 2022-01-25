@@ -8,6 +8,8 @@
 @use '../access/components/access.theme' as access-components;
 @use './mini-profile/mini-profile.theme' as mini-profile;
 @use './circle-button/circle-button.theme' as circle-button;
+@use './sidebar/sidebar.theme' as sidebar;
+@use './page-header/page-header.theme' as page-header;
 
 @mixin light-components-theme($theme) {
   @include toggle-button.theme($theme, false);
@@ -19,6 +21,8 @@
   @include access-components.light-theme($theme);
   @include mini-profile.theme($theme, false);
   @include circle-button.theme($theme, false);
+  @include sidebar.theme($theme, false);
+  @include page-header.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -31,4 +35,6 @@
   @include access-components.dark-theme($theme);
   @include mini-profile.theme($theme, true);
   @include circle-button.theme($theme, true);
+  @include sidebar.theme($theme, true);
+  @include page-header.theme($theme, true);
 }

@@ -1,11 +1,11 @@
 <form class="form-container" [formGroup]="registrationForm" (ngSubmit)="register()">
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>First Name</mat-label>
     <input matInput autocomplete="off" placeholder="Pat" [formControl]="firstName" required>
     <mat-error *ngIf="firstName.invalid">You must enter a first name</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Last Name</mat-label>
     <input matInput autocomplete="off" placeholder="Smith" [formControl]="lastName" required>
     <mat-error *ngIf="firstName.invalid">You must enter a last name</mat-error>
@@ -13,7 +13,7 @@
 
   <mat-divider></mat-divider>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Email address</mat-label>
     <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email" required>
     <span matSuffix>
@@ -22,18 +22,18 @@
     <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Password</mat-label>
-    <input matInput placeholder="" type="password" [formControl]="password" required>
+    <input matInput placeholder="••••••" type="password" [formControl]="password" required>
     <span matSuffix>
         <mat-icon>lock</mat-icon>
       </span>
     <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Password (again)</mat-label>
-    <input matInput placeholder="" type="password" [formControl]="passwordConfirm" required
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Password Confirmation</mat-label>
+    <input matInput placeholder="••••••" type="password" [formControl]="passwordConfirm" required
            [errorStateMatcher]="matcher">
     <span matSuffix>
         <mat-icon>lock</mat-icon>

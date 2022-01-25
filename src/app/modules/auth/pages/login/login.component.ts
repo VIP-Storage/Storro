@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
               private authFrontendService: AuthFrontendService,
               private route: ActivatedRoute,
               private router: Router) {
-    this.authFrontendService.title = 'Login';
+    this.authFrontendService.title = 'Welcome';
     this.authFrontendService.showLoginBack = false;
   }
 

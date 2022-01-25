@@ -1,7 +1,7 @@
 <form class="form-container" [formGroup]="verificationForm" (ngSubmit)="verify()">
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Token</mat-label>
-    <input matInput autocomplete="off" placeholder="Pat" [formControl]="token" required>
+    <input matInput autocomplete="off" placeholder="123iasd9812;lk" [formControl]="token" required>
     <mat-error *ngIf="token.invalid">You must enter a registration token</mat-error>
   </mat-form-field>
 
