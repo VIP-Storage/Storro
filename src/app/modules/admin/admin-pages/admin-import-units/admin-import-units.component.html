@@ -82,8 +82,8 @@
             </div>
 
             <div class="actions">
-              <button type="button" mat-stroked-button (click)="removeFile()">
-                Upload
+              <button type="button" color="warn" mat-stroked-button (click)="removeFile()">
+                Re-upload
               </button>
               <app-spinner-button [disabled]="uploadDisabled" (click)="upload()" [submitted]="submitted">Import
               </app-spinner-button>
