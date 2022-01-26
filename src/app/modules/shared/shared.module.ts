@@ -31,6 +31,8 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
+import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
+import { NoDataShadeComponent } from './components/no-data-shade/no-data-shade.component';
 
 
 @NgModule({
@@ -50,21 +52,25 @@ import {MatCardModule} from "@angular/material/card";
     SearchBarComponent,
     RolePipe,
     PageHeaderComponent,
+    StatusBadgeComponent,
+    NoDataShadeComponent,
   ],
-  exports: [
-    SidebarComponent,
-    HoverElevationDirective,
-    ToggleButtonComponent,
-    LoadingShadeComponent,
-    SimpleTableComponent,
-    CustomColorDirective,
-    UnitMapComponent,
-    SpinnerButtonComponent,
-    CircleButtonComponent,
-    SearchBarComponent,
-    RolePipe,
-    PageHeaderComponent,
-  ],
+    exports: [
+        SidebarComponent,
+        HoverElevationDirective,
+        ToggleButtonComponent,
+        LoadingShadeComponent,
+        SimpleTableComponent,
+        CustomColorDirective,
+        UnitMapComponent,
+        SpinnerButtonComponent,
+        CircleButtonComponent,
+        SearchBarComponent,
+        RolePipe,
+        PageHeaderComponent,
+        StatusBadgeComponent,
+        NoDataShadeComponent,
+    ],
   imports: [
     CommonModule,
     RouterModule,

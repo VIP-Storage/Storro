@@ -1,0 +1,19 @@
+.status-badge {
+  padding: 5px 1em;
+  border-radius: 8px;
+
+  &.status-badge-success {
+    background-color: #00ffc433;
+    color: #11cec2;
+  }
+
+  &.status-badge-error {
+    background-color: #ff03265e;
+    color: #d10404;
+  }
+
+  &.status-badge-warn {
+    background-color: #ffbf0d40;
+    color: #fec011;
+  }
+}

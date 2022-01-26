@@ -1,9 +1,19 @@
 <div class="user-details">
-  <h3>Welcome,</h3>
-  <h2 class="name" *ngIf="user as user">{{user.firstName}} {{user.lastName}}</h2>
+  <div class="profile-circle" *ngIf="user as user">
+    <span>{{initials(user)}}</span>
+  </div>
+  <div class="name-role">
+    <h2 class="name" *ngIf="user as user">{{fullName(user)}}</h2>
+    <span class="role" *ngIf="role as role">{{role|role}}</span>
+  </div>
 </div>
+<mat-divider></mat-divider>
 <div class="user-actions">
   <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
+  <button mat-icon-button *ngIf="isDarkMode|async" (click)="updateTheme(false)">
+    <mat-icon>dark_mode</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="!(isDarkMode|async)" (click)="updateTheme(true)">
+    <mat-icon>light_mode</mat-icon>
+  </button>
 </div>
-
-<span class="role" *ngIf="role as role">{{role|role}}</span>

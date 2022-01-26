@@ -29,7 +29,7 @@
         <div class="unit-row">
           <span class="number">{{item['id']}}</span>
           <span class="status">
-            <span class="status-badge status-badge-{{item['available']}}">{{item['available'] ? 'Available' : 'Unavailable' }}</span>
+            <app-status-badge [mappedValues]="statusBadgeValues" [currentValue]="item['available']"></app-status-badge>
           </span>
           <span class="type">{{item['unitTypeName']}}</span>
           <button mat-icon-button (click)="openUnitDebugDialog(item)">
@@ -46,9 +46,7 @@
         <mat-paginator [length]="totalUnits" [pageSize]="pageSize"></mat-paginator>
       </div>
 
-      <div class="no-data-shade" *ngIf="!isLoadingUnits && totalUnits === 0" @fade>
-        <h1>No Units</h1>
-      </div>
+      <app-no-data-shade entityName="Units" *ngIf="!isLoadingUnits && totalUnits === 0" @fade></app-no-data-shade>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -23,11 +23,3 @@
 </mat-nav-list>
 
 <app-mini-profile [user]="currentUser|async" [role]="currentRole|async"></app-mini-profile>
-
-<div class="toggles">
-  <mat-slide-toggle
-    [ngModel]="isDarkMode|async"
-    (ngModelChange)="updateTheme($event)">
-    Dark Mode
-  </mat-slide-toggle>
-</div>

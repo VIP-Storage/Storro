@@ -1,0 +1,10 @@
+<div class="stats-grid-inner">
+  <app-loading-shade *ngIf="isLoading|async"></app-loading-shade>
+  <div class="grid-list-wrapper">
+    <mat-grid-list cols="3" rowHeight="250px" gutterSize="0px">
+      <mat-grid-tile class="stat-tile" *ngFor="let stat of stats|async; index as index">
+        <app-stat-card hoverElevation [raisedElevation]="1" [stat]="stat" [@onEnterLeft]="{params: { delay: 100 * index}}"></app-stat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

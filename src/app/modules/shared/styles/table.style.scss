@@ -1,0 +1,41 @@
+@mixin user-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
+
+  .fullName, .email, .emailValidated, .role, .actions, .accountCurrent {
+    flex: 1;
+  }
+
+  .fullName{
+    font-size: 18px;
+  }
+
+  .actions button {
+    margin-left: -0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+@mixin base {
+  .table-container {
+    padding: 1.2em;
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paginator-container {
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 6px 6px 3px;
+  }
+}
+
+@mixin host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

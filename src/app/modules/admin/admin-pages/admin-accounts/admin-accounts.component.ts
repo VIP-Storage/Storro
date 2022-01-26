@@ -1,18 +1,15 @@
-import {AfterViewInit, Component , ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
-import {User} from "../../../../data/types";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
 import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
 import {DebugDialogService} from "../../../../services/debug-dialog.service";
-import {MatDialog} from "@angular/material/dialog";
 import {PageTitleService} from "../../../../services/page-title.service";
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
-import {CreateUserDialogComponent} from "../../../shared/dialogs/create-user-dialog/create-user-dialog.component";
-import {Role} from "../../../../data/enums";
-import {EditUserDialogComponent} from "../../../shared/dialogs/edit-user-dialog/edit-user-dialog.component";
 import {Account} from "../../../../data/types/accounts";
 import {AccountsService} from "../../../../api/backend/services/accounts.service";
 import {storroAnimations} from "../../../shared/animations";
+import {EntityHelper} from "../../../shared/helpers/entity.helper";
+import {StatusBadge} from "../../../shared/components/status-badge/status-badge.type";
 
 @Component({
   selector: 'app-admin-accounts',
@@ -23,14 +20,23 @@ import {storroAnimations} from "../../../shared/animations";
 export class AdminAccountsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  statusBadgeValues: StatusBadge[] = [
+    {
+      value: true,
+      display: 'Delinquent',
+      color: 'error'
+    },
+    {
+      value: false,
+      display: 'Current',
+      color: 'success'
+    }
+  ];
+
   displayedColumns: { name: string; title: string, noSort?: boolean }[] = [
     {
       name: 'firstName',
-      title: 'First Name'
-    },
-    {
-      name: 'lastName',
-      title: 'Last Name'
+      title: 'Full Name'
     },
     {
       name: 'email',
@@ -56,15 +62,14 @@ export class AdminAccountsComponent implements AfterViewInit {
   isLoadingAccounts: boolean = true;
   didError: boolean = false;
 
-  searchValue: BehaviorSubject<string|null> = new BehaviorSubject<string|null>(null);
-  searchValueChanged: Observable<string|null>;
+  searchValue: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  searchValueChanged: Observable<string | null>;
 
   private tableChange: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
-  private lastTableEvent: SimpleTableEvent|undefined;
+  private lastTableEvent: SimpleTableEvent | undefined;
 
   constructor(private debugDialogService: DebugDialogService,
               private accountsService: AccountsService,
-              private matDialog: MatDialog,
               private pageTitleService: PageTitleService) {
 
     this.pageTitleService.title = 'Accounts';
@@ -74,25 +79,11 @@ export class AdminAccountsComponent implements AfterViewInit {
     );
   }
 
-  openCreateUserDialog() {
-    this.matDialog.open(CreateUserDialogComponent, {
-      panelClass: CreateUserDialogComponent.panelClass,
-      data: Role.Tenant
-    });
-  }
-
   openAccountDebugDialog(account: Account) {
     this.debugDialogService.openDebugDialog('Account', account);
   }
 
-  openEditUserDialog(user: User) {
-    this.matDialog.open(EditUserDialogComponent, {
-      panelClass: EditUserDialogComponent.panelClass,
-      data: user
-    });
-  }
-
-  updateSearchValue(value: string|null) {
+  updateSearchValue(value: string | null) {
     if (!!value && value.length > 0) {
       this.searchValue.next(value);
     } else {
@@ -103,6 +94,10 @@ export class AdminAccountsComponent implements AfterViewInit {
   tableEventTriggered(event: SimpleTableEvent) {
     this.lastTableEvent = event;
     this.tableChange.next(event);
+  }
+
+  fullName(account: Account) {
+    return EntityHelper.fullName(account);
   }
 
   ngAfterViewInit(): void {

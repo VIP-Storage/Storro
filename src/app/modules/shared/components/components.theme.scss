@@ -11,6 +11,7 @@
 @use './sidebar/sidebar.theme' as sidebar;
 @use './page-header/page-header.theme' as page-header;
 @use '../account/components/create-account-stepper/create-account-stepper.theme' as create-account-stepper;
+@use 'src/app/modules/admin/admin-components/stat-card/stat-card.theme' as stat-card;
 
 @mixin light-components-theme($theme) {
   @include toggle-button.theme($theme, false);
@@ -25,6 +26,7 @@
   @include sidebar.theme($theme, false);
   @include page-header.theme($theme, false);
   @include create-account-stepper.theme($theme, false);
+  @include stat-card.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -40,4 +42,5 @@
   @include sidebar.theme($theme, true);
   @include page-header.theme($theme, true);
   @include create-account-stepper.theme($theme, true);
+  @include stat-card.theme($theme, true);
 }

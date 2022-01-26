@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import { User} from "../../../../data/types";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
 import {catchError, debounceTime, distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
@@ -13,6 +13,8 @@ import {CreateUserDialogComponent} from "../../../shared/dialogs/create-user-dia
 import {Role} from "../../../../data/enums";
 import {EditUserDialogComponent} from "../../../shared/dialogs/edit-user-dialog/edit-user-dialog.component";
 import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
+import {StatusBadge} from "../../../shared/components/status-badge/status-badge.type";
+import {EntityHelper} from "../../../shared/helpers/entity.helper";
 
 @Component({
   selector: 'app-admin-users',
@@ -24,14 +26,23 @@ export class AdminUsersComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  statusBadgeValues: StatusBadge[] =  [
+    {
+      value: true,
+      display: 'Validated',
+      color: 'success'
+    },
+    {
+      value: false,
+      display: 'Pending Validation',
+      color: 'warn'
+    }
+  ];
+
   displayedColumns: { name: string; title: string }[] = [
     {
       name: 'firstName',
-      title: 'First Name'
-    },
-    {
-      name: 'lastName',
-      title: 'Last Name'
+      title: 'Full Name'
     },
     {
       name: 'role',
@@ -86,6 +97,10 @@ export class AdminUsersComponent implements AfterViewInit {
       debounceTime(150),
       distinctUntilChanged()
     );
+  }
+
+  fullName(user: User) {
+    return EntityHelper.fullName(user);
   }
 
   openCreateUserDialog() {

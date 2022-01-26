@@ -9,11 +9,12 @@ import {MatPaginator} from "@angular/material/paginator";
 import {UnitTypesService} from "../../../../api/backend/services/unit-types.service";
 import {CurrencyPipe} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateUnitComponent} from "../../components/create-unit/create-unit.component";
-import {CreateUnitTypeComponent} from "../../components/create-unit-type/create-unit-type.component";
+import {CreateUnitComponent} from "../../dialogs/create-unit/create-unit.component";
+import {CreateUnitTypeComponent} from "../../dialogs/create-unit-type/create-unit-type.component";
 import {storroAnimations} from "../../../shared/animations";
 import {DebugDialogService} from "../../../../services/debug-dialog.service";
 import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
+import {StatusBadge} from "../../../shared/components/status-badge/status-badge.type";
 
 @Component({
   selector: 'app-admin-units',
@@ -35,6 +36,19 @@ export class AdminUnitsComponent implements AfterViewInit {
       name: 'unitTypeName',
       title: 'Type'
     },
+  ];
+
+  statusBadgeValues: StatusBadge[] =  [
+    {
+      value: true,
+      display: 'Available',
+      color: 'success'
+    },
+    {
+      value: false,
+      display: 'Unavailable',
+      color: 'error'
+    }
   ];
 
   unitTypes: UnitType[] = [];

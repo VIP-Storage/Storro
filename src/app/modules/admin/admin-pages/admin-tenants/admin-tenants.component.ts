@@ -13,6 +13,8 @@ import {Role} from "../../../../data/enums";
 import {EditUserDialogComponent} from "../../../shared/dialogs/edit-user-dialog/edit-user-dialog.component";
 import {storroAnimations} from "../../../shared/animations";
 import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
+import {StatusBadge} from "../../../shared/components/status-badge/status-badge.type";
+import {EntityHelper} from "../../../shared/helpers/entity.helper";
 
 @Component({
   selector: 'app-admin-tenants',
@@ -24,14 +26,24 @@ export class AdminTenantsComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  statusBadgeValues: StatusBadge[] =  [
+    {
+      value: true,
+      display: 'Validated',
+      color: 'success'
+    },
+    {
+      value: false,
+      display: 'Pending Validation',
+      color: 'warn'
+    }
+  ];
+
+
   displayedColumns: { name: string; title: string }[] = [
     {
       name: 'firstName',
-      title: 'First Name'
-    },
-    {
-      name: 'lastName',
-      title: 'Last Name'
+      title: 'Full Name'
     },
     {
       name: 'role',
@@ -104,6 +116,10 @@ export class AdminTenantsComponent implements AfterViewInit {
       panelClass: EditUserDialogComponent.panelClass,
       data: user
     });
+  }
+
+  fullName(user: User) {
+    return EntityHelper.fullName(user);
   }
 
   updateSearchValue(value: string|null) {

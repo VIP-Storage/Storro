@@ -4,13 +4,12 @@
 
   <ng-template #rowTemplate let-item>
     <div class="user-row">
-      <span class="firstName">{{item['firstName']}}</span>
-      <span class="lastName">{{item['lastName']}}</span>
+      <span class="fullName">{{fullName(item)}}</span>
       <span class="role">{{item['role']|role}}</span>
       <span class="email">{{item['email']}}</span>
       <span class="emailValidated">
-            <span class="status-badge status-badge-{{item['emailValidated']}}">{{item['emailValidated'] ? 'Validated' : 'Pending Validation' }}</span>
-          </span>
+        <app-status-badge [currentValue]="item['emailValidated']" [mappedValues]="statusBadgeValues"></app-status-badge>
+      </span>
 
       <div class="actions">
         <button mat-icon-button color="primary" (click)="openEditUserDialog(item)">
@@ -32,7 +31,5 @@
     <mat-paginator [length]="totalUsers" [pageSize]="pageSize"></mat-paginator>
   </div>
 
-  <div class="no-data-shade" *ngIf="!isLoadingUsers && totalUsers === 0" @fade>
-    <h1>No Users</h1>
-  </div>
+  <app-no-data-shade entityName="Users" *ngIf="!isLoadingUsers && totalUsers === 0" @fade></app-no-data-shade>
 </div>

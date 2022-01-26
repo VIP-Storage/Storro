@@ -30,6 +30,7 @@ import {AccountModule} from "../../shared/account/account.module";
 import {AdminImportUnitsComponent} from './admin-import-units/admin-import-units.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatTreeModule} from "@angular/material/tree";
+import {AdminComponentsModule} from "../admin-components/admin-components.module";
 
 
 const routes: Routes = [
@@ -114,6 +115,7 @@ const routes: Routes = [
         AccountModule,
         NgxDropzoneModule,
         MatTreeModule,
+        AdminComponentsModule,
     ]
 })
 export class AdminPagesModule {
