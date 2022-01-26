@@ -19,7 +19,6 @@ export class DebugDialogComponent {
   set object(newValue: object) {
     const data = this.buildObjectTree(newValue);
 
-    console.log(data);
     this.dataChange.next(data);
   }
 
@@ -55,14 +54,12 @@ export class DebugDialogComponent {
       node.key = key;
 
       if (value != null) {
-        console.log(key, value)
         if (typeof value === 'object') {
           node.children = this.buildObjectTree(value, level + 1);
         } else {
           node.value = value;
           node.type = (typeof value);
         }
-
 
         return accumulator.concat(node);
       }

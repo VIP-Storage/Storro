@@ -69,7 +69,7 @@ export const storroAnimations = [
 
       query(':enter', style({ opacity: 0, transform: 'translateY(-25px)' }), {optional: true}),
 
-      query(':enter', stagger('120ms', [
+      query(':enter', stagger('20ms', [
         animate('300ms ease-in-out', keyframes([
           style({opacity: 1, transform: 'translateY(0)'}),
         ]))]), {optional: true})
