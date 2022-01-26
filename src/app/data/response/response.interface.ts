@@ -1,7 +1,7 @@
-export interface IResponse {
+export interface IResponse<T = any> {
   success: boolean;
   message: string;
   errorMessage: string;
-  data: any[];
+  data: T;
   error: any;
 }

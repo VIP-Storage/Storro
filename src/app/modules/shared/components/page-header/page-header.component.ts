@@ -27,6 +27,9 @@ export class PageHeaderComponent {
   @Input()
   actions: PageHeaderAction[] = [];
 
+  @Input()
+  showBackButton: boolean = false;
+
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute) {
   }

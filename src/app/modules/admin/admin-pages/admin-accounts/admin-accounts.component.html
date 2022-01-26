@@ -1,0 +1,37 @@
+<app-page-header title="Accounts" (searchValueChanged)="updateSearchValue($event)" [actions]="pageHeaderActions" @onEnterLeft></app-page-header>
+<div class="table-container">
+  <app-loading-shade *ngIf="isLoadingAccounts" @fade></app-loading-shade>
+
+  <ng-template #rowTemplate let-item>
+    <div class="user-row">
+      <span class="firstName">{{item['accountHolder']['firstName']}}</span>
+      <span class="lastName">{{item['accountHolder']['lastName']}}</span>
+      <span class="email">{{item['accountHolder']['email']}}</span>
+      <span class="accountCurrent">
+            <span class="status-badge status-badge-{{!item['delinquent']}}">{{item['delinquent'] ? 'Delinquent' : 'Current' }}</span>
+      </span>
+
+      <div class="actions">
+        <button mat-icon-button color="primary" (click)="openEditUserDialog(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="openAccountDebugDialog(item)">
+          <mat-icon>bug_report</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <app-simple-table @onEnterLeft [data]="accounts" [columns]="displayedColumns" (tableEvent)="tableEventTriggered($event)"
+                    [rowTemplate]="rowTemplate">
+  </app-simple-table>
+
+  <div class="paginator-container">
+    <mat-paginator [length]="totalAccounts" [pageSize]="pageSize"></mat-paginator>
+  </div>
+
+  <div class="no-data-shade" *ngIf="!isLoadingAccounts && totalAccounts === 0" @fade>
+    <h1>No Accounts</h1>
+  </div>
+</div>

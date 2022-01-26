@@ -17,10 +17,6 @@
   padding-top: 0 !important;
   flex: 1;
 
-  a {
-    margin-top: 1.5em;
-  }
-
   a::ng-deep{
     .mat-list-item-content {
       flex-direction: row-reverse;

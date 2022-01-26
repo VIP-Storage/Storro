@@ -1,5 +1,8 @@
 <div class="page-header">
   <mat-toolbar>
+    <button *ngIf="showBackButton" mat-icon-button class="back-button" routerLink="../">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
     <h1>{{title}}</h1>
     <span class="spacer"></span>
     <button mat-flat-button *ngFor="let action of actions" [color]="action.color || 'primary'" class="icon-text-button" (click)="actionClicked(action)">

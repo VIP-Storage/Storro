@@ -10,6 +10,7 @@
 @use './circle-button/circle-button.theme' as circle-button;
 @use './sidebar/sidebar.theme' as sidebar;
 @use './page-header/page-header.theme' as page-header;
+@use '../account/components/create-account-stepper/create-account-stepper.theme' as create-account-stepper;
 
 @mixin light-components-theme($theme) {
   @include toggle-button.theme($theme, false);
@@ -23,6 +24,7 @@
   @include circle-button.theme($theme, false);
   @include sidebar.theme($theme, false);
   @include page-header.theme($theme, false);
+  @include create-account-stepper.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -37,4 +39,5 @@
   @include circle-button.theme($theme, true);
   @include sidebar.theme($theme, true);
   @include page-header.theme($theme, true);
+  @include create-account-stepper.theme($theme, true);
 }

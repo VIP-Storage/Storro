@@ -22,6 +22,14 @@ import {MatListModule} from "@angular/material/list";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AdminUnitsMapComponent} from './admin-units-map/admin-units-map.component';
 import {AdminUsersComponent} from './admin-users/admin-users.component';
+import {AdminAccountsComponent} from './admin-accounts/admin-accounts.component';
+import {AdminAccountComponent} from './admin-account/admin-account.component';
+import {AccountResolver} from "../resolvers/account.resolver";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {AccountModule} from "../../shared/account/account.module";
+import {AdminImportUnitsComponent} from './admin-import-units/admin-import-units.component';
+import {NgxDropzoneModule} from "ngx-dropzone";
+import {MatTreeModule} from "@angular/material/tree";
 
 
 const routes: Routes = [
@@ -43,13 +51,32 @@ const routes: Routes = [
     component: AdminUnitsMapComponent
   },
   {
+    path: 'units/import',
+    component: AdminImportUnitsComponent
+  },
+  {
     path: 'users',
     component: AdminUsersComponent,
   },
   {
     path: 'tenants',
     component: AdminTenantsComponent
-  }
+  },
+  {
+    path: 'accounts',
+    component: AdminAccountsComponent
+  },
+  {
+    path: 'accounts/create',
+    component: AdminAccountComponent
+  },
+  {
+    path: 'accounts/:id',
+    component: AdminAccountComponent,
+    resolve: {
+      account: AccountResolver
+    }
+  },
 ]
 
 @NgModule({
@@ -59,6 +86,9 @@ const routes: Routes = [
     AdminDashboardComponent,
     AdminUnitsMapComponent,
     AdminUsersComponent,
+    AdminAccountsComponent,
+    AdminAccountComponent,
+    AdminImportUnitsComponent,
   ],
     imports: [
         CommonModule,
@@ -80,6 +110,10 @@ const routes: Routes = [
         MatSidenavModule,
         MatListModule,
         MatTooltipModule,
+        MatGridListModule,
+        AccountModule,
+        NgxDropzoneModule,
+        MatTreeModule,
     ]
 })
 export class AdminPagesModule {

@@ -28,6 +28,9 @@ import {CircleButtonComponent} from './components/circle-button/circle-button.co
 import {SearchBarComponent} from "./components/search-bar/search-bar.component";
 import { RolePipe } from './pipes/role.pipe';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -48,20 +51,20 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
     RolePipe,
     PageHeaderComponent,
   ],
-    exports: [
-        SidebarComponent,
-        HoverElevationDirective,
-        ToggleButtonComponent,
-        LoadingShadeComponent,
-        SimpleTableComponent,
-        CustomColorDirective,
-        UnitMapComponent,
-        SpinnerButtonComponent,
-        CircleButtonComponent,
-        SearchBarComponent,
-        RolePipe,
-        PageHeaderComponent
-    ],
+  exports: [
+    SidebarComponent,
+    HoverElevationDirective,
+    ToggleButtonComponent,
+    LoadingShadeComponent,
+    SimpleTableComponent,
+    CustomColorDirective,
+    UnitMapComponent,
+    SpinnerButtonComponent,
+    CircleButtonComponent,
+    SearchBarComponent,
+    RolePipe,
+    PageHeaderComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -78,6 +81,9 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
     LeafletModule,
     MatButtonModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
   ],
   providers: [
     HttpClient

@@ -7,13 +7,14 @@ import {DateTime} from "luxon";
 import {IResponse} from "../../../data/response/response.interface";
 import {Observable} from "rxjs";
 import {Role} from "../../../data/enums";
-import {User} from "../../../data/types";
+import {UserService} from "./user.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   private readonly apiEndpoint: string = environment.http.url;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private userService: UserService) {
   }
 
   login(email: string, password: string) {
@@ -94,6 +95,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
+    this.userService.clearCache();
   }
 
   public isLoggedIn() {

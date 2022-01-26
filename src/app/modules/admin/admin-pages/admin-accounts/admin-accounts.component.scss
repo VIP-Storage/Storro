@@ -1,0 +1,70 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  padding: 1.2em;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.no-data-shade {
+  user-select: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: gray;
+  }
+}
+
+.paginator-container {
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 6px 6px 3px;
+}
+
+.user-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
+
+  .firstName, .lastName, .email, .accountCurrent, .actions {
+    flex: 1;
+  }
+
+  .firstName, .lastName {
+    font-size: 18px;
+  }
+
+  .actions button {
+    margin-left: -0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .accountCurrent .status-badge {
+    padding: 5px 1em;
+    border-radius: 8px;
+
+    &.status-badge-true {
+      background-color: #00ffc433;
+      color: #11cec2;
+    }
+
+    &.status-badge-false {
+      background-color: #ff03265e;
+      color: #d10404;
+    }
+  }
+}

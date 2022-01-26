@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {ManyResponse} from "../../../data/response/many.response";
 import {CreateUnitRequest} from "../../../data/requests/create-unit.request";
+import {IResponse} from "../../../data/response/response.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,22 @@ export class UnitsService {
     };
 
     return this.httpClient.post(url, request);
+  }
+
+  importUnitsJSON(location: string, unitType: string, idFieldKey: string, arrayRootFieldKey: string, json: any) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/import')
+      .addSegment('/json')
+      .get
+
+    return this.httpClient.post<IResponse>(url, {
+      location,
+      unitType,
+      idFieldKey,
+      arrayRootFieldKey,
+      json
+    })
   }
 
   getUnitSnapshotURL(unit: Unit) {

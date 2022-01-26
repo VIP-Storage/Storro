@@ -1,0 +1,25 @@
+<ng-container *ngIf="viewMode === 'EDIT'">
+  <div class="account-grid-inner">
+    <div class="grid-list-wrapper">
+      <mat-grid-list cols="2" rowHeight="675px" gutterSize="0px">
+        <mat-grid-tile class="mailing-address-tile">
+          <app-mailing-address-card></app-mailing-address-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="viewMode === 'CREATE'">
+  <mat-card class="mat-elevation-z3 create-card">
+    <div class="title-wrapper">
+      <button mat-icon-button routerLink="../">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Create Account</h2>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="inner-card">
+      <app-create-account-stepper></app-create-account-stepper>
+    </div>
+  </mat-card>
+</ng-container>

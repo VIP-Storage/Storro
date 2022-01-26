@@ -12,7 +12,8 @@ export const environment = {
   http: {
     url: 'http://localhost:3000'
   },
-  stripeKey: 'pk_test_I0WfyTbDeYOBUL9K3EN3OEzW'
+  stripeKey: 'pk_test_I0WfyTbDeYOBUL9K3EN3OEzW',
+  googleMapsKey: 'AIzaSyAM0OwlFZVDekDq7AqJ120f4jIznC0VJIU'
 };
 
 /*

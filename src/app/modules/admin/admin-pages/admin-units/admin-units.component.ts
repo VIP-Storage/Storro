@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Unit, UnitType} from "../../../../data/types";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
-import {catchError, debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, tap} from "rxjs/operators";
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from "rxjs/operators";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
 import {PageTitleService} from "../../../../services/page-title.service";
@@ -52,6 +52,12 @@ export class AdminUnitsComponent implements AfterViewInit {
       icon: 'map',
       color: 'accent',
       routerLink: './map'
+    },
+    {
+      title: 'Import Units',
+      icon: 'download',
+      color: 'warn',
+      routerLink: './import'
     }
   ]
 
@@ -127,7 +133,6 @@ export class AdminUnitsComponent implements AfterViewInit {
   ngAfterViewInit() {
     merge(this.tableChange, this.paginator.page, this.searchValueChanged)
       .pipe(
-        startWith({}),
         switchMap(() => {
           const pageNumber = this.paginator.pageIndex;
           const pageSize = this.pageSize;

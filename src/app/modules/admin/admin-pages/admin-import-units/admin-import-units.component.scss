@@ -1,0 +1,189 @@
+:host {
+  height: 100%;
+  display: flex;
+}
+
+.cards {
+  flex: 1;
+  display: flex;
+  padding: 1.2em;
+
+  mat-card {
+    border-radius: 20px;
+  }
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  span.filename {
+    font-size: 22px;
+  }
+
+  button {
+    margin-top: 1.5em;
+
+    &:last-child {
+      width: 200px;
+    }
+  }
+
+  .error-wrapper {
+    height: 22px;
+  }
+}
+
+.process-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .mat-card-content {
+    flex: 1;
+    padding: 1.2em;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    position: relative;
+
+    .process-mode, .upload-mode {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 1em;
+    }
+
+    .process-mode {
+      flex-direction: column;
+    }
+
+    .upload-mode {
+      ngx-dropzone {
+        flex: 1;
+        background: transparent;
+        height: unset !important;
+      }
+    }
+
+
+    .footer {
+      display: flex;
+      margin-top: 1em;
+      margin-left: 2em;
+      margin-right: 2em;
+
+      mat-divider {
+        margin-left: 1em;
+      }
+    }
+
+    .selected-node {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 1em;
+      }
+    }
+
+    .form-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-left: 2em;
+      margin-bottom: 1em;
+
+      .error-wrapper {
+        flex: 1;
+      }
+
+      .actions {
+        display: flex;
+
+        button {
+          flex: 1;
+        }
+
+        app-spinner-button {
+          flex: 1;
+          margin-left: 1em;
+        }
+      }
+    }
+
+    .help {
+      margin-top: 1em;
+      color: grey;
+    }
+  }
+}
+
+.mat-tree {
+  background-color: black;
+  border-radius: 20px;
+  padding: 1.2em;
+  flex: 1;
+  overflow: auto;
+}
+
+.mat-tree-node {
+  color: white;
+  font-family: monospace;
+}
+
+
+span.number {
+  color: #0088ff;
+}
+
+span.boolean {
+  color: #2ab342;
+}
+
+span.string {
+  color: orange;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  overflow: hidden;
+  transition: height 300ms ease-in-out;
+  height: auto;
+}
+
+.example-tree-invisible {
+  height: 0 !important;
+}
+
+
+span.clickable:hover {
+  cursor: pointer;
+}
+
+.array-highlighted {
+  background-color: #00ffc433;
+  color: #11cec2;
+  padding: 5px 1em;
+  border-radius: 8px;
+}
+
+.id-highlighted {
+  padding: 5px 1em;
+  border-radius: 8px;
+  background-color: #ffbf0d40;
+  color: #fec011;
+}

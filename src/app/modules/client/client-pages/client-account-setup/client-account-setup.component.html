@@ -1,0 +1,10 @@
+<mat-card class="mat-elevation-z3 create-card" *ngIf="scriptLoaded" @fadeIn>
+  <div class="title-wrapper">
+    <h2>Setup Account</h2>
+    <p>Before you can rent a unit, you need to setup your account</p>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="inner-card">
+    <app-create-account-stepper [googleAvailable]="scriptLoaded"></app-create-account-stepper>
+  </div>
+</mat-card>

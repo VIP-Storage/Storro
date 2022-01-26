@@ -17,6 +17,7 @@ import {NgxStripeModule} from "ngx-stripe";
 import {HttpErrorInterceptor} from "./modules/shared/interceptors/http.interceptor";
 import {MatDialogModule} from "@angular/material/dialog";
 import {DialogsModule} from "./modules/shared/dialogs/dialogs.module";
+import {MatNativeDateModule} from "@angular/material/core";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -45,6 +46,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DialogsModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+    MatNativeDateModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

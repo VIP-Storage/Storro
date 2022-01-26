@@ -2,16 +2,18 @@ import {AfterViewInit, Component, EventEmitter, Input, Output, TemplateRef, View
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {SimpleTableEvent} from "./simple-table.event";
+import {storroAnimations} from "../../animations";
 
 @Component({
   selector: 'app-simple-table',
   templateUrl: './simple-table.component.html',
-  styleUrls: ['./simple-table.component.scss']
+  styleUrls: ['./simple-table.component.scss'],
+  animations: storroAnimations
 })
 export class SimpleTableComponent implements AfterViewInit {
 
   @Input()
-  columns: { name: string; title: string }[] = [];
+  columns: { name: string; title: string, noSort?: boolean }[] = [];
 
   @Input()
   rowTemplate!: TemplateRef<any>;
@@ -36,5 +38,13 @@ export class SimpleTableComponent implements AfterViewInit {
       active: this.sort.active,
       direction: this.sort.direction
     })
+  }
+
+  shouldSort(column: {name: string, title: string, noSort?: boolean}) {
+    if (column.hasOwnProperty('noSort') && typeof column.noSort === "boolean") {
+      return !column.noSort;
+    }
+
+    return true;
   }
 }

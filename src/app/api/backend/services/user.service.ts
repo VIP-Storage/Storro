@@ -21,6 +21,11 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
+  clearCache() {
+    this.$currentRole = null;
+    this.$currentUser = null;
+  }
+
   get currentUser(): Observable<User> {
       if (!this.$currentUser) {
         const url = Burly(this.apiEndpoint)
@@ -40,7 +45,6 @@ export class UserService {
     if (!this.$currentRole) {
       this.$currentRole = this.currentUser.pipe(
         map(user => user.role),
-        shareReplay(1)
       )
     }
 

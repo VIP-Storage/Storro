@@ -19,10 +19,14 @@ import {UnitChartResolver} from "../resolvers/unit-chart.resolver";
 import {UnitResolver} from "../resolvers/unit.resolver";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDividerModule} from "@angular/material/divider";
-import {ClientBillingSetupComponent} from './client-billing-setup/client-billing-setup.component';
 import {BillingResolver} from "../resolvers/billing.resolver";
 import {NgxStripeModule} from "ngx-stripe";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ClientAccountComponent} from './client-account/client-account.component';
+import {ClientAccountSetupComponent} from './client-account-setup/client-account-setup.component';
+import {AccountModule} from "../../shared/account/account.module";
+import {AccountResolver} from "../resolvers/account.resolver";
+import {NoAccountGuard} from "../guards/no-account.guard";
 
 
 const routes: Routes = [
@@ -62,8 +66,16 @@ const routes: Routes = [
     }
   },
   {
-    path: 'billing/setup',
-    component: ClientBillingSetupComponent
+    path: 'account',
+    component: ClientAccountComponent,
+    resolve: {
+      account: AccountResolver
+    }
+  },
+  {
+    path: 'account/setup',
+    canActivate: [NoAccountGuard],
+    component: ClientAccountSetupComponent
   }
 ];
 
@@ -73,7 +85,8 @@ const routes: Routes = [
     ClientUnitComponent,
     ClientBillingComponent,
     ClientUnitChartComponent,
-    ClientBillingSetupComponent
+    ClientAccountComponent,
+    ClientAccountSetupComponent
   ],
   imports: [
     CommonModule,
@@ -91,7 +104,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatDividerModule,
     NgxStripeModule,
-    MatDialogModule
+    MatDialogModule,
+    AccountModule
   ],
   exports: [
     RouterModule
