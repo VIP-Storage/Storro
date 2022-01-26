@@ -1,7 +1,6 @@
 import {AfterViewInit, Component , ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {User} from "../../../../data/types";
-import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
 import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
 import {DebugDialogService} from "../../../../services/debug-dialog.service";
@@ -50,17 +49,6 @@ export class AdminAccountsComponent implements AfterViewInit {
   ];
 
   accounts: Account[] = [];
-
-  pageHeaderActions: PageHeaderAction[] = [
-    {
-      title: 'Add Account',
-      icon: 'add',
-      clickAction: () => {
-        this.openCreateUserDialog()
-      }
-    },
-  ];
-
   pageIndex: number = 1;
   pageSize: number = 25;
   totalAccounts: number = 0;
