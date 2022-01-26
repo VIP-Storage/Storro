@@ -1,5 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PageTitleService} from "../../../../services/page-title.service";
+import {MatDialog} from "@angular/material/dialog";
+import {UnitPickerComponent} from "../../dialogs/unit-picker/unit-picker.component";
+import {UnitsGridComponent} from "../../../shared/unit/components/units-grid/units-grid.component";
+import {AccountsService} from "../../../../api/backend/services/accounts.service";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-client-dashboard',
@@ -8,11 +15,37 @@ import {PageTitleService} from "../../../../services/page-title.service";
 })
 export class ClientDashboardComponent implements OnInit {
 
-  constructor(private pageTitleService: PageTitleService) {
+  @ViewChild(UnitsGridComponent) unitsGridComponent?: UnitsGridComponent;
+
+  hasAccount: Observable<boolean>;
+
+  constructor(private pageTitleService: PageTitleService,
+              private accountsService: AccountsService,
+              private router: Router,
+              private matDialog: MatDialog) {
+
+    this.hasAccount = this.accountsService.getCurrentAccount().pipe(
+      map(res => res.success)
+    )
   }
 
   ngOnInit(): void {
     this.pageTitleService.title = 'Dashboard';
   }
 
+  openUnitPicker() {
+    this.matDialog.open(UnitPickerComponent, {
+      panelClass: UnitPickerComponent.panelClass
+    });
+  }
+
+  actionClicked() {
+    this.hasAccount.subscribe(hasAccount => {
+      if (hasAccount) {
+        this.openUnitPicker();
+      } else {
+        this.router.navigate(['client', 'account']).then();
+      }
+    })
+  }
 }

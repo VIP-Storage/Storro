@@ -11,6 +11,7 @@ export * from './sidebar-item.type';
 export * from './stat.type';
 export * from './toggle-option.type';
 export * from './unit-access-entry.type';
+export * from './unit-by-type.type';
 export * from './unit-data.type';
 export * from './unit-indicator.type';
 export * from './unit-type.type';

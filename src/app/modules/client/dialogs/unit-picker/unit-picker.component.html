@@ -1,0 +1,51 @@
+<mat-toolbar color="accent">
+  <span>Rent a Unit</span>
+</mat-toolbar>
+<div class="content">
+  <div class="select-type">
+    <span>Unit Type</span>
+    <mat-selection-list class="unit-types-list" [@listAnimation]="totalUnitTypes" [multiple]="false" (selectionChange)="typeSelectionChanged($event)">
+      <mat-list-option class="unit-type" *ngFor="let unitByType of unitsByType|async" [value]="unitByType.unitType">
+        <div mat-line class="type">{{unitByType.unitTypeName}}</div>
+        <div mat-line class="available">{{unitByType.count}} available</div>
+        <div mat-line class="pricing">{{getPricing(unitByType)}}</div>
+        <mat-icon matListIcon [class.selected]="isSelected(unitByType)">
+          {{isSelected(unitByType) ? 'done' : ''}}
+        </mat-icon>
+      </mat-list-option>
+    </mat-selection-list>
+    <app-loading-shade *ngIf="isLoadingTypes" @fade></app-loading-shade>
+    <mat-hint>Select a unit type that accurately reflects your needs</mat-hint>
+  </div>
+  <div class="select-payment-method">
+    <mat-divider></mat-divider>
+    <span>Payment Method</span>
+    <mat-selection-list class="payment-methods-list" [@listAnimation]="totalPaymentMethods" [multiple]="false" (selectionChange)="paymentMethodSelectionChange($event)">
+      <mat-list-option class="payment-method" *ngFor="let paymentMethod of paymentMethods|async" [value]="paymentMethod.id">
+        <div mat-line class="name">{{paymentMethod.name}}</div>
+        <div mat-line class="type">{{paymentMethod.type|titlecase}} {{paymentMethod.readableID}}</div>
+        <div mat-line class="expires">Expires {{paymentMethod.expires}}</div>
+        <mat-icon matListIcon [class.selected]="isSelected(paymentMethod)">
+          {{isSelected(paymentMethod) ? 'done' : ''}}
+        </mat-icon>
+      </mat-list-option>
+    </mat-selection-list>
+    <app-loading-shade *ngIf="isLoadingTypes" @fade></app-loading-shade>
+    <div class="no-payment-methods-shade" *ngIf="!isLoadingPaymentMethods && totalPaymentMethods === 0" @fade>
+        <h1>You have no payment methods</h1>
+        <button mat-stroked-button (click)="addPaymentMethod()">Add payment method</button>
+      </div>
+  </div>
+  <div class="agreement">
+    <mat-divider></mat-divider>
+    <span>Payment Agreement</span>
+    <div>
+      <p>By checking this box, you are stating that you aren't a fucking moron</p>
+      <mat-checkbox class="agreement-checkbox" [(ngModel)]="userAcceptedAgreement">I Agree</mat-checkbox>
+    </div>
+  </div>
+  <div class="actions">
+    <mat-divider></mat-divider>
+    <app-spinner-button [submitted]="submitted" [disabled]="rentButtonDisabled">Rent Unit</app-spinner-button>
+  </div>
+</div>

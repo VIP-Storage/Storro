@@ -7,4 +7,10 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+  <div class="no-units-shade" *ngIf="!(isLoading|async) && totalUnits === 0">
+    <div class="client-view" *ngIf="clientMode">
+      <h1>You have no units</h1>
+      <button mat-stroked-button (click)="action.emit(true)" *ngIf="actionButtonTitle as actionButtonTitle">{{actionButtonTitle}}</button>
+    </div>
+  </div>
 </div>

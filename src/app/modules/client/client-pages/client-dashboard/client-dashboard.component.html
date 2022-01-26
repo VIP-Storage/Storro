@@ -3,6 +3,6 @@
     <span>Units</span>
   </div>
   <div class="section-content">
-    <app-units-grid></app-units-grid>
+    <app-units-grid (action)="actionClicked()" [actionButtonTitle]="(hasAccount|async) ? 'Rent Unit' : 'Setup Account'"></app-units-grid>
   </div>
 </div>

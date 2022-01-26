@@ -11,7 +11,7 @@
   <div class="error-wrapper">
     <mat-error *ngIf="error">{{error}}</mat-error>
   </div>
-  <mat-divider></mat-divider>
+
   <div class="card-wrapper">
     <ngx-stripe-card class="stripe" (change)="cardChanges($event)" [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
     <div class="error-wrapper">

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
-import {catchError, delay, map} from "rxjs/operators";
-import {UnitAccessEntryType, UnitDataType, Unit} from "../../../data/types";
+import {catchError} from "rxjs/operators";
+import {UnitAccessEntryType, UnitDataType, Unit, UnitByType} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
@@ -20,7 +20,7 @@ export class UnitsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getUnits(pageNumber: number = 0, pageSize: number = 25, sortDirection: any = 'desc', sortBy: string = 'id', search: string|null = null): Observable<ManyResponse<Unit>> {
+  getUnits(pageNumber: number = 0, pageSize: number = 25, sortDirection: any = 'desc', sortBy: string = 'id', search: string | null = null): Observable<ManyResponse<Unit>> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/list')
@@ -117,6 +117,16 @@ export class UnitsService {
   getUnitAccessHistory(unit?: Unit): Observable<UnitAccessEntryType[]> {
     // TODO: Replace this with proper backend call
     return of([]);
+  }
+
+  getAvailableUnitsByType(): Observable<UnitByType[]> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/available')
+      .addSegment('/by-type')
+      .get;
+
+    return this.httpClient.get<UnitByType[]>(url);
   }
 
 }
