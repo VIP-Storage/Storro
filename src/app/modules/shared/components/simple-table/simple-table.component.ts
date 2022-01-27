@@ -50,4 +50,10 @@ export class SimpleTableComponent implements AfterViewInit {
 
     return true;
   }
+
+  rowClick(data: any, event: Event) {
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    this.rowEvent.emit(data);
+  }
 }

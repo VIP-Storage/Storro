@@ -17,13 +17,13 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Street Address</mat-label>
-        <input matInput placeholder="123 N. Main Street" [formControl]="streetAddress" required>
+        <input matInput placeholder="123 N. Main Street" [formControl]="streetAddress" required autocomplete="address-line1">
         <mat-error *ngIf="streetAddress.invalid">{{getErrorMessage(streetAddress)}}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>City</mat-label>
-        <input matInput placeholder="Pleasantville" [formControl]="city" required>
+        <input matInput placeholder="Pleasantville" [formControl]="city" required autocomplete="address-level2">
         <mat-error *ngIf="city.invalid">{{getErrorMessage(city)}}</mat-error>
       </mat-form-field>
 
@@ -37,7 +37,7 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>ZIP Code</mat-label>
-        <input matInput placeholder="12345" [formControl]="zipCode" mask="00000" required>
+        <input matInput placeholder="12345" [formControl]="zipCode" mask="00000" required autocomplete="postal-code">
         <mat-error *ngIf="zipCode.invalid">{{getErrorMessage(zipCode, 'ZIP Code')}}</mat-error>
       </mat-form-field>
       <div class="buttons">
@@ -86,7 +86,7 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Phone Number</mat-label>
-        <input matInput mask="(000)-000-0000" [formControl]="personalPhoneNumber" placeholder="123-345-3212" required>
+        <input matInput mask="(000)-000-0000" [formControl]="personalPhoneNumber" placeholder="123-345-3212" required autocomplete="tel">
         <mat-error
           *ngIf="personalPhoneNumber.invalid">{{getErrorMessage(personalPhoneNumber, "phone number")}}</mat-error>
       </mat-form-field>

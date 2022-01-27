@@ -1,7 +1,7 @@
 <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
   <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Email address</mat-label>
-    <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email">
+    <input matInput placeholder="pat@example.com" [formControl]="email" autocomplete="username">
     <span matSuffix>
         <mat-icon>alternate_email</mat-icon>
       </span>
@@ -9,7 +9,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Password</mat-label>
-    <input matInput placeholder="••••••" type="password" [formControl]="password">
+    <input matInput placeholder="••••••" type="password" [formControl]="password" autocomplete="current-password">
     <span matSuffix>
         <mat-icon>lock</mat-icon>
       </span>

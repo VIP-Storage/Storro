@@ -1,13 +1,13 @@
 <form class="form-container" [formGroup]="registrationForm" (ngSubmit)="register()">
   <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>First Name</mat-label>
-    <input matInput autocomplete="off" placeholder="Pat" [formControl]="firstName" required>
+    <input matInput placeholder="Pat" [formControl]="firstName" required autocomplete="given-name">
     <mat-error *ngIf="firstName.invalid">You must enter a first name</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Last Name</mat-label>
-    <input matInput autocomplete="off" placeholder="Smith" [formControl]="lastName" required>
+    <input matInput placeholder="Smith" [formControl]="lastName" required autocomplete="family-name">
     <mat-error *ngIf="firstName.invalid">You must enter a last name</mat-error>
   </mat-form-field>
 
@@ -15,7 +15,7 @@
 
   <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Email address</mat-label>
-    <input matInput autocomplete="off" placeholder="pat@example.com" [formControl]="email" required>
+    <input matInput placeholder="pat@example.com" [formControl]="email" required autocomplete="email">
     <span matSuffix>
         <mat-icon>alternate_email</mat-icon>
       </span>
@@ -24,7 +24,7 @@
 
   <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker>
     <mat-label>Password</mat-label>
-    <input matInput placeholder="••••••" type="password" [formControl]="password" required>
+    <input matInput placeholder="••••••" type="password" [formControl]="password" required autocomplete="new-password">
     <span matSuffix>
         <mat-icon>lock</mat-icon>
       </span>
@@ -33,7 +33,7 @@
 
   <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Password Confirmation</mat-label>
-    <input matInput placeholder="••••••" type="password" [formControl]="passwordConfirm" required
+    <input matInput placeholder="••••••" type="password" [formControl]="passwordConfirm" required autocomplete="new-password"
            [errorStateMatcher]="matcher">
     <span matSuffix>
         <mat-icon>lock</mat-icon>

@@ -1,7 +1,7 @@
 <form class="form-container" [formGroup]="registrationForm" (ngSubmit)="reset()">
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
-    <input matInput placeholder="" type="password" [formControl]="password" required>
+    <input matInput placeholder="" type="password" [formControl]="password" required autocomplete="new-password">
     <span matSuffix>
         <mat-icon>lock</mat-icon>
       </span>
@@ -10,7 +10,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Password (again)</mat-label>
-    <input matInput placeholder="" type="password" [formControl]="passwordConfirm" required
+    <input matInput placeholder="" type="password" [formControl]="passwordConfirm" required autocomplete="new-password"
            [errorStateMatcher]="matcher">
     <span matSuffix>
         <mat-icon>lock</mat-icon>
