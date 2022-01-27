@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {Component, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Unit, UnitDataType} from "../../../../../data/types";
 import {ChartDataType, UnitIndicatorDataType} from "../../../../../data/enums";
 import {ActivatedRoute} from "@angular/router";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {PageTitleService} from "../../../../../services/page-title.service";
-import {filter, map, tap} from "rxjs/operators";
+import {filter, map, takeUntil, tap} from "rxjs/operators";
 import {storroAnimations} from "../../../animations";
 
 @Component({
@@ -14,7 +14,7 @@ import {storroAnimations} from "../../../animations";
   styleUrls: ['./unit-overview.component.scss'],
   animations: storroAnimations
 })
-export class UnitOverviewComponent {
+export class UnitOverviewComponent implements OnDestroy {
 
   unit: Observable<Unit>;
 
@@ -32,6 +32,7 @@ export class UnitOverviewComponent {
 
   unitData: Observable<UnitDataType>;
 
+  private destroyed = new Subject<boolean>();
   private _mode: 'ADMIN' | 'USER' = 'USER';
   private _unitData: BehaviorSubject<UnitDataType | null> = new BehaviorSubject<UnitDataType | null>(null);
 
@@ -47,9 +48,17 @@ export class UnitOverviewComponent {
       map(data => data.unit),
       tap(unit => this.pageTitleService.title = unit.name),
       tap(unit => this.unitsService.getUnitData(unit).subscribe(this._unitData)),
+      takeUntil(this.destroyed)
     );
 
-    this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>;
+    this.unitData = this._unitData.pipe(
+      takeUntil(this.destroyed),
+      filter(d => !!d),
+    ) as Observable<UnitDataType>;
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next(true);
   }
 
   getChartURL(chartType: ChartDataType) {

@@ -17,6 +17,6 @@
   </mat-toolbar>
   <mat-divider></mat-divider>
 </div>
-<div class="full-chart-wrapper" *ngIf="unit|async as unit">
-  <app-unit-chart (current)="chartValueUpdated($event)" large="true" [paused]="paused" [type]="chartType|async" [unit]="unit"></app-unit-chart>
+<div class="full-chart-wrapper">
+  <app-unit-chart (current)="chartValueUpdated($event)" large="true" [paused]="paused" [type]="chartType|async" [unit]="unit|async"></app-unit-chart>
 </div>

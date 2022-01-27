@@ -4,7 +4,7 @@ import {Unit} from "../../../../../data/types";
 import {ChartDataType} from "../../../../../data/enums";
 import {ActivatedRoute} from "@angular/router";
 import {PageTitleService} from "../../../../../services/page-title.service";
-import {map, tap} from "rxjs/operators";
+import {map, shareReplay, tap} from "rxjs/operators";
 import {storroAnimations} from "../../../animations";
 
 @Component({
@@ -26,10 +26,12 @@ export class UnitFullChartComponent {
     this.unit = this.activatedRoute.data.pipe(
       map(data => data.unit),
       tap(unit => this.pageTitleService.title = `${unit.id} Chart`),
+      shareReplay()
     );
 
     this.chartType = this.activatedRoute.data.pipe(
       map(data => data.type as ChartDataType),
+      shareReplay()
     );
   }
 

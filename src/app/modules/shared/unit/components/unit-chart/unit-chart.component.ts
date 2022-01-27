@@ -22,7 +22,7 @@ export class UnitChartComponent {
     }
   }
 
-  @Input() set unit(newValue: Unit) {
+  @Input() set unit(newValue: Unit|null) {
     if (!!newValue) {
       this._unit = newValue;
       this.fetchData();
