@@ -31,7 +31,7 @@ export class SensorsService {
   getHumidityChartData(unit: Unit, take: number|null = null): Observable<ChartData|any> {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
-        .addSegment('/stats')
+        .addSegment('/unit')
         .addSegment('/humidity/')
         .addSegment(unit.id)
         .addQuery('take', take, false)
@@ -47,7 +47,7 @@ export class SensorsService {
   getTemperatureChartData(unit: Unit, take: number|null = null): Observable<ChartData|any> {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
-        .addSegment('/stats')
+        .addSegment('/unit')
         .addSegment('/temperature/')
         .addSegment(unit.id)
         .addQuery('take', take, false)

@@ -24,8 +24,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   port: environment.mqtt.port,
   protocol: (environment.mqtt.protocol === "wss") ? "wss" : "ws",
   path: '/ws',
-  username: 'tibbo',
-  password: 'tibbo'
+  username: 'storro',
+  password: 'storro',
 };
 
 
