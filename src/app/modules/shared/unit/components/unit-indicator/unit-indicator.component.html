@@ -1,6 +1,6 @@
 <div class="indicator-text">
   <span class="indicator-title">{{title|titlecase}}</span>
-  <span class="indicator-value" *ngIf="hasLoaded|async; else textLoading">{{text}}</span>
+  <span class="indicator-value" *ngIf="hasLoaded|async; else textLoading" [class.gray]="text === '--'">{{text}}</span>
   <ng-template #textLoading>
     <mat-spinner diameter="18"></mat-spinner>
   </ng-template>

@@ -60,6 +60,10 @@
     font-weight: 500;
     font-size: 1.8rem;
     vertical-align: middle;
+
+    &.gray {
+      color: grey;
+    }
   }
 }
 

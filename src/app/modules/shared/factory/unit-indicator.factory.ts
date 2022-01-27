@@ -178,9 +178,11 @@ export class UnitIndicatorFactory {
       }
     }
 
+    const formattedReading = temperatureReading === -9999 ? '--' : `${temperatureReading} C`;
+
     return {
       icon: TEMPERATURE_ICON,
-      text: `${temperatureReading} F`,
+      text: formattedReading,
       iconColor: this.getTemperatureColor(temperatureReading),
       badge
     };
@@ -201,9 +203,11 @@ export class UnitIndicatorFactory {
       }
     }
 
+    const formattedReading = humidityReading === -9999 ? '--' : `${humidityReading}%`;
+
     return {
       icon: HUMIDITY_ICON,
-      text: `${humidityReading}%`,
+      text: formattedReading,
       iconColor: this.getHumidityColor(humidityReading),
       badge
     };

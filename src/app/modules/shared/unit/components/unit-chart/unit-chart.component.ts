@@ -104,7 +104,7 @@ export class UnitChartComponent {
   }
 
   private parseData(data: ChartData) {
-    if (Object.keys(data).length === 0) {
+    if (Object.keys(data).length === 0 || data.values.length === 0) {
       this.emptyChart = true;
       return;
     }
