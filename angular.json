@@ -45,7 +45,8 @@
             ],
             "allowedCommonJsDependencies": [
               "clone-deep",
-              "kb-burly"
+              "kb-burly",
+              "ngx-google-places-autocomplete"
             ]
           },
           "configurations": {
@@ -58,8 +59,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
                 }
               ],
               "fileReplacements": [

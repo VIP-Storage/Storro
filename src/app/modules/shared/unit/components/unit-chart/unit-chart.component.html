@@ -5,13 +5,14 @@
   <ngx-charts-line-chart [results]="chartData"
                          [autoScale]="true"
                          [animations]="animations"
-                         [scheme]="chartScheme">
+                         [scheme]="chartScheme"
+  *ngIf="!emptyChart">
     <ng-template #seriesTooltipTemplate let-model="model">
       {{model[0]['value']}}{{measurementUnit}}
     </ng-template>
   </ngx-charts-line-chart>
 </div>
-<div class="chart-details">
+<div class="chart-details" *ngIf="!emptyChart">
   <div class="chart-measurement" [matTooltip]="getTooltipText('max')|titlecase" matTooltipPosition="below">
     <mat-icon>arrow_drop_up</mat-icon>
     {{maxValue}}
@@ -21,3 +22,5 @@
     {{minValue}}
   </div>
 </div>
+
+<app-no-data-shade *ngIf="emptyChart"></app-no-data-shade>

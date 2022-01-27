@@ -93,7 +93,7 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Date of Birth</mat-label>
-        <input placeholder="03/08/1999" matInput [matDatepicker]="birthdayPicker" [formControl]="dateOfBirth" required>
+        <input placeholder="03/08/1999" type="date" matInput [matDatepicker]="birthdayPicker" [formControl]="dateOfBirth" required>
         <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
         <mat-datepicker #birthdayPicker></mat-datepicker>
         <mat-error *ngIf="dateOfBirth.invalid">{{getErrorMessage(dateOfBirth, "date of birth")}}</mat-error>

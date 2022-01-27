@@ -53,6 +53,7 @@ export class UnitChartComponent {
     return this._large;
   }
 
+  emptyChart: boolean = false;
   hasLoadedInitial = false;
   maxValue?: string;
   minValue?: string;
@@ -103,6 +104,11 @@ export class UnitChartComponent {
   }
 
   private parseData(data: ChartData) {
+    if (Object.keys(data).length === 0) {
+      this.emptyChart = true;
+      return;
+    }
+
     this.measurementUnit = data.measurementUnit;
 
     this.updateMinMax(data.values.map(v => v.value));
@@ -130,6 +136,10 @@ export class UnitChartComponent {
   }
 
   private attachLiveData(type: ChartDataType) {
+    if (this.emptyChart) {
+      return;
+    }
+
     switch (type) {
       case ChartDataType.TEMPERATURE:
         this._liveSub = this.sensorsService.getLiveTemperatureChartData(this._unit).subscribe(
@@ -145,44 +155,46 @@ export class UnitChartComponent {
     }
   }
 
-  private appendPoint(value: number) {
-    const currentData = this.chartData[0];
-    const now = new Date();
+  private appendPoint(value: number|null) {
+    if (value !== null) {
+      const currentData = this.chartData[0];
+      const now = new Date();
 
-    this.current.emit(`${value}`);
+      this.current.emit(`${value}`);
 
-    if (!currentData || !currentData.series) {
-      return;
-    }
-
-    const newData = {
-      value: `${value}`,
-      name: now.toISOString()
-    };
-
-    if (this._paused) {
-      this._queue.push(newData);
-      return;
-    }
-
-    const currentSeries = currentData.series;
-    const newSeries = [
-      ...currentSeries,
-      ...this._queue,
-      newData
-    ];
-
-    this.updateMinMax(newSeries.map(v => v.value));
-
-
-    this.chartData = [
-      {
-        name: currentData.name,
-        series: newSeries.slice(Math.max(newSeries.length - this.maxEventLen, 0))
+      if (!currentData || !currentData.series) {
+        return;
       }
-    ];
 
-    this._queue = [];
+      const newData = {
+        value: `${value}`,
+        name: now.toISOString()
+      };
+
+      if (this._paused) {
+        this._queue.push(newData);
+        return;
+      }
+
+      const currentSeries = currentData.series;
+      const newSeries = [
+        ...currentSeries,
+        ...this._queue,
+        newData
+      ];
+
+      this.updateMinMax(newSeries.map(v => v.value));
+
+
+      this.chartData = [
+        {
+          name: currentData.name,
+          series: newSeries.slice(Math.max(newSeries.length - this.maxEventLen, 0))
+        }
+      ];
+
+      this._queue = [];
+    }
   }
 
   private applyChartScheme(type: ChartDataType) {

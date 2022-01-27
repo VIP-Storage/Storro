@@ -4,7 +4,7 @@
 
 <form class="form-container" [formGroup]="addPaymentMethodForm" (ngSubmit)="addPaymentMethod()">
   <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
+    <mat-label>Payment Method Name</mat-label>
     <input matInput autocomplete="off" placeholder="Pat's Visa" [formControl]="name" required>
     <mat-error *ngIf="name.invalid">{{getNameError()}}</mat-error>
   </mat-form-field>

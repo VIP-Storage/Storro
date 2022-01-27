@@ -136,16 +136,19 @@ export class UnitIndicatorComponent implements OnInit {
     switch (type) {
       case UnitIndicatorDataType.TEMP:
         observable = this.sensorsService.getLiveTemperatureChartData(unit).pipe(
-          map(raw => UnitIndicatorFactory.getTemperatureData(raw))
+          filter(v => !!v),
+          map(raw => UnitIndicatorFactory.getTemperatureData(raw as number))
         );
         break;
       case UnitIndicatorDataType.HUMIDITY:
         observable = this.sensorsService.getLiveHumidityChartData(unit).pipe(
-          map(raw => UnitIndicatorFactory.getHumidityData(raw))
+          filter(v => !!v),
+          map(raw => UnitIndicatorFactory.getHumidityData(raw as number))
         );
         break;
       case UnitIndicatorDataType.DOOR:
         observable = this.sensorsService.getLiveDoorState(unit).pipe(
+          filter(v => !!v),
           map(raw => UnitIndicatorFactory.getDoorStateData(raw))
         );
         break;

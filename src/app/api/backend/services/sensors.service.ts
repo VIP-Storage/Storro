@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {Observable, of} from "rxjs";
+import {catchError, map} from "rxjs/operators";
 import {MqttService} from "ngx-mqtt";
 import {ChartDataType, DoorState} from "../../../data/enums";
 import {ChartData, Unit} from "../../../data/types";
@@ -19,7 +19,7 @@ export class SensorsService {
               private httpClient: HttpClient) {
   }
 
-  getChartData(unit: Unit, dataType: ChartDataType, take: number|null = null): Observable<ChartData> {
+  getChartData(unit: Unit, dataType: ChartDataType, take: number|null = null): Observable<ChartData|any> {
     switch (dataType) {
       case ChartDataType.HUMIDITY:
         return this.getHumidityChartData(unit, take);
@@ -28,7 +28,7 @@ export class SensorsService {
     }
   }
 
-  getHumidityChartData(unit: Unit, take: number|null = null): Observable<ChartData> {
+  getHumidityChartData(unit: Unit, take: number|null = null): Observable<ChartData|any> {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
         .addSegment('/stats')
@@ -36,10 +36,15 @@ export class SensorsService {
         .addSegment(unit.id)
         .addQuery('take', take, false)
         .get
-    );
+    ).pipe(
+      catchError(err => {
+        console.warn('Chart data error', err);
+        return of({});
+      })
+    )
   }
 
-  getTemperatureChartData(unit: Unit, take: number|null = null): Observable<ChartData> {
+  getTemperatureChartData(unit: Unit, take: number|null = null): Observable<ChartData|any> {
     return this.httpClient.get<ChartData>(
       Burly(this.apiEndpoint)
         .addSegment('/stats')
@@ -47,10 +52,15 @@ export class SensorsService {
         .addSegment(unit.id)
         .addQuery('take', take, false)
         .get
-    );
+    ).pipe(
+      catchError(err => {
+        console.warn('Chart data error', err);
+        return of({});
+      })
+    )
   }
 
-  getLiveTemperatureChartData(unit: Unit|string): Observable<number> {
+  getLiveTemperatureChartData(unit: Unit|string): Observable<number|null> {
     let _unit = unit;
 
     if (unit.hasOwnProperty('id')) {
@@ -58,11 +68,15 @@ export class SensorsService {
     }
 
     return this.mqttService.observe(`sensors/${_unit}/temperature`).pipe(
-      map(message => Number(message.payload.toString()))
+      map(message => Number(message.payload.toString())),
+      catchError(err => {
+        console.warn('Chart live data error', err);
+        return of(null);
+      })
     );
   }
 
-  getLiveHumidityChartData(unit: Unit|string): Observable<number> {
+  getLiveHumidityChartData(unit: Unit|string): Observable<number|null> {
     let _unit = unit;
 
     if (unit.hasOwnProperty('id')) {
@@ -70,7 +84,11 @@ export class SensorsService {
     }
 
     return this.mqttService.observe(`sensors/${_unit}/humidity`).pipe(
-      map(message => Number(message.payload.toString()))
+      map(message => Number(message.payload.toString())),
+      catchError(err => {
+        console.warn('Chart live data error', err);
+        return of(null);
+      })
     );
   }
 
