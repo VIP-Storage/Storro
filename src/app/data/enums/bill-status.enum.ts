@@ -1,5 +1,5 @@
 export enum BillStatus {
-  PAID = 'Paid',
+  PAID = 'paid',
   PENDING = 'Pending',
   ERROR = 'Error'
 }

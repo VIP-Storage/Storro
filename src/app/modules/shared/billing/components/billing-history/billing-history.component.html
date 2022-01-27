@@ -4,11 +4,12 @@
   <div class="line-item-row">
     <span class="amount">{{item['amount']|currency: 'USD'}}</span>
     <span class="status">
-      <span class="status-badge status-badge-{{item['status']|lowercase}}">{{item['status']}}</span>
+      <span class="status-badge status-badge-{{item['status']|lowercase}}">{{item['status']|titlecase}}</span>
     </span>
-    <span class="paidOn">{{item['paidOn']|date}}</span>
+    <span class="paidOn">{{item['date']|date}}</span>
     <span class="paymentMethod">
-        <img class="type-image" [src]="getImageType(item['paymentMethod'])">
+        <img class="type-image" [src]="getImageType(item['paymentMethod']['type'])">
+      <span>{{item['paymentMethod']['name']}}</span>
     </span>
   </div>
 </ng-template>

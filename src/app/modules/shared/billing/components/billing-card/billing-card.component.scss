@@ -5,6 +5,7 @@
   padding: 2em 2.8em;
   position: relative;
   overflow: hidden;
+  min-height: 220px;
 
   &.show-borders {
     border-width: 2px;
@@ -74,5 +75,16 @@
   left: 0;
   right: 0;
   pointer-events: none;
+}
+
+.spinner, .error {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 

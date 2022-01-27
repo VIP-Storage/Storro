@@ -1,14 +1,21 @@
 <div class="background-overlay"></div>
-<h3 class="subtitle" *ngIf="!!subtitle">{{subtitle}}</h3>
-<div class="amount">
-  <span class="dollar-amount">${{dollars}}</span>
-  <span class="cents-amount">.{{cents}}</span>
+<ng-container *ngIf="!loading" @fade>
+  <h3 class="subtitle" @fade *ngIf="!!subtitle">{{subtitle}}</h3>
+  <div class="amount" @fade>
+    <span class="dollar-amount">${{dollars}}</span>
+    <span class="cents-amount">.{{cents}}</span>
+  </div>
+  <h1 class="title" @fade>{{title}}</h1>
+  <div class="button-wrapper" @fade>
+    <button mat-flat-button [color]="color" *ngIf="!!routerLink" [routerLink]="routerLink">
+      {{actionTitle}}
+    </button>
+    <span *ngIf="chargedTo" class="charged-to">Charged to {{chargedToMethod}}</span>
+  </div>
+</ng-container>
+<div class="spinner" *ngIf="loading" @fade>
+  <mat-spinner [diameter]="30"></mat-spinner>
 </div>
-<h1 class="title">{{title}}</h1>
-<div class="button-wrapper">
-  <button mat-flat-button [color]="color" *ngIf="!!routerLink" [routerLink]="routerLink">
-    {{actionTitle}}
-  </button>
-  <span *ngIf="chargedTo" class="charged-to">Charged to {{chargedToMethod}}</span>
+<div class="error" *ngIf="errorMessage && !loading">
+  <mat-hint>{{errorMessage}}</mat-hint>
 </div>
-

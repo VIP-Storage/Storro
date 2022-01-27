@@ -1,8 +1,9 @@
 import {BillStatus} from "../enums";
+import {PaymentMethod} from "./payment-method.type";
 
 export interface BillingHistoryType {
-  paidOn: Date;
+  date: Date;
   amount: number;
   status: BillStatus;
-  paymentMethod: any;
+  paymentMethod: PaymentMethod;
 }

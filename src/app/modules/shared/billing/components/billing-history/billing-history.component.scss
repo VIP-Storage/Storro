@@ -29,8 +29,18 @@
     font-size: 16px;
   }
 
-  .paymentMethod .type-image {
-    width: 50px;
+  .paymentMethod {
+    display: flex;
+    align-items: center;
+
+    .type-image {
+      margin-right: 1em;
+      width: 50px;
+    }
+
+    span {
+      color: grey;
+    }
   }
 
   .status .status-badge {

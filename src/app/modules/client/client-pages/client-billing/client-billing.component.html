@@ -25,10 +25,12 @@
     <div class="billing-main">
       <div class="billing-info">
         <app-billing-card
+          [loading]="!!!(nextPayment)"
+          [errorMessage]="nextPaymentError"
           @onEnterLeft
-          amount="228.55"
+          [amount]="nextPayment?.amount"
           subtitle="Upcoming Bill"
-          title="by June 12th, 2022"
+          [title]="atTitle(nextPayment?.date|date) "
           actionTitle="Manage Payment"
           routerLink="/manage/payment"
           color="primary"
@@ -36,11 +38,13 @@
         ></app-billing-card>
 
         <app-billing-card
-          amount="223.49"
+          [loading]="!!!(lastPayment)"
+          [errorMessage]="lastPaymentError"
+          [amount]="lastPayment?.amount"
           [@onEnterLeft]="{params: { delay: 100}}"
           [showBorders]="true"
           subtitle="Last Payment"
-          title="on May 12th, 2022"
+          [title]="onTitle(lastPayment?.date|date) "
           actionTitle="View Details"
           routerLink="/billing/history/last"
           color="accent"

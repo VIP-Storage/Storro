@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {delay, map, shareReplay} from "rxjs/operators";
-import {getBillingDemoData} from "../../../data/demo";
-import {BillingHistoryResponse} from "../../../data/response/billing-history.response";
-import {PaymentMethod} from "../../../data/types";
-import {Customer} from "../../../data/types/billing";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import {BillingHistoryType, PaymentMethod} from "../../../data/types";
+import {Customer} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {ManyResponse} from "../../../data/response/many.response";
 import {Token} from "@stripe/stripe-js";
 import {CreatePaymentMethodRequest} from "../../../data/requests/create-payment-method.request";
+import {IResponse} from "../../../data/response/response.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +32,16 @@ export class BillingService {
     return this.httpClient.get<Customer>(url)
   }
 
-  getBillingHistory(pageSize: number, pageNumber: number): Observable<BillingHistoryResponse> {
-    return of(getBillingDemoData(pageSize, pageNumber)).pipe(
-      delay(150)
-    )
+  getBillingHistory(pageSize: number, pageNumber: number): Observable<ManyResponse<BillingHistoryType>> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/billing')
+      .addSegment('/me')
+      .addSegment('/customer')
+      .addSegment('/billing-history')
+      .addQuery('limit', pageSize)
+      .get;
+
+    return this.httpClient.get<ManyResponse<BillingHistoryType>>(url);
   }
 
   getPaymentMethods(): Observable<PaymentMethod[]> {
@@ -98,5 +103,29 @@ export class BillingService {
     return this.getPaymentMethods().pipe(
       map(methods => methods[0])
     )
+  }
+
+  getLastPayment() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/billing')
+      .addSegment('/me')
+      .addSegment('/customer')
+      .addSegment('/billing-history')
+      .addSegment('/last')
+      .get;
+
+    return this.httpClient.get<IResponse<BillingHistoryType>>(url);
+  }
+
+  getNextPayment() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/billing')
+      .addSegment('/me')
+      .addSegment('/customer')
+      .addSegment('/billing-history')
+      .addSegment('/next')
+      .get;
+
+    return this.httpClient.get<IResponse<BillingHistoryType>>(url);
   }
 }

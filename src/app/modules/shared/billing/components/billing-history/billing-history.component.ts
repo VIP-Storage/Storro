@@ -30,6 +30,7 @@ export class BillingHistoryComponent implements AfterViewInit {
       title: 'Payment Method'
     }
   ];
+
   billingHistoryData: BillingHistoryType[] = [];
   total = 0;
   itemsPerPage = 18;
@@ -47,8 +48,8 @@ export class BillingHistoryComponent implements AfterViewInit {
           return [];
         }
 
-        this.total = response.total;
-        return response.data;
+        this.total = response.meta.totalItems;
+        return response.items;
       })
     ).subscribe(data => this.billingHistoryData = data);
   }

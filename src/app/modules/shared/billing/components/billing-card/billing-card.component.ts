@@ -1,13 +1,21 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {ThemePalette} from "@angular/material/core/common-behaviors/color";
 import {PaymentMethod} from "../../../../../data/types";
+import {storroAnimations} from "../../../animations";
 
 @Component({
   selector: 'app-billing-card',
   templateUrl: './billing-card.component.html',
-  styleUrls: ['./billing-card.component.scss']
+  styleUrls: ['./billing-card.component.scss'],
+  animations: storroAnimations
 })
 export class BillingCardComponent implements OnInit {
+
+  @Input()
+  errorMessage: string|null = null;
+
+  @Input()
+  loading: boolean = false;
 
   @Input()
   title!: string;
@@ -37,8 +45,10 @@ export class BillingCardComponent implements OnInit {
   showShadow: boolean = true;
 
   @Input()
-  set amount(newValue: number | string) {
-    this._amount = Number(newValue);
+  set amount(newValue: number | string | null | undefined) {
+    if (newValue !== null && newValue !== undefined) {
+      this._amount = Number(newValue);
+    }
   }
 
   @Input()
