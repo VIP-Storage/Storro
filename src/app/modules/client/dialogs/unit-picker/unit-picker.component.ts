@@ -7,7 +7,7 @@ import {storroAnimations} from "../../../shared/animations";
 import {CurrencyPipe} from "@angular/common";
 import {tap} from "rxjs/operators";
 import {BillingService} from "../../../../api/backend/services/billing.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {
   AddPaymentMethodComponent
 } from "../../../shared/billing/components/add-payment-method/add-payment-method.component";
@@ -20,6 +20,7 @@ import {
 })
 export class UnitPickerComponent {
 
+  error: string|null = null;
   submitted: boolean = false;
   userAcceptedAgreement: boolean = false;
   selectedType: string|null = null;
@@ -39,6 +40,7 @@ export class UnitPickerComponent {
 
   constructor(private unitsService: UnitsService,
               private matDialog: MatDialog,
+              private matDialogRef: MatDialogRef<UnitPickerComponent>,
               private billingService: BillingService) {
     this.unitsByType = this.unitsService.getAvailableUnitsByType().pipe(
       tap(() => this.isLoadingTypes = false),
@@ -73,6 +75,22 @@ export class UnitPickerComponent {
         this.reloadPaymentMethods();
       }
     })
+  }
+
+  rentUnit() {
+    if (!!this.selectedPaymentMethod && !!this.selectedType) {
+      this.submitted = true;
+      this.error = null;
+
+      this.unitsService.rentUnit(this.selectedPaymentMethod, this.selectedType).subscribe(res => {
+        if (!res.success) {
+          this.error = res.message;
+          this.submitted = false;
+        } else {
+          this.matDialogRef.close(res.data);
+        }
+      })
+    }
   }
 
   getPricing(unitByType: UnitByType) {

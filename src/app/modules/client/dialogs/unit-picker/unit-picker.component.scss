@@ -1,6 +1,6 @@
 :host {
   min-width: 620px;
-  min-height: 900px;
+  min-height: 920px;
   display: flex;
   flex-direction: column;
 }
@@ -108,6 +108,11 @@ mat-toolbar {
 
     app-spinner-button {
       min-width: 150px;
+    }
+
+    .error-wrapper {
+      padding-top: 1em;
+      height: 22px;
     }
   }
 }

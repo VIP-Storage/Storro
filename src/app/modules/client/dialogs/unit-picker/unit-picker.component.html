@@ -46,6 +46,9 @@
   </div>
   <div class="actions">
     <mat-divider></mat-divider>
-    <app-spinner-button [submitted]="submitted" [disabled]="rentButtonDisabled">Rent Unit</app-spinner-button>
+    <app-spinner-button (click)="rentUnit()" [submitted]="submitted" [disabled]="rentButtonDisabled">Rent Unit</app-spinner-button>
+    <div class="error-wrapper">
+      <mat-error>{{error}}</mat-error>
+    </div>
   </div>
 </div>

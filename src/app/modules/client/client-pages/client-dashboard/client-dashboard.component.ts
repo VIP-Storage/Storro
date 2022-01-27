@@ -36,7 +36,11 @@ export class ClientDashboardComponent implements OnInit {
   openUnitPicker() {
     this.matDialog.open(UnitPickerComponent, {
       panelClass: UnitPickerComponent.panelClass
-    });
+    }).afterClosed().subscribe(unit => {
+      if (!!unit && this.unitsGridComponent) {
+        this.unitsGridComponent.reloadData();
+      }
+    })
   }
 
   actionClicked() {

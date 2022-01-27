@@ -79,6 +79,15 @@ export class UnitsService {
     return this.httpClient.post(url, request);
   }
 
+  rentUnit(paymentMethod: string, unitType: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/rent')
+      .get
+
+    return this.httpClient.post<IResponse<Unit>>(url, {paymentMethod, unitType});
+  }
+
   importUnitsJSON(location: string, unitType: string, idFieldKey: string, arrayRootFieldKey: string, json: any) {
     const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
