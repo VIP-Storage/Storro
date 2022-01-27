@@ -95,7 +95,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'unit/:id/chart/:type',
+    path: 'units/:id/chart/:type',
     component: UnitFullChartComponent,
     resolve: {
       unit: UnitResolver,
@@ -106,7 +106,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'unit/:id/chart',
+    path: 'units/:id/chart',
     redirectTo: 'unit/:id'
   },
   {
