@@ -13,14 +13,17 @@ export class ThemeService {
     const darkModeOn = this.checkTheme();
 
     // If dark mode is enabled then directly switch to the dark-theme
-    if(darkModeOn){
+    if(darkModeOn && sessionStorage.getItem('theme') !== 'light-theme'){
       this.theme.next("dark-theme");
     }
 
     // Watch for changes of the preference
     window.matchMedia("(prefers-color-scheme: dark)").addListener(e => {
       const turnOn = e.matches;
-      this.changeTheme(turnOn);
+
+      if (sessionStorage.getItem('theme') !== 'light-theme') {
+        this.changeTheme(turnOn);
+      }
     });
   }
 
