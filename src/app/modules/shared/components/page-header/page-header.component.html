@@ -5,9 +5,8 @@
     </button>
     <h1>{{title}}</h1>
     <span class="spacer"></span>
-    <button mat-flat-button *ngFor="let action of actions" [color]="action.color || 'primary'" class="icon-text-button" (click)="actionClicked(action)">
-      <mat-icon inline>{{action.icon}}</mat-icon>
-      <span>{{action.title}}</span>
+    <button mat-icon-button *ngFor="let action of actions" [color]="action.color || 'primary'" class="icon-button" (click)="actionClicked(action)" [matTooltip]="action.title">
+      <mat-icon>{{action.icon}}</mat-icon>
     </button>
   </mat-toolbar>
   <mat-divider></mat-divider>

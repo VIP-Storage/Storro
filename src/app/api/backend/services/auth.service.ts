@@ -8,13 +8,34 @@ import {IResponse} from "../../../data/response/response.interface";
 import {Observable} from "rxjs";
 import {Role} from "../../../data/enums";
 import {UserService} from "./user.service";
+import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+
+  redirectAfterLoginURL: string | null = null;
+
   private readonly apiEndpoint: string = environment.http.url;
 
   constructor(private httpClient: HttpClient,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
+  }
+
+  handleLoginRedirect() {
+    this.userService.currentRole.subscribe(role => {
+      if (this.redirectAfterLoginURL) {
+        return this.router.navigateByUrl(this.redirectAfterLoginURL).then(() => {
+          this.redirectAfterLoginURL = null;
+        })
+      }
+
+      if (role === Role.Tenant) {
+        return this.router.navigate(['client', 'dashboard'])
+      }
+
+      return this.router.navigate(['admin', 'dashboard'])
+    })
   }
 
   login(email: string, password: string) {

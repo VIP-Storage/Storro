@@ -70,7 +70,7 @@ export class AdminUnitsComponent implements AfterViewInit {
     },
     {
       title: 'Import Units',
-      icon: 'download',
+      icon: 'publish',
       color: 'warn',
       routerLink: './import'
     }

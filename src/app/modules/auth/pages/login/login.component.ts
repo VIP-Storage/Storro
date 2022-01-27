@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../api/backend/services/auth.service";
 import {filter} from "rxjs/operators";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {AuthFrontendService} from "../../services/auth-frontend.service";
 import {AuthMessageService} from "../../../../services/auth-message.service";
 
@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private authMessageService: AuthMessageService,
               private authFrontendService: AuthFrontendService,
-              private route: ActivatedRoute,
-              private router: Router) {
+              private route: ActivatedRoute) {
     this.authFrontendService.title = 'Welcome';
     this.authFrontendService.showLoginBack = false;
   }
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.email.value, this.password.value).subscribe(response => {
       if (response.success) {
-        this.router.navigate(['client', 'dashboard']).then();
+        this.authService.handleLoginRedirect();
       } else {
         this.error = this.authMessageService.getErrorMessage(response);
       }

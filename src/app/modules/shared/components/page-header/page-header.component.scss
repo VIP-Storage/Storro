@@ -13,17 +13,11 @@
       flex: 1;
     }
 
-    button {
-      border-radius: 9px;
-      padding-left: 1.5em;
-      padding-right: 1.5em;
-      margin-right: 1em;
-    }
 
-    .icon-text-button {
+    .icon-button {
+      margin-right: 1rem;
       mat-icon {
-        font-size: 18px;
-        margin-right: 1rem;
+        font-size: 24px;
       }
     }
   }
