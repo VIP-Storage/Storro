@@ -15,6 +15,7 @@ import {storroAnimations} from "../../../shared/animations";
 import {DebugDialogService} from "../../../../services/debug-dialog.service";
 import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
 import {StatusBadge} from "../../../shared/components/status-badge/status-badge.type";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-units',
@@ -95,7 +96,8 @@ export class AdminUnitsComponent implements AfterViewInit {
               private unitTypesService: UnitTypesService,
               private pageTitleService: PageTitleService,
               private debugDialogService: DebugDialogService,
-              private matDialog: MatDialog) {
+              private matDialog: MatDialog,
+              private router: Router) {
     this.pageTitleService.title = 'Units';
     this.reloadUnitTypes();
 
@@ -103,6 +105,10 @@ export class AdminUnitsComponent implements AfterViewInit {
       debounceTime(150),
       distinctUntilChanged()
     );
+  }
+
+  goToUnit(unit: Unit) {
+    this.router.navigate(['admin', 'units', unit.id]).then();
   }
 
   openCreateUnitDialog() {

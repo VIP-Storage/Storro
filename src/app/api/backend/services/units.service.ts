@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
-import {catchError} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {UnitAccessEntryType, UnitDataType, Unit, UnitByType} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -8,6 +8,7 @@ import {Burly} from "kb-burly";
 import {ManyResponse} from "../../../data/response/many.response";
 import {CreateUnitRequest} from "../../../data/requests/create-unit.request";
 import {IResponse} from "../../../data/response/response.interface";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UnitsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getUnits(pageNumber: number = 0, pageSize: number = 25, sortDirection: any = 'desc', sortBy: string = 'id', search: string | null = null): Observable<ManyResponse<Unit>> {
+  getUnits(pageNumber: number = 0, pageSize: number = 25, sortDirection: any = 'asc', sortBy: string = 'id', search: string | null = null): Observable<ManyResponse<Unit>> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/list')
@@ -104,13 +105,17 @@ export class UnitsService {
     })
   }
 
-  getUnitSnapshotURL(unit: Unit) {
-    return Burly(this.apiEndpoint)
+  getUnitSnapshotURL(unit: Unit, domSanitizer: DomSanitizer): Observable<any> {
+    const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/snapshot/')
       .addSegment(unit.id)
       .addQuery('now', Math.random())
       .get
+
+    return this.httpClient.get(url, {responseType: 'blob'}).pipe(
+      map(e => domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e)))
+    );
   }
 
   getUnitData(unit: Unit): Observable<UnitDataType> {

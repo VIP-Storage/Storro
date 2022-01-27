@@ -39,7 +39,7 @@
       </ng-template>
 
       <app-simple-table @onEnterLeft [data]="units" [columns]="displayedColumns" (tableEvent)="tableEventTriggered($event)"
-                        [rowTemplate]="rowTemplate">
+                        [rowTemplate]="rowTemplate" (rowEvent)="goToUnit($event)">
       </app-simple-table>
 
       <div class="paginator-container">

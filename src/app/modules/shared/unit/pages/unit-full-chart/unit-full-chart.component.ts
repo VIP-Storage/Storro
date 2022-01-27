@@ -1,20 +1,19 @@
 import {Component} from '@angular/core';
-import {map, tap} from "rxjs/operators";
 import {BehaviorSubject, Observable} from "rxjs";
-import {Unit} from "../../../../data/types";
+import {Unit} from "../../../../../data/types";
+import {ChartDataType} from "../../../../../data/enums";
 import {ActivatedRoute} from "@angular/router";
-import {PageTitleService} from "../../../../services/page-title.service";
-import {ChartDataType} from "../../../../data/enums";
-import {storroAnimations} from "../../../shared/animations";
-import {B} from "@angular/cdk/keycodes";
+import {PageTitleService} from "../../../../../services/page-title.service";
+import {map, tap} from "rxjs/operators";
+import {storroAnimations} from "../../../animations";
 
 @Component({
-  selector: 'app-client-unit-chart',
-  templateUrl: './client-unit-chart.component.html',
-  styleUrls: ['./client-unit-chart.component.scss'],
+  selector: 'app-unit-full-chart',
+  templateUrl: './unit-full-chart.component.html',
+  styleUrls: ['./unit-full-chart.component.scss'],
   animations: storroAnimations
 })
-export class ClientUnitChartComponent {
+export class UnitFullChartComponent {
 
   paused = false;
   unit: Observable<Unit>;

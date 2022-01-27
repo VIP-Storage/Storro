@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {ChartDataType} from "../../../data/enums";
+import {ChartDataType} from "../../../../data/enums";
 
 @Injectable({
   providedIn: 'root'

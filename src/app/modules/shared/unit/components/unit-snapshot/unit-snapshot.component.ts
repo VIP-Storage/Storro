@@ -2,6 +2,7 @@ import {AfterViewInit, Component, Input} from '@angular/core';
 import {Unit} from "../../../../../data/types";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {BehaviorSubject, interval, Subject} from "rxjs";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-unit-snapshot',
@@ -22,7 +23,8 @@ export class UnitSnapshotComponent implements AfterViewInit {
 
   private _unit?: Unit;
 
-  constructor(private unitsService: UnitsService) {
+  constructor(private unitsService: UnitsService,
+              private domSanitizer: DomSanitizer) {
   }
 
   ngAfterViewInit() {
@@ -33,8 +35,11 @@ export class UnitSnapshotComponent implements AfterViewInit {
 
   private updateSnapshot() {
     if (!!this._unit) {
-      this.snapshotURL.next(this.unitsService.getUnitSnapshotURL(this._unit));
+      this.unitsService.getUnitSnapshotURL(this._unit, this.domSanitizer).subscribe(url => {
+        this.snapshotURL.next(url);
+      })
     }
   }
+
 
 }

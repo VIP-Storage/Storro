@@ -27,6 +27,9 @@ export class SimpleTableComponent implements AfterViewInit {
   @Output()
   tableEvent: EventEmitter<SimpleTableEvent> = new EventEmitter<SimpleTableEvent>();
 
+  @Output()
+  rowEvent: EventEmitter<any> = new EventEmitter<any>();
+
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => {
       this.emitUpdate()

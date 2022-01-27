@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {ClientDashboardComponent} from './client-dashboard/client-dashboard.component';
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
-import {ClientUnitComponent} from './client-unit/client-unit.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {ClientBillingComponent} from './client-billing/client-billing.component';
@@ -14,8 +13,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AccessModule} from "../../shared/access/access.module";
-import {ClientUnitChartComponent} from './client-unit-chart/client-unit-chart.component';
-import {UnitChartResolver} from "../resolvers/unit-chart.resolver";
+import {UnitChartResolver} from "../../shared/unit/resolvers/unit-chart.resolver";
 import {UnitResolver} from "../resolvers/unit.resolver";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDividerModule} from "@angular/material/divider";
@@ -27,6 +25,8 @@ import {ClientAccountSetupComponent} from './client-account-setup/client-account
 import {AccountModule} from "../../shared/account/account.module";
 import {AccountResolver} from "../resolvers/account.resolver";
 import {NoAccountGuard} from "../guards/no-account.guard";
+import {UnitOverviewComponent} from "../../shared/unit/pages/unit-overview/unit-overview.component";
+import {UnitFullChartComponent} from "../../shared/unit/pages/unit-full-chart/unit-full-chart.component";
 
 
 const routes: Routes = [
@@ -41,17 +41,23 @@ const routes: Routes = [
   },
   {
     path: 'unit/:id',
-    component: ClientUnitComponent,
+    component: UnitOverviewComponent,
     resolve: {
       unit: UnitResolver
+    },
+    data: {
+      mode: 'USER'
     }
   },
   {
     path: 'unit/:id/chart/:type',
-    component: ClientUnitChartComponent,
+    component: UnitFullChartComponent,
     resolve: {
       unit: UnitResolver,
       type: UnitChartResolver
+    },
+    data: {
+      mode: 'USER'
     }
   },
   {
@@ -82,9 +88,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ClientDashboardComponent,
-    ClientUnitComponent,
     ClientBillingComponent,
-    ClientUnitChartComponent,
     ClientAccountComponent,
     ClientAccountSetupComponent
   ],

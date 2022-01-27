@@ -17,6 +17,11 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {RouterModule} from "@angular/router";
 import { UnitMapCardComponent } from './components/unit-map-card/unit-map-card.component';
+import { UnitOverviewComponent } from './pages/unit-overview/unit-overview.component';
+import {AccessModule} from "../access/access.module";
+import { UnitFullChartComponent } from './pages/unit-full-chart/unit-full-chart.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -26,6 +31,8 @@ import { UnitMapCardComponent } from './components/unit-map-card/unit-map-card.c
     UnitSnapshotComponent,
     UnitsGridComponent,
     UnitMapCardComponent,
+    UnitOverviewComponent,
+    UnitFullChartComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +46,10 @@ import { UnitMapCardComponent } from './components/unit-map-card/unit-map-card.c
     MatCardModule,
     MatGridListModule,
     NgxChartsModule,
-    RouterModule
+    RouterModule,
+    AccessModule,
+    MatToolbarModule,
+    MatDividerModule
   ],
     exports: [
         UnitIndicatorComponent,

@@ -5,4 +5,7 @@
   border-radius: 16px;
   height: 65px;
   margin: 1em 6px 3px;
+  &:hover {
+    cursor: pointer;
+  }
 }

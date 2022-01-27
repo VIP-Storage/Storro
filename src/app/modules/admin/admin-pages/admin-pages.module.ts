@@ -24,13 +24,19 @@ import {AdminUnitsMapComponent} from './admin-units-map/admin-units-map.componen
 import {AdminUsersComponent} from './admin-users/admin-users.component';
 import {AdminAccountsComponent} from './admin-accounts/admin-accounts.component';
 import {AdminAccountComponent} from './admin-account/admin-account.component';
-import {AccountResolver} from "../resolvers/account.resolver";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {AccountModule} from "../../shared/account/account.module";
 import {AdminImportUnitsComponent} from './admin-import-units/admin-import-units.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatTreeModule} from "@angular/material/tree";
 import {AdminComponentsModule} from "../admin-components/admin-components.module";
+import { AdminUnitComponent } from './admin-unit/admin-unit.component';
+import {UnitModule} from "../../shared/unit/unit.module";
+import {AccessModule} from "../../shared/access/access.module";
+import {UnitOverviewComponent} from "../../shared/unit/pages/unit-overview/unit-overview.component";
+import {UnitFullChartComponent} from "../../shared/unit/pages/unit-full-chart/unit-full-chart.component";
+import {UnitChartResolver} from "../../shared/unit/resolvers/unit-chart.resolver";
+import {AccountResolver, UnitResolver} from "../resolvers";
 
 
 const routes: Routes = [
@@ -78,6 +84,35 @@ const routes: Routes = [
       account: AccountResolver
     }
   },
+  {
+    path: 'units/:id',
+    component: UnitOverviewComponent,
+    resolve: {
+      unit: UnitResolver,
+    },
+    data: {
+      mode: 'ADMIN'
+    }
+  },
+  {
+    path: 'unit/:id/chart/:type',
+    component: UnitFullChartComponent,
+    resolve: {
+      unit: UnitResolver,
+      type: UnitChartResolver
+    },
+    data: {
+      mode: 'ADMIN'
+    }
+  },
+  {
+    path: 'unit/:id/chart',
+    redirectTo: 'unit/:id'
+  },
+  {
+    path: 'client/dashboard',
+    redirectTo: 'units'
+  }
 ]
 
 @NgModule({
@@ -90,33 +125,36 @@ const routes: Routes = [
     AdminAccountsComponent,
     AdminAccountComponent,
     AdminImportUnitsComponent,
+    AdminUnitComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatToolbarModule,
-        SharedModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatListModule,
-        MatTooltipModule,
-        MatGridListModule,
-        AccountModule,
-        NgxDropzoneModule,
-        MatTreeModule,
-        AdminComponentsModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    SharedModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTooltipModule,
+    MatGridListModule,
+    AccountModule,
+    NgxDropzoneModule,
+    MatTreeModule,
+    AdminComponentsModule,
+    UnitModule,
+    AccessModule,
+  ]
 })
 export class AdminPagesModule {
 }
