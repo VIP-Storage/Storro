@@ -33,7 +33,7 @@ export class SensorsService {
       Burly(this.apiEndpoint)
         .addSegment('/unit')
         .addSegment('/humidity/')
-        .addSegment(unit.id)
+        .addSegment('A100') // TODO FIX LATER
         .addQuery('take', take, false)
         .get
     ).pipe(
@@ -49,7 +49,7 @@ export class SensorsService {
       Burly(this.apiEndpoint)
         .addSegment('/unit')
         .addSegment('/temperature/')
-        .addSegment(unit.id)
+        .addSegment('A100') // TODO FIX LATER
         .addQuery('take', take, false)
         .get
     ).pipe(
@@ -67,6 +67,8 @@ export class SensorsService {
       _unit = (unit as Unit).id;
     }
 
+    // TODO REPLACE LATER
+    _unit = 'A100';
     return this.mqttService.observe(`sensors/${_unit}/temperature`).pipe(
       map(message => Number(message.payload.toString())),
       catchError(err => {
@@ -83,6 +85,8 @@ export class SensorsService {
       _unit = (unit as Unit).id;
     }
 
+    // TODO REPLACE LATER
+    _unit = 'A100';
     return this.mqttService.observe(`sensors/${_unit}/humidity`).pipe(
       map(message => Number(message.payload.toString())),
       catchError(err => {
@@ -99,6 +103,8 @@ export class SensorsService {
       _unit = (unit as Unit).id;
     }
 
+    // TODO REPLACE LATER
+    _unit = 'A100';
     return this.mqttService.observe(`sensors/${_unit}/door/state`).pipe(
       map(message => {
         const rawState = message.payload.toString();
