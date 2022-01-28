@@ -1,0 +1,43 @@
+<mat-toolbar color="accent">
+  <span>{{keyCard.name || 'Key Card'}}</span>
+</mat-toolbar>
+<div class="content">
+  <form [formGroup]="keyCardInfoFormGroup" class="card-info-group">
+    <mat-form-field [appearance]="editMode ? 'outline' : 'fill'" floatLabel="always" disabled="" *ngIf="showField(currentRole|async)">
+      <mat-label>Owner</mat-label>
+      <input matInput disabled [value]="ownerFullName">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field [appearance]="editMode ? 'outline' : 'fill'" floatLabel="always">
+      <mat-label>Card Name</mat-label>
+      <input matInput [formControl]="cardName" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field [appearance]="editMode ? 'outline' : 'fill'" floatLabel="always" *ngIf="showField(currentRole|async)">
+      <mat-label>Facility Code</mat-label>
+      <input matInput mask="0000" [formControl]="facilityCode" required autocomplete="off">
+      <mat-error *ngIf="facilityCode.invalid">{{getErrorMessage(facilityCode, 'facility code')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="editMode ? 'outline' : 'fill'" floatLabel="always" *ngIf="showField(currentRole|async)">
+      <mat-label>Card Code</mat-label>
+      <input matInput [formControl]="cardCode" required autocomplete="off">
+      <mat-error *ngIf="cardCode.invalid">{{getErrorMessage(cardCode, 'card code')}}</mat-error>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+
+    <div class="buttons">
+      <button mat-stroked-button [disabled]="cancelDisabled"
+              (click)="updateEditMode(!editMode)">{{editMode ? 'Cancel' : 'Edit'}}</button>
+      <app-spinner-button [disabled]="saveDisabled" [submitted]="submitted"
+                          (click)="doneClicked()">{{editMode ? 'Save' : 'Done'}}</app-spinner-button>
+    </div>
+  </form>
+</div>

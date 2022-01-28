@@ -8,16 +8,11 @@
       <span class="email">{{item['owner']['email']}}</span>
       <span class="cardCode">{{item['cardCode']}}</span>
       <span class="facilityCode">{{item['facilityCode']}}</span>
-
-      <div class="actions">
-        <button mat-icon-button color="accent" (click)="openKeyCardDebugDialog(item)">
-          <mat-icon>bug_report</mat-icon>
-        </button>
-      </div>
     </div>
   </ng-template>
 
   <app-simple-table @onEnterLeft [data]="keyCards" [columns]="displayedColumns"
+                    (rowEvent)="viewKeyCard($event)"
                     (tableEvent)="tableEventTriggered($event)"
                     [rowTemplate]="rowTemplate">
   </app-simple-table>

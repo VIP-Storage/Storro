@@ -3,12 +3,13 @@ import {MatPaginator} from "@angular/material/paginator";
 import {Keycard} from "../../../../data/types";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
 import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
-import {DebugDialogService} from "../../../../services/debug-dialog.service";
 import {PageTitleService} from "../../../../services/page-title.service";
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
 import {KeycardsService} from "../../../../api/backend/services/keycards.service";
 import {storroAnimations} from "../../../shared/animations";
 import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
+import {MatDialog} from "@angular/material/dialog";
+import {KeyCardDialogComponent} from "../../../shared/dialogs/key-card-dialog/key-card-dialog.component";
 
 @Component({
   selector: 'app-admin-keycards',
@@ -39,11 +40,6 @@ export class AdminKeycardsComponent implements AfterViewInit {
       title: 'Facility Code',
       noSort: true
     },
-    {
-      name: 'actions',
-      title: 'Actions',
-      noSort: true
-    }
   ];
 
   pageHeaderActions: PageHeaderAction[] = [
@@ -54,6 +50,7 @@ export class AdminKeycardsComponent implements AfterViewInit {
     },
   ]
 
+  reloadData: Subject<any> =  new Subject<any>();
   keyCards: Keycard[] = [];
   pageIndex: number = 1;
   pageSize: number = 25;
@@ -68,8 +65,8 @@ export class AdminKeycardsComponent implements AfterViewInit {
   private tableChange: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
   private lastTableEvent: SimpleTableEvent | undefined;
 
-  constructor(private debugDialogService: DebugDialogService,
-              private keycardsService: KeycardsService,
+  constructor(private keycardsService: KeycardsService,
+              private matDialog: MatDialog,
               private pageTitleService: PageTitleService) {
 
     this.pageTitleService.title = 'Key Cards';
@@ -79,9 +76,6 @@ export class AdminKeycardsComponent implements AfterViewInit {
     );
   }
 
-  openKeyCardDebugDialog(keyCard: Keycard) {
-    this.debugDialogService.openDebugDialog('Key Card', keyCard);
-  }
 
   updateSearchValue(value: string | null) {
     if (!!value && value.length > 0) {
@@ -91,13 +85,24 @@ export class AdminKeycardsComponent implements AfterViewInit {
     }
   }
 
+  viewKeyCard(keyCard: Keycard) {
+    this.matDialog.open(KeyCardDialogComponent, {
+      panelClass: KeyCardDialogComponent.panelClass,
+      data: keyCard,
+    }).afterClosed().subscribe(keyCard => {
+      if (!!keyCard) {
+        this.reloadData.next(true);
+      }
+    })
+  }
+
   tableEventTriggered(event: SimpleTableEvent) {
     this.lastTableEvent = event;
     this.tableChange.next(event);
   }
 
   ngAfterViewInit(): void {
-    merge(this.tableChange, this.paginator.page, this.searchValueChanged)
+    merge(this.tableChange, this.paginator.page, this.searchValueChanged, this.reloadData)
       .pipe(
         switchMap(() => {
           const pageNumber = this.paginator.pageIndex;

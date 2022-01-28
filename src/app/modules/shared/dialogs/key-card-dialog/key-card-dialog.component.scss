@@ -1,0 +1,58 @@
+.content {
+  padding: 1.2em;
+}
+
+:host {
+  display: block;
+  min-width: 460px;
+  min-height: 380px;
+}
+
+.content {
+  padding: 1.2em;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .mat-form-field {
+      height: 78px;
+    }
+
+    mat-divider {
+      position: relative;
+      margin-bottom: 2em;
+    }
+  }
+}
+
+.error-wrapper {
+  height: 22px;
+  margin-bottom: 1em;
+}
+
+mat-toolbar {
+  justify-content: center;
+  span {
+    text-align: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button, app-spinner-button {
+    width: 200px;
+  }
+
+  app-spinner-button {
+    margin-right: 1em;
+  }
+}
+
+span.card-owner {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: block;
+}

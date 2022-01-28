@@ -5,6 +5,7 @@ import {Burly} from "kb-burly";
 import {IResponse, ManyResponse} from "../../../data/response";
 import {Keycard, User} from "../../../data/types";
 import {UserService} from "./user.service";
+import {Role} from "../../../data/enums";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,14 @@ import {UserService} from "./user.service";
 export class KeycardsService {
 
   private currentUser?: User;
+  private currentRole?: Role;
   private readonly apiEndpoint: string = environment.http.url;
 
   constructor(private httpClient: HttpClient,
               private userService: UserService) {
 
     this.userService.currentUser.subscribe(user => this.currentUser = user);
+    this.userService.currentRole.subscribe(role => this.currentRole = role);
   }
 
   createKeycard(cardCode: number, facilityCode: number, ownerID: number, name?: string) {
@@ -42,6 +45,21 @@ export class KeycardsService {
       .get;
 
     return this.httpClient.delete(url);
+  }
+
+  updateKeyCard(id: string, name?: string, cardCode?: number, facilityCode?: number) {
+    const url =  Burly(this.apiEndpoint)
+      .addSegment('/keycards/')
+      .addSegment(id)
+      .get;
+
+    const request = {
+      name,
+      cardCode,
+      facilityCode
+    };
+
+    return this.httpClient.patch<IResponse<Keycard>>(url, request);
   }
 
   getKeycards(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any, searchValue?: string | null, currentUser: boolean = false) {

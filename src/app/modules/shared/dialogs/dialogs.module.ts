@@ -14,13 +14,16 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatSelectModule} from "@angular/material/select";
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { KeyCardDialogComponent } from './key-card-dialog/key-card-dialog.component';
+import {NgxMaskModule} from "ngx-mask";
 
 
 @NgModule({
   declarations: [
     DebugDialogComponent,
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    KeyCardDialogComponent
   ],
   exports: [
     DebugDialogComponent
@@ -37,7 +40,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         SharedModule,
         MatDividerModule,
         MatSelectModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        NgxMaskModule.forChild()
     ]
 })
 export class DialogsModule {

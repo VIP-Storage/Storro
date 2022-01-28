@@ -18,6 +18,7 @@ import {HttpErrorInterceptor} from "./modules/shared/interceptors/http.intercept
 import {MatDialogModule} from "@angular/material/dialog";
 import {DialogsModule} from "./modules/shared/dialogs/dialogs.module";
 import {MatNativeDateModule} from "@angular/material/core";
+import {NgxMaskModule} from "ngx-mask";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -46,7 +47,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DialogsModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMaskModule.forRoot({validation: true})
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

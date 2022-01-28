@@ -5,4 +5,5 @@ export interface Keycard {
   cardCode: number;
   facilityCode: number;
   owner: User;
+  name?: string;
 }

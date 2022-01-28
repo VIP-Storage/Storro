@@ -55,9 +55,9 @@ $dark-theme: mat.define-dark-theme((
   @include auth-base.theme($dark-theme, true);
 }
 
-.add-payment-method-dialog, .create-unit-dialog, .create-unit-type-dialog, .debug-dialog, .create-user-dialog, .edit-user-dialog, .unit-picker-dialog {
+.add-payment-method-dialog, .create-unit-dialog, .create-unit-type-dialog, .debug-dialog, .create-user-dialog, .edit-user-dialog, .unit-picker-dialog, .key-card-dialog {
   .mat-dialog-container {
-    padding: 0!important;
+    padding: 0 !important;
     border-radius: 16px;
   }
 }

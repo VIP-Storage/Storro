@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../api/backend/services/auth.service";
-import {filter} from "rxjs/operators";
+import {catchError, filter} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {AuthFrontendService} from "../../services/auth-frontend.service";
 import {AuthMessageService} from "../../../../services/auth-message.service";
+import {of} from "rxjs";
+import {IResponse} from "../../../../data/response";
 
 @Component({
   selector: 'app-login',
@@ -64,7 +66,14 @@ export class LoginComponent implements OnInit {
     this.error = null;
     this.submitted = true;
 
-    this.authService.login(this.email.value, this.password.value).subscribe(response => {
+    this.authService.login(this.email.value, this.password.value).pipe(
+      catchError((err) => {
+        return of({
+          success: false,
+          message: err
+        } as IResponse)
+      })
+    ).subscribe(response => {
       if (response.success) {
         this.authService.handleLoginRedirect();
       } else {
