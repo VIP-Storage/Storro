@@ -13,6 +13,7 @@ import {AuthMessageService} from "../../../../services/auth-message.service";
 })
 export class LoginComponent implements OnInit {
 
+  submitted: boolean = false;
   error: string | null = null;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.min(6)]);
@@ -39,6 +40,10 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  get loginDisabled() {
+    return this.email.invalid || this.password.invalid;
+  }
+
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -57,12 +62,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.error = null;
+    this.submitted = true;
 
     this.authService.login(this.email.value, this.password.value).subscribe(response => {
       if (response.success) {
         this.authService.handleLoginRedirect();
       } else {
         this.error = this.authMessageService.getErrorMessage(response);
+        this.submitted = false;
       }
     });
   }

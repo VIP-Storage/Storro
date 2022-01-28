@@ -1,0 +1,27 @@
+@use 'src/app/modules/shared/styles/table.style' as table-style;
+
+:host {
+  @include table-style.host;
+}
+
+.key-card-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
+
+  .cardName, .email, .cardCode, .facilityCode, .actions {
+    flex: 1;
+  }
+
+  .cardName {
+    font-size: 18px;
+  }
+
+  .actions button {
+    margin-left: -0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+@include table-style.base;

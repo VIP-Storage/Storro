@@ -1,0 +1,79 @@
+<mat-card class="mat-elevation-z3 create-card" @fade>
+  <div class="title-wrapper">
+    <button mat-icon-button routerLink="../">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>Create Key Card</h2>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="inner-card">
+
+    <mat-stepper orientation="vertical" linear>
+      <mat-step [stepControl]="userFormGroup">
+        <form [formGroup]="userFormGroup" class="user-group">
+          <ng-template matStepLabel>
+            <h1>Key Card Owner</h1>
+          </ng-template>
+
+
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Bob Smith" autocomplete="off" #userSearch>
+            <mat-hint>Search for a user</mat-hint>
+          </mat-form-field>
+
+          <mat-divider></mat-divider>
+
+          <mat-selection-list class="tenants-list" [@listAnimation]="totalTenants" [multiple]="false" (selectionChange)="userSelectionChange($event)">
+            <mat-list-option class="tenant" *ngFor="let user of users|async" [value]="user.id">
+              <div mat-line class="name">{{user.firstName}} {{user.lastName}}</div>
+              <div mat-line class="email">{{user.email}}</div>
+              <mat-icon matListIcon [class.selected]="isSelected(user)">
+                {{isSelected(user) ? 'done' : ''}}
+              </mat-icon>
+            </mat-list-option>
+          </mat-selection-list>
+
+          <div class="buttons">
+            <button mat-stroked-button matStepperNext [disabled]="user.invalid">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="keyCardInfoFormGroup">
+        <form [formGroup]="keyCardInfoFormGroup" class="card-info-group">
+          <ng-template matStepLabel>
+            <h1>Key Card Details</h1>
+          </ng-template>
+
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Card Name</mat-label>
+            <input matInput [formControl]="cardName" placeholder="Bob Smith's Card" autocomplete="off">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Facility Code</mat-label>
+            <input matInput mask="0000" [formControl]="facilityCode" placeholder="1234" required autocomplete="off">
+            <mat-error *ngIf="facilityCode.invalid">{{getErrorMessage(facilityCode, 'facility code')}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Card Code</mat-label>
+            <input matInput [formControl]="cardCode" placeholder="12345678" required autocomplete="off">
+            <mat-error *ngIf="cardCode.invalid">{{getErrorMessage(cardCode, 'card code')}}</mat-error>
+          </mat-form-field>
+
+          <div class="error-wrapper">
+            <mat-error *ngIf="error">{{error}}</mat-error>
+          </div>
+
+          <div class="buttons">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <app-spinner-button [disabled]="saveDisabled" [submitted]="submitted" (click)="createKeycard()">Save</app-spinner-button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+
+  </div>
+</mat-card>

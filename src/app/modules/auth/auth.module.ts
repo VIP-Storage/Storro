@@ -16,6 +16,7 @@ import { VerifyComponent } from './pages/verify/verify.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { SuccessComponent } from './pages/success/success.component';
 import { ResetComponent } from './pages/reset/reset.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 const routes: Routes = [
@@ -71,18 +72,19 @@ const routes: Routes = [
     SuccessComponent,
     ResetComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatProgressSpinnerModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatProgressSpinnerModule,
+        SharedModule
+    ]
 })
 export class AuthModule {
 }

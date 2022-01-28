@@ -21,8 +21,7 @@
   </div>
 
   <span class="spacer"></span>
-  <button type="submit" mat-stroked-button [disabled]="password.invalid || email.invalid">Login
-  </button>
+  <app-spinner-button [disabled]="loginDisabled" [submitted]="submitted">Login</app-spinner-button>
 
   <div class="actions">
     <mat-hint class="iforgot">

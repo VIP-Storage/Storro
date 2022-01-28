@@ -37,6 +37,10 @@ import {UnitOverviewComponent} from "../../shared/unit/pages/unit-overview/unit-
 import {UnitFullChartComponent} from "../../shared/unit/pages/unit-full-chart/unit-full-chart.component";
 import {UnitChartResolver} from "../../shared/unit/resolvers/unit-chart.resolver";
 import {AccountResolver, UnitResolver} from "../resolvers";
+import { AdminKeycardsComponent } from './admin-keycards/admin-keycards.component';
+import { AdminCreateKeycardComponent } from './admin-create-keycard/admin-create-keycard.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {NgxMaskModule} from "ngx-mask";
 
 
 const routes: Routes = [
@@ -112,7 +116,15 @@ const routes: Routes = [
   {
     path: 'client/dashboard',
     redirectTo: 'units'
-  }
+  },
+  {
+    path: 'keycards',
+    component: AdminKeycardsComponent
+  },
+  {
+    path: 'keycards/create',
+    component: AdminCreateKeycardComponent
+  },
 ]
 
 @NgModule({
@@ -126,6 +138,8 @@ const routes: Routes = [
     AdminAccountComponent,
     AdminImportUnitsComponent,
     AdminUnitComponent,
+    AdminKeycardsComponent,
+    AdminCreateKeycardComponent,
   ],
   imports: [
     CommonModule,
@@ -154,6 +168,8 @@ const routes: Routes = [
     AdminComponentsModule,
     UnitModule,
     AccessModule,
+    MatStepperModule,
+    NgxMaskModule,
   ]
 })
 export class AdminPagesModule {

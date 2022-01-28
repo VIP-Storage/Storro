@@ -60,6 +60,8 @@ export class AuthMessageService {
         return 'A password reset email has been sent. \n Please check your inbox.';
       case 'USER_NOT_FOUND':
         return 'User cannot be found with that email address.';
+      case 'INVALID_PASSWORD':
+        return 'Invalid password.';
       default:
         return message;
     }

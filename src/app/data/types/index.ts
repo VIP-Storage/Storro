@@ -6,6 +6,7 @@ export * from './chart';
 export * from './badge.type';
 export * from './billing-history.type';
 export * from './geo-json.type';
+export * from './keycard.type';
 export * from './payment-method.type';
 export * from './sidebar-item.type';
 export * from './stat.type';

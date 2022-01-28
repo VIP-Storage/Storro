@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StateHelper} from "../../../helpers/state.helper";
 import {Address} from "ngx-google-places-autocomplete/objects/address";
 import {ExpirationValidator} from "../../validator/expiration.validator";
-import {CreateAccountRequest} from "../../../../../data/requests/create-account.request";
+import {CreateAccountRequest} from "../../../../../data/requests";
 import {AccountsService} from "../../../../../api/backend/services/accounts.service";
 import {UserService} from "../../../../../api/backend/services/user.service";
 import {Router} from "@angular/router";
