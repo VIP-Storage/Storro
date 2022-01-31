@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {StateHelper} from "../../../shared/helpers/state.helper";
+import {StateHelper} from "../../../../shared/helpers/state.helper";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {storroAnimations} from "../../../shared/animations";
-import {PageTitleService} from "../../../../services/page-title.service";
-import {UserService} from "../../../../api/backend/services/user.service";
+import {storroAnimations} from "../../../../shared/animations";
+import {PageTitleService} from "../../../../../services/page-title.service";
+import {UserService} from "../../../../../api/backend/services/user.service";
 import {fromEvent, Observable} from "rxjs";
-import {User} from "../../../../data/types";
+import {User} from "../../../../../data/types";
 import {debounceTime, distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 import {MatSelectionListChange} from "@angular/material/list";
-import {KeycardsService} from "../../../../api/backend/services/keycards.service";
+import {KeycardsService} from "../../../../../api/backend/services/keycards.service";
 import {Router} from "@angular/router";
 
 @Component({

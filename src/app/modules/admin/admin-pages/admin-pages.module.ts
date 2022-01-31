@@ -29,8 +29,6 @@ import {AdminComponentsModule} from "../admin-components/admin-components.module
 import {UnitModule} from "../../shared/unit/unit.module";
 import {AccessModule} from "../../shared/access/access.module";
 import {AccountResolver} from "../resolvers";
-import {AdminKeycardsComponent} from './admin-keycards/admin-keycards.component';
-import {AdminCreateKeycardComponent} from './admin-create-keycard/admin-create-keycard.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {NgxMaskModule} from "ngx-mask";
 import {AccountModule} from "../../shared/account/account.module";
@@ -73,14 +71,6 @@ const routes: Routes = [
     path: 'client/dashboard',
     redirectTo: 'units'
   },
-  {
-    path: 'keycards',
-    component: AdminKeycardsComponent
-  },
-  {
-    path: 'keycards/create',
-    component: AdminCreateKeycardComponent
-  },
 ]
 
 @NgModule({
@@ -90,8 +80,6 @@ const routes: Routes = [
     AdminUsersComponent,
     AdminAccountsComponent,
     AdminAccountComponent,
-    AdminKeycardsComponent,
-    AdminCreateKeycardComponent,
   ],
   imports: [
     CommonModule,

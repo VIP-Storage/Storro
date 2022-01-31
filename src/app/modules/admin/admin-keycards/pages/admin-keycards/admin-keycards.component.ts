@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
-import {Keycard} from "../../../../data/types";
+import {Keycard} from "../../../../../data/types";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
-import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
-import {PageTitleService} from "../../../../services/page-title.service";
+import {SimpleTableEvent} from "../../../../shared/components/simple-table/simple-table.event";
+import {PageTitleService} from "../../../../../services/page-title.service";
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
-import {KeycardsService} from "../../../../api/backend/services/keycards.service";
-import {storroAnimations} from "../../../shared/animations";
-import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
+import {KeycardsService} from "../../../../../api/backend/services/keycards.service";
+import {storroAnimations} from "../../../../shared/animations";
+import {PageHeaderAction} from "../../../../shared/components/page-header/page-header.action";
 import {MatDialog} from "@angular/material/dialog";
-import {KeyCardDialogComponent} from "../../../shared/dialogs/key-card-dialog/key-card-dialog.component";
+import {KeyCardDialogComponent} from "../../../../shared/dialogs/key-card-dialog/key-card-dialog.component";
 
 @Component({
   selector: 'app-admin-keycards',

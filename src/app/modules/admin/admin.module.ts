@@ -23,31 +23,34 @@ const routes: Routes = [
   {
     path: 'units',
     loadChildren: () => import('./admin-units/admin-units.module').then(m => m.AdminUnitsModule)
+  },
+  {
+    path: 'keycards',
+    loadChildren: () => import('./admin-keycards/admin-keycards.module').then(m => m.AdminKeycardsModule)
   }
 ];
 
 @NgModule({
-    declarations: [
-        AdminBaseComponent,
-        CreateUnitComponent,
-        CreateUnitTypeComponent,
-    ],
-    exports: [
-    ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatSidenavModule,
-        SharedModule,
-        MatDialogModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatIconModule
-    ]
+  declarations: [
+    AdminBaseComponent,
+    CreateUnitComponent,
+    CreateUnitTypeComponent,
+  ],
+  exports: [],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatSidenavModule,
+    SharedModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule
+  ]
 })
 export class AdminModule {
 }
