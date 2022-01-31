@@ -10,4 +10,6 @@ export interface Unit {
   location: string;
   unitType: string;
   unitTypeName: string;
+  available: boolean;
+  owner?: User;
 }

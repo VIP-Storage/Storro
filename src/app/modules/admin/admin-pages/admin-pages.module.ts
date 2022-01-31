@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AdminTenantsComponent} from './admin-tenants/admin-tenants.component';
-import {AdminUnitsComponent} from './admin-units/admin-units.component';
 import {RouterModule, Routes} from "@angular/router";
 import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -20,27 +19,21 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {AdminUnitsMapComponent} from './admin-units-map/admin-units-map.component';
 import {AdminUsersComponent} from './admin-users/admin-users.component';
 import {AdminAccountsComponent} from './admin-accounts/admin-accounts.component';
 import {AdminAccountComponent} from './admin-account/admin-account.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import {AccountModule} from "../../shared/account/account.module";
-import {AdminImportUnitsComponent} from './admin-import-units/admin-import-units.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatTreeModule} from "@angular/material/tree";
 import {AdminComponentsModule} from "../admin-components/admin-components.module";
-import { AdminUnitComponent } from './admin-unit/admin-unit.component';
 import {UnitModule} from "../../shared/unit/unit.module";
 import {AccessModule} from "../../shared/access/access.module";
-import {UnitOverviewComponent} from "../../shared/unit/pages/unit-overview/unit-overview.component";
-import {UnitFullChartComponent} from "../../shared/unit/pages/unit-full-chart/unit-full-chart.component";
-import {UnitChartResolver} from "../../shared/unit/resolvers/unit-chart.resolver";
-import {AccountResolver, UnitResolver} from "../resolvers";
-import { AdminKeycardsComponent } from './admin-keycards/admin-keycards.component';
-import { AdminCreateKeycardComponent } from './admin-create-keycard/admin-create-keycard.component';
+import {AccountResolver} from "../resolvers";
+import {AdminKeycardsComponent} from './admin-keycards/admin-keycards.component';
+import {AdminCreateKeycardComponent} from './admin-create-keycard/admin-create-keycard.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {NgxMaskModule} from "ngx-mask";
+import {AccountModule} from "../../shared/account/account.module";
 
 
 const routes: Routes = [
@@ -52,18 +45,6 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: AdminDashboardComponent
-  },
-  {
-    path: 'units',
-    component: AdminUnitsComponent
-  },
-  {
-    path: 'units/map',
-    component: AdminUnitsMapComponent
-  },
-  {
-    path: 'units/import',
-    component: AdminImportUnitsComponent
   },
   {
     path: 'users',
@@ -89,31 +70,6 @@ const routes: Routes = [
     }
   },
   {
-    path: 'units/:id',
-    component: UnitOverviewComponent,
-    resolve: {
-      unit: UnitResolver,
-    },
-    data: {
-      mode: 'ADMIN'
-    }
-  },
-  {
-    path: 'units/:id/chart/:type',
-    component: UnitFullChartComponent,
-    resolve: {
-      unit: UnitResolver,
-      type: UnitChartResolver
-    },
-    data: {
-      mode: 'ADMIN'
-    }
-  },
-  {
-    path: 'units/:id/chart',
-    redirectTo: 'unit/:id'
-  },
-  {
     path: 'client/dashboard',
     redirectTo: 'units'
   },
@@ -130,14 +86,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminTenantsComponent,
-    AdminUnitsComponent,
     AdminDashboardComponent,
-    AdminUnitsMapComponent,
     AdminUsersComponent,
     AdminAccountsComponent,
     AdminAccountComponent,
-    AdminImportUnitsComponent,
-    AdminUnitComponent,
     AdminKeycardsComponent,
     AdminCreateKeycardComponent,
   ],

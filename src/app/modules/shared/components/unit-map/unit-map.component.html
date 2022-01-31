@@ -1,5 +1,7 @@
 <div class="leaflet-map-wrapper"
+     [class.hide]="!showMap"
      leaflet
      [leafletOptions]="mapOptions"
 (leafletMapReady)="onMapReady($event)">
 </div>
+<app-loading-shade class="loading-shade" showBackground="true" *ngIf="!showMap" @fade></app-loading-shade>

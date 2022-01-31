@@ -1,0 +1,40 @@
+<ng-container *ngIf="unit as unit">
+  <mat-toolbar>
+    <span class="id">{{unit.id}}</span>
+    <span class="status">
+            <app-status-badge [mappedValues]="statusBadgeValues" [currentValue]="unit.available"></app-status-badge>
+          </span>
+  </mat-toolbar>
+  <mat-list>
+    <ng-container *ngIf="unit.owner as tenant">
+      <mat-list-item>
+        <p matLine class="property-value">{{tenant.firstName}} {{tenant.lastName}}</p>
+        <p matLine class="property-name">Tenant</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+    <mat-list-item>
+      <p matLine class="property-value">{{unit.unitTypeName}}</p>
+      <p matLine class="property-name">Unit Type</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <p matLine class="property-value">{{unit.location}}</p>
+      <p matLine class="property-name">Location</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <p matLine class="property-value">{{unit.lastUpdated|date}}</p>
+      <p matLine class="property-name">Last Updated</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <p matLine class="property-value">{{unit.armed ? 'Armed' : 'Disarmed'}}</p>
+      <p matLine class="property-name">State</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+  <div class="actions">
+    <button mat-stroked-button (click)="viewUnit(unit.id)">View Unit</button>
+  </div>
+</ng-container>

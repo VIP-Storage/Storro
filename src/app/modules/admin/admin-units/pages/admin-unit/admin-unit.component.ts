@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {Unit, UnitDataType} from "../../../../data/types";
-import {ChartDataType, UnitIndicatorDataType} from "../../../../data/enums";
+import {Unit, UnitDataType} from "../../../../../data/types";
+import {ChartDataType, UnitIndicatorDataType} from "../../../../../data/enums";
 import {ActivatedRoute} from "@angular/router";
-import {UnitsService} from "../../../../api/backend/services/units.service";
-import {PageTitleService} from "../../../../services/page-title.service";
+import {UnitsService} from "../../../../../api/backend/services/units.service";
+import {PageTitleService} from "../../../../../services/page-title.service";
 import {filter, map, tap} from "rxjs/operators";
 
 @Component({

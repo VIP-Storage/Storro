@@ -6,6 +6,7 @@ mat-toolbar {
   span {
     flex: 1;
   }
+
   app-search-bar {
     width: 400px;
   }
@@ -17,6 +18,14 @@ mat-toolbar {
   height: 100%;
 }
 
-app-unit-map {
+.map-drawer-container {
   flex: 1;
+}
+
+.search-map-wrapper {
+  padding: 1.2em;
+}
+
+.loading-shade {
+  z-index: 100;
 }

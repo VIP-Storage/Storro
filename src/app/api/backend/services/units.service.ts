@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {forkJoin, Observable, of} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {UnitAccessEntryType, UnitDataType, Unit, UnitByType} from "../../../data/types";
+import {UnitAccessEntryType, UnitDataType, Unit, UnitByType, GeoJSONObject} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
-import {ManyResponse} from "../../../data/response/many.response";
-import {CreateUnitRequest} from "../../../data/requests/create-unit.request";
-import {IResponse} from "../../../data/response/response.interface";
 import {DomSanitizer} from "@angular/platform-browser";
+import {CreateUnitRequest} from "../../../data/requests";
+import {AvailabilitySummaryResponse, IResponse, ManyResponse} from "../../../data/response";
+
+const CORDOVA_MAP_URL = 'assets/map/cordova/storage-unit-layout.geojson';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,47 @@ export class UnitsService {
 
   private readonly apiEndpoint: string = environment.http.url;
 
-
   constructor(private httpClient: HttpClient) {
+  }
+
+  getMapGeoJSON() {
+    return this.httpClient.get<GeoJSONObject>(CORDOVA_MAP_URL)
+  }
+
+  getUnitsAvailabilitySummary(): Observable<AvailabilitySummaryResponse> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/availability')
+      .addSegment('/summary')
+      .get
+
+    return this.httpClient.get<AvailabilitySummaryResponse>(url);
+  }
+
+  getUnitsMapDetails() {
+    const geoJSON = this.getMapGeoJSON().pipe(
+      map(value => {
+        return {value, type: 'geoJSON'}
+      })
+    );
+
+    const summary = this.getUnitsAvailabilitySummary().pipe(
+      map(value => {
+        return {value, type: 'availability'}
+      })
+    );
+
+    return forkJoin(geoJSON, summary).pipe(
+      map(forked => {
+        const geoJSONObject: GeoJSONObject = forked.find(f => f.type === 'geoJSON')!.value as GeoJSONObject;
+        const availability: {[key: string]: boolean} = forked.find(f => f.type === 'availability')!.value as unknown as {[key: string]: boolean};
+
+        return {
+          geoJSONObject,
+          availability
+        }
+      })
+    )
   }
 
   getUnits(pageNumber: number = 0, pageSize: number = 25, sortDirection: any = 'asc', sortBy: string = 'id', search: string | null = null): Observable<ManyResponse<Unit>> {

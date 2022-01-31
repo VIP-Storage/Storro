@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.property-name {
+  color: grey;
+}
+
+.actions {
+  padding: 1.2em;
+  display: flex;
+  button {
+    flex: 1;
+  }
+}

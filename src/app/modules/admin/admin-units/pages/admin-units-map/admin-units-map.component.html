@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <button mat-icon-button routerLink="../">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>Unit Map</span>
+</mat-toolbar>
+<div class="search-map-wrapper">
+  <app-search-bar (searchValueChanged)="searchChanged($event)"></app-search-bar>
+</div>
+
+<mat-sidenav-container class="map-drawer-container">
+  <mat-sidenav mode="side" position="end">
+      <app-admin-side-unit-summary [unit]="currentUnit"></app-admin-side-unit-summary>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-unit-map [searchedUnit]="searchText|async" (unitPopupOpened)="unitPopupOpened($event)"></app-unit-map>
+  </mat-sidenav-content>
+</mat-sidenav-container>

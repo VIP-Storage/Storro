@@ -1,8 +1,18 @@
 .leaflet-map-wrapper {
   height: 100%;
   width: 100%;
+  opacity: 1;
+
+  &.hide {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
 }
 
 :host {
   flex: 1;
+}
+
+.loading-shade {
+  z-index: 1000;
 }

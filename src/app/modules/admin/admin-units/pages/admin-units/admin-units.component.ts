@@ -1,20 +1,20 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {Unit, UnitType} from "../../../../data/types";
+import {Unit, UnitType} from "../../../../../data/types";
 import {BehaviorSubject, merge, Observable, of, Subject} from "rxjs";
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap, tap} from "rxjs/operators";
-import {UnitsService} from "../../../../api/backend/services/units.service";
-import {SimpleTableEvent} from "../../../shared/components/simple-table/simple-table.event";
-import {PageTitleService} from "../../../../services/page-title.service";
+import {UnitsService} from "../../../../../api/backend/services/units.service";
+import {SimpleTableEvent} from "../../../../shared/components/simple-table/simple-table.event";
+import {PageTitleService} from "../../../../../services/page-title.service";
 import {MatPaginator} from "@angular/material/paginator";
-import {UnitTypesService} from "../../../../api/backend/services/unit-types.service";
+import {UnitTypesService} from "../../../../../api/backend/services/unit-types.service";
 import {CurrencyPipe} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateUnitComponent} from "../../dialogs/create-unit/create-unit.component";
-import {CreateUnitTypeComponent} from "../../dialogs/create-unit-type/create-unit-type.component";
-import {storroAnimations} from "../../../shared/animations";
-import {DebugDialogService} from "../../../../services/debug-dialog.service";
-import {PageHeaderAction} from "../../../shared/components/page-header/page-header.action";
-import {StatusBadge} from "../../../shared/components/status-badge/status-badge.type";
+import {CreateUnitComponent} from "../../../dialogs/create-unit/create-unit.component";
+import {CreateUnitTypeComponent} from "../../../dialogs/create-unit-type/create-unit-type.component";
+import {storroAnimations} from "../../../../shared/animations";
+import {DebugDialogService} from "../../../../../services/debug-dialog.service";
+import {PageHeaderAction} from "../../../../shared/components/page-header/page-header.action";
+import {StatusBadge} from "../../../../shared/components/status-badge/status-badge.type";
 import {Router} from "@angular/router";
 
 @Component({
