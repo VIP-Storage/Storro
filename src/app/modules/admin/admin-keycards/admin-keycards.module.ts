@@ -16,6 +16,8 @@ import {SharedModule} from "../../shared/shared.module";
 import {NgxMaskModule} from "ngx-mask";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTabsModule} from "@angular/material/tabs";
+import { AdminKeycardsTableComponent } from './components/admin-keycards-table/admin-keycards-table.component';
+import { AdminKeycardRequestTableComponent } from './components/admin-keycard-request-table/admin-keycard-request-table.component';
 
 
 const routes: Routes = [
@@ -32,7 +34,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminKeycardsComponent,
-    AdminCreateKeycardComponent
+    AdminCreateKeycardComponent,
+    AdminKeycardsTableComponent,
+    AdminKeycardRequestTableComponent
   ],
   imports: [
     CommonModule,

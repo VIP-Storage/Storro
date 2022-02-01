@@ -3,32 +3,12 @@
 <mat-tab-group mat-stretch-tabs class="mat-tab-group">
   <mat-tab label="Current">
       <ng-template matTabContent>
-        <div class="table-container">
-          <app-loading-shade *ngIf="isLoadingKeyCards" @fade></app-loading-shade>
-
-          <ng-template #rowTemplate let-item>
-            <div class="key-card-row">
-              <span class="cardName">{{item['name'] || 'None'}}</span>
-              <span class="email">{{item['owner']['email']}}</span>
-              <span class="cardCode">{{item['cardCode']}}</span>
-              <span class="facilityCode">{{item['facilityCode']}}</span>
-            </div>
-          </ng-template>
-
-          <app-simple-table @onEnterLeft [data]="keyCards" [columns]="displayedColumns"
-                            (rowEvent)="viewKeyCard($event)"
-                            (tableEvent)="tableEventTriggered($event)"
-                            [rowTemplate]="rowTemplate">
-          </app-simple-table>
-
-          <div class="paginator-container">
-            <mat-paginator [length]="totalKeyCards" [pageSize]="pageSize"></mat-paginator>
-          </div>
-
-          <app-no-data-shade entityName="Key Cards" *ngIf="!isLoadingKeyCards && totalKeyCards === 0" @fade></app-no-data-shade>
-        </div>
+        <app-admin-keycards-table></app-admin-keycards-table>
       </ng-template>
   </mat-tab>
   <mat-tab label="Requests">
+    <ng-template matTabContent>
+      <app-admin-keycard-request-table></app-admin-keycard-request-table>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

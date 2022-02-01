@@ -1,7 +1,7 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
-import {storroAnimations} from "../../../shared/animations";
-import {ScriptService} from "../../../../services/script.service";
-import {environment} from "../../../../../environments/environment";
+import {storroAnimations} from "../../../../shared/animations";
+import {ScriptService} from "../../../../../services/script.service";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-client-account-setup',

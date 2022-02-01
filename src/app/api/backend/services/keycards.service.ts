@@ -3,7 +3,7 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {IResponse, ManyResponse} from "../../../data/response";
-import {Keycard, User} from "../../../data/types";
+import {Keycard, KeycardRequest, User} from "../../../data/types";
 import {UserService} from "./user.service";
 import {Role} from "../../../data/enums";
 
@@ -71,10 +71,36 @@ export class KeycardsService {
       .addQuery('sortBy', sortBy, false)
       .addQuery('sortDirection', sortDirection, false)
       .addQuery('search', searchValue, false)
-      .addQuery('forUser', (currentUser ? this.currentUser : null), false)
+      .addQuery('forUser', (currentUser ? this.currentUser?.id : null), false)
       .get;
 
 
     return this.httpClient.get<ManyResponse<Keycard>>(url);
+  }
+
+  getKeycardRequests(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any, searchValue?: string | null, currentUser: boolean = false) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/keycard')
+      .addSegment('/requests')
+      .addSegment('/list')
+      .addQuery('limit', pageSize)
+      .addQuery('page', pageNumber + 1)
+      .addQuery('sortBy', sortBy, false)
+      .addQuery('sortDirection', sortDirection, false)
+      .addQuery('search', searchValue, false)
+      .addQuery('forUser', (currentUser ? this.currentUser?.id : null), false)
+      .get;
+
+
+    return this.httpClient.get<ManyResponse<KeycardRequest>>(url);
+  }
+
+  requestKeycard(comments?: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/keycard')
+      .addSegment('/requests')
+      .get;
+
+    return this.httpClient.post<IResponse<KeycardRequest>>(url, {comments});
   }
 }

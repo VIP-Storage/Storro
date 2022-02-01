@@ -1,0 +1,28 @@
+@use 'src/app/modules/shared/styles/table.style' as table-style;
+
+:host {
+  @include table-style.host;
+  flex: 1;
+}
+
+@include table-style.base;
+
+.key-card-request-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
+
+  .requestedByName, .email, .status {
+    flex: 1;
+  }
+
+  .requestedByName {
+    font-size: 18px;
+  }
+
+  .actions button {
+    margin-left: -0.5rem;
+    margin-right: 0.5rem;
+  }
+}

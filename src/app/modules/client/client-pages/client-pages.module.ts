@@ -20,11 +20,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {BillingResolver} from "../resolvers/billing.resolver";
 import {NgxStripeModule} from "ngx-stripe";
 import {MatDialogModule} from "@angular/material/dialog";
-import {ClientAccountComponent} from './client-account/client-account.component';
-import {ClientAccountSetupComponent} from './client-account-setup/client-account-setup.component';
 import {AccountModule} from "../../shared/account/account.module";
-import {AccountResolver} from "../resolvers/account.resolver";
-import {NoAccountGuard} from "../guards/no-account.guard";
 import {UnitOverviewComponent} from "../../shared/unit/pages/unit-overview/unit-overview.component";
 import {UnitFullChartComponent} from "../../shared/unit/pages/unit-full-chart/unit-full-chart.component";
 
@@ -71,26 +67,12 @@ const routes: Routes = [
       customer: BillingResolver
     }
   },
-  {
-    path: 'account',
-    component: ClientAccountComponent,
-    resolve: {
-      account: AccountResolver
-    }
-  },
-  {
-    path: 'account/setup',
-    canActivate: [NoAccountGuard],
-    component: ClientAccountSetupComponent
-  }
 ];
 
 @NgModule({
   declarations: [
     ClientDashboardComponent,
     ClientBillingComponent,
-    ClientAccountComponent,
-    ClientAccountSetupComponent
   ],
   imports: [
     CommonModule,

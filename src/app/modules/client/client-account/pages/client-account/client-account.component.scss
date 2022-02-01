@@ -4,8 +4,14 @@
   @include table-style.host;
 }
 
+.credentials-wrapper {
+  padding: 1.2em;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
 .mat-tab-group {
-  margin-top: 1em;
   flex: 1;
 
   ::ng-deep {
@@ -17,8 +23,4 @@
       }
     }
   }
-}
-
-app-page-header {
-  margin-bottom: 1.5em;
 }

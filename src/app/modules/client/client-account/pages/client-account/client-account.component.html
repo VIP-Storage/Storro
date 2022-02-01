@@ -1,0 +1,11 @@
+<app-page-header title="Account" [search]="false" @onEnterLeft></app-page-header>
+<mat-tab-group>
+  <mat-tab label="Credentials">
+    <ng-template matTabContent>
+      <div class="credentials-wrapper">
+        <app-client-credentials-card></app-client-credentials-card>
+        <app-client-requested-credentials-card></app-client-requested-credentials-card>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

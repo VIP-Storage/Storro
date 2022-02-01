@@ -1,0 +1,24 @@
+<div class="table-container">
+  <app-loading-shade *ngIf="isLoadingRequests" @fade></app-loading-shade>
+
+  <ng-template #rowTemplate let-item>
+    <div class="key-card-request-row">
+      <span class="requestedByName">{{item['requestedBy']['firstName']}} {{item['requestedBy']['lastName']}}</span>
+      <span class="email">{{item['requestedOn']|date}}</span>
+      <span class="status">
+            <app-status-badge [mappedValues]="statusBadgeValues" [currentValue]="item['state']"></app-status-badge>
+          </span>
+    </div>
+  </ng-template>
+
+  <app-simple-table @onEnterLeft [data]="requests" [columns]="displayedColumns"
+                    (tableEvent)="tableEventTriggered($event)"
+                    [rowTemplate]="rowTemplate">
+  </app-simple-table>
+
+  <div class="paginator-container">
+    <mat-paginator [length]="totalRequests" [pageSize]="pageSize"></mat-paginator>
+  </div>
+
+  <app-no-data-shade entityName="Key Card Requests" *ngIf="!isLoadingRequests && totalRequests === 0" @fade></app-no-data-shade>
+</div>

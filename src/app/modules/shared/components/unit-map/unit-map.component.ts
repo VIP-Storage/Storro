@@ -105,8 +105,9 @@ export class UnitMapComponent implements OnInit {
 
           if (layerUnitID !== unitID) {
             return {
-              opacity: 0,
-              fillOpacity: 0
+              opacity: 0.1,
+              fillOpacity: 0,
+              color: 'red'
             }
           }
         }
@@ -154,15 +155,27 @@ export class UnitMapComponent implements OnInit {
   }
 
   private fetchUnitGeoJSON(map: Map) {
-    this.unitsService.getUnitsMapDetails().subscribe(response => {
-      this.unitsGeoJSON.addData(response.geoJSONObject);
-      this.setMapAvailability(response.availability);
-      this.bindPopups(map);
+    if (!!this.unit) {
+      this.unitsService.getMapGeoJSON().subscribe(geoJSON => {
+        this.unitsGeoJSON.addData(geoJSON);
+        this.setMapAvailability({});
+        this.bindPopups(map);
 
-      setTimeout(() => {
-        this.showMap = true;
-      }, 800);
-    });
+        setTimeout(() => {
+          this.showMap = true;
+        }, 800);
+      })
+    } else {
+      this.unitsService.getUnitsMapDetails().subscribe(response => {
+        this.unitsGeoJSON.addData(response.geoJSONObject);
+        this.setMapAvailability(response.availability);
+        this.bindPopups(map);
+
+        setTimeout(() => {
+          this.showMap = true;
+        }, 800);
+      });
+    }
   }
 
   private static searchMatch(typedLayer: UnitLayer, partialID: string | null) {
