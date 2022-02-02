@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostListener, Input} from '@angular/core';
 import {Stat} from "../../../../data/types";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-stat-card',
@@ -10,6 +11,14 @@ export class StatCardComponent {
 
   @Input()
   stat!: Stat;
+
+  @HostListener('click')
+  click() {
+    return this.router.navigateByUrl(this.routerLink);
+  }
+
+  constructor(private router: Router) {
+  }
 
   get icon() {
     switch (this.stat.name) {
@@ -24,6 +33,10 @@ export class StatCardComponent {
         return 'attach_money';
       case 'Unit Types':
         return 'holiday_village';
+      case 'Key Cards':
+        return 'badge';
+      case 'Key Card Requests':
+        return 'add_to_photos';
       default:
         return '';
     }
@@ -35,6 +48,26 @@ export class StatCardComponent {
         return 'success';
       case 'Unavailable Units':
         return 'error';
+      default:
+        return '';
+    }
+  }
+
+  get routerLink() {
+    switch (this.stat.name) {
+      case 'Users':
+        return '/admin/users';
+      case 'Tenants':
+        return '/admin/tenants';
+      case 'Available Units':
+      case 'Unavailable Units':
+      case 'Unit Types':
+        return '/admin/units';
+      case  'Accounts':
+        return '/admin/accounts';
+      case 'Key Cards':
+      case 'Key Card Requests':
+        return '/admin/keycards';
       default:
         return '';
     }

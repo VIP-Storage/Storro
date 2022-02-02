@@ -22,6 +22,24 @@
       flex-direction: row-reverse;
     }
   }
+
+  ::ng-deep {
+    .divided {
+      line-height: 16px;
+      border-bottom: 1px solid;
+      border-color: #80808047;
+      height: 10px;
+      margin-bottom: 2.5em;
+      margin-top: 0;
+      position: relative;
+
+      span {
+        position: absolute;
+        bottom: -2rem;
+        left: 2rem;
+      }
+    }
+  }
 }
 
 .toggles {
@@ -47,3 +65,5 @@
     text-align: center;
   }
 }
+
+

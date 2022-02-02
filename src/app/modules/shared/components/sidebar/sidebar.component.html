@@ -17,7 +17,9 @@
     </ng-container>
 
     <ng-template #sectionTemplate>
-      <div mat-subheader>{{item.title}}</div>
+      <div mat-subheader [class]="item.class">
+        <span>{{item.title}}</span>
+      </div>
     </ng-template>
   </ng-container>
 </mat-nav-list>

@@ -6,6 +6,8 @@ import {map, startWith, switchMap, tap} from "rxjs/operators";
 import {storroAnimations} from "../../../../shared/animations";
 import {StatusBadge} from "../../../../shared/components/status-badge/status-badge.type";
 import {KeycardRequestState} from "../../../../../data/enums";
+import {MatDialog} from "@angular/material/dialog";
+import {RequestKeyCardComponent} from "../../../dialogs/request-key-card/request-key-card.component";
 
 @Component({
   selector: 'app-client-requested-credentials-card',
@@ -19,9 +21,6 @@ export class ClientRequestedCredentialsCardComponent implements OnInit {
   requests: Observable<KeycardRequest[]>;
   totalRequests: number = 0;
   isLoadingRequests = true;
-  requested: boolean = false;
-  canRequest: boolean = true;
-  error: string|null = null;
 
   statusBadgeValues: StatusBadge[] =  [
     {
@@ -41,11 +40,12 @@ export class ClientRequestedCredentialsCardComponent implements OnInit {
     }
   ];
 
-  constructor(private keycardsService: KeycardsService) {
+  constructor(private keycardsService: KeycardsService,
+              private matDialog: MatDialog) {
     this.requests = this.reloadData.pipe(
       startWith({}),
       tap(() => this.isLoadingRequests = true),
-      switchMap(() => keycardsService.getKeycardRequests(0, 100, 'request.id', 'DESC', null, true)),
+      switchMap(() => keycardsService.getKeycardRequests(0, 100, 'request.requestedOn', 'DESC', null, true)),
       tap(response => this.totalRequests = response.meta.totalItems),
       map(response => response.items),
       tap(() => this.isLoadingRequests = false)
@@ -57,22 +57,12 @@ export class ClientRequestedCredentialsCardComponent implements OnInit {
   }
 
   requestKeycard() {
-    this.requested = true;
-
-    this.keycardsService.requestKeycard().subscribe(response => {
-      this.requested = false;
-
-      if (response.success) {
-        this.reloadData.next(true);
-        this.canRequest = false;
-      } else {
-        this.error = response.message;
-      }
-    })
-
-  }
-
-  get requestDisabled() {
-    return !this.canRequest || this.requested;
+   this.matDialog.open(RequestKeyCardComponent, {
+     panelClass: RequestKeyCardComponent.panelClass
+   }).afterClosed().subscribe(response => {
+     if (!!response) {
+       this.reloadData.next(true);
+     }
+   })
   }
 }

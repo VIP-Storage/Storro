@@ -1,0 +1,21 @@
+<mat-toolbar>
+  <span>Key Card Request</span>
+</mat-toolbar>
+<div class="content">
+  <form [formGroup]="requestFormGroup">
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Card Name</mat-label>
+      <input matInput autocomplete="off" [formControl]="cardName" placeholder="My First Credential">
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Request Comments</mat-label>
+      <textarea matInput [formControl]="requestComments" placeholder=""></textarea>
+    </mat-form-field>
+  </form>
+  <div class="error-wrapper">
+    <mat-error *ngIf="error">{{error}}</mat-error>
+  </div>
+  <div class="actions">
+    <button mat-stroked-button [disabled]="submitDisabled" (click)="submitRequest()">Submit</button>
+  </div>
+</div>

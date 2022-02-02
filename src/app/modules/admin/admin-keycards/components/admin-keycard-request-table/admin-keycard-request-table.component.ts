@@ -9,6 +9,8 @@ import {DebugDialogService} from "../../../../../services/debug-dialog.service";
 import {StatusBadge} from "../../../../shared/components/status-badge/status-badge.type";
 import {KeycardRequestState} from "../../../../../data/enums";
 import {storroAnimations} from "../../../../shared/animations";
+import {MatDialog} from "@angular/material/dialog";
+import {KeycardRequestDialogComponent} from "../../dialogs/keycard-request-dialog/keycard-request-dialog.component";
 
 @Component({
   selector: 'app-admin-keycard-request-table',
@@ -69,13 +71,23 @@ export class AdminKeycardRequestTableComponent implements AfterViewInit {
   private tableChange: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
   private lastTableEvent: SimpleTableEvent | undefined;
 
-  constructor(private keycardsService: KeycardsService, private debugDialogService: DebugDialogService) {
+  constructor(private keycardsService: KeycardsService, private matDialog: MatDialog) {
     this.searchValueChanged = this.searchValue.asObservable().pipe(
       debounceTime(150),
       distinctUntilChanged()
     );
   }
 
+  openRequestDialog(request: KeycardRequest) {
+    this.matDialog.open(KeycardRequestDialogComponent, {
+      panelClass: KeycardRequestDialogComponent.panelClass,
+      data: request
+    }).afterClosed().subscribe(response => {
+      if (!!response) {
+        this.reloadData.next(true);
+      }
+    })
+  }
 
   updateSearchValue(value: string | null) {
     if (!!value && value.length > 0) {

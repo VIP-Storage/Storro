@@ -12,6 +12,7 @@
   </ng-template>
 
   <app-simple-table @onEnterLeft [data]="requests" [columns]="displayedColumns"
+                    (rowEvent)="openRequestDialog($event)"
                     (tableEvent)="tableEventTriggered($event)"
                     [rowTemplate]="rowTemplate">
   </app-simple-table>

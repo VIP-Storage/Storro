@@ -14,14 +14,14 @@
 
     @if $isDarkTheme {
       .background-overlay {
-        background-color: black;
+        background-color: #00000045;
         opacity: 0.5;
       }
 
-      background-color: black;
-      background-image: url("~src/assets/gradient-bg-dark.svg");
+      background-color:transparent;
       border-color: #4e4d4d;
-
+      border-width: 2px;
+      border-style: solid;
     } @else {
       .background-overlay {
         background-color: white;
@@ -31,7 +31,6 @@
       border-color: #e7e7e7;
       border-width: 2px;
       border-style: solid;
-      background-image: url("~src/assets/gradient-bg-light.svg");
     }
 
     .title {

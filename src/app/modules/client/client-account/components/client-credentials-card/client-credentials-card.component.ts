@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {KeycardsService} from "../../../../../api/backend/services/keycards.service";
-import {Observable} from "rxjs";
+import {Observable, Subject, switchMap} from "rxjs";
 import {Keycard} from "../../../../../data/types";
-import {map, tap} from "rxjs/operators";
+import {map, startWith, tap} from "rxjs/operators";
 import {storroAnimations} from "../../../../shared/animations";
 
 @Component({
@@ -13,12 +13,15 @@ import {storroAnimations} from "../../../../shared/animations";
 })
 export class ClientCredentialsCardComponent implements OnInit {
 
+  reloadData: Subject<boolean> = new Subject<boolean>();
   keycards: Observable<Keycard[]>;
   totalKeycards: number = 0;
   isLoadingKeycards = true;
 
   constructor(private keycardsService: KeycardsService) {
-    this.keycards =  keycardsService.getKeycards(0, 100, 'keycard.id', 'DESC', null, true).pipe(
+    this.keycards = this.reloadData.pipe(
+      startWith({}),
+      switchMap(() => keycardsService.getKeycards(0, 100, 'keycard.id', 'DESC', null, true)),
       tap(response => this.totalKeycards = response.meta.totalItems),
       map(response => response.items),
       tap(() => this.isLoadingKeycards = false)
@@ -26,6 +29,14 @@ export class ClientCredentialsCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  toggleLost(keycard: Keycard) {
+    this.keycardsService.updateLost(keycard, !keycard.lost).subscribe((res) => {
+      if (res.success) {
+        this.reloadData.next(true);
+      }
+    })
   }
 
 }

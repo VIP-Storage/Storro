@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <span>Request #{{keycardRequest.id}}</span>
+</mat-toolbar>
+
+<div class="content">
+  <div class="toggle-group">
+    <mat-button-toggle-group [(ngModel)]="state">
+      <mat-button-toggle value="APPROVED">Approve</mat-button-toggle>
+      <mat-button-toggle value="DENIED">Deny</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <form [formGroup]="denialFormGroup" class="denial-group" *ngIf="state === 'DENIED'" @fade>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Denial Reason</mat-label>
+      <textarea [formControl]="denialReason" matInput></textarea>
+      <mat-error *ngIf="denialReason.invalid">{{getErrorMessage(denialReason)}}</mat-error>
+    </mat-form-field>
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+  </form>
+
+  <form [formGroup]="approvalFormGroup" class="approval-group" *ngIf="state === 'APPROVED'" @fade>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Facility Code</mat-label>
+      <input matInput mask="0000" [formControl]="facilityCode" required autocomplete="off">
+      <mat-error *ngIf="facilityCode.invalid">{{getErrorMessage(facilityCode, 'facility code')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Card Code</mat-label>
+      <input matInput [formControl]="cardCode" required autocomplete="off">
+      <mat-error *ngIf="cardCode.invalid">{{getErrorMessage(cardCode, 'card code')}}</mat-error>
+    </mat-form-field>
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+  </form>
+
+  <div class="actions">
+    <button mat-flat-button (click)="close()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="saveDisabled">Save</button>
+  </div>
+
+</div>

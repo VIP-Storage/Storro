@@ -1,7 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
+  border-radius: 20%;
   padding: 2em 2.8em;
   position: relative;
   overflow: hidden;
@@ -9,14 +9,13 @@
   margin: 1.2em;
   user-select: none;
 
-  &.show-borders {
-    border-width: 2px;
-    border-style: solid;
+  &:hover {
+    cursor: pointer;
   }
 }
 
 .title {
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 0.6em;
 }
 
@@ -33,29 +32,27 @@
   pointer-events: none;
 }
 
+.icon {
+  position: absolute;
+  top: 2em;
+  left: 2.5em;
+
+  .mat-icon {
+    font-size: 32px;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+  }
+}
 
 .info {
   z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex: 1;
-
-  .icon {
-    margin-right: 4em;
-
-    .mat-icon {
-      font-size: 32px;
-      height: 55px;
-      width: 55px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 100%;
-    }
-  }
-
-  .meta {
-    margin-top: -3em;
-    margin-left: 2em;
-  }
+  position: relative;
+  margin-bottom: 1em;
 }

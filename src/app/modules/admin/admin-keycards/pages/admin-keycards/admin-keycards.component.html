@@ -1,14 +1,14 @@
 <app-page-header title="Key Cards" (searchValueChanged)="updateSearchValue($event)" @onEnterLeft [actions]="pageHeaderActions"></app-page-header>
 <mat-divider></mat-divider>
-<mat-tab-group mat-stretch-tabs class="mat-tab-group">
+<mat-tab-group mat-stretch-tabs class="mat-tab-group" (selectedTabChange)="tabChanged()">
   <mat-tab label="Current">
       <ng-template matTabContent>
-        <app-admin-keycards-table></app-admin-keycards-table>
+        <app-admin-keycards-table #keycardsTableComponent></app-admin-keycards-table>
       </ng-template>
   </mat-tab>
   <mat-tab label="Requests">
     <ng-template matTabContent>
-      <app-admin-keycard-request-table></app-admin-keycard-request-table>
+      <app-admin-keycard-request-table #requestTableComponent></app-admin-keycard-request-table>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

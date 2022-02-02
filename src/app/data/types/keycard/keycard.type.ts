@@ -6,4 +6,5 @@ export interface Keycard {
   facilityCode: number;
   owner: User;
   name?: string;
+  lost: boolean;
 }

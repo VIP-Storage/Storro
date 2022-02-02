@@ -1,0 +1,54 @@
+.content {
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  transition: all 150ms;
+  position: relative;
+
+  .toggle-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    mat-button-toggle-group {
+      width: 100%;
+    }
+
+    mat-button-toggle {
+      flex: 1;
+    }
+  }
+
+  form {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    left: 1.5em;
+    right: 1.5em;
+    top: 6em;
+    position: absolute;
+
+    .error-wrapper {
+      height: 22px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+  }
+}
+
+:host {
+  min-width: 420px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}

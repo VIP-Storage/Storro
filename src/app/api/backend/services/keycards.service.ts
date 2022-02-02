@@ -95,12 +95,45 @@ export class KeycardsService {
     return this.httpClient.get<ManyResponse<KeycardRequest>>(url);
   }
 
-  requestKeycard(comments?: string) {
+  requestKeycard(name: string, comments?: string) {
     const url = Burly(this.apiEndpoint)
       .addSegment('/keycard')
       .addSegment('/requests')
       .get;
 
-    return this.httpClient.post<IResponse<KeycardRequest>>(url, {comments});
+    return this.httpClient.post<IResponse<KeycardRequest>>(url, {comments, name});
+  }
+
+  approveRequest(request: KeycardRequest, cardCode: number, facilityCode: number, name?: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/keycard')
+      .addSegment('/requests')
+      .addSegment('/approve/')
+      .addSegment(request.id)
+      .get;
+
+    return this.httpClient.post<IResponse<KeycardRequest>>(url, {owner: request.requestedByID, facilityCode, cardCode, name})
+  }
+
+  denyRequest(request: KeycardRequest, reason: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/keycard')
+      .addSegment('/requests')
+      .addSegment('/deny/')
+      .addSegment(request.id)
+      .get;
+
+    return this.httpClient.post<IResponse<KeycardRequest>>(url, {reason})
+  }
+
+  updateLost(keycard: Keycard, lost: boolean) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/keycards')
+      .addSegment('/lost')
+      .addSegment(`/${keycard.id}/`)
+      .addSegment(`${lost}`)
+      .get;
+
+    return this.httpClient.get<IResponse<Keycard>>(url)
   }
 }

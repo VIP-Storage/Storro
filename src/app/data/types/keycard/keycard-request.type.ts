@@ -15,4 +15,5 @@ export interface KeycardRequest {
   requestedOn: Date;
   comments: string;
   denialReason?: string;
+  name?: string;
 }

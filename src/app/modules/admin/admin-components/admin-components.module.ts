@@ -5,6 +5,8 @@ import { StatCardGridComponent } from './stat-card-grid/stat-card-grid.component
 import {SharedModule} from "../../shared/shared.module";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -16,11 +18,13 @@ import {MatIconModule} from "@angular/material/icon";
   exports: [
     StatCardGridComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        MatGridListModule,
-        MatIconModule
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterModule
+  ]
 })
 export class AdminComponentsModule { }

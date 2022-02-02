@@ -10,9 +10,11 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
+import { RequestKeyCardComponent } from './dialogs/request-key-card/request-key-card.component';
+import {MatInputModule} from "@angular/material/input";
 
 const routes: Routes = [
   {
@@ -28,22 +30,25 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ClientBaseComponent,
-    UnitPickerComponent
+    UnitPickerComponent,
+    RequestKeyCardComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    UnitModule,
-    MatSidenavModule,
-    SharedModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        UnitModule,
+        MatSidenavModule,
+        SharedModule,
+        MatToolbarModule,
+        MatListModule,
+        MatIconModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        ReactiveFormsModule,
+    ],
   exports: [
     RouterModule,
   ]
