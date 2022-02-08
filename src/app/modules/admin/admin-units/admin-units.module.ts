@@ -32,6 +32,13 @@ const routes: Routes = [
     component: AdminUnitsComponent
   },
   {
+    path: 'create',
+    component: AdminUnitsComponent,
+    data: {
+      create: true
+    }
+  },
+  {
     path: 'map',
     component: AdminUnitsMapComponent
   },
@@ -42,7 +49,7 @@ const routes: Routes = [
   {
     path: ':id',
     redirectTo: '/admin/unit/:id'
-  }
+  },
 ]
 
 @NgModule({

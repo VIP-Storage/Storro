@@ -1,0 +1,6 @@
+<mat-selection-list [multiple]="false">
+  <mat-list-option *ngFor="let monitorListing of monitors|async" [(ngModel)]="currentMonitorID">
+    <p matLine>{{monitorListing.Monitor.Name}}</p>
+    <p matLine>{{monitorListing.Monitor.Id}} - {{monitorListing.Monitor_Status.Status}}</p>
+  </mat-list-option>
+</mat-selection-list>

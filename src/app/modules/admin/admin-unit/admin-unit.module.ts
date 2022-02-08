@@ -15,9 +15,13 @@ import {UnitModule} from "../../shared/unit/unit.module";
 import {AccessModule} from "../../shared/access/access.module";
 import {UnitFullChartComponent} from "../../shared/unit/pages/unit-full-chart/unit-full-chart.component";
 import {UnitChartResolver} from "../../shared/unit/resolvers/unit-chart.resolver";
-import { AdminMonitorListComponent } from './components/admin-monitor-list/admin-monitor-list.component';
 import {MatListModule} from "@angular/material/list";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {AdminComponentsModule} from "../admin-components/admin-components.module";
 
 const routes: Routes = [
   {
@@ -58,7 +62,6 @@ const routes: Routes = [
   declarations: [
     AdminUnitSettingsComponent,
     AdminUnitComponent,
-    AdminMonitorListComponent,
   ],
   imports: [
     CommonModule,
@@ -72,7 +75,13 @@ const routes: Routes = [
     UnitModule,
     AccessModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatToolbarModule,
+    AdminComponentsModule
   ]
 })
 export class AdminUnitModule {

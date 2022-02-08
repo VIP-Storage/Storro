@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline" floatLabel="always">
+  <mat-label>Camera Name</mat-label>
+  <input matInput autocomplete="off" placeholder="A123" #cameraNameInput
+         (input)="cameraNameInput.value = cameraNameInput.value.toUpperCase()" maxlength="4"
+         [formControl]="monitorName" required>
+  <mat-error *ngIf="monitorName.invalid">{{getMonitorNameErrorMessage()}}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+  <mat-label>Camera Address</mat-label>
+  <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp" [formControl]="monitorAddress" required>
+  <mat-error *ngIf="monitorAddress.invalid">{{getMonitorAddressErrorMessage()}}</mat-error>
+</mat-form-field>

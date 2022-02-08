@@ -19,16 +19,16 @@ export class ActionCardGridComponent implements OnInit, OnDestroy {
     style: 'PURPLE' | 'BLUE' | 'GREEN' | 'RED' | 'ORANGE'
   }[] = [
     {
-      routerLink: '/units/adopt',
+      routerLink: '/admin/units/create',
       title: 'Adopt Unit',
       subtitle: 'Add a new Tibbo device to the system',
       icon: 'add_circle',
       style: 'PURPLE'
     },
     {
-      routerLink: '/units/adopt',
+      routerLink: '/admin/keycards/create',
       title: 'Create a Keycard',
-      subtitle: 'Add a new Tibbo device to the system',
+      subtitle: 'Create a new keycard credential for a user',
       icon: 'badge',
       style: 'GREEN'
     }

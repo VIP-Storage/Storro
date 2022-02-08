@@ -1,16 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ZoneminderService} from "../../../../../api/backend/services/zoneminder.service";
+import {ZoneminderService} from "../../../../api/backend/services/zoneminder.service";
 import {Observable} from "rxjs";
-import {Monitor, MonitorListing} from "../../../../../data/types/zoneminder";
+import {Monitor, MonitorListing} from "../../../../data/types/zoneminder";
 import {map} from "rxjs/operators";
-import {Unit} from "../../../../../data/types";
+import {Unit} from "../../../../data/types";
 
 @Component({
-  selector: 'app-admin-monitor-list',
-  templateUrl: './admin-monitor-list.component.html',
-  styleUrls: ['./admin-monitor-list.component.scss']
+  selector: 'app-monitor-list',
+  templateUrl: './monitor-list.component.html',
+  styleUrls: ['./monitor-list.component.scss']
 })
-export class AdminMonitorListComponent implements OnInit {
+export class MonitorListComponent implements OnInit {
 
   @Input()
   set unit(unit: Unit|null) {
@@ -19,6 +19,13 @@ export class AdminMonitorListComponent implements OnInit {
       this._currentMonitorID = unit.zoneMinderMonitor;
     }
 
+  }
+
+  @Input()
+  set monitorID(newValue: string|null) {
+    if (!!newValue && newValue.length === 4) {
+      this._currentMonitorID = newValue;
+    }
   }
 
   monitors!: Observable<MonitorListing[]>
