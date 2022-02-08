@@ -68,4 +68,8 @@ export class UnitOverviewComponent implements OnDestroy {
   get backURL() {
     return this._mode === 'ADMIN' ? '/admin/units' : '/client/dashboard';
   }
+
+  get mode() {
+    return this._mode;
+  }
 }

@@ -38,4 +38,14 @@ export class ZoneminderService {
       map(response => response.monitors[0])
     )
   }
+
+  deleteMonitor(id: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/zoneminder')
+      .addSegment('/monitors/')
+      .addSegment(id)
+      .get;
+
+    return this.httpClient.delete(url);
+  }
 }

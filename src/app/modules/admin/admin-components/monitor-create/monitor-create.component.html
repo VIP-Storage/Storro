@@ -4,6 +4,7 @@
          (input)="cameraNameInput.value = cameraNameInput.value.toUpperCase()" maxlength="4"
          [formControl]="monitorName" required>
   <mat-error *ngIf="monitorName.invalid">{{getMonitorNameErrorMessage()}}</mat-error>
+  <mat-hint *ngIf="!!currentUnit">This was pre-filled from the unit ID</mat-hint>
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
@@ -11,3 +12,11 @@
   <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp" [formControl]="monitorAddress" required>
   <mat-error *ngIf="monitorAddress.invalid">{{getMonitorAddressErrorMessage()}}</mat-error>
 </mat-form-field>
+
+<div class="error-wrapper">
+  <mat-error *ngIf="error">{{error}}</mat-error>
+</div>
+
+<app-spinner-button [disabled]="disableSubmit" [submitted]="submitted">
+  Assign Monitor
+</app-spinner-button>

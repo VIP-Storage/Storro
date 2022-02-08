@@ -3,4 +3,7 @@
   <button class="download-button" color="warn" matTooltip="Download Snapshot" mat-icon-button>
     <mat-icon>download</mat-icon>
   </button>
+  <button class="settings-button" *ngIf="showSettings" matTooltip="Settings" mat-icon-button routerLink="./settings/monitor">
+    <mat-icon>settings</mat-icon>
+  </button>
 </div>

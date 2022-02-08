@@ -35,7 +35,7 @@
         </mat-grid-tile>
         <mat-grid-tile class="snapshot-tile" colspan="2" [@onEnterLeft]="{params: {delay: 100 * (unitCharts.length)}}">
           <div class="unit-snapshot-wrapper">
-            <app-unit-snapshot [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-unit-snapshot>
+            <app-unit-snapshot [mode]="mode" [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-unit-snapshot>
           </div>
         </mat-grid-tile>
       </mat-grid-list>

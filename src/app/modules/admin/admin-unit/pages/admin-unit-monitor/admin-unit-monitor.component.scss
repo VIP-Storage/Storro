@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+}
+
+mat-card {
+  flex: 1;
+  margin: 4em;
+  border-radius: 2em;
+  padding: 4em;
+
+  mat-card-content {
+    padding: 1em;
+    margin-top: 2em;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}

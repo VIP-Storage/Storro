@@ -22,6 +22,12 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
 
   snapshotURL = new BehaviorSubject<string>('');
 
+  @Input()
+  set mode(mode: 'ADMIN' | 'USER') {
+    this._mode = mode;
+  }
+
+  private _mode: 'ADMIN' | 'USER' = 'USER';
   private destroyed = new Subject<boolean>();
   private _unit?: Unit;
 
@@ -49,5 +55,8 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  get showSettings() {
+   return this._mode === 'ADMIN';
+  }
 
 }

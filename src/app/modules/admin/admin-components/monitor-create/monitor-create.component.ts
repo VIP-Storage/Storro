@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {MonitorNameValidator} from "../../validators/monitor-name.validator";
 import {ZoneminderService} from "../../../../api/backend/services/zoneminder.service";
+import {Unit} from "../../../../data/types";
 
 @Component({
   selector: 'app-monitor-create',
@@ -10,25 +11,31 @@ import {ZoneminderService} from "../../../../api/backend/services/zoneminder.ser
 })
 export class MonitorCreateComponent {
 
+  error: string|null = null;
+  submitted: boolean = false;
   monitorNamePattern = `^([A-Z]\\d{3}|\\d[A-Z]\\d{2}|\\d{2}[A-Z]\\d|\\d{3}[A-Z])$`;
   monitorName: FormControl = new FormControl('', [Validators.required, Validators.pattern(this.monitorNamePattern)], MonitorNameValidator.createValidator(this.zoneminderService));
 
   monitorAddressPattern = `^(rtsp):\\/\\/([^\\s@/]+)@([^\\s/:]+)(?::([0-9]+))?(\\/.*)`;
   monitorAddress: FormControl = new FormControl('', [Validators.required, Validators.pattern(this.monitorAddressPattern)]);
 
+
   @Input()
-  set disabled(disabled: boolean) {
-    if (disabled) {
+  set unit(unit: Unit|null) {
+    this.currentUnit = unit || undefined;
+
+    if (!!unit) {
+      this.monitorName.setValue(unit.id);
       this.monitorName.disable();
-      this.monitorAddress.disable();
     } else {
+      this.monitorName.setValue(null);
       this.monitorName.enable();
-      this.monitorAddress.enable();
     }
   }
 
-  constructor(private zoneminderService: ZoneminderService) { }
+  currentUnit?: Unit;
 
+  constructor(private zoneminderService: ZoneminderService) { }
 
   getMonitorNameErrorMessage() {
     if (this.monitorName.hasError('required')) {
@@ -46,5 +53,9 @@ export class MonitorCreateComponent {
     }
 
     return this.monitorAddress.hasError('pattern') ? `Camera address number must be in format 'rtsp://username:password@0.0.0.0/axis-media/media.amp'` : '';
+  }
+
+  get disableSubmit() {
+    return this.monitorName.invalid || this.monitorAddress.invalid || this.submitted;
   }
 }
