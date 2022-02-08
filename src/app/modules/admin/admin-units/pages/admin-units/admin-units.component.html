@@ -32,9 +32,15 @@
             <app-status-badge [mappedValues]="statusBadgeValues" [currentValue]="item['available']"></app-status-badge>
           </span>
           <span class="type">{{item['unitTypeName']}}</span>
-          <button mat-icon-button (click)="openUnitDebugDialog(item)">
-            <mat-icon>bug_report</mat-icon>
-          </button>
+          <span class="monitor">{{item['zoneMinderMonitor']||'None'}}</span>
+          <div class="actions">
+            <button mat-icon-button color="warn" (click)="openUnitDebugDialog(item, $event)">
+              <mat-icon>bug_report</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="openMonitorSettings(item, $event)">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
         </div>
       </ng-template>
 

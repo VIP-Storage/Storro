@@ -47,14 +47,10 @@
   align-items: center;
   position: relative;
 
-  button {
-    position: absolute;
-    right: 1em;
-  }
-
-  .number, .status, .type {
+  .number, .status, .type, .monitor, .actions {
     flex: 1;
   }
+
 
   .number {
     font-size: 20px;

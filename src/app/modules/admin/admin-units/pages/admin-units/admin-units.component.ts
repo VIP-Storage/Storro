@@ -24,7 +24,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   animations: storroAnimations
 })
 export class AdminUnitsComponent implements AfterViewInit {
-  displayedColumns: { name: string; title: string }[] = [
+  displayedColumns: { name: string; title: string, noSort?: boolean }[] = [
     {
       name: 'id',
       title: 'Unit ID'
@@ -37,6 +37,15 @@ export class AdminUnitsComponent implements AfterViewInit {
       name: 'unitTypeName',
       title: 'Type'
     },
+    {
+      name: 'zoneMinderMonitor',
+      title: 'Camera'
+    },
+    {
+      name: 'actions',
+      title: 'Actions',
+      noSort: true
+    }
   ];
 
   statusBadgeValues: StatusBadge[] =  [
@@ -142,8 +151,16 @@ export class AdminUnitsComponent implements AfterViewInit {
     })
   }
 
-  openUnitDebugDialog(unit: Unit) {
+  openUnitDebugDialog(unit: Unit, event: MouseEvent) {
+    event.stopPropagation();
+    event.stopImmediatePropagation();
     this.debugDialogService.openDebugDialog(unit.id, unit);
+  }
+
+  openMonitorSettings(unit: Unit, event: MouseEvent) {
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+   return this.router.navigate(['admin', 'unit', unit.id, 'settings', 'monitor'], {queryParams: {root: '/admin/units'}});
   }
 
   updateSearchValue(value: string|null) {

@@ -4,6 +4,7 @@ import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {BehaviorSubject, interval, Subject} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {takeUntil} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-unit-snapshot',
@@ -32,6 +33,7 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
   private _unit?: Unit;
 
   constructor(private unitsService: UnitsService,
+              private router: Router,
               private domSanitizer: DomSanitizer) {
   }
 
@@ -56,7 +58,24 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
   }
 
   get showSettings() {
-   return this._mode === 'ADMIN';
+    return this._mode === 'ADMIN';
   }
 
+  goToSettings() {
+    const rootURL = this.getBackURL(this._unit!);
+
+    return this.router.navigate(['admin', 'unit', this._unit!.id, 'settings', 'monitor'], {
+      queryParams: {
+        root: rootURL
+      }
+    });
+  }
+
+  getBackURL(unit: Unit) {
+    if (this._mode === 'ADMIN') {
+      return `/admin/unit/${unit.id}`;
+    }
+
+    return null;
+  }
 }

@@ -1,7 +1,7 @@
 <mat-card *ngIf="unit|async as unit">
   <mat-card-header>
     <div mat-card-avatar class="header-action">
-      <button mat-icon-button routerLink="../">
+      <button mat-icon-button (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
