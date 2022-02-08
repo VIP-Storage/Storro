@@ -1,0 +1,78 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  border-radius: 60px;
+  padding: 2em 2.8em;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  margin: 1.2em;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title {
+  font-size: 28px;
+  margin-top: 0.6em;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.stat {
+  font-size: 60px;
+}
+
+.background-overlay, .ripple-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.background-overlay {
+  pointer-events: none;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .action-arrow {
+    padding-bottom: 2em;
+
+    mat-icon {
+      font-size: 60px;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 1.5em;
+  left: 1.5em;
+  transition: transform 350ms ease-in-out;
+
+  .mat-icon {
+    font-size: 70px;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+  }
+
+  &:hover {
+    transform: rotate(90deg);
+  }
+}

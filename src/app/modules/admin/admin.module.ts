@@ -27,7 +27,11 @@ const routes: Routes = [
   {
     path: 'keycards',
     loadChildren: () => import('./admin-keycards/admin-keycards.module').then(m => m.AdminKeycardsModule)
-  }
+  },
+  {
+    path: 'unit',
+    loadChildren: () => import('./admin-unit/admin-unit.module').then(m => m.AdminUnitModule)
+  },
 ];
 
 @NgModule({

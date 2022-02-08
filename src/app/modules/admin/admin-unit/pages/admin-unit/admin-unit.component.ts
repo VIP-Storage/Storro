@@ -47,4 +47,5 @@ export class AdminUnitComponent {
   getChartURL(chartType: ChartDataType) {
     return `./chart/${chartType.toLowerCase()}`;
   }
+
 }

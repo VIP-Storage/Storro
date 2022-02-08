@@ -7,24 +7,31 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule} from "@angular/router";
+import { ActionCardGridComponent } from './action-card-grid/action-card-grid.component';
+import { ActionCardComponent } from './action-card/action-card.component';
+import {MatRippleModule} from "@angular/material/core";
 
 
 
 @NgModule({
   declarations: [
     StatCardComponent,
-    StatCardGridComponent
+    StatCardGridComponent,
+    ActionCardGridComponent,
+    ActionCardComponent
   ],
-  exports: [
-    StatCardGridComponent
-  ],
+    exports: [
+        StatCardGridComponent,
+        ActionCardGridComponent
+    ],
   imports: [
     CommonModule,
     SharedModule,
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    MatRippleModule
   ]
 })
 export class AdminComponentsModule { }

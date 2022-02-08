@@ -12,6 +12,7 @@
 @use './page-header/page-header.theme' as page-header;
 @use '../account/components/create-account-stepper/create-account-stepper.theme' as create-account-stepper;
 @use 'src/app/modules/admin/admin-components/stat-card/stat-card.theme' as stat-card;
+@use 'src/app/modules/admin/admin-components/action-card/action-card.theme' as action-card;
 @use './loading-shade/loading-shade.theme' as loading-shade;
 @use './unit-map/unit-map.theme' as unit-map;
 
@@ -29,6 +30,7 @@
   @include page-header.theme($theme, false);
   @include create-account-stepper.theme($theme, false);
   @include stat-card.theme($theme, false);
+  @include action-card.theme($theme, false);
   @include loading-shade.theme($theme, false);
   @include unit-map.theme($theme, false);
 }
@@ -47,6 +49,7 @@
   @include page-header.theme($theme, true);
   @include create-account-stepper.theme($theme, true);
   @include stat-card.theme($theme, true);
+  @include action-card.theme($theme, true);
   @include loading-shade.theme($theme, true);
   @include unit-map.theme($theme, true);
 }

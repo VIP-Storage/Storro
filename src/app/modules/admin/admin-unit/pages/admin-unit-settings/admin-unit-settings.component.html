@@ -1,0 +1,26 @@
+<ng-container *ngIf="unit|async as unit">
+  <mat-card class="mat-elevation-z0 unit-card">
+    <div class="unit-card-header">
+      <div class="header-action" [@onEnterLeft]="{params: {delay: 0}}">
+        <button mat-icon-button routerLink="../">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div class="header-text">
+        <mat-card-title>
+          {{unit.id}} - Settings
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{unit.location}}
+        </mat-card-subtitle>
+      </div>
+      <div class="header-right" [@onEnterLeft]="{params: { delay: 300}}">
+      </div>
+    </div>
+
+    <div class="settings-cards">
+      <app-admin-monitor-list></app-admin-monitor-list>
+    </div>
+  </mat-card>
+
+</ng-container>

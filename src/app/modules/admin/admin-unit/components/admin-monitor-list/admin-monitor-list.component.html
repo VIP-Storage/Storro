@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-header>
+    <h1 mat-card-title>Cameras</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let monitorListing of monitors|async" [(ngModel)]="currentMonitorID">
+        <p matLine>{{monitorListing.Monitor.Name}}</p>
+        <p matLine>{{monitorListing.Monitor.Id}} - {{monitorListing.Monitor_Status.Status}}</p>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

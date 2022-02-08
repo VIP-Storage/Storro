@@ -8,4 +8,9 @@
       </div>
     </ng-template>
   </mat-tab>
+  <mat-tab label="Personal">
+    <ng-template matTabContent>
+      <app-mailing-address-card *ngIf="account|async as account" [mailingAddress]="account.mailingAddress" [user]="account.accountHolder"></app-mailing-address-card>
+    </ng-template>
+  </mat-tab>
 </mat-tab-group>

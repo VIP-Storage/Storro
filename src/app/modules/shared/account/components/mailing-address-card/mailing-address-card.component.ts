@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MailingAddress} from "../../../../../data/types/accounts";
+import {Component, Input} from '@angular/core';
+import {MailingAddress} from "../../../../../data/types";
 import {User} from "../../../../../data/types";
 
 @Component({

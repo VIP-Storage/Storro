@@ -4,7 +4,6 @@ import {Stat} from "../../../../data/types";
 import {StatsService} from "../../../../api/backend/services/stats.service";
 import {distinctUntilChanged, map, tap} from "rxjs/operators";
 import {storroAnimations} from "../../../shared/animations";
-import {MediaObserver} from '@angular/flex-layout';
 
 @Component({
   selector: 'app-stat-card-grid',
@@ -15,15 +14,16 @@ import {MediaObserver} from '@angular/flex-layout';
 export class StatCardGridComponent implements OnInit, OnDestroy {
 
   cols: number = 1;
+  totalStats: number = 1;
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   stats: Observable<Stat[]>;
 
   private mediaSubscription?: Subscription;
 
 
-  constructor(private statsService: StatsService,
-              private mediaObserver: MediaObserver) {
+  constructor(private statsService: StatsService) {
     this.stats = this.statsService.getDashboardStats().pipe(
+      tap(res => this.totalStats = res.items.length),
       map(res => res.items),
       tap(() => this.isLoading.next(false))
     );
@@ -43,6 +43,10 @@ export class StatCardGridComponent implements OnInit, OnDestroy {
     if (this.mediaSubscription) {
       this.mediaSubscription.unsubscribe();
     }
+  }
+
+  get minHeight() {
+    return `${(this.cols/this.totalStats) * 385}px`;
   }
 
   private setSize() {

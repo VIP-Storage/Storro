@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import {from, Observable, of} from 'rxjs';
 import {switchMap} from "rxjs/operators";
-import {Account} from "../../../data/types/accounts";
+import {Account} from "../../../data/types";
 import {AccountsService} from "../../../api/backend/services/accounts.service";
 
 @Injectable({

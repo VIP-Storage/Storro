@@ -1,9 +1,9 @@
-<div class="stats-grid-inner">
+<div class="stats-grid-inner" [style.min-height]="minHeight">
   <app-loading-shade *ngIf="isLoading|async"></app-loading-shade>
   <div class="grid-list-wrapper">
     <mat-grid-list [cols]="cols" rowHeight="1:1" gutterSize="0px">
       <mat-grid-tile class="stat-tile" *ngFor="let stat of stats|async; index as index">
-        <app-stat-card hoverElevation [raisedElevation]="1" [stat]="stat" [@onEnterLeft]="{params: { delay: 100 * index}}"></app-stat-card>
+        <app-stat-card hoverElevation [raisedElevation]="1" [stat]="stat" @fadeIn></app-stat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

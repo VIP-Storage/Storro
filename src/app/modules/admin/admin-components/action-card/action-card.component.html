@@ -1,0 +1,17 @@
+<div class="background-overlay" [ngClass]="backgroundOverlayClass"></div>
+<div class="info">
+  <div class="meta">
+    <h1 class="title" *ngIf="title">{{title}}</h1>
+    <h2 class="subtitle" *ngIf="subtitle">{{subtitle}}</h2>
+  </div>
+  <div class="action-arrow">
+    <mat-icon inline>arrow_forward</mat-icon>
+  </div>
+</div>
+
+<div class="icon" *ngIf="icon">
+  <mat-icon inline>{{icon}}</mat-icon>
+</div>
+
+<div matRipple class="ripple-container">
+</div>
