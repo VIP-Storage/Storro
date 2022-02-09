@@ -32,6 +32,7 @@
     "@swimlane/ngx-charts": "^19.1.0",
     "@types/node": "^12.20.37",
     "dotenv": "^14.3.0",
+    "esbuild": "^0.14.21",
     "express": "^4.17.2",
     "jwt-decode": "^3.1.2",
     "kb-burly": "0.1.3",
