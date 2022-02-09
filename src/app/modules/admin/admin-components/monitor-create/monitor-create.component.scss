@@ -1,6 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .mat-form-field {
@@ -11,4 +12,8 @@
 
 .error-wrapper {
   height: 22px;
+}
+
+span.spacer {
+  flex: 1;
 }

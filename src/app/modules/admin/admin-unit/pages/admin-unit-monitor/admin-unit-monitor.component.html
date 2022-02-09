@@ -1,15 +1,6 @@
-<mat-card *ngIf="unit|async as unit">
-  <mat-card-header>
-    <div mat-card-avatar class="header-action">
-      <button mat-icon-button (click)="goBack()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-    </div>
-
-    <mat-card-title>{{unit.zoneMinderMonitor ? 'Change Monitor Assignment' : 'Assign Monitor'}}</mat-card-title>
-    <mat-card-subtitle>{{unit.zoneMinderMonitor ? 'Update the source IP address of the monitor' : 'Add a source IP address of the monitor'}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <app-monitor-create [unit]="unit"></app-monitor-create>
-  </mat-card-content>
-</mat-card>
+<layout-single-card-page *ngIf="unit|async as unit"
+                         [backRouterLink]="backRouterLink"
+                         [title]="unit.zoneMinderMonitor ? 'Change Monitor Assignment' : 'Assign Monitor'"
+                         [subtitle]="unit.zoneMinderMonitor ? 'Update the source IP address of the monitor' : 'Add a source IP address of the monitor'">
+  <app-monitor-create [unit]="unit"></app-monitor-create>
+</layout-single-card-page>

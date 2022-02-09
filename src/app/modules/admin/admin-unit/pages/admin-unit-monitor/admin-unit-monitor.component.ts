@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {Unit} from "../../../../../data/types";
 import {map, tap} from "rxjs/operators";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {PageTitleService} from "../../../../../services/page-title.service";
+import {BreadcrumbService} from "xng-breadcrumb";
 
 @Component({
   selector: 'app-admin-unit-monitor',
@@ -18,27 +19,24 @@ export class AdminUnitMonitorComponent {
 
   constructor(private activatedRoute: ActivatedRoute,
               private unitsService: UnitsService,
-              private router: Router,
+              private breadcrumbService: BreadcrumbService,
               private pageTitleService: PageTitleService) {
     this.unit = this.activatedRoute.data.pipe(
       map(data => data.unit),
-      tap(unit => this.pageTitleService.title = `${unit.id} - Monitor`),
+      tap(unit => this.pageTitleService.title = `${unit.id} | Monitor`),
+      tap(unit => this.breadcrumbService.set(`/admin/unit/${unit.id}/settings/monitor`, 'Monitor'))
     );
 
     this.activatedRoute.queryParams.subscribe(params => {
       if (params.hasOwnProperty('root')) {
         this.returnToURL = params.root;
       }
-    })
+    });
+
+    this.breadcrumbService.set('/admin/unit', {disable: true, label: 'Unit'});
   }
 
-
-  goBack() {
-    if (!!this.returnToURL) {
-      return this.router.navigateByUrl(this.returnToURL);
-    }
-
-    return this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+  get backRouterLink() {
+    return this.returnToURL || '../'
   }
-
 }

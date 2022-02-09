@@ -11,18 +11,21 @@ const routes: Routes = [
     path: 'client',
     component: ClientBaseComponent,
     canActivate: [AuthGuard, RoleGuard],
-    loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule)
+    loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule),
+    data: { breadcrumb: { skip: true } }
   },
   {
     path: 'auth',
     component: AuthBaseComponent,
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
+    data: { breadcrumb: { skip: true } }
   },
   {
     path: 'admin',
     component: AdminBaseComponent,
     canActivate: [AuthGuard, RoleGuard],
-    loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+    data: { breadcrumb: { skip: true } }
   },
   {
     path: '',

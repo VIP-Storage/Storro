@@ -21,16 +21,19 @@ import { AdminKeycardRequestTableComponent } from './components/admin-keycard-re
 import { KeycardRequestDialogComponent } from './dialogs/keycard-request-dialog/keycard-request-dialog.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {LayoutModule} from "../../layout/layout.module";
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminKeycardsComponent
+    component: AdminKeycardsComponent,
+    data: { breadcrumb: 'Key Cards' }
   },
   {
     path: 'create',
-    component: AdminCreateKeycardComponent
+    component: AdminCreateKeycardComponent,
+    data: { breadcrumb: 'Create' }
   },
 ]
 
@@ -60,7 +63,8 @@ const routes: Routes = [
         MatTabsModule,
         MatToolbarModule,
         MatButtonToggleModule,
-        FormsModule
+        FormsModule,
+        LayoutModule
     ]
 })
 export class AdminKeycardsModule {

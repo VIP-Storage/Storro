@@ -23,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {AdminComponentsModule} from "../admin-components/admin-components.module";
 import { AdminUnitMonitorComponent } from './pages/admin-unit-monitor/admin-unit-monitor.component';
+import {LayoutModule} from "../../layout/layout.module";
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
     },
     data: {
       mode: 'ADMIN'
-    }
+    },
   },
   {
     path: ':id/settings',
@@ -90,7 +91,8 @@ const routes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatToolbarModule,
-    AdminComponentsModule
+    AdminComponentsModule,
+    LayoutModule
   ]
 })
 export class AdminUnitModule {

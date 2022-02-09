@@ -9,10 +9,15 @@
 
 <mat-form-field appearance="outline" floatLabel="always">
   <mat-label>Camera Address</mat-label>
-  <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp" [formControl]="monitorAddress" required>
+  <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp"
+         [formControl]="monitorAddress" required>
   <mat-error *ngIf="monitorAddress.invalid">{{getMonitorAddressErrorMessage()}}</mat-error>
+  <mat-hint>
+    HikVision - rtsp://admin:12345@192.168.1.210:554/Streaming/Channels/101<br><br>
+    AXIS - rtsp://192.168.1.210/axis-media/media.amp
+  </mat-hint>
 </mat-form-field>
-
+<span class="spacer"></span>
 <div class="error-wrapper">
   <mat-error *ngIf="error">{{error}}</mat-error>
 </div>

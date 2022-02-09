@@ -1,0 +1,23 @@
+<xng-breadcrumb [separator]="iconTemplate" [class.stepper-mode]="stepperMode"></xng-breadcrumb>
+<ng-template #iconTemplate>
+<mat-icon>
+  arrow_right
+</mat-icon>
+</ng-template>
+
+<mat-card [class.stepper-mode]="stepperMode" @fade>
+  <mat-card-header [class.divided]="dividerEnabled">
+    <div mat-card-avatar class="header-action" *ngIf="backRouterLink">
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+
+    <mat-card-title *ngIf="title as title">{{title}}</mat-card-title>
+    <mat-card-subtitle *ngIf="subtitle as subtitle">{{subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider *ngIf="dividerEnabled"></mat-divider>
+  <mat-card-content [class.spaced]="!!backRouterLink" [class.divided]="dividerEnabled">
+    <ng-content></ng-content>
+  </mat-card-content>
+</mat-card>
