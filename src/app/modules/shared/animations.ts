@@ -67,7 +67,7 @@ export const storroAnimations = [
   trigger('listAnimation', [
     transition('* => *', [
 
-      query(':enter', style({ opacity: 0, transform: 'translateY(-25px)' }), {optional: true}),
+      query(':enter', style({opacity: 0, transform: 'translateY(-25px)'}), {optional: true}),
 
       query(':enter', stagger('20ms', [
         animate('300ms ease-in-out', keyframes([
@@ -75,14 +75,44 @@ export const storroAnimations = [
         ]))]), {optional: true})
     ])
   ]),
-  trigger('staggerList', [
-    transition(':enter', [
-      query('.list-item', style({ opacity: 0, transform: 'translateX(-80px)'}), {optional: true}),
-      query('.list-item',
-        stagger('200ms',[
-          animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)'}))
-        ]),
-        {optional: true})
-    ])
-  ])
+  trigger(
+    'cardGridAnimation',
+    [
+      transition(
+        ':enter',
+        [
+          style({transform: 'translateY(100%)', opacity: 0}),
+          animate('{{speed}}ms {{delay}}ms ease-in-out',
+            style({transform: 'translateY(0)', opacity: 1}))
+        ],
+        {params: {delay: 0, speed: 300}}
+      ),
+    ],
+  ),
+  trigger(
+    'fromBottom',
+    [
+      transition(
+        ':enter',
+        [
+          style({transform: 'translateY(100%)', opacity: 0}),
+          animate('300ms  ease-in-out',
+            style({transform: 'translateY(0)', opacity: 1}))
+        ],
+      ),
+    ],
+  ),
+  trigger(
+    'fromTop',
+    [
+      transition(
+        ':enter',
+        [
+          style({transform: 'translateY(-100%)'}),
+          animate('300ms  ease-in-out',
+            style({transform: 'translateY(0)'}))
+        ],
+      ),
+    ],
+  ),
 ]

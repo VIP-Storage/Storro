@@ -53,14 +53,6 @@ $dark-theme: mat.define-dark-theme((
   @include mat.all-component-colors($dark-theme);
   @include components.dark-components-theme($dark-theme);
   @include auth-base.theme($dark-theme, true);
-
-  .xng-breadcrumb-root, .xng-breadcrumb-item {
-    color: white!important;
-  }
-
-  .xng-breadcrumb-trail {
-    color: gray;
-  }
 }
 
 .add-payment-method-dialog, .create-unit-dialog, .create-unit-type-dialog, .debug-dialog, .create-user-dialog, .edit-user-dialog, .unit-picker-dialog, .key-card-dialog, .keycard-request-dialog, .request-key-card-dialog {
@@ -68,9 +60,4 @@ $dark-theme: mat.define-dark-theme((
     padding: 0 !important;
     border-radius: 16px;
   }
-}
-
-.xng-breadcrumb-separator {
-  color: gray;
-  margin: 0!important;
 }

@@ -1,11 +1,4 @@
-<xng-breadcrumb [separator]="iconTemplate" [class.stepper-mode]="stepperMode"></xng-breadcrumb>
-<ng-template #iconTemplate>
-<mat-icon>
-  arrow_right
-</mat-icon>
-</ng-template>
-
-<mat-card [class.stepper-mode]="stepperMode" @fade>
+<mat-card [class.stepper-mode]="stepperMode" @fromBottom>
   <mat-card-header [class.divided]="dividerEnabled">
     <div mat-card-avatar class="header-action" *ngIf="backRouterLink">
       <button mat-icon-button (click)="goBack()">

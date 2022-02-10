@@ -1,0 +1,14 @@
+<mat-toolbar @fromTop>
+  <button mat-icon-button *ngIf="backRouterLink" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="title-wrapper" *ngIf="title || subtitle">
+    <span class="title" *ngIf="title">{{title}}</span>
+    <span class="subtitle" *ngIf="subtitle">{{subtitle}}</span>
+  </div>
+  <mat-divider></mat-divider>
+</mat-toolbar>
+<div class="card-grid-wrapper">
+  <ng-content></ng-content>
+</div>
+

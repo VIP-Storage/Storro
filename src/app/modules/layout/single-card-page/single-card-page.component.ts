@@ -47,8 +47,12 @@ export class SingleCardPageComponent {
 
   goBack() {
     if (!!this.backRouterLink) {
+      if (this.backRouterLink === '../') {
+        return this.router.navigate(['../'], {relativeTo: this.activatedRoute})
+      }
       return this.router.navigate(this.backRouterLink.split('/'), {relativeTo: this.activatedRoute})
     }
+
 
     return null;
   }

@@ -1,25 +1,10 @@
-<ng-container *ngIf="unit|async as unit">
-  <mat-card class="mat-elevation-z0 unit-card">
-    <div class="unit-card-header">
-      <div class="header-action" [@onEnterLeft]="{params: {delay: 0}}">
-        <button mat-icon-button routerLink="../">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-      </div>
-      <div class="header-text">
-        <mat-card-title>
-          {{unit.id}} - Settings
-        </mat-card-title>
-        <mat-card-subtitle>
-          {{unit.location}}
-        </mat-card-subtitle>
-      </div>
-      <div class="header-right" [@onEnterLeft]="{params: { delay: 300}}">
-      </div>
-    </div>
+<layout-card-grid-page *ngIf="unit|async as unit" title="Settings" [subtitle]="unit.id" backRouterLink="../" #gridPageComponent>
+  <mat-grid-list [cols]="gridPageComponent.columnsDisplayed" rowHeight="1:1" gutterSize="0px">
+    <mat-grid-tile @cardGridAnimation>
+      <app-unit-monitor-setting class="admin-setting" [unit]="unit" matRipple routerLink="./monitor"></app-unit-monitor-setting>
+    </mat-grid-tile>
+    <mat-grid-tile @cardGridAnimation colspan="2">
 
-    <div class="settings-cards">
-    </div>
-  </mat-card>
-
-</ng-container>
+    </mat-grid-tile>
+  </mat-grid-list>
+</layout-card-grid-page>

@@ -19,7 +19,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {DialogsModule} from "./modules/shared/dialogs/dialogs.module";
 import {MatNativeDateModule} from "@angular/material/core";
 import {NgxMaskModule} from "ngx-mask";
-import {BreadcrumbModule} from "xng-breadcrumb";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -50,7 +49,6 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     MatNativeDateModule,
     NgxMaskModule.forRoot({validation: true}),
-    BreadcrumbModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

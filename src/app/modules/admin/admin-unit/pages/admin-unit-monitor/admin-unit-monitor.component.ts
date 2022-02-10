@@ -5,7 +5,6 @@ import {map, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {PageTitleService} from "../../../../../services/page-title.service";
-import {BreadcrumbService} from "xng-breadcrumb";
 
 @Component({
   selector: 'app-admin-unit-monitor',
@@ -19,12 +18,10 @@ export class AdminUnitMonitorComponent {
 
   constructor(private activatedRoute: ActivatedRoute,
               private unitsService: UnitsService,
-              private breadcrumbService: BreadcrumbService,
               private pageTitleService: PageTitleService) {
     this.unit = this.activatedRoute.data.pipe(
       map(data => data.unit),
-      tap(unit => this.pageTitleService.title = `${unit.id} | Monitor`),
-      tap(unit => this.breadcrumbService.set(`/admin/unit/${unit.id}/settings/monitor`, 'Monitor'))
+      tap(unit => this.pageTitleService.title = `${unit.id} | Monitor`)
     );
 
     this.activatedRoute.queryParams.subscribe(params => {
@@ -32,8 +29,6 @@ export class AdminUnitMonitorComponent {
         this.returnToURL = params.root;
       }
     });
-
-    this.breadcrumbService.set('/admin/unit', {disable: true, label: 'Unit'});
   }
 
   get backRouterLink() {

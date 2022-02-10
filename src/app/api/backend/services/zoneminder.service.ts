@@ -6,6 +6,8 @@ import {MonitorListingResponse} from "../../../data/response/monitor-listing.res
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {MonitorListing} from "../../../data/types/zoneminder";
+import {Unit} from "../../../data/types";
+import {IResponse} from "../../../data/response";
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +49,14 @@ export class ZoneminderService {
       .get;
 
     return this.httpClient.delete(url);
+  }
+
+  createMonitor(name: string, cameraURL: string, unitID: string): Observable<IResponse<Unit>> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/zoneminder')
+      .addSegment('/monitors')
+      .get;
+
+    return this.httpClient.post<IResponse<Unit>>(url, {name, cameraURL, unitID});
   }
 }

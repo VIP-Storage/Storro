@@ -13,6 +13,7 @@
 @use '../account/components/create-account-stepper/create-account-stepper.theme' as create-account-stepper;
 @use 'src/app/modules/admin/admin-components/stat-card/stat-card.theme' as stat-card;
 @use 'src/app/modules/admin/admin-components/action-card/action-card.theme' as action-card;
+@use 'src/app/modules/admin/admin-unit/pages/admin-unit-settings/admin-unit-setting.theme' as admin-unit-setting;
 @use './loading-shade/loading-shade.theme' as loading-shade;
 @use './unit-map/unit-map.theme' as unit-map;
 
@@ -33,6 +34,7 @@
   @include action-card.theme($theme, false);
   @include loading-shade.theme($theme, false);
   @include unit-map.theme($theme, false);
+  @include admin-unit-setting.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -52,4 +54,5 @@
   @include action-card.theme($theme, true);
   @include loading-shade.theme($theme, true);
   @include unit-map.theme($theme, true);
+  @include admin-unit-setting.theme($theme, true);
 }

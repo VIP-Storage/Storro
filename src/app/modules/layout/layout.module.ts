@@ -1,28 +1,35 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SingleCardPageComponent } from './single-card-page/single-card-page.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {SingleCardPageComponent} from './single-card-page/single-card-page.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
-import {BreadcrumbModule} from "xng-breadcrumb";
-
+import { CardGridPageComponent } from './card-grid-page/card-grid-page.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {RouterModule} from "@angular/router";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 @NgModule({
   declarations: [
-    SingleCardPageComponent
+    SingleCardPageComponent,
+    CardGridPageComponent
   ],
-  exports: [
-    SingleCardPageComponent
-  ],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        BreadcrumbModule
-    ]
+    exports: [
+        SingleCardPageComponent,
+        CardGridPageComponent
+    ],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatToolbarModule,
+    RouterModule,
+    MatGridListModule,
+  ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}

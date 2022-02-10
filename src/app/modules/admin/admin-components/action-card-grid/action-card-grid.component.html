@@ -1,8 +1,8 @@
 <div class="actions-grid-inner">
   <div class="actions-list-wrapper">
     <mat-grid-list [cols]="cols" rowHeight="2:1" gutterSize="0px">
-      <mat-grid-tile class="action-tile" *ngFor="let action of actions">
-        <app-action-card hoverElevation [raisedElevation]="1" [title]="action.title" [subtitle]="action.subtitle" [icon]="action.icon" [routerLink]="action.routerLink" [style]="action.style" @fadeIn></app-action-card>
+      <mat-grid-tile class="action-tile" *ngFor="let action of actions; index as index" [@cardGridAnimation]="{value: ':enter', params: {delay: 25 * index}}">
+        <app-action-card hoverElevation [raisedElevation]="1" [title]="action.title" [subtitle]="action.subtitle" [icon]="action.icon" [routerLink]="action.routerLink" [style]="action.style"></app-action-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

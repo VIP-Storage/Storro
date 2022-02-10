@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {MonitorNameValidator} from "../../validators/monitor-name.validator";
 import {ZoneminderService} from "../../../../api/backend/services/zoneminder.service";
 import {Unit} from "../../../../data/types";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-monitor-create',
@@ -11,7 +12,7 @@ import {Unit} from "../../../../data/types";
 })
 export class MonitorCreateComponent {
 
-  error: string|null = null;
+  error: string | null = null;
   submitted: boolean = false;
   monitorNamePattern = `^([A-Z]\\d{3}|\\d[A-Z]\\d{2}|\\d{2}[A-Z]\\d|\\d{3}[A-Z])$`;
   monitorName: FormControl = new FormControl('', [Validators.required, Validators.pattern(this.monitorNamePattern)], MonitorNameValidator.createValidator(this.zoneminderService));
@@ -21,7 +22,7 @@ export class MonitorCreateComponent {
 
 
   @Input()
-  set unit(unit: Unit|null) {
+  set unit(unit: Unit | null) {
     this.currentUnit = unit || undefined;
 
     if (!!unit) {
@@ -35,7 +36,10 @@ export class MonitorCreateComponent {
 
   currentUnit?: Unit;
 
-  constructor(private zoneminderService: ZoneminderService) { }
+  constructor(private zoneminderService: ZoneminderService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
+  }
 
   getMonitorNameErrorMessage() {
     if (this.monitorName.hasError('required')) {
@@ -57,5 +61,19 @@ export class MonitorCreateComponent {
 
   get disableSubmit() {
     return this.monitorName.invalid || this.monitorAddress.invalid || this.submitted;
+  }
+
+  createMonitor() {
+    this.submitted = true;
+    this.error = null;
+
+    this.zoneminderService.createMonitor(this.monitorName.value, this.monitorAddress.value, this.currentUnit!.id).subscribe(res => {
+      if (res.success) {
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute}).then();
+      } else {
+        this.submitted = false;
+        this.error = res.message;
+      }
+    })
   }
 }

@@ -24,6 +24,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {AdminComponentsModule} from "../admin-components/admin-components.module";
 import { AdminUnitMonitorComponent } from './pages/admin-unit-monitor/admin-unit-monitor.component';
 import {LayoutModule} from "../../layout/layout.module";
+import { UnitMonitorSettingComponent } from './components/unit-monitor-setting/unit-monitor-setting.component';
+import {MatRippleModule} from "@angular/material/core";
 
 const routes: Routes = [
   {
@@ -72,6 +74,7 @@ const routes: Routes = [
     AdminUnitSettingsComponent,
     AdminUnitComponent,
     AdminUnitMonitorComponent,
+    UnitMonitorSettingComponent,
   ],
   imports: [
     CommonModule,
@@ -92,7 +95,8 @@ const routes: Routes = [
     MatSelectModule,
     MatToolbarModule,
     AdminComponentsModule,
-    LayoutModule
+    LayoutModule,
+    MatRippleModule
   ]
 })
 export class AdminUnitModule {
