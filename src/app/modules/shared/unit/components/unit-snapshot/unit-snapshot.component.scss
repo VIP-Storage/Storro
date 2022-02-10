@@ -9,7 +9,7 @@
 .snapshot-wrapper {
   flex: 1;
   display: flex;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   padding: 1em;
 
@@ -21,7 +21,13 @@
 
   .download-button {
     position: absolute;
-    bottom: 1em;
-    right: 1em;
+    bottom: 2em;
+    right: 2em;
+  }
+
+  .settings-button {
+    position: absolute;
+    top: 2em;
+    right: 2em;
   }
 }

@@ -3,5 +3,5 @@
                          [title]="unit.zoneMinderMonitor ? 'Change Monitor Assignment' : 'Assign Monitor'"
                          [subtitle]="unit.zoneMinderMonitor ? 'Update the source IP address of the monitor' : 'Add a source IP address of the monitor'">
 
-  <app-monitor-create *ngIf="!unit.zoneMinderMonitor" [unit]="unit"></app-monitor-create>
+  <app-monitor-create [mode]="unit.zoneMinderMonitor ? 'UPDATE' : 'CREATE'" [unit]="unit"></app-monitor-create>
 </layout-single-card-page>

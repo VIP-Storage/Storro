@@ -1,9 +1,9 @@
 <div class="snapshot-wrapper">
   <img [src]="snapshotURL|async" alt="Snapshot">
-  <button class="download-button" color="warn" matTooltip="Download Snapshot" mat-icon-button>
+  <button class="download-button" *ngIf="snapshotURL|async as imageURL" color="accent" matTooltip="Download Snapshot" mat-mini-fab (click)="downloadImage(imageURL)">
     <mat-icon>download</mat-icon>
   </button>
-  <button class="settings-button" *ngIf="showSettings" matTooltip="Settings" mat-icon-button (click)="goToSettings()">
+  <button class="settings-button"  color="primary" *ngIf="showSettings" matTooltip="Settings" mat-mini-fab (click)="goToSettings()">
     <mat-icon>settings</mat-icon>
   </button>
 </div>

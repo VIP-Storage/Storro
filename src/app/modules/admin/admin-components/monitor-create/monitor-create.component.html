@@ -22,6 +22,6 @@
   <mat-error *ngIf="error">{{error}}</mat-error>
 </div>
 
-<app-spinner-button [disabled]="disableSubmit" [submitted]="submitted" (click)="createMonitor()">
-  Assign Monitor
+<app-spinner-button [disabled]="disableSubmit" [submitted]="submitted" (click)="submit()">
+  {{isCreating ? 'Assign' : 'Reassign'}} Monitor
 </app-spinner-button>

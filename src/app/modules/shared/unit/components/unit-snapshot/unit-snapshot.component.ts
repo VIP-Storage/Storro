@@ -78,4 +78,8 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
 
     return null;
   }
+
+  downloadImage(passedURL: any) {
+   return this.unitsService.downloadSnapshot(passedURL);
+  }
 }

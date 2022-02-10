@@ -183,4 +183,39 @@ export class UnitsService {
     return this.httpClient.get<UnitByType[]>(url);
   }
 
+  downloadSnapshot(passedURL: any) {
+    const safeURL: {changingThisBreaksApplicationSecurity: string} = passedURL;
+    const imageURL = safeURL.changingThisBreaksApplicationSecurity;
+
+    this.httpClient.get(imageURL, {responseType: 'blob' as 'json'})
+      .subscribe((res: any) => {
+        const file = new Blob([res], {type: res.type});
+
+        // IE
+        if (window.navigator && window.navigator.hasOwnProperty('msSaveOrOpenBlob')) {
+          // @ts-ignore
+          window.navigator.msSaveOrOpenBlob(file);
+          return;
+        }
+
+        const blob = (window.webkitURL || window.URL).createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = blob;
+        link.download = 'snapshot.png';
+
+        // Version link.click() to work at firefox
+        link.dispatchEvent(new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        }));
+
+        console.log(blob);
+
+        setTimeout(() => { // firefox
+          window.URL.revokeObjectURL(blob);
+          link.remove();
+        }, 100);
+      });
+  }
 }

@@ -20,6 +20,8 @@ export class MonitorCreateComponent {
   monitorAddressPattern = `^(rtsp):\\/\\/([^\\s@/]+)@([^\\s/:]+)(?::([0-9]+))?(\\/.*)`;
   monitorAddress: FormControl = new FormControl('', [Validators.required, Validators.pattern(this.monitorAddressPattern)]);
 
+  @Input()
+  mode: 'UPDATE' | 'CREATE' = 'CREATE';
 
   @Input()
   set unit(unit: Unit | null) {
@@ -63,10 +65,26 @@ export class MonitorCreateComponent {
     return this.monitorName.invalid || this.monitorAddress.invalid || this.submitted;
   }
 
-  createMonitor() {
+  get isCreating() {
+    return this.mode === 'CREATE';
+  }
+
+  submit() {
     this.submitted = true;
     this.error = null;
 
+    if (!this.isCreating && this.currentUnit?.zoneMinderMonitor) {
+      this.zoneminderService.deleteMonitor(this.currentUnit!.zoneMinderMonitor!).subscribe(response => {
+        console.log('deleted', response);
+
+        return this.createMonitor();
+      })
+    } else {
+      return this.createMonitor();
+    }
+  }
+
+  createMonitor() {
     this.zoneminderService.createMonitor(this.monitorName.value, this.monitorAddress.value, this.currentUnit!.id).subscribe(res => {
       if (res.success) {
         this.router.navigate(['../'], {relativeTo: this.activatedRoute}).then();
