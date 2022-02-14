@@ -1,0 +1,107 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.unit-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1em;
+  border-width: 0;
+  border-style: solid;
+  box-shadow: none !important;
+  background-color: transparent!important;
+
+  ::ng-deep {
+    .mat-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .buttons {
+    margin-right: 1.5em;
+  }
+
+  .unit-card-header {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1.6rem;
+    margin-right: 0.7rem;
+    padding-top: 10px;
+
+    .header-action {
+      margin-left: -2.5em;
+      margin-right: 1em;
+    }
+
+    .header-text {
+      flex: 1;
+
+      .mat-card-title {
+        margin-bottom: 12px;
+        display: block;
+        font-size: 20px;
+      }
+
+      .mat-card-subtitle {
+        margin-bottom: 8px;
+        margin-top: -8px;
+      }
+    }
+  }
+}
+
+.chart-grid {
+  margin-top: -1em !important;
+}
+
+.indicator-grid {
+  margin-top: -0.5em;
+}
+
+.manage-grid {
+  max-height: 45%;
+}
+
+.unit-content {
+  padding: 15px;
+
+  .chart-tile {
+    app-unit-chart {
+      margin: 0.8em;
+      height: 90%;
+    }
+  }
+
+  .unit-indicator-tile {
+    app-unit-indicator {
+      margin: 0.8em;
+      height: 75%;
+    }
+  }
+
+  .access-grid-tile {
+    app-access-card, app-access-history-card {
+      margin: 0.8em;
+      flex: 1;
+    }
+  }
+
+  .map-grid-tile {
+    app-unit-map-card {
+      margin: 0.8em;
+      flex: 1;
+    }
+  }
+}
+
+.unit-snapshot-wrapper {
+  margin: 0.8em;
+  height: 90%;
+  width: 100%;
+}

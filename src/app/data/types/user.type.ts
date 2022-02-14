@@ -10,4 +10,5 @@ export interface User {
   lastName: string;
   stripeID: string;
   emailValidated: boolean;
+  sharedAccessCode: string;
 }

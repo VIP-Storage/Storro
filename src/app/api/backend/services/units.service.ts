@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {forkJoin, Observable, of} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {UnitAccessEntryType, UnitDataType, Unit, UnitByType, GeoJSONObject} from "../../../data/types";
+import {UnitAccessEntryType, UnitDataType, Unit, UnitByType, GeoJSONObject, User} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CreateUnitRequest} from "../../../data/requests";
 import {AvailabilitySummaryResponse, IResponse, ManyResponse} from "../../../data/response";
+import {AccessType} from "../../../data/enums";
 
 const CORDOVA_MAP_URL = 'assets/map/cordova/storage-unit-layout.geojson';
 
@@ -20,6 +21,44 @@ export class UnitsService {
 
   constructor(private httpClient: HttpClient) {
   }
+
+  getUserAccess(userID: number, unitID: string): Observable<AccessType> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/user-access-level/')
+      .addSegment(unitID)
+      .addQuery('userID', userID)
+      .get
+
+    return this.httpClient.get<AccessType>(url);
+  }
+
+  allowUserAccess(user: User, unitID: string){
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/access')
+      .addSegment('/allow.')
+      .addSegment(unitID)
+      .get
+
+    return this.httpClient.post<AccessType>(url, {
+      userID: user.id
+    });
+  }
+
+  removeUserAccess(user: User, unitID: string){
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/access')
+      .addSegment('/remove/')
+      .addSegment(unitID)
+      .get
+
+    return this.httpClient.post<AccessType>(url, {
+      userID: user.id
+    });
+  }
+
 
   getMapGeoJSON() {
     return this.httpClient.get<GeoJSONObject>(CORDOVA_MAP_URL)

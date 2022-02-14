@@ -1,0 +1,25 @@
+<mat-toolbar color="accent">
+  <span>Find Guest</span>
+</mat-toolbar>
+<div class="content">
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="01DBC" autocomplete="off" #userSearch>
+    <mat-hint>Search for a user</mat-hint>
+  </mat-form-field>
+
+  <mat-selection-list class="users-list" [@listAnimation]="totalUsers" [multiple]="false" (selectionChange)="userSelectionChange($event)">
+    <mat-list-option class="tenant" *ngFor="let user of users|async" [value]="user.id">
+      <div mat-line class="name">{{user.fullName}}</div>
+      <div mat-line class="email">{{user.emailAddress}}</div>
+      <mat-icon matListIcon [class.selected]="isSelected(user)">
+        {{isSelected(user) ? 'done' : ''}}
+      </mat-icon>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div class="buttons">
+    <button mat-stroked-button>Cancel</button>
+    <app-spinner-button [disabled]="!selectedUserID" [submitted]="submitted" (click)="grantAccess()">Grant</app-spinner-button>
+  </div>
+</div>

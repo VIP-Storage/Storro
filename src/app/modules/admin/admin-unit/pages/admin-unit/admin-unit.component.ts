@@ -1,18 +1,20 @@
-import {Component} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {Component, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Unit, UnitDataType} from "../../../../../data/types";
 import {ChartDataType, UnitIndicatorDataType} from "../../../../../data/enums";
 import {ActivatedRoute} from "@angular/router";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {PageTitleService} from "../../../../../services/page-title.service";
-import {filter, map, tap} from "rxjs/operators";
+import {filter, map, takeUntil, tap} from "rxjs/operators";
+import {storroAnimations} from "../../../../shared/animations";
 
 @Component({
   selector: 'app-admin-unit',
   templateUrl: './admin-unit.component.html',
-  styleUrls: ['./admin-unit.component.scss']
+  styleUrls: ['./admin-unit.component.scss'],
+  animations: storroAnimations
 })
-export class AdminUnitComponent {
+export class AdminUnitComponent implements OnDestroy {
 
   unit: Observable<Unit>;
 
@@ -30,6 +32,7 @@ export class AdminUnitComponent {
 
   unitData: Observable<UnitDataType>;
 
+  private destroyed = new Subject<boolean>();
   private _unitData: BehaviorSubject<UnitDataType | null> = new BehaviorSubject<UnitDataType | null>(null);
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -39,13 +42,20 @@ export class AdminUnitComponent {
       map(data => data.unit),
       tap(unit => this.pageTitleService.title = unit.name),
       tap(unit => this.unitsService.getUnitData(unit).subscribe(this._unitData)),
+      takeUntil(this.destroyed)
     );
 
-    this.unitData = this._unitData.pipe(filter(d => !!d)) as Observable<UnitDataType>;
+    this.unitData = this._unitData.pipe(
+      takeUntil(this.destroyed),
+      filter(d => !!d),
+    ) as Observable<UnitDataType>;
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next(true);
   }
 
   getChartURL(chartType: ChartDataType) {
     return `./chart/${chartType.toLowerCase()}`;
   }
-
 }

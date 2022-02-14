@@ -1,60 +1,45 @@
 <ng-container *ngIf="unit|async as unit">
   <mat-card class="mat-elevation-z0 unit-card">
     <div class="unit-card-header">
-      <div class="header-action" [@onEnterLeft]="{params: {delay: 0}}">
-        <button mat-icon-button routerLink="/client/dashboard">
+      <div class="header-action" @fromTop>
+        <button mat-icon-button routerLink="/admin/units">
           <mat-icon>arrow_back</mat-icon>
         </button>
       </div>
-      <div class="header-text" [@onEnterLeft]="{params: {delay: 200, speed: 650}}">
-        <mat-card-title>
+      <div class="header-text">
+        <mat-card-title @fromTop>
           {{unit.id}}
         </mat-card-title>
-        <mat-card-subtitle>
+        <mat-card-subtitle @fromTop>
           {{unit.location}}
         </mat-card-subtitle>
-      </div>
-      <div class="header-right" [@onEnterLeft]="{params: { delay: 300}}">
-        <div class="buttons">
-          <button mat-icon-button color="primary" matTooltip="Edit" [@onEnterLeft]="{params: { delay: 310}}" routerLink="settings">
-            <mat-icon>settings</mat-icon>
-          </button>
-          <button mat-icon-button customColor="#76ff03" matTooltip="Billing" [@onEnterLeft]="{params: { delay: 320}}">
-            <mat-icon>paid</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" matTooltip="Terminate Contract" [@onEnterLeft]="{params: { delay: 330}}">
-            <mat-icon>remove_circle</mat-icon>
-          </button>
-        </div>
       </div>
     </div>
     <mat-card-content class="unit-content">
       <mat-grid-list class="chart-grid" cols="4" gutterSize="0px" rowHeight="1:1">
-        <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts; index as index" [@onEnterLeft]="{params: {delay: 110 * index}}">
+        <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts; index as index" [@cardGridAnimation]="{value: ':enter', params: {delay: 50 * index}}">
           <app-unit-chart [routerLink]="getChartURL(chart)" hoverElevation [large]="true" [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
         </mat-grid-tile>
-        <mat-grid-tile class="snapshot-tile" colspan="2" [@onEnterLeft]="{params: {delay: 100 * (unitCharts.length)}}">
+
+        <mat-grid-tile class="snapshot-tile" colspan="2" [@cardGridAnimation]="{value: ':enter', params: {delay: 50 * (unitCharts.length + 1)}}">
           <div class="unit-snapshot-wrapper">
-            <app-unit-snapshot [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-unit-snapshot>
+            <app-unit-snapshot mode="ADMIN" [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-unit-snapshot>
           </div>
         </mat-grid-tile>
       </mat-grid-list>
 
       <mat-grid-list class="indicator-grid" cols="4" rowHeight="100px"  gutterSize="0">
-        <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators; index as index" [@onEnterLeft]="{params: {delay: 120 * index}}">
+        <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators; index as index" [@cardGridAnimation]="{value: ':enter', params: {delay: 50 * ((index + 1)/2)}}">
           <app-unit-indicator  hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
         </mat-grid-tile>
       </mat-grid-list>
 
       <mat-grid-list class="manage-grid" cols="4" rowHeight="1:1"  gutterSize="0">
-        <mat-grid-tile class="access-grid-tile" colspan="2" [@onEnterLeft]="{params: {delay: 120}}">
-          <app-access-card [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-card>
+        <mat-grid-tile class="access-grid-tile" colspan="2" [@cardGridAnimation]="{value: ':enter', params: {delay: 100}}">
+          <app-access-card [showRequestButton]="false" [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-card>
         </mat-grid-tile>
-        <mat-grid-tile class="access-grid-tile" rowspan="1" colspan="2" [@onEnterLeft]="{params: {delay: 120}}">
+        <mat-grid-tile class="access-grid-tile" rowspan="1" colspan="2" [@cardGridAnimation]="{value: ':enter', params: {delay: 150}}">
           <app-access-history-card [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-history-card>
-        </mat-grid-tile>
-        <mat-grid-tile class="map-grid-tile" rowspan="2" colspan="4" [@onEnterLeft]="{params: {delay: 120}}">
-          <app-unit-map-card [unit]="unit"></app-unit-map-card>
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>

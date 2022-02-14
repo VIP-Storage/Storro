@@ -5,8 +5,15 @@
     <span class="access-count">{{userAccessCount|async}}</span>
     <span class="access-details">{{(userAccessCount|async) === 1 ? 'User has' : 'Users have'}} access</span>
   </div>
+  <div class="action-list">
+    <mat-list>
+      <mat-list-item *ngFor="let guest of guests|async">
+        {{guest.firstName}} {{guest.lastName}}
+      </mat-list-item>
+    </mat-list>
+  </div>
   <div class="button-wrapper">
-    <button mat-flat-button color="primary">Manage Access</button>
-    <button mat-flat-button color="secondary">Request New Credential</button>
+    <button mat-flat-button color="primary" (click)="addUser()">Add Access</button>
+    <button mat-flat-button color="secondary" *ngIf="showRequestButton" (click)="requestKeycard()">Request New Credential</button>
   </div>
 </div>

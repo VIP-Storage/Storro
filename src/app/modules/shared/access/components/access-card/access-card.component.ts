@@ -3,6 +3,9 @@ import {Unit, User} from "../../../../../data/types";
 import {UserService} from "../../../../../api/backend/services/user.service";
 import {BehaviorSubject} from "rxjs";
 import {storroAnimations} from "../../../animations";
+import {RequestKeyCardComponent} from "../../../../client/dialogs/request-key-card/request-key-card.component";
+import {MatDialog} from "@angular/material/dialog";
+import {FindGuestDialogComponent} from "../../../dialogs/find-guest-dialog/find-guest-dialog.component";
 
 @Component({
   selector: 'app-access-card',
@@ -19,6 +22,9 @@ export class AccessCardComponent {
   userAccessCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   @Input()
+  showRequestButton: boolean = true;
+
+  @Input()
   @HostBinding('class.show-background')
   showBackground: boolean = true;
 
@@ -26,20 +32,32 @@ export class AccessCardComponent {
   set unit(unit: Unit|null) {
     if (!!unit) {
       this._unit = unit;
-      this.fetchUsers();
+      this.fetchGuests();
     }
   }
 
-  users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  guests: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   private _unit?: Unit;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private matDialog: MatDialog) { }
 
-  private fetchUsers() {
-    if (!!this._unit) {
-
+  private fetchGuests() {
+    if (!!this._unit && !!this.unit?.guests) {
+      this.guests.next(this.unit?.guests);
+      this.userAccessCount.next(this.unit?.guests.length);
     }
   }
 
+  requestKeycard() {
+    this.matDialog.open(RequestKeyCardComponent, {
+      panelClass: RequestKeyCardComponent.panelClass
+    });
+  }
+
+  addUser() {
+    this.matDialog.open(FindGuestDialogComponent, {
+      panelClass: FindGuestDialogComponent.panelClass
+    });
+  }
 }

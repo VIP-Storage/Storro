@@ -1,0 +1,96 @@
+.content {
+  padding: 1.2em;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 460px;
+  min-height: 380px;
+}
+
+.content {
+  padding: 1.2em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .mat-form-field {
+      height: 78px;
+    }
+
+    mat-divider {
+      position: relative;
+      margin-bottom: 2em;
+    }
+  }
+}
+
+.error-wrapper {
+  height: 22px;
+  margin-bottom: 1em;
+}
+
+mat-toolbar {
+  justify-content: center;
+
+  span {
+    text-align: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+
+  button, app-spinner-button {
+    width: 200px;
+  }
+
+  app-spinner-button {
+    margin-right: 1em;
+  }
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+.users-list {
+  flex: 1;
+
+  ::ng-deep {
+    .mat-list-item-content {
+      flex-direction: row !important;
+      padding: 0 !important;
+    }
+
+    .mat-icon {
+      opacity: 0;
+      transition: opacity 200ms ease-in-out;
+
+      &.selected {
+        opacity: 1;
+      }
+    }
+  }
+
+  .tenant {
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: auto;
+    flex: 1;
+    margin: 0 0 0.5em;
+
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+}

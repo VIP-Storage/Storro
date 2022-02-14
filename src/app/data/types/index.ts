@@ -4,6 +4,8 @@ export * from './accounts';
 export * from './billing';
 export * from './chart';
 export * from './keycard';
+export * from './zoneminder';
+export * from './access-user.type';
 export * from './badge.type';
 export * from './billing-history.type';
 export * from './geo-json.type';

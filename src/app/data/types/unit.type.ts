@@ -2,7 +2,7 @@ import {User} from "./user.type";
 
 export interface Unit {
   ownerID: number;
-  guests: User[];
+  guests?: User[];
   armed: boolean;
   id: string;
   lastUpdated: Date;

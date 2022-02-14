@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from "../../../data/types";
+import {AccessUser, User} from "../../../data/types";
 import {map, shareReplay} from "rxjs/operators";
 import {Burly} from "kb-burly";
 import {environment} from "../../../../environments/environment";
@@ -48,6 +48,16 @@ export class UserService {
     }
 
     return this.$currentRole!;
+  }
+
+  searchByAccessCode(sharedAccessCode: string): Observable<AccessUser[]> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/users')
+      .addSegment('/byAccessCode')
+      .addQuery('sharedAccessCode', sharedAccessCode)
+      .get;
+
+    return this.httpClient.get<AccessUser[]>(url);
   }
 
   getTenants(pageNumber: number, pageSize: number, sortBy?: string, sortDirection?: any, searchValue?: string | null) {

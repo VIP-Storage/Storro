@@ -1,5 +1,6 @@
 // created from 'create-ts-index'
 
+export * from './access-type.enum';
 export * from './bill-status.enum';
 export * from './chart-data.enum';
 export * from './door-state.enum';

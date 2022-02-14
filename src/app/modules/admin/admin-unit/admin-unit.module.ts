@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AdminUnitSettingsComponent} from './pages/admin-unit-settings/admin-unit-settings.component';
 import {RouterModule, Routes} from "@angular/router";
 import {UnitResolver} from "../resolvers";
-import {UnitOverviewComponent} from "../../shared/unit/pages/unit-overview/unit-overview.component";
 import {AdminUnitComponent} from "./pages/admin-unit/admin-unit.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -24,26 +22,18 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {AdminComponentsModule} from "../admin-components/admin-components.module";
 import { AdminUnitMonitorComponent } from './pages/admin-unit-monitor/admin-unit-monitor.component';
 import {LayoutModule} from "../../layout/layout.module";
-import { UnitMonitorSettingComponent } from './components/unit-monitor-setting/unit-monitor-setting.component';
 import {MatRippleModule} from "@angular/material/core";
 
 const routes: Routes = [
   {
     path: ':id',
-    component: UnitOverviewComponent,
+    component: AdminUnitComponent,
     resolve: {
       unit: UnitResolver,
     },
     data: {
       mode: 'ADMIN'
     },
-  },
-  {
-    path: ':id/settings',
-    resolve: {
-      unit: UnitResolver
-    },
-    component: AdminUnitSettingsComponent
   },
   {
     path: ':id/settings/monitor',
@@ -71,10 +61,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AdminUnitSettingsComponent,
     AdminUnitComponent,
     AdminUnitMonitorComponent,
-    UnitMonitorSettingComponent,
   ],
   imports: [
     CommonModule,

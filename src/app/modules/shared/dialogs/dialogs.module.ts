@@ -16,6 +16,8 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { KeyCardDialogComponent } from './key-card-dialog/key-card-dialog.component';
 import {NgxMaskModule} from "ngx-mask";
+import { FindGuestDialogComponent } from './find-guest-dialog/find-guest-dialog.component';
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import {NgxMaskModule} from "ngx-mask";
     DebugDialogComponent,
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    KeyCardDialogComponent
+    KeyCardDialogComponent,
+    FindGuestDialogComponent
   ],
   exports: [
     DebugDialogComponent
@@ -41,7 +44,8 @@ import {NgxMaskModule} from "ngx-mask";
         MatDividerModule,
         MatSelectModule,
         MatCheckboxModule,
-        NgxMaskModule.forChild()
+        NgxMaskModule.forChild(),
+        MatListModule
     ]
 })
 export class DialogsModule {
