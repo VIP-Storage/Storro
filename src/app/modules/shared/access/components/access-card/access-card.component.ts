@@ -1,11 +1,12 @@
 import {Component, HostBinding, Input} from '@angular/core';
 import {Unit, User} from "../../../../../data/types";
 import {UserService} from "../../../../../api/backend/services/user.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of, switchMap} from "rxjs";
 import {storroAnimations} from "../../../animations";
 import {RequestKeyCardComponent} from "../../../../client/dialogs/request-key-card/request-key-card.component";
 import {MatDialog} from "@angular/material/dialog";
 import {FindGuestDialogComponent} from "../../../dialogs/find-guest-dialog/find-guest-dialog.component";
+import {UnitsService} from "../../../../../api/backend/services/units.service";
 
 @Component({
   selector: 'app-access-card',
@@ -40,12 +41,14 @@ export class AccessCardComponent {
 
   private _unit?: Unit;
 
-  constructor(private userService: UserService, private matDialog: MatDialog) { }
+  constructor(private userService: UserService,
+              private unitService: UnitsService,
+              private matDialog: MatDialog) { }
 
   private fetchGuests() {
-    if (!!this._unit && !!this.unit?.guests) {
-      this.guests.next(this.unit?.guests);
-      this.userAccessCount.next(this.unit?.guests.length);
+    if (!!this._unit && !!this._unit?.guests) {
+      this.guests.next(this._unit?.guests);
+      this.userAccessCount.next(this._unit?.guests.length);
     }
   }
 
@@ -57,7 +60,42 @@ export class AccessCardComponent {
 
   addUser() {
     this.matDialog.open(FindGuestDialogComponent, {
-      panelClass: FindGuestDialogComponent.panelClass
-    });
+      panelClass: FindGuestDialogComponent.panelClass,
+      data: this._unit
+    }).afterClosed().pipe(
+      switchMap(response => {
+        if (!!response && !!this._unit?.id) {
+          return this.unitService.getUnit(this._unit?.id)
+        }
+
+        return of(null)
+      })
+    ).subscribe(nullOrUnit => {
+      if (!!nullOrUnit) {
+        this.unit = nullOrUnit as Unit;
+      }
+    })
+  }
+
+  isOwner(user: User) {
+    return this._unit?.ownerID === user.id;
+  }
+
+  revokeAccess(user: User) {
+   if (!!this._unit) {
+     this.unitService.removeUserAccess(user.id, this._unit.id).pipe(
+       switchMap(response => {
+         if (response.success && !!this._unit?.id) {
+           return this.unitService.getUnit(this._unit?.id)
+         }
+
+         return of(null)
+       })
+     ).subscribe(nullOrUnit => {
+       if (!!nullOrUnit) {
+         this.unit = nullOrUnit as Unit;
+       }
+     })
+   }
   }
 }

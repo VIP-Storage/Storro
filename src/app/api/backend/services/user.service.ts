@@ -50,11 +50,12 @@ export class UserService {
     return this.$currentRole!;
   }
 
-  searchByAccessCode(sharedAccessCode: string): Observable<AccessUser[]> {
+  searchByAccessCode(sharedAccessCode: string, unitID: string|null = null): Observable<AccessUser[]> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/users')
       .addSegment('/byAccessCode')
       .addQuery('sharedAccessCode', sharedAccessCode)
+      .addQuery('unitID', unitID, false)
       .get;
 
     return this.httpClient.get<AccessUser[]>(url);

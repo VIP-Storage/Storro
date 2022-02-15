@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {storroAnimations} from "../../shared/animations";
 
@@ -20,6 +20,15 @@ export class SingleCardPageComponent {
   backRouterLink?: string;
 
   @Input()
+  showAddButton = false;
+
+  @Input()
+  addButtonTooltip?: string|null = null;
+
+  @Input()
+  fullWidth: boolean = false;
+
+  @Input()
   set showDivider(newValue: boolean | string) {
     if (typeof newValue === "boolean") {
       this.dividerEnabled = (newValue as boolean)
@@ -36,6 +45,9 @@ export class SingleCardPageComponent {
       this.stepperMode = (newValue === 'true');
     }
   }
+
+  @Output()
+  addClicked = new EventEmitter<any>();
 
   dividerEnabled: boolean = true;
   stepperMode: boolean = false;

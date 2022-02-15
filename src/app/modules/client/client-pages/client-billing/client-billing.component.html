@@ -8,7 +8,7 @@
         </button>
       </div>
 
-      <div class="payment-methods" @staggerList>
+      <div class="payment-methods" @listAnimation>
         <app-payment-method class="list-item" *ngFor="let method of paymentMethods|async"
                             (deleteClicked)="deletePaymentMethod(method.id)"
                             [title]="method.name"

@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, fromEvent, Subscription} from "rxjs";
 import {distinctUntilChanged} from "rxjs/operators";
 import {storroAnimations} from "../../../shared/animations";
+import {Browser} from "leaflet";
+import win = Browser.win;
 
 @Component({
   selector: 'app-action-card-grid',
@@ -58,8 +60,12 @@ export class ActionCardGridComponent implements OnInit, OnDestroy {
   }
 
   private setSize() {
-    let n = Math.ceil(window.innerWidth / 800);
-    this.cols = ((n % 2 === 0) ? n : n - 1);
+   if (window.innerWidth < 1600) {
+     this.cols = 1;
+   } else {
+     let n = Math.ceil(window.innerWidth / 800);
+     this.cols = ((n % 2 === 0) ? n : n - 1);
+   }
   }
 
 }

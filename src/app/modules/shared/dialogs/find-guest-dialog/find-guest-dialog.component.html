@@ -5,7 +5,7 @@
   <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Search</mat-label>
     <input matInput placeholder="01DBC" autocomplete="off" #userSearch>
-    <mat-hint>Search for a user</mat-hint>
+    <mat-hint>Search for a user using their <b>Shared Access Code</b></mat-hint>
   </mat-form-field>
 
   <mat-selection-list class="users-list" [@listAnimation]="totalUsers" [multiple]="false" (selectionChange)="userSelectionChange($event)">
@@ -16,10 +16,14 @@
         {{isSelected(user) ? 'done' : ''}}
       </mat-icon>
     </mat-list-option>
+
+    <div class="no-data" *ngIf="totalUsers === 0">
+      <h1>No results</h1>
+    </div>
   </mat-selection-list>
 
   <div class="buttons">
-    <button mat-stroked-button>Cancel</button>
+    <button mat-stroked-button (click)="close()">Cancel</button>
     <app-spinner-button [disabled]="!selectedUserID" [submitted]="submitted" (click)="grantAccess()">Grant</app-spinner-button>
   </div>
 </div>

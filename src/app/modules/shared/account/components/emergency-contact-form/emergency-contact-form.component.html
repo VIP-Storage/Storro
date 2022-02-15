@@ -1,0 +1,21 @@
+<form [formGroup]="emergencyContactFormGroup" class="emergency-contact-group">
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Full Name</mat-label>
+    <input matInput [formControl]="fullName" placeholder="Bob Smith" required autocomplete="off">
+    <mat-error *ngIf="fullName.invalid">{{getErrorMessage(fullName)}}</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Phone Number</mat-label>
+    <input matInput mask="(000)-000-0000" [formControl]="primaryPhone" placeholder="123-345-3212" required
+           autocomplete="off">
+    <mat-error *ngIf="primaryPhone.invalid">{{getErrorMessage(primaryPhone, 'phone number')}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Relationship</mat-label>
+    <input matInput [formControl]="relationship" placeholder="Father" required autocomplete="off">
+    <mat-error *ngIf="relationship.invalid">{{getErrorMessage(relationship)}}</mat-error>
+  </mat-form-field>
+</form>

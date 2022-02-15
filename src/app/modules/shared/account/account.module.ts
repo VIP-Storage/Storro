@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MailingAddressCardComponent} from './components/mailing-address-card/mailing-address-card.component';
 import {MatButtonModule} from "@angular/material/button";
 import {CreateAccountStepperComponent} from './components/create-account-stepper/create-account-stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
@@ -13,17 +12,24 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {NgxMaskModule} from "ngx-mask";
 import {SharedModule} from "../shared.module";
+import {MailingAddressFormComponent} from './components/mailing-address-form/mailing-address-form.component';
+import {EmergencyContactFormComponent} from './components/emergency-contact-form/emergency-contact-form.component';
+import {PersonalInfoFormComponent} from "./components/personal-info-form/personal-info-form.component";
 
 
 @NgModule({
   declarations: [
-    MailingAddressCardComponent,
-    CreateAccountStepperComponent
+    CreateAccountStepperComponent,
+    MailingAddressFormComponent,
+    EmergencyContactFormComponent,
+    PersonalInfoFormComponent
   ],
-  exports: [
-    MailingAddressCardComponent,
-    CreateAccountStepperComponent
-  ],
+    exports: [
+        CreateAccountStepperComponent,
+        MailingAddressFormComponent,
+        EmergencyContactFormComponent,
+        PersonalInfoFormComponent
+    ],
   imports: [
     CommonModule,
     MatButtonModule,

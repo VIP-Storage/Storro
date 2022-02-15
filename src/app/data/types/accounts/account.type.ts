@@ -10,4 +10,5 @@ export interface Account {
   mailingAddress: MailingAddress;
   driversLicense: DriversLicense;
   emergencyContact: EmergencyContact;
+  primaryPhone: string;
 }

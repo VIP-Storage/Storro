@@ -10,11 +10,18 @@ import {AccountModule} from "../../shared/account/account.module";
 import {MatDividerModule} from "@angular/material/divider";
 import {SharedModule} from "../../shared/shared.module";
 import {MatTabsModule} from "@angular/material/tabs";
-import { ClientCredentialsCardComponent } from './components/client-credentials-card/client-credentials-card.component';
 import {MatListModule} from "@angular/material/list";
-import { ClientRequestedCredentialsCardComponent } from './components/client-requested-credentials-card/client-requested-credentials-card.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {LayoutModule} from "../../layout/layout.module";
+import {ClientAccountGridComponent} from './components/client-account-grid/client-account-grid.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {ClientAccountGridCardComponent} from './components/client-account-grid-card/client-account-grid-card.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatRippleModule} from "@angular/material/core";
+import {ClientCredentialsComponent} from './pages/client-credentials/client-credentials.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {ClientPersonalComponent} from './pages/client-personal/client-personal.component';
 
 
 const routes: Routes = [
@@ -29,6 +36,17 @@ const routes: Routes = [
     path: 'setup',
     canActivate: [NoAccountGuard],
     component: ClientAccountSetupComponent
+  },
+  {
+    path: 'credentials',
+    component: ClientCredentialsComponent,
+  },
+  {
+    path: 'personal',
+    component: ClientPersonalComponent,
+    resolve: {
+      account: AccountResolver
+    }
   }
 ]
 
@@ -36,8 +54,10 @@ const routes: Routes = [
   declarations: [
     ClientAccountComponent,
     ClientAccountSetupComponent,
-    ClientCredentialsCardComponent,
-    ClientRequestedCredentialsCardComponent
+    ClientAccountGridComponent,
+    ClientAccountGridCardComponent,
+    ClientCredentialsComponent,
+    ClientPersonalComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +69,12 @@ const routes: Routes = [
     MatTabsModule,
     MatListModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    LayoutModule,
+    MatGridListModule,
+    MatIconModule,
+    MatRippleModule,
+    MatTooltipModule
   ]
 })
 export class ClientAccountModule {

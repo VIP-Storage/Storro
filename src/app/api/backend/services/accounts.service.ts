@@ -36,10 +36,10 @@ export class AccountsService {
     return this.httpClient.get<IResponse<Account|string>>(url);
   }
 
-  updateAccount(account: Account): Observable<Account> {
+  updateAccount(id: string, account: Partial<Account>): Observable<Account> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/accounts/')
-      .addSegment(account.id)
+      .addSegment(id)
       .get;
 
 

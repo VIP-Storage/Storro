@@ -9,6 +9,7 @@ import { CardGridPageComponent } from './card-grid-page/card-grid-page.component
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {RouterModule} from "@angular/router";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -20,16 +21,17 @@ import {MatGridListModule} from "@angular/material/grid-list";
         SingleCardPageComponent,
         CardGridPageComponent
     ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatToolbarModule,
-    RouterModule,
-    MatGridListModule,
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatToolbarModule,
+        RouterModule,
+        MatGridListModule,
+        MatTooltipModule,
+    ]
 })
 export class LayoutModule {
 }

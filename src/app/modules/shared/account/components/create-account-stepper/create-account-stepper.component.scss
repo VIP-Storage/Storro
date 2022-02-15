@@ -2,63 +2,9 @@
   height: 100%;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-
-  .mat-form-field:first-child {
-    margin-top: 1.5em;
-  }
-
-  .mat-form-field {
-    margin-bottom: 1em;
-
-    .mat-error {
-      font-size: 12px;
-    }
-  }
-}
-
 h1 {
   margin: 0!important;
 }
-
-.address-group {
-  .mat-form-field:first-child {
-    margin-bottom: 1em;
-  }
-  mat-divider {
-    position: relative;
-    margin-top: 1em;
-    margin-bottom: 2em;
-  }
-}
-
-.personal-group {
-  mat-divider {
-    margin-top: 1em;
-    margin-bottom: 1em;
-  }
-
-  .subtitle {
-    display: flex;
-    margin-bottom: 1em;
-    margin-top: 2em;
-    justify-content: center;
-    align-items: center;
-
-    .mat-divider {
-      flex: 1;
-      position: relative;
-      margin-left: 1em;
-    }
-
-    span {
-      font-size: 18px;
-    }
-  }
-}
-
 
 mat-stepper {
   height: 100%;

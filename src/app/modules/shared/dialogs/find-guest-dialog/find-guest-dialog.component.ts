@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {fromEvent, Observable} from "rxjs";
 import {debounceTime, distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 import {UserService} from "../../../../api/backend/services/user.service";
-import {AccessUser} from "../../../../data/types";
+import {AccessUser, Unit} from "../../../../data/types";
 import {MatSelectionListChange} from "@angular/material/list";
 import {storroAnimations} from "../../animations";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 
 @Component({
@@ -21,14 +21,16 @@ export class FindGuestDialogComponent implements AfterViewInit {
   static panelClass = 'find-guest-dialog';
 
   submitted: boolean = false;
-  error: string|null = null;
+  error: string | null = null;
   users!: Observable<AccessUser[]>
-  totalUsers: number = 0;
-  selectedUserID?: number|null = null;
+  totalUsers: number | null = null;
+  selectedUserID?: number | null = null;
 
-  constructor(private userService: UserService,
+  constructor(@Inject(MAT_DIALOG_DATA) public unit: Unit,
+              private userService: UserService,
               private unitsService: UnitsService,
-              private dialogRef: MatDialogRef<FindGuestDialogComponent>) { }
+              private dialogRef: MatDialogRef<FindGuestDialogComponent>) {
+  }
 
   ngAfterViewInit() {
     this.users = fromEvent(this.userSearchInput.nativeElement, 'keyup')
@@ -37,7 +39,7 @@ export class FindGuestDialogComponent implements AfterViewInit {
         debounceTime(150),
         distinctUntilChanged(),
         switchMap(() => {
-          return this.userService.searchByAccessCode(this.userSearchInput.nativeElement.value);
+          return this.userService.searchByAccessCode(this.userSearchInput.nativeElement.value, this.unit.id);
         }),
         map(response => {
           this.totalUsers = response.length;
@@ -61,7 +63,19 @@ export class FindGuestDialogComponent implements AfterViewInit {
   }
 
   grantAccess() {
+    if (!!this.selectedUserID) {
+      this.submitted = true;
+      this.error = null;
 
+      this.unitsService.allowUserAccess(this.selectedUserID, this.unit.id).subscribe(response => {
+        if (response.success) {
+          this.dialogRef.close(response.data)
+        } else {
+          this.error = response.message || response.errorMessage;
+          this.submitted = false;
+        }
+      });
+    }
   }
 
   close() {

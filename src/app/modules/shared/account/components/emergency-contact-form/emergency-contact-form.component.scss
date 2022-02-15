@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-direction: column;
+
+  .mat-form-field:first-child {
+    margin-top: 1.5em;
+  }
+
+  .mat-form-field {
+    margin-bottom: 1em;
+
+    .mat-error {
+      font-size: 12px;
+    }
+  }
+}

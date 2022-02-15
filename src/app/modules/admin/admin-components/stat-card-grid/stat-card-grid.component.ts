@@ -50,7 +50,13 @@ export class StatCardGridComponent implements OnInit, OnDestroy {
   }
 
   private setSize() {
-    let n = Math.ceil(window.innerWidth / 400);
-    this.cols = ((n % 2 === 0) ? n : n - 1);
+    if (window.innerWidth <= 1650 && window.innerWidth >= 1300) {
+      this.cols = 3;
+    } else if ( window.innerWidth < 1300) {
+      this.cols = 2;
+    } else {
+      let n = Math.ceil(window.innerWidth / 400);
+      this.cols = ((n % 2 === 0) ? n : n - 1);
+    }
   }
 }

@@ -1,0 +1,49 @@
+<form [formGroup]="personalInformationFormGroup" class="personal-group" >
+  <div class="subtitle">
+    <span>Driver's License</span>
+    <mat-divider></mat-divider>
+  </div>
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Driver's License Number</mat-label>
+    <input matInput [formControl]="driversLicenseNumber" type="number" placeholder="123456789" required
+           autocomplete="off">
+    <mat-error
+      *ngIf="driversLicenseNumber.invalid">{{getErrorMessage(driversLicenseNumber, "Driver's License Number")}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>State</mat-label>
+    <mat-select [formControl]="driversLicenseState" placeholder="California">
+      <mat-option *ngFor="let state of allStates" [value]="state.abbreviation">{{state.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Expiration Date</mat-label>
+    <input autocomplete="off" placeholder="03/24" matInput mask="00/00" [formControl]="driversLicenseExpiration"
+           required>
+    <mat-error
+      *ngIf="driversLicenseExpiration.invalid">{{getErrorMessage(driversLicenseExpiration, "Driver's License Expiration")}}</mat-error>
+  </mat-form-field>
+
+  <div class="subtitle">
+    <span>Other Details</span>
+    <mat-divider></mat-divider>
+  </div>
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Phone Number</mat-label>
+    <input matInput mask="(000)-000-0000" [formControl]="personalPhoneNumber" placeholder="123-345-3212" required autocomplete="tel">
+    <mat-error
+      *ngIf="personalPhoneNumber.invalid">{{getErrorMessage(personalPhoneNumber, "phone number")}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Date of Birth</mat-label>
+    <input placeholder="03/08/1999" type="date" matInput [matDatepicker]="picker" [formControl]="dateOfBirth" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="dateOfBirth.invalid">{{getErrorMessage(dateOfBirth, "date of birth")}}</mat-error>
+  </mat-form-field>
+</form>

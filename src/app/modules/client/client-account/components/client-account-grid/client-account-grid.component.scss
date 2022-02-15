@@ -1,0 +1,8 @@
+.account-tile {
+  ::ng-deep {
+    .mat-grid-tile-content {
+      align-items: unset!important;
+      justify-content: unset!important;
+    }
+  }
+}

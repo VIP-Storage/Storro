@@ -1,144 +1,40 @@
-<mat-stepper orientation="vertical" linear *ngIf="googleAvailable">
-  <mat-step [stepControl]="mailingAddressFormGroup">
-    <form [formGroup]="mailingAddressFormGroup" class="address-group">
-      <ng-template matStepLabel>
-        <h1>Mailing Address</h1>
-      </ng-template>
-
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Search</mat-label>
-        <input ngx-google-places-autocomplete (onAddressChange)="addressChanged($event)" matInput
-               placeholder="123 N. Main Street" autocomplete="off">
-        <mat-hint>Search for your address using the field above or manually enter it below</mat-hint>
-      </mat-form-field>
-
-      <mat-divider></mat-divider>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Street Address</mat-label>
-        <input matInput placeholder="123 N. Main Street" [formControl]="streetAddress" required autocomplete="address-line1">
-        <mat-error *ngIf="streetAddress.invalid">{{getErrorMessage(streetAddress)}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="Pleasantville" [formControl]="city" required autocomplete="address-level2">
-        <mat-error *ngIf="city.invalid">{{getErrorMessage(city)}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>State</mat-label>
-        <mat-select [formControl]="state" placeholder="California">
-          <mat-option *ngFor="let state of allStates" [value]="state.abbreviation">{{state.name}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="state.invalid">{{getErrorMessage(state)}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>ZIP Code</mat-label>
-        <input matInput placeholder="12345" [formControl]="zipCode" mask="00000" required autocomplete="postal-code">
-        <mat-error *ngIf="zipCode.invalid">{{getErrorMessage(zipCode, 'ZIP Code')}}</mat-error>
-      </mat-form-field>
-      <div class="buttons">
-        <button mat-stroked-button matStepperNext [disabled]="addressNextDisabled">Next</button>
-      </div>
-    </form>
+<mat-stepper orientation="vertical" linear>
+  <mat-step [stepControl]="mailingAddressFormComponent.mailingAddressFormGroup">
+    <ng-template matStepLabel>
+      <h1>Mailing Address</h1>
+    </ng-template>
+    <app-mailing-address-form #mailingAddressFormComponent [googleAvailable]="googleAvailable"></app-mailing-address-form>
+    <div class="buttons">
+      <button mat-stroked-button matStepperNext [disabled]="mailingAddressFormComponent.addressNextDisabled">Next
+      </button>
+    </div>
   </mat-step>
-  <mat-step [stepControl]="personalInformationFormGroup">
-    <form [formGroup]="personalInformationFormGroup" class="personal-group">
-      <ng-template matStepLabel>
-        <h1>Personal Information</h1>
-      </ng-template>
-
-      <div class="subtitle">
-        <span>Driver's License</span>
-        <mat-divider></mat-divider>
-      </div>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Driver's License Number</mat-label>
-        <input matInput [formControl]="driversLicenseNumber" type="number" placeholder="123456789" required
-               autocomplete="off">
-        <mat-error
-          *ngIf="driversLicenseNumber.invalid">{{getErrorMessage(driversLicenseNumber, "Driver's License Number")}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>State</mat-label>
-        <mat-select [formControl]="driversLicenseState" placeholder="California">
-          <mat-option *ngFor="let state of allStates" [value]="state.abbreviation">{{state.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Expiration Date</mat-label>
-        <input autocomplete="off" placeholder="03/24" matInput mask="00/00" [formControl]="driversLicenseExpiration"
-               required>
-        <mat-error
-          *ngIf="driversLicenseExpiration.invalid">{{getErrorMessage(driversLicenseExpiration, "Driver's License Expiration")}}</mat-error>
-      </mat-form-field>
-
-      <div class="subtitle">
-        <span>Other Details</span>
-        <mat-divider></mat-divider>
-      </div>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Phone Number</mat-label>
-        <input matInput mask="(000)-000-0000" [formControl]="personalPhoneNumber" placeholder="123-345-3212" required autocomplete="tel">
-        <mat-error
-          *ngIf="personalPhoneNumber.invalid">{{getErrorMessage(personalPhoneNumber, "phone number")}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Date of Birth</mat-label>
-        <input placeholder="03/08/1999" type="date" matInput [matDatepicker]="birthdayPicker" [formControl]="dateOfBirth" required>
-        <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
-        <mat-datepicker #birthdayPicker></mat-datepicker>
-        <mat-error *ngIf="dateOfBirth.invalid">{{getErrorMessage(dateOfBirth, "date of birth")}}</mat-error>
-      </mat-form-field>
-
-      <div class="buttons">
-        <button mat-stroked-button matStepperPrevious>Back</button>
-        <button mat-stroked-button matStepperNext [disabled]="personalNextDisabled">Next</button>
-      </div>
-    </form>
+  <mat-step [stepControl]="personalInfoFormComponent.personalInformationFormGroup">
+    <ng-template matStepLabel>
+      <h1>Personal Information</h1>
+    </ng-template>
+    <app-personal-info-form #personalInfoFormComponent></app-personal-info-form>
+    <div class="buttons">
+      <button mat-stroked-button matStepperPrevious>Back</button>
+      <button mat-stroked-button matStepperNext [disabled]="personalInfoFormComponent.personalNextDisabled">Next
+      </button>
+    </div>
   </mat-step>
-  <mat-step [stepControl]="emergencyContactFormGroup">
-    <form [formGroup]="emergencyContactFormGroup" class="emergency-contact-group">
-      <ng-template matStepLabel>
-        <h1>Emergency Contact</h1>
-      </ng-template>
+  <mat-step [stepControl]="emergencyContactFormComponent.emergencyContactFormGroup">
+    <ng-template matStepLabel>
+      <h1>Emergency Contact</h1>
+    </ng-template>
 
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Full Name</mat-label>
-        <input matInput [formControl]="fullName" placeholder="Bob Smith" required autocomplete="off">
-        <mat-error *ngIf="fullName.invalid">{{getErrorMessage(fullName)}}</mat-error>
-      </mat-form-field>
+    <app-emergency-contact-form #emergencyContactFormComponent></app-emergency-contact-form>
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
 
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Phone Number</mat-label>
-        <input matInput mask="(000)-000-0000" [formControl]="primaryPhone" placeholder="123-345-3212" required
-               autocomplete="off">
-        <mat-error *ngIf="primaryPhone.invalid">{{getErrorMessage(primaryPhone, 'phone number')}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Relationship</mat-label>
-        <input matInput [formControl]="relationship" placeholder="Father" required autocomplete="off">
-        <mat-error *ngIf="relationship.invalid">{{getErrorMessage(relationship)}}</mat-error>
-      </mat-form-field>
-
-      <div class="error-wrapper">
-        <mat-error *ngIf="error">{{error}}</mat-error>
-      </div>
-
-      <div class="buttons">
-        <button mat-stroked-button matStepperPrevious>Back</button>
-        <app-spinner-button [disabled]="saveDisabled" [submitted]="submitted" (click)="createAccount()">Save</app-spinner-button>
-      </div>
-    </form>
+    <div class="buttons">
+      <button mat-stroked-button matStepperPrevious>Back</button>
+      <app-spinner-button [disabled]="emergencyContactFormComponent.saveDisabled" [submitted]="submitted"
+                          (click)="createAccount()">Save
+      </app-spinner-button>
+    </div>
   </mat-step>
 </mat-stepper>

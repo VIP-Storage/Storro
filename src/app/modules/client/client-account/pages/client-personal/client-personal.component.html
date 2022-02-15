@@ -1,0 +1,45 @@
+<layout-single-card-page title="Personal"
+                         subtitle="View and modify information like driver's license, mailing address, and emergency contacts"
+                         [fullWidth]="true" backRouterLink="../">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Mailing Address">
+      <div class="content">
+        <app-mailing-address-form class="form" #addressFormComponent [googleAvailable]="scriptLoaded"
+                                  [account]="account|async"></app-mailing-address-form>
+        <div class="buttons">
+          <button mat-stroked-button
+                  [disabled]="addressFormComponent.addressNextDisabled || this.submittedMailingAddress"
+                  (click)="updateMailingAddress()">Save
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Emergency Contact">
+      <div class="content">
+        <app-emergency-contact-form class="form" [account]="account|async"
+                                    #emergencyContactFormComponent></app-emergency-contact-form>
+        <div class="buttons">
+          <button mat-stroked-button
+                  [disabled]="emergencyContactFormComponent.saveDisabled || this.submittedEmergencyContact"
+                  (click)="updateEmergencyContact()">Save
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Driver's Licence">
+      <ng-template matTabContent>
+        <div class="content">
+          <app-personal-info-form class="form" [account]="account|async"
+                                  #personalInfoFormComponent></app-personal-info-form>
+          <div class="buttons">
+            <button mat-stroked-button
+                    [disabled]="personalInfoFormComponent.personalNextDisabled || this.submittedPersonal"
+                    (click)="updatePersonal()">Save
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</layout-single-card-page>

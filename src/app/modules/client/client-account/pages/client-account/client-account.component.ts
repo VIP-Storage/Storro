@@ -4,7 +4,7 @@ import {map, takeUntil, tap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {PageTitleService} from "../../../../../services/page-title.service";
 import {Observable, Subject} from "rxjs";
-import {Account} from "../../../../../data/types";
+import {Account, User} from "../../../../../data/types";
 
 @Component({
   selector: 'app-client-account',
@@ -15,6 +15,7 @@ import {Account} from "../../../../../data/types";
 export class ClientAccountComponent implements OnInit, OnDestroy {
 
   account: Observable<Account>;
+  user: Observable<User>;
   private destroyed = new Subject<boolean>();
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -24,6 +25,10 @@ export class ClientAccountComponent implements OnInit, OnDestroy {
     this.account = this.activatedRoute.data.pipe(
       map(data => data.account),
       takeUntil(this.destroyed)
+    );
+
+    this.user = this.account.pipe(
+      map(account => account.accountHolder)
     );
   }
 

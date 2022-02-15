@@ -33,6 +33,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
 import { NoDataShadeComponent } from './components/no-data-shade/no-data-shade.component';
+import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { NoDataShadeComponent } from './components/no-data-shade/no-data-shade.c
     PageHeaderComponent,
     StatusBadgeComponent,
     NoDataShadeComponent,
+    CopyClipboardDirective,
   ],
     exports: [
         SidebarComponent,
@@ -70,6 +72,7 @@ import { NoDataShadeComponent } from './components/no-data-shade/no-data-shade.c
         PageHeaderComponent,
         StatusBadgeComponent,
         NoDataShadeComponent,
+        CopyClipboardDirective,
     ],
   imports: [
     CommonModule,

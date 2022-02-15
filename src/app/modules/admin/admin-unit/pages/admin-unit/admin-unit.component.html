@@ -16,7 +16,7 @@
       </div>
     </div>
     <mat-card-content class="unit-content">
-      <mat-grid-list class="chart-grid" cols="4" gutterSize="0px" rowHeight="1:1">
+      <mat-grid-list class="chart-grid" [cols]="chartGridCols" gutterSize="0px" rowHeight="1:1">
         <mat-grid-tile class="chart-tile" *ngFor="let chart of unitCharts; index as index" [@cardGridAnimation]="{value: ':enter', params: {delay: 50 * index}}">
           <app-unit-chart [routerLink]="getChartURL(chart)" hoverElevation [large]="true" [defaultElevation]="0" [raisedElevation]="5" [type]="chart" [unit]="unit"></app-unit-chart>
         </mat-grid-tile>
@@ -28,13 +28,13 @@
         </mat-grid-tile>
       </mat-grid-list>
 
-      <mat-grid-list class="indicator-grid" cols="4" rowHeight="100px"  gutterSize="0">
+      <mat-grid-list class="indicator-grid" [cols]="indicatorCols" rowHeight="100px"  gutterSize="0">
         <mat-grid-tile class="unit-indicator-tile" *ngFor="let unitIndicator of unitIndicators; index as index" [@cardGridAnimation]="{value: ':enter', params: {delay: 50 * ((index + 1)/2)}}">
           <app-unit-indicator  hoverElevation [defaultElevation]="0" [raisedElevation]="5" [type]="unitIndicator" [unitData]="unitData|async"></app-unit-indicator>
         </mat-grid-tile>
       </mat-grid-list>
 
-      <mat-grid-list class="manage-grid" cols="4" rowHeight="1:1"  gutterSize="0">
+      <mat-grid-list class="manage-grid" [cols]="manageCols" rowHeight="1:1"  gutterSize="0">
         <mat-grid-tile class="access-grid-tile" colspan="2" [@cardGridAnimation]="{value: ':enter', params: {delay: 100}}">
           <app-access-card [showRequestButton]="false" [unit]="unit" hoverElevation [defaultElevation]="0" [raisedElevation]="5"></app-access-card>
         </mat-grid-tile>

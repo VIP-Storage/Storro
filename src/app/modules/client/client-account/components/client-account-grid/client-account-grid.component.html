@@ -1,0 +1,26 @@
+<div class="grid-list-wrapper">
+  <mat-grid-list [cols]="cols" rowHeight="1:1" gutterSize="0px">
+    <mat-grid-tile class="account-tile" [@cardGridAnimation]="{value: ':enter', params: {delay: 25}}">
+      <app-client-account-grid-card title="Key Cards" subtitle="View your current key cards or requests"
+                                    (gridTileClicked)="goToCredentials()"
+                                    actionIcon="badge">
+
+      </app-client-account-grid-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="account-tile" *ngIf="user as user"
+                   [@cardGridAnimation]="{value: ':enter', params: {delay: 30}}">
+      <app-client-account-grid-card title="Shared Access Code"
+                                    actionIcon="content_copy" [copy-clipboard]="user.sharedAccessCode">
+        {{user.sharedAccessCode}}
+      </app-client-account-grid-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="account-tile" *ngIf="user as user" colspan="2"
+                   [@cardGridAnimation]="{value: ':enter', params: {delay: 35}}">
+      <app-client-account-grid-card (gridTileClicked)="goToPersonal()" title="Personal Information" subtitle="View and modify information like driver's license, mailing address, and emergency contacts" actionIcon="mode_edit">
+
+      </app-client-account-grid-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {forkJoin, Observable, of} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {UnitAccessEntryType, UnitDataType, Unit, UnitByType, GeoJSONObject, User} from "../../../data/types";
+import {UnitAccessEntryType, UnitDataType, Unit, UnitByType, GeoJSONObject} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
@@ -33,20 +33,20 @@ export class UnitsService {
     return this.httpClient.get<AccessType>(url);
   }
 
-  allowUserAccess(user: User, unitID: string){
+  allowUserAccess(userID: number, unitID: string){
     const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/access')
-      .addSegment('/allow.')
+      .addSegment('/allow/')
       .addSegment(unitID)
       .get
 
-    return this.httpClient.post<AccessType>(url, {
-      userID: user.id
+    return this.httpClient.post<IResponse<AccessType>>(url, {
+      userID
     });
   }
 
-  removeUserAccess(user: User, unitID: string){
+  removeUserAccess(userID: number, unitID: string){
     const url = Burly(this.apiEndpoint)
       .addSegment('/unit')
       .addSegment('/access')
@@ -54,8 +54,8 @@ export class UnitsService {
       .addSegment(unitID)
       .get
 
-    return this.httpClient.post<AccessType>(url, {
-      userID: user.id
+    return this.httpClient.post<IResponse<AccessType>>(url, {
+      userID
     });
   }
 
