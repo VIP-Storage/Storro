@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 })
 export class GlobalSearchComponent implements OnInit {
 
+  disableIndexButton: boolean = false;
   searchControl = new FormControl();
   results!: Observable<UnifiedSearchResult[]>;
 
@@ -54,5 +55,12 @@ export class GlobalSearchComponent implements OnInit {
       default:
         return null;
     }
+  }
+
+  reIndex() {
+    this.disableIndexButton = true;
+    this.searchService.forceIndex().subscribe(result => {
+      this.disableIndexButton = !result
+    });
   }
 }

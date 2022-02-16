@@ -34,6 +34,15 @@ export class SearchService {
     )
   }
 
+  forceIndex() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/search')
+      .addSegment('/rebuildIndex')
+      .get;
+
+    return this.httpClient.get<boolean>(url);
+  }
+
   getIcon(type: SearchType) {
     switch (type) {
       case SearchType.KeyCards:

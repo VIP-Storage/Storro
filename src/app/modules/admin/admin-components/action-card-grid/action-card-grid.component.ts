@@ -62,6 +62,8 @@ export class ActionCardGridComponent implements OnInit, OnDestroy {
   private setSize() {
    if (window.innerWidth < 1600) {
      this.cols = 1;
+   } else if (window.innerWidth >= 2600) {
+      this.cols = 4;
    } else {
      let n = Math.ceil(window.innerWidth / 800);
      this.cols = ((n % 2 === 0) ? n : n - 1);
