@@ -7,6 +7,9 @@ import {PageHeaderAction} from "../../../../shared/components/page-header/page-h
 import {
   AdminKeycardRequestTableComponent
 } from "../../components/admin-keycard-request-table/admin-keycard-request-table.component";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AdminKeycardsTableComponent} from "../../components/admin-keycards-table/admin-keycards-table.component";
+import {KeycardsService} from "../../../../../api/backend/services/keycards.service";
 
 @Component({
   selector: 'app-admin-keycards',
@@ -17,7 +20,7 @@ import {
 export class AdminKeycardsComponent {
 
   @ViewChild('requestTableComponent') requestTableComponent?: AdminKeycardRequestTableComponent;
-  @ViewChild('keycardsTableComponent') keycardsTableComponent?: AdminKeycardRequestTableComponent;
+  @ViewChild('keycardsTableComponent') keycardsTableComponent?: AdminKeycardsTableComponent;
 
   searchValue: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
@@ -31,8 +34,18 @@ export class AdminKeycardsComponent {
 
 
 
-  constructor(private pageTitleService: PageTitleService) {
+  constructor(private pageTitleService: PageTitleService,
+              private router: Router,
+              private keyCardsService: KeycardsService,
+              private activatedRoute: ActivatedRoute) {
 
+    this.activatedRoute.params.subscribe(data => {
+      if (!!data && data.hasOwnProperty('id')) {
+          this.keyCardsService.getKeycard(data.id).subscribe(keyCard => {
+            this.keycardsTableComponent?.viewKeyCard(keyCard);
+          })
+      }
+    })
     this.pageTitleService.title = 'Key Cards';
     this.searchValue.subscribe(searchValue => {
       this.searchChanged(searchValue);

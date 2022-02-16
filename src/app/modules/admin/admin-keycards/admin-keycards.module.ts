@@ -31,6 +31,11 @@ const routes: Routes = [
     data: { breadcrumb: 'Key Cards' }
   },
   {
+    path: ':id',
+    component: AdminKeycardsComponent,
+    data: { breadcrumb: 'Key Cards' }
+  },
+  {
     path: 'create',
     component: AdminCreateKeycardComponent,
     data: { breadcrumb: 'Create' }

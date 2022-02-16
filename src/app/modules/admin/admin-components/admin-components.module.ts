@@ -17,6 +17,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MonitorCreateComponent } from './monitor-create/monitor-create.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { GlobalSearchComponent } from './global-search/global-search.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -26,29 +28,32 @@ import {MatInputModule} from "@angular/material/input";
     ActionCardGridComponent,
     ActionCardComponent,
     MonitorListComponent,
-    MonitorCreateComponent
+    MonitorCreateComponent,
+    GlobalSearchComponent
   ],
-  exports: [
-    StatCardGridComponent,
-    ActionCardGridComponent,
-    MonitorListComponent,
-    MonitorCreateComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    MatGridListModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterModule,
-    MatRippleModule,
-    MatCardModule,
-    MatListModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule
-  ]
+    exports: [
+        StatCardGridComponent,
+        ActionCardGridComponent,
+        MonitorListComponent,
+        MonitorCreateComponent,
+        GlobalSearchComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        MatGridListModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterModule,
+        MatRippleModule,
+        MatCardModule,
+        MatListModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule
+    ]
 })
 export class AdminComponentsModule {
 }

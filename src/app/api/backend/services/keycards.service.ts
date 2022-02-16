@@ -38,6 +38,15 @@ export class KeycardsService {
     return this.httpClient.post<IResponse<Keycard>>(url, request);
   }
 
+  getKeycard(id: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/keycards/')
+      .addSegment(id)
+      .get;
+
+    return this.httpClient.get<Keycard>(url);
+  }
+
   deleteKeycard(id: string) {
     const url = Burly(this.apiEndpoint)
       .addSegment('/keycards/')

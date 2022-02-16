@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
 import {KeyCardDialogComponent} from "../../../../shared/dialogs/key-card-dialog/key-card-dialog.component";
 import {storroAnimations} from "../../../../shared/animations";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-keycards-table',
@@ -54,7 +55,8 @@ export class AdminKeycardsTableComponent implements AfterViewInit {
   private tableChange: Subject<SimpleTableEvent> = new Subject<SimpleTableEvent>();
   private lastTableEvent: SimpleTableEvent | undefined;
 
-  constructor(private keycardsService: KeycardsService, private matDialog: MatDialog) {
+  constructor(private keycardsService: KeycardsService, private matDialog: MatDialog,
+              private router: Router) {
 
     this.searchValueChanged = this.searchValue.asObservable().pipe(
       debounceTime(150),
@@ -79,6 +81,8 @@ export class AdminKeycardsTableComponent implements AfterViewInit {
       if (!!keyCard) {
         this.reloadData.next(true);
       }
+
+      return this.router.navigateByUrl('/admin/keycards');
     })
   }
 
