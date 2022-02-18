@@ -16,4 +16,7 @@
   <button mat-icon-button *ngIf="!(isDarkMode|async)" (click)="updateTheme(true)">
     <mat-icon>light_mode</mat-icon>
   </button>
+  <button mat-icon-button *ngIf="showAdminButton()" routerLink="/admin/settings">
+    <mat-icon>settings</mat-icon>
+  </button>
 </div>

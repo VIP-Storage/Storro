@@ -45,4 +45,12 @@ export class MiniProfileComponent {
   updateTheme(darkMode: boolean) {
     this.themeService.changeTheme(darkMode);
   }
+
+  showAdminButton() {
+    if (!!this.role) {
+      return this.role !== Role.Tenant;
+    }
+
+    return false;
+  }
 }

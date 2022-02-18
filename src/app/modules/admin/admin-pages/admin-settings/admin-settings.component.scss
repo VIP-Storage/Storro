@@ -1,0 +1,22 @@
+.search-settings {
+  margin-left: -0.5em;
+  display: flex;
+  flex-wrap: wrap;
+
+  h3 {
+    width: 100%;
+    font-size: 18px;
+    margin-left: 8px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  button {
+    margin-right: 1em;
+
+    &:last-child {
+      margin-left: 2em;
+      margin-right: 0;
+    }
+  }
+}

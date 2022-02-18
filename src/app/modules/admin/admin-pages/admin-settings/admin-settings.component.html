@@ -1,0 +1,12 @@
+<layout-single-card-page title="Settings" subtitle="View and modify site settings here">
+  <div class="search-settings">
+    <h3>Search</h3>
+    <button mat-stroked-button (click)="forceIndexUsers()" [disabled]="disableIndexUsersButton">Index Users</button>
+    <button mat-stroked-button (click)="forceIndexUnits()" [disabled]="disableIndexUnitsButton">Index Units</button>
+    <button mat-stroked-button (click)="forceIndexAccounts()" [disabled]="disableIndexAccountsButton">Index Accounts</button>
+    <button mat-stroked-button (click)="forceIndexKeyCards()" [disabled]="disableIndexKeyCardsButton">Index Key Cards</button>
+    <button mat-stroked-button class="all" (click)="forceIndexAll()" [disabled]="disableIndexAllButton">Index
+      Everything
+    </button>
+  </div>
+</layout-single-card-page>

@@ -32,6 +32,8 @@ import {AccountResolver} from "../resolvers";
 import {MatStepperModule} from "@angular/material/stepper";
 import {NgxMaskModule} from "ngx-mask";
 import {AccountModule} from "../../shared/account/account.module";
+import {AdminSettingsComponent} from './admin-settings/admin-settings.component';
+import {LayoutModule} from "../../layout/layout.module";
 
 
 const routes: Routes = [
@@ -68,6 +70,10 @@ const routes: Routes = [
     }
   },
   {
+    path: 'settings',
+    component: AdminSettingsComponent
+  },
+  {
     path: 'client/dashboard',
     redirectTo: 'units'
   },
@@ -80,6 +86,7 @@ const routes: Routes = [
     AdminUsersComponent,
     AdminAccountsComponent,
     AdminAccountComponent,
+    AdminSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +117,7 @@ const routes: Routes = [
     AccessModule,
     MatStepperModule,
     NgxMaskModule,
+    LayoutModule,
   ]
 })
 export class AdminPagesModule {

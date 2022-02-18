@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {Observable, switchMap} from "rxjs";
-import {map, startWith} from "rxjs/operators";
+import {startWith} from "rxjs/operators";
 import {SearchService} from "../../../../api/backend/services/search.service";
 import {UnifiedSearchResult} from "../../../../data/types/search";
 import {SearchType} from "../../../../data/enums";
@@ -15,7 +15,6 @@ import {Router} from "@angular/router";
 })
 export class GlobalSearchComponent implements OnInit {
 
-  disableIndexButton: boolean = false;
   searchControl = new FormControl();
   results!: Observable<UnifiedSearchResult[]>;
 
@@ -55,12 +54,5 @@ export class GlobalSearchComponent implements OnInit {
       default:
         return null;
     }
-  }
-
-  reIndex() {
-    this.disableIndexButton = true;
-    this.searchService.forceIndex().subscribe(result => {
-      this.disableIndexButton = !result
-    });
   }
 }

@@ -34,10 +34,50 @@ export class SearchService {
     )
   }
 
-  forceIndex() {
+  forceIndexAll() {
     const url = Burly(this.apiEndpoint)
       .addSegment('/search')
       .addSegment('/rebuildIndex')
+      .get;
+
+    return this.httpClient.get<boolean>(url);
+  }
+
+  forceIndexUsers() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/search')
+      .addSegment('/users')
+      .addSegment('/rebuild')
+      .get;
+
+    return this.httpClient.get<boolean>(url);
+  }
+
+  forceIndexAccounts() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/search')
+      .addSegment('/accounts')
+      .addSegment('/rebuild')
+      .get;
+
+    return this.httpClient.get<boolean>(url);
+  }
+
+  forceIndexUnits() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/search')
+      .addSegment('/units')
+      .addSegment('/rebuild')
+      .get;
+
+    return this.httpClient.get<boolean>(url);
+  }
+
+  forceIndexKeyCards() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/search')
+      .addSegment('/keyCards')
+      .addSegment('/rebuild')
       .get;
 
     return this.httpClient.get<boolean>(url);
