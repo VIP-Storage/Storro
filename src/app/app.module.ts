@@ -17,8 +17,10 @@ import {NgxStripeModule} from "ngx-stripe";
 import {HttpErrorInterceptor} from "./modules/shared/interceptors/http.interceptor";
 import {MatDialogModule} from "@angular/material/dialog";
 import {DialogsModule} from "./modules/shared/dialogs/dialogs.module";
-import {MatNativeDateModule} from "@angular/material/core";
 import {NgxMaskModule} from "ngx-mask";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS} from "@angular/material/core";
+import {FormDateAdapter} from "./modules/shared/adapters/form-date.adapter";
+import {AlertWrapperComponent} from "./modules/shared/components/alert-wrapper/alert-wrapper.component";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.server,
@@ -47,15 +49,20 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DialogsModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
-    MatNativeDateModule,
     NgxMaskModule.forRoot({validation: true}),
   ],
   providers: [
+    {
+      provide: DateAdapter, useClass: FormDateAdapter
+    },
+    {
+      provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS
+    },
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, AlertWrapperComponent]
 })
 export class AppModule {
 }

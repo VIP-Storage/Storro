@@ -1,4 +1,4 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import {Component, Renderer2} from '@angular/core';
 import {storroAnimations} from "../../../../shared/animations";
 import {ScriptService} from "../../../../../services/script.service";
 import {environment} from "../../../../../../environments/environment";
@@ -9,7 +9,7 @@ import {environment} from "../../../../../../environments/environment";
   styleUrls: ['./client-account-setup.component.scss'],
   animations: storroAnimations
 })
-export class ClientAccountSetupComponent implements OnInit {
+export class ClientAccountSetupComponent {
 
   scriptLoaded: boolean = false;
 
@@ -27,8 +27,4 @@ export class ClientAccountSetupComponent implements OnInit {
       console.error('Could not load the Google API Script!');
     }
   }
-
-  ngOnInit(): void {
-  }
-
 }

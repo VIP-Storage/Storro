@@ -1,3 +1,60 @@
-<layout-card-grid-page title="Account" #gridPageComponent>
-  <app-client-account-grid [cols]="gridPageComponent.columnsDisplayed" [user]="user|async"></app-client-account-grid>
-</layout-card-grid-page>
+<layout-single-card-page title="Account" [showDivider]="false" [fullWidth]="true">
+  <mat-nav-list>
+    <mat-list-item class="shared-access-code" *ngIf="user|async as user" [copy-clipboard]="user.sharedAccessCode" (click)="alertClipboard()">
+      <mat-icon>swap_calls</mat-icon>
+      <div class="list-item-inner">
+        <div class="meta">
+          <span class="title">Shared Access Code</span>
+          <p class="description">Share this code with other members to gain access to their units, tap or click to copy</p>
+        </div>
+        <span class="code">
+          {{user.sharedAccessCode}}
+        </span>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="keycards" (click)="goToCredentials()">
+      <mat-icon>badge</mat-icon>
+      <div class="list-item-inner">
+        <div class="meta">
+          <span class="title">Key Cards</span>
+          <p class="description">View your current key cards or requests</p>
+        </div>
+        <mat-icon inline>chevron_right</mat-icon>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="personal-info" (click)="goToPersonal()">
+      <mat-icon>edit</mat-icon>
+      <div class="list-item-inner">
+        <div class="meta">
+          <span class="title">Personal Information</span>
+          <p class="description">View and modify information like driver's license, mailing address, and emergency contacts</p>
+        </div>
+        <mat-icon inline>chevron_right</mat-icon>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="password-reset" (click)="goToPasswordReset()">
+      <mat-icon>lock</mat-icon>
+      <div class="list-item-inner">
+        <div class="meta">
+          <span class="title">Password</span>
+          <p class="description">Change your account password</p>
+        </div>
+        <mat-icon inline>chevron_right</mat-icon>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="help" (click)="insultUser()">
+      <mat-icon>help</mat-icon>
+      <div class="list-item-inner">
+        <div class="meta">
+          <span class="title">Help</span>
+          <p class="description">Help help HELP help HEEEELLLP</p>
+        </div>
+        <mat-icon inline>chevron_right</mat-icon>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+</layout-single-card-page>

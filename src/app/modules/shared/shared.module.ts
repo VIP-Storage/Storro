@@ -34,6 +34,9 @@ import {StatusBadgeComponent} from './components/status-badge/status-badge.compo
 import {NoDataShadeComponent} from './components/no-data-shade/no-data-shade.component';
 import {CopyClipboardDirective} from './directives/copy-clipboard.directive';
 import {HighlightGlobalSearchPipe, RolePipe} from "./pipes";
+import {DateInputDirective} from './directives/date-input.directive';
+import {AlertWrapperComponent} from "./components/alert-wrapper/alert-wrapper.component";
+import {MtxAlertModule} from "@ng-matero/extensions/alert";
 
 
 @NgModule({
@@ -57,6 +60,8 @@ import {HighlightGlobalSearchPipe, RolePipe} from "./pipes";
     NoDataShadeComponent,
     CopyClipboardDirective,
     HighlightGlobalSearchPipe,
+    DateInputDirective,
+    AlertWrapperComponent,
   ],
   exports: [
     SidebarComponent,
@@ -75,6 +80,8 @@ import {HighlightGlobalSearchPipe, RolePipe} from "./pipes";
     NoDataShadeComponent,
     CopyClipboardDirective,
     HighlightGlobalSearchPipe,
+    DateInputDirective,
+    AlertWrapperComponent
   ],
   imports: [
     CommonModule,
@@ -95,6 +102,7 @@ import {HighlightGlobalSearchPipe, RolePipe} from "./pipes";
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MtxAlertModule,
   ],
   providers: [
     HttpClient

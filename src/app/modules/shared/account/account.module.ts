@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from "@angular/material/button";
-import {CreateAccountStepperComponent} from './components/create-account-stepper/create-account-stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -12,24 +11,30 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {NgxMaskModule} from "ngx-mask";
 import {SharedModule} from "../shared.module";
-import {MailingAddressFormComponent} from './components/mailing-address-form/mailing-address-form.component';
-import {EmergencyContactFormComponent} from './components/emergency-contact-form/emergency-contact-form.component';
-import {PersonalInfoFormComponent} from "./components/personal-info-form/personal-info-form.component";
-
+import {
+  CreateAccountStepperComponent,
+  EmergencyContactFormComponent,
+  MailingAddressFormComponent,
+  PersonalInfoFormComponent
+} from "./components";
+import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
     CreateAccountStepperComponent,
     MailingAddressFormComponent,
     EmergencyContactFormComponent,
-    PersonalInfoFormComponent
+    PersonalInfoFormComponent,
+    ChangePasswordFormComponent
   ],
-    exports: [
-        CreateAccountStepperComponent,
-        MailingAddressFormComponent,
-        EmergencyContactFormComponent,
-        PersonalInfoFormComponent
-    ],
+  exports: [
+    CreateAccountStepperComponent,
+    MailingAddressFormComponent,
+    EmergencyContactFormComponent,
+    PersonalInfoFormComponent,
+    ChangePasswordFormComponent
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -44,7 +49,8 @@ import {PersonalInfoFormComponent} from "./components/personal-info-form/persona
     NgxMaskModule.forRoot({
       validation: true
     }),
-    SharedModule
+    SharedModule,
+    MatIconModule
   ]
 })
 export class AccountModule {

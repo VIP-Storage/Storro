@@ -1,0 +1,11 @@
+<mtx-alert class="global-alert" [class.no-hover]="!!alert.action"
+           @inOutAnimation
+           (click)="closeAlert()"
+           [elevation]="3"
+           *ngIf="(currentAlert|async) as alert"
+           [type]="alert.type">
+  <mat-icon>{{getAlertIcon(alert)}}</mat-icon>
+  <p class="message">{{alert.message}}</p>
+  <a *ngIf="alert.link as link" (click)="goToRouterURL(link.url)">{{link.title}}</a>
+  <button mat-flat-button *ngIf="alert.action as action" (click)="action.function()">{{action.title}}</button>
+</mtx-alert>

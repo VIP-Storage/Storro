@@ -29,6 +29,18 @@ export class SingleCardPageComponent {
   fullWidth: boolean = false;
 
   @Input()
+  showHeader: boolean = true;
+
+  @Input()
+  set fullScrollHeight(newValue: boolean | string) {
+    if (typeof newValue === 'boolean') {
+      this.scrollHeight = (newValue as boolean);
+    } else {
+      this.scrollHeight = (newValue === 'true');
+    }
+  }
+
+  @Input()
   set showDivider(newValue: boolean | string) {
     if (typeof newValue === "boolean") {
       this.dividerEnabled = (newValue as boolean)
@@ -51,6 +63,7 @@ export class SingleCardPageComponent {
 
   dividerEnabled: boolean = true;
   stepperMode: boolean = false;
+  scrollHeight: boolean = false;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute) {

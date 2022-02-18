@@ -102,6 +102,15 @@ export class AuthService {
     return this.httpClient.post<IResponse>(url, {newPassword, newPasswordToken: token})
   }
 
+  resetPassword(email: string, currentPassword: string, newPassword: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/reset-password')
+      .get;
+
+    return this.httpClient.post<IResponse>(url, {newPassword, email, currentPassword})
+  }
+
   private static setSession(authResult: { expiresIn: string, idToken: string } | null) {
     if (!!authResult) {
       const expiresAt = DateTime.now().plus({

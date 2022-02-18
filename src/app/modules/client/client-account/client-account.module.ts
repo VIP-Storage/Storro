@@ -14,14 +14,13 @@ import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {LayoutModule} from "../../layout/layout.module";
-import {ClientAccountGridComponent} from './components/client-account-grid/client-account-grid.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import {ClientAccountGridCardComponent} from './components/client-account-grid-card/client-account-grid-card.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatRippleModule} from "@angular/material/core";
 import {ClientCredentialsComponent} from './pages/client-credentials/client-credentials.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ClientPersonalComponent} from './pages/client-personal/client-personal.component';
+import {ClientPasswordChangeComponent} from './pages/client-password-change/client-password-change.component';
 
 
 const routes: Routes = [
@@ -47,6 +46,10 @@ const routes: Routes = [
     resolve: {
       account: AccountResolver
     }
+  },
+  {
+    path: 'password',
+    component: ClientPasswordChangeComponent,
   }
 ]
 
@@ -54,10 +57,9 @@ const routes: Routes = [
   declarations: [
     ClientAccountComponent,
     ClientAccountSetupComponent,
-    ClientAccountGridComponent,
-    ClientAccountGridCardComponent,
     ClientCredentialsComponent,
-    ClientPersonalComponent
+    ClientPersonalComponent,
+    ClientPasswordChangeComponent
   ],
   imports: [
     CommonModule,

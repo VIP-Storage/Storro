@@ -1,0 +1,83 @@
+:host {
+  position: absolute;
+  top: 1em;
+  z-index: 99999;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.global-alert.no-hover {
+  opacity: 1!important;
+}
+
+.global-alert {
+  position: relative;
+  min-width: 350px;
+  margin: 0 1em;
+  display: block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: opacity 300ms ease-in-out;
+
+  a {
+    color: white !important;
+    font-weight: bold;
+    text-decoration: none !important;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+
+.mtx-alert {
+  margin: 0 auto !important;
+  font-size: 1.2em;
+  border-radius: 16px;
+  padding-bottom: 1em !important;
+  padding-top: 1em !important;
+  text-align: left;
+  display: flex;
+  align-items: center;
+
+  p.message {
+    margin: 0;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+
+  mat-icon {
+    margin-right: 15px;
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+    font-size: 30px;
+  }
+
+  button, a {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+.mtx-alert-danger {
+  background-color: #ff5252;
+}
+
+.mtx-alert-info {
+  background-color: #29b6f6;
+}
+
+.mtx-alert-warning {
+  background-color: #ff9800;
+}
+
+.mtx-alert-success {
+  background-color: #00c853;
+}

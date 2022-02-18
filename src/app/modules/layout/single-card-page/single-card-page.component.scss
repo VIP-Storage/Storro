@@ -17,6 +17,13 @@ mat-card {
     padding-right: 0;
   }
 
+  &.scroll-height {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: 0;
+  }
+
   mat-card-content {
     padding: 1em;
     flex: 1;

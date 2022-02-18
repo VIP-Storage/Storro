@@ -1,5 +1,5 @@
-<mat-card [class.stepper-mode]="stepperMode" @fromBottom [class.full-width]="fullWidth">
-  <mat-card-header [class.divided]="dividerEnabled" [class.full-width]="fullWidth">
+<mat-card [class.stepper-mode]="stepperMode" @fromBottom [class.full-width]="fullWidth" [class.scroll-height]="scrollHeight">
+  <mat-card-header [class.divided]="dividerEnabled" [class.full-width]="fullWidth" *ngIf="showHeader">
     <div mat-card-avatar class="header-action" *ngIf="backRouterLink">
       <button mat-icon-button (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
@@ -15,7 +15,7 @@
     <mat-card-title *ngIf="title as title">{{title}}</mat-card-title>
     <mat-card-subtitle *ngIf="subtitle as subtitle">{{subtitle}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-divider *ngIf="dividerEnabled"></mat-divider>
+  <mat-divider *ngIf="dividerEnabled && showHeader"></mat-divider>
   <mat-card-content [class.spaced]="!!backRouterLink" [class.no-padding]="fullWidth" [class.divided]="dividerEnabled">
     <ng-content></ng-content>
   </mat-card-content>
