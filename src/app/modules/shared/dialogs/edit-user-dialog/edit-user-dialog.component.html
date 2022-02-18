@@ -2,7 +2,7 @@
   <span>Edit {{incomingUser.firstName}} {{incomingUser.lastName}}</span>
 </mat-toolbar>
 <div class="content">
-  <form class="form-container" [formGroup]="createForm" (ngSubmit)="updateUser()">
+  <form class="form-container" [formGroup]="createForm">
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
       <input matInput autocomplete="off" placeholder="Pat" [formControl]="firstName" required>
@@ -34,13 +34,16 @@
 
     <div class="checkbox-wrapper">
       <mat-checkbox [formControl]="validated">Validated</mat-checkbox>
+
+      <app-spinner-button [submitted]="passwordResetSent" (click)="resetPassword()">Send password reset</app-spinner-button>
+      <app-spinner-button [submitted]="verificationSent" *ngIf="!incomingUser.emailValidated" (click)="sendVerificationEmail()">Send verification email</app-spinner-button>
     </div>
 
     <div class="error-wrapper">
       <mat-error *ngIf="error">{{error}}</mat-error>
     </div>
 
-    <app-spinner-button [submitted]="submitted">
+    <app-spinner-button [submitted]="submitted" (click)="updateUser()">
       Update
     </app-spinner-button>
   </form>

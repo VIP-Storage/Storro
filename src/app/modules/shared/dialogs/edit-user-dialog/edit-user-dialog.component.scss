@@ -36,3 +36,10 @@ mat-toolbar {
     text-align: center;
   }
 }
+
+.checkbox-wrapper {
+  app-spinner-button {
+    display: block;
+    margin-top: 2em;
+  }
+}

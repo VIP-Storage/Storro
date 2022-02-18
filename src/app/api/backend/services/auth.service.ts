@@ -102,6 +102,16 @@ export class AuthService {
     return this.httpClient.post<IResponse>(url, {newPassword, newPasswordToken: token})
   }
 
+  sendVerificationRequest(email: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/auth')
+      .addSegment('/resend-verification/')
+      .addSegment(email)
+      .get;
+
+    return this.httpClient.get<IResponse>(url);
+  }
+
   resetPassword(email: string, currentPassword: string, newPassword: string) {
     const url = Burly(this.apiEndpoint)
       .addSegment('/auth')

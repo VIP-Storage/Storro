@@ -7,6 +7,7 @@ import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
 import {User} from "../../../../data/types";
 import {UserService} from "../../../../api/backend/services/user.service";
+import {AuthService} from "../../../../api/backend/services/auth.service";
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -16,6 +17,8 @@ import {UserService} from "../../../../api/backend/services/user.service";
 export class EditUserDialogComponent implements OnInit {
 
 
+  verificationSent = false;
+  passwordResetSent = false;
   submitted = false;
   error: string | null = null;
 
@@ -39,12 +42,35 @@ export class EditUserDialogComponent implements OnInit {
 
   constructor(private authMessageService: AuthMessageService,
               private userService: UserService,
+              private authService: AuthService,
               private matDialogRef: MatDialogRef<EditUserDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public incomingUser: User) {
 
     this.userService.currentUser.subscribe(user => {
       if (user.id === incomingUser.id) {
         this.role.disable();
+      }
+    })
+  }
+
+  resetPassword() {
+    this.passwordResetSent = true;
+    this.authService.sendPasswordResetEmail(this.incomingUser.email).subscribe((response) => {
+      this.passwordResetSent = false;
+
+      if (!response.success) {
+        this.error = this.authMessageService.getErrorMessage(response);
+      }
+    })
+  }
+
+  sendVerificationEmail() {
+    this.verificationSent = true;
+    this.authService.sendVerificationRequest(this.incomingUser.email).subscribe((response) => {
+      this.verificationSent = false;
+
+      if (!response.success) {
+        this.error = this.authMessageService.getErrorMessage(response);
       }
     })
   }
