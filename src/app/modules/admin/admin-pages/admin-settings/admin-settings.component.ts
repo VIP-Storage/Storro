@@ -11,6 +11,7 @@ export class AdminSettingsComponent {
 
   disableIndexAllButton = false;
   disableIndexUsersButton = false;
+  disableIndexTenantsButton = false;
   disableIndexAccountsButton = false;
   disableIndexUnitsButton = false;
   disableIndexKeyCardsButton = false;
@@ -52,6 +53,13 @@ export class AdminSettingsComponent {
     this.disableIndexKeyCardsButton = true;
     this.searchService.forceIndexKeyCards().subscribe(result => {
       this.disableIndexKeyCardsButton = !result
+    });
+  }
+
+  forceIndexTenants() {
+    this.disableIndexTenantsButton = true;
+    this.searchService.forceIndexTenants().subscribe(result => {
+      this.disableIndexTenantsButton = !result
     });
   }
 }

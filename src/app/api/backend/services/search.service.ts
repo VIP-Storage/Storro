@@ -83,6 +83,16 @@ export class SearchService {
     return this.httpClient.get<boolean>(url);
   }
 
+  forceIndexTenants() {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/search')
+      .addSegment('/tenants')
+      .addSegment('/rebuild')
+      .get;
+
+    return this.httpClient.get<boolean>(url);
+  }
+
   getIcon(type: SearchType) {
     switch (type) {
       case SearchType.KeyCards:
