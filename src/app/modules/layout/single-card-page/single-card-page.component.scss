@@ -10,7 +10,7 @@ mat-card {
   padding: 4em;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
 
   &.full-width {
     padding-left: 0;
@@ -22,6 +22,7 @@ mat-card {
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 
     &.divided {
       margin-top: 4em;
