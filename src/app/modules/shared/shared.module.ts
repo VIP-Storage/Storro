@@ -26,14 +26,14 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {SpinnerButtonComponent} from './components/spinner-button/spinner-button.component';
 import {CircleButtonComponent} from './components/circle-button/circle-button.component';
 import {SearchBarComponent} from "./components/search-bar/search-bar.component";
-import { RolePipe } from './pipes/role.pipe';
-import { PageHeaderComponent } from './components/page-header/page-header.component';
+import {PageHeaderComponent} from './components/page-header/page-header.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
-import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
-import { NoDataShadeComponent } from './components/no-data-shade/no-data-shade.component';
-import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
+import {StatusBadgeComponent} from './components/status-badge/status-badge.component';
+import {NoDataShadeComponent} from './components/no-data-shade/no-data-shade.component';
+import {CopyClipboardDirective} from './directives/copy-clipboard.directive';
+import {HighlightGlobalSearchPipe, RolePipe} from "./pipes";
 
 
 @NgModule({
@@ -56,24 +56,26 @@ import { CopyClipboardDirective } from './directives/copy-clipboard.directive';
     StatusBadgeComponent,
     NoDataShadeComponent,
     CopyClipboardDirective,
+    HighlightGlobalSearchPipe,
   ],
-    exports: [
-        SidebarComponent,
-        HoverElevationDirective,
-        ToggleButtonComponent,
-        LoadingShadeComponent,
-        SimpleTableComponent,
-        CustomColorDirective,
-        UnitMapComponent,
-        SpinnerButtonComponent,
-        CircleButtonComponent,
-        SearchBarComponent,
-        RolePipe,
-        PageHeaderComponent,
-        StatusBadgeComponent,
-        NoDataShadeComponent,
-        CopyClipboardDirective,
-    ],
+  exports: [
+    SidebarComponent,
+    HoverElevationDirective,
+    ToggleButtonComponent,
+    LoadingShadeComponent,
+    SimpleTableComponent,
+    CustomColorDirective,
+    UnitMapComponent,
+    SpinnerButtonComponent,
+    CircleButtonComponent,
+    SearchBarComponent,
+    RolePipe,
+    PageHeaderComponent,
+    StatusBadgeComponent,
+    NoDataShadeComponent,
+    CopyClipboardDirective,
+    HighlightGlobalSearchPipe,
+  ],
   imports: [
     CommonModule,
     RouterModule,

@@ -1,0 +1,63 @@
+:host {
+  height: 65px;
+  display: flex;
+  width: 100%;
+}
+
+.search-result {
+  flex: 1;
+  display: flex;
+
+  .item-divider {
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    left: 0;
+    right: 0;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    span {
+      line-height: 18px;
+
+      &.subtitle {
+        font-size: 14px;
+        color: gray;
+      }
+    }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+
+      mat-divider {
+        position: relative;
+        width: 25px;
+        border-width: 2px;
+        margin: 0 4px;
+      }
+
+      .type {
+        font-weight: bold;
+      }
+    }
+  }
+
+  ::ng-deep {
+    span.highlight {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+}
+

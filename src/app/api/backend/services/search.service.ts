@@ -89,10 +89,12 @@ export class SearchService {
         return 'badge';
       case SearchType.Accounts:
         return 'attach_money';
+      case SearchType.Tenants:
+        return 'people';
       case SearchType.Users:
         return 'manage_accounts';
       case SearchType.Units:
-        return 'house_siding';
+        return 'home';
     }
   }
 }

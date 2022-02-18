@@ -19,6 +19,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { GlobalSearchComponent } from './global-search/global-search.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { GlobalSearchResultComponent } from './global-search-result/global-search-result.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     ActionCardComponent,
     MonitorListComponent,
     MonitorCreateComponent,
-    GlobalSearchComponent
+    GlobalSearchComponent,
+    GlobalSearchResultComponent
   ],
     exports: [
         StatCardGridComponent,

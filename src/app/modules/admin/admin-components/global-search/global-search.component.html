@@ -7,9 +7,8 @@
              [formControl]="searchControl"
              [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let result of results | async" [value]="result.data.id" (click)="navigate(result)">
-          <mat-icon>{{getIcon(result.type)}}</mat-icon>
-          {{getDisplayData(result)}}
+        <mat-option class="search-result" *ngFor="let result of (results | async); last as last" [value]="result.data.id" (click)="navigate(result)">
+         <app-global-search-result [result]="result" [last]="last"></app-global-search-result>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

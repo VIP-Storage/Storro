@@ -1,0 +1,16 @@
+<div class="search-result" *ngIf="getDisplayData(result) as displayData">
+  <div class="icon-wrapper">
+    <mat-icon>{{getIcon(result.type)}}</mat-icon>
+  </div>
+  <div class="content-wrapper">
+    <div class="title-wrapper">
+      <span class="title" *ngIf="displayData.title" [innerHTML]="displayData.title|highlightSearch: result: displayData.titleHighlightKey"></span>
+      <mat-divider *ngIf="displayData.title"></mat-divider>
+      <span class="type">{{displayData.type}}</span>
+    </div>
+    <span class="subtitle" *ngIf="displayData.subtitle"
+          [innerHTML]="displayData.subtitle|highlightSearch: result: displayData.subtitleHighlightKey"></span>
+  </div>
+
+  <mat-divider class="item-divider" *ngIf="!last"></mat-divider>
+</div>

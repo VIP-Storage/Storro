@@ -3,4 +3,5 @@ export enum SearchType {
   Users = 'USER',
   Accounts = 'ACCOUNT',
   KeyCards = 'CREDENTIAL',
+  Tenants = 'TENANT'
 }
