@@ -91,6 +91,8 @@ export class UserService {
     return this.httpClient.get<ManyResponse<User>>(url)
   }
 
+
+  //
   update(user: User): Observable<IResponse> {
     const url = Burly(this.apiEndpoint)
       .addSegment('/users/')
