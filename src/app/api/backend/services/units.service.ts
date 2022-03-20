@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
 import {forkJoin, Observable, of} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {UnitAccessEntryType, UnitDataType, Unit, UnitByType, GeoJSONObject} from "../../../data/types";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Burly} from "kb-burly";
 import {DomSanitizer} from "@angular/platform-browser";
-import {CreateUnitRequest} from "../../../data/requests";
-import {AvailabilitySummaryResponse, IResponse, ManyResponse} from "../../../data/response";
-import {AccessType} from "../../../data/enums";
+import {
+  AccessType,
+  AvailabilitySummaryResponse,
+  CreateUnitRequest,
+  GeoJSONObject, IResponse, ManyResponse, Unit,
+  UnitAccessEntryType, UnitByType,
+  UnitDataType
+} from "../../../data";
+
 
 const CORDOVA_MAP_URL = 'assets/map/cordova/storage-unit-layout.geojson';
 
@@ -249,12 +254,46 @@ export class UnitsService {
           view: window
         }));
 
-        console.log(blob);
-
         setTimeout(() => { // firefox
           window.URL.revokeObjectURL(blob);
           link.remove();
         }, 100);
       });
+  }
+
+  updateStreamURL(unitID: string, newURL: string): Observable<IResponse> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/snapshot/')
+      .addSegment(unitID)
+      .get;
+
+    return this.httpClient.patch<IResponse>(url, {
+      newURL
+    });
+  }
+
+  saveSnapshot(unitID: string) {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/snapshot/')
+      .addSegment(unitID)
+      .addSegment('/save')
+      .get;
+
+    return this.httpClient.get(url);
+  }
+
+  getSavedUnitSnapshotURL(unit: Unit, snapshotID: number, domSanitizer: DomSanitizer): Observable<any> {
+    const url = Burly(this.apiEndpoint)
+      .addSegment('/unit')
+      .addSegment('/savedSnapshot/')
+      .addSegment(unit.id)
+      .addSegment(`/${snapshotID}`)
+      .get
+
+    return this.httpClient.get(url, {responseType: 'blob'}).pipe(
+      map(e => domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e)))
+    );
   }
 }

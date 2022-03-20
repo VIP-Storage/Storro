@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
-import {Unit} from "../../../../../data/types";
+import {Unit} from "../../../../../data";
 import {UnitsService} from "../../../../../api/backend/services/units.service";
-import {BehaviorSubject, interval, Subject} from "rxjs";
+import {BehaviorSubject, interval, Subject, take} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {takeUntil} from "rxjs/operators";
-import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {SnapshotUrlComponent} from "../../../../admin/dialogs/snapshot-url/snapshot-url.component";
 
 @Component({
   selector: 'app-unit-snapshot',
@@ -33,7 +34,7 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
   private _unit?: Unit;
 
   constructor(private unitsService: UnitsService,
-              private router: Router,
+              private matDialog: MatDialog,
               private domSanitizer: DomSanitizer) {
   }
 
@@ -62,24 +63,21 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
   }
 
   goToSettings() {
-    const rootURL = this.getBackURL(this._unit!);
-
-    return this.router.navigate(['admin', 'unit', this._unit!.id, 'settings', 'monitor'], {
-      queryParams: {
-        root: rootURL
-      }
+    this.matDialog.open(SnapshotUrlComponent, {
+      panelClass: SnapshotUrlComponent.panelClass,
+      disableClose: true,
+      data: this._unit
     });
   }
 
-  getBackURL(unit: Unit) {
-    if (this._mode === 'ADMIN') {
-      return `/admin/unit/${unit.id}`;
+
+  downloadImage() {
+    if (!!this._unit) {
+      return this.unitsService.saveSnapshot(this._unit.id).pipe(
+        take(1),
+      ).subscribe();
     }
 
     return null;
-  }
-
-  downloadImage(passedURL: any) {
-   return this.unitsService.downloadSnapshot(passedURL);
   }
 }

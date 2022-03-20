@@ -1,0 +1,29 @@
+<mat-toolbar color="accent">
+  <span>Edit Snapshot URL</span>
+</mat-toolbar>
+<div class="content">
+  <form class="form-container" [formGroup]="urlForm">
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>RSTP Address</mat-label>
+      <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp"
+             [formControl]="urlControl" required>
+      <mat-error *ngIf="urlControl.invalid">{{getURLError()}}</mat-error>
+      <mat-hint>
+        HikVision - rtsp://admin:12345@192.168.1.210:554/Streaming/Channels/101<br><br>
+        AXIS - rtsp://192.168.1.210/axis-media/media.amp
+      </mat-hint>
+    </mat-form-field>
+    <span class="spacer"></span>
+    <div class="error-wrapper">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+
+    <app-spinner-button *ngIf="hasChanged" [disabled]="disableSubmit" [submitted]="submitted" (click)="submit()">
+      Save
+    </app-spinner-button>
+
+    <button mat-stroked-button *ngIf="!hasChanged" (click)="submit()">
+      Close
+    </button>
+  </form>
+</div>

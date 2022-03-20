@@ -12,5 +12,5 @@ export interface Unit {
   unitTypeName: string;
   available: boolean;
   owner?: User;
-  zoneMinderMonitor?: string;
+  rtspSnapshotURL?: string;
 }

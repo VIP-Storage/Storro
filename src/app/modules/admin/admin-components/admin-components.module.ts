@@ -10,16 +10,14 @@ import {RouterModule} from "@angular/router";
 import {ActionCardGridComponent} from './action-card-grid/action-card-grid.component';
 import {ActionCardComponent} from './action-card/action-card.component';
 import {MatRippleModule} from "@angular/material/core";
-import {MonitorListComponent} from "./monitor-list/monitor-list.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { MonitorCreateComponent } from './monitor-create/monitor-create.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import { GlobalSearchComponent } from './global-search/global-search.component';
+import {GlobalSearchComponent} from './global-search/global-search.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import { GlobalSearchResultComponent } from './global-search-result/global-search-result.component';
+import {GlobalSearchResultComponent} from './global-search-result/global-search-result.component';
 
 
 @NgModule({
@@ -28,34 +26,30 @@ import { GlobalSearchResultComponent } from './global-search-result/global-searc
     StatCardGridComponent,
     ActionCardGridComponent,
     ActionCardComponent,
-    MonitorListComponent,
-    MonitorCreateComponent,
     GlobalSearchComponent,
     GlobalSearchResultComponent
   ],
-    exports: [
-        StatCardGridComponent,
-        ActionCardGridComponent,
-        MonitorListComponent,
-        MonitorCreateComponent,
-        GlobalSearchComponent
-    ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        MatGridListModule,
-        MatIconModule,
-        MatButtonModule,
-        RouterModule,
-        MatRippleModule,
-        MatCardModule,
-        MatListModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule
-    ]
+  exports: [
+    StatCardGridComponent,
+    ActionCardGridComponent,
+    GlobalSearchComponent
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterModule,
+    MatRippleModule,
+    MatCardModule,
+    MatListModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule
+  ]
 })
 export class AdminComponentsModule {
 }

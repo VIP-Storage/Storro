@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable, of} from "rxjs";
-import {UnitType} from "../../../../data/types";
+import {UnitType} from "../../../../data";
 import {CurrencyPipe} from "@angular/common";
 import {UnitsService} from "../../../../api/backend/services/units.service";
 import {UnitTypesService} from "../../../../api/backend/services/unit-types.service";

@@ -14,6 +14,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {CreateUnitTypeComponent} from './dialogs/create-unit-type/create-unit-type.component';
 import {MatIconModule} from "@angular/material/icon";
+import { SnapshotUrlComponent } from './dialogs/snapshot-url/snapshot-url.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     AdminBaseComponent,
     CreateUnitComponent,
     CreateUnitTypeComponent,
+    SnapshotUrlComponent,
   ],
   exports: [],
   imports: [

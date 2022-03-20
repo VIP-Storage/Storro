@@ -1,7 +1,0 @@
-<layout-single-card-page *ngIf="unit|async as unit"
-                         [backRouterLink]="backRouterLink"
-                         [title]="unit.zoneMinderMonitor ? 'Change Monitor Assignment' : 'Assign Monitor'"
-                         [subtitle]="unit.zoneMinderMonitor ? 'Update the source IP address of the monitor' : 'Add a source IP address of the monitor'">
-
-  <app-monitor-create [mode]="unit.zoneMinderMonitor ? 'UPDATE' : 'CREATE'" [unit]="unit"></app-monitor-create>
-</layout-single-card-page>
