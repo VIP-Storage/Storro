@@ -9,12 +9,14 @@ import {CreateUnitComponent} from './dialogs/create-unit/create-unit.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {CreateUnitTypeComponent} from './dialogs/create-unit-type/create-unit-type.component';
 import {MatIconModule} from "@angular/material/icon";
 import { SnapshotUrlComponent } from './dialogs/snapshot-url/snapshot-url.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatListModule} from "@angular/material/list";
 
 const routes: Routes = [
   {
@@ -55,7 +57,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatSelectModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTabsModule,
+    MatListModule,
+    FormsModule
   ]
 })
 export class AdminModule {

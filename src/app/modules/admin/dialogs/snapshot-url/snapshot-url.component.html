@@ -1,29 +1,68 @@
 <mat-toolbar color="accent">
   <span>Edit Snapshot URL</span>
 </mat-toolbar>
-<div class="content">
-  <form class="form-container" [formGroup]="urlForm">
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>RSTP Address</mat-label>
-      <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp"
-             [formControl]="urlControl" required>
-      <mat-error *ngIf="urlControl.invalid">{{getURLError()}}</mat-error>
-      <mat-hint>
-        HikVision - rtsp://admin:12345@192.168.1.210:554/Streaming/Channels/101<br><br>
-        AXIS - rtsp://192.168.1.210/axis-media/media.amp
-      </mat-hint>
-    </mat-form-field>
-    <span class="spacer"></span>
-    <div class="error-wrapper">
-      <mat-error *ngIf="error">{{error}}</mat-error>
-    </div>
+<div class="selection-list">
+  <app-loading-shade *ngIf="loadingCameras"></app-loading-shade>
+  <mat-selection-list class="camera-list" [multiple]="false">
+    <mat-list-option *ngFor="let camera of localCameras|async" [value]="camera.address" [selected]="selectedCameraAddress === camera.address" (click)="handleListClick(camera.address)">
+      {{camera.name}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
 
-    <app-spinner-button *ngIf="hasChanged" [disabled]="disableSubmit" [submitted]="submitted" (click)="submit()">
-      Save
-    </app-spinner-button>
+<div class="tab-group">
+  <mat-tab-group mat-align-tabs="center" class="tabs" (selectedTabChange)="modeChanged($event)">
+    <mat-tab label="Automatic" #automatic>
+      <div class="content">
+        <form class="form-container" [formGroup]="autoForm">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Username</mat-label>
+            <input matInput autocomplete="off" placeholder="admin" (change)="updateCameraAddress()"
+                   [formControl]="usernameControl" required>
+            <mat-error *ngIf="usernameControl.invalid">{{getUsernameError()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput autocomplete="off" placeholder="1234" (change)="updateCameraAddress()"
+                   [formControl]="passwordControl" required>
+            <mat-error *ngIf="passwordControl.invalid">{{getPasswordError()}}</mat-error>
+          </mat-form-field>
 
-    <button mat-stroked-button *ngIf="!hasChanged" (click)="submit()">
-      Close
-    </button>
-  </form>
+          <div class="error-wrapper">
+            <mat-error *ngIf="error">{{error}}</mat-error>
+          </div>
+        </form>
+
+        <pre class="url-preview">
+          {{generatedCameraURL}}
+        </pre>
+      </div>
+    </mat-tab>
+    <mat-tab label="Manual" #manual>
+      <div class="content">
+        <form class="form-container" [formGroup]="urlForm">
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>RSTP Address</mat-label>
+            <input matInput autocomplete="off" placeholder="rtsp://username:password@0.0.0.0/axis-media/media.amp"
+                   [formControl]="urlControl" required>
+            <mat-error *ngIf="urlControl.invalid">{{getURLError()}}</mat-error>
+            <mat-hint>
+              HikVision - rtsp://admin:12345@192.168.1.210:554/Streaming/Channels/101<br><br>
+              AXIS - rtsp://192.168.1.210/axis-media/media.amp
+            </mat-hint>
+          </mat-form-field>
+          <span class="spacer"></span>
+          <div class="error-wrapper">
+            <mat-error *ngIf="error">{{error}}</mat-error>
+          </div>
+        </form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div class="footer">
+  <app-spinner-button [disabled]="submitDisabled" [submitted]="submitted" (click)="submit()">
+    Done
+  </app-spinner-button>
 </div>

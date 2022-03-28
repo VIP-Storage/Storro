@@ -1,9 +1,13 @@
 <div class="snapshot-wrapper">
-  <img [src]="snapshotURL|async" alt="Snapshot">
-  <button class="download-button" color="accent" matTooltip="Save Snapshot" mat-mini-fab (click)="downloadImage()">
-    <mat-icon>camera</mat-icon>
-  </button>
-  <button class="settings-button"  color="primary" *ngIf="showSettings" matTooltip="Settings" mat-mini-fab (click)="goToSettings()">
-    <mat-icon>settings</mat-icon>
-  </button>
+  <app-loading-shade *ngIf="!imageLoaded"></app-loading-shade>
+  <img [src]="snapshotURL|async" (load)="didLoad()" [class.show]="imageLoaded" alt="Snapshot">
+
+  <div class="controls">
+    <button class="download-button" color="accent" matTooltip="Save Snapshot" mat-icon-button (click)="downloadImage()">
+      <mat-icon>camera</mat-icon>
+    </button>
+    <button class="settings-button"  color="primary" *ngIf="showSettings" matTooltip="Settings" mat-icon-button (click)="goToSettings()">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
 </div>

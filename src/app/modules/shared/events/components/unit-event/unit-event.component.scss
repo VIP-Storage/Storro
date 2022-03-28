@@ -1,0 +1,13 @@
+.event-snapshot img {
+  height: 80px;
+}
+
+:host {
+  display: block;
+}
+
+.event-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

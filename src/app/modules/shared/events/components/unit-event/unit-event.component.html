@@ -1,0 +1,10 @@
+<div class="event-wrapper">
+  <div class="event-type">
+    <span>Event at {{event.created | date}}</span>
+  </div>
+  <div class="event-snapshot">
+    <div class="loading-wrapper" *ngIf="snapshotURL|async as snapshotURL">
+      <img [src]="snapshotURL">
+    </div>
+  </div>
+</div>

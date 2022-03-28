@@ -7,8 +7,8 @@
 
 :host {
   display: flex;
-  min-width: 460px;
-  min-height: 380px;
+  min-width: 820px;
+  min-height: 265px;
   flex-direction: column;
 }
 
@@ -22,10 +22,6 @@
     flex: 1;
     margin-top: 1em;
     margin-bottom: 2em;
-  }
-
-  .mat-form-field {
-    margin-bottom: 1em;
   }
 }
 
@@ -55,4 +51,28 @@ mat-toolbar {
 
 .error-wrapper {
   height: 22px;
+}
+
+.tabs::ng-deep {
+  .mat-tab-labels div {
+    flex: 1;
+  }
+}
+
+.camera-list {
+  min-height: 180px;
+  margin-bottom: 1em;
+}
+
+.selection-list {
+  position: relative;
+}
+
+.tab-group {
+  min-height: 350px;
+  flex: 1;
+}
+
+.footer {
+  padding: 1.2em;
 }

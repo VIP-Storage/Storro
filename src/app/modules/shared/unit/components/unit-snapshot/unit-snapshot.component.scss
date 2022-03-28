@@ -17,17 +17,57 @@
     object-fit: cover;
     border-radius: 8px;
     flex: 1;
-  }
+    transition: opacity 350ms ease-in-out;
+    opacity: 0;
 
-  .download-button {
-    position: absolute;
-    bottom: 2em;
-    right: 2em;
+    &.show {
+      opacity: 1;
+    }
   }
+}
 
-  .settings-button {
-    position: absolute;
-    top: 2em;
-    right: 2em;
+.controls {
+  position: absolute;
+  right: 2em;
+  bottom: 2em;
+  border-radius: 18px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px); /* Firefox does not support this property: https://caniuse.com/#search=backdrop-filter */
+  -webkit-backdrop-filter: blur(10px);
+
+  button {
+    margin-right: 0.5em;
+    box-shadow: none;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.09);
+    background-color: rgba(0, 0, 0, 0.08);
+    height: 50px;
+    width: 50px;
+
+    transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+      border-color: rgba(0, 0, 0, 0.2);;
+      box-shadow: inherit;
+
+      mat-icon {
+        color: #FC3158
+      }
+    }
+
+    mat-icon {
+      color: white;
+      transition: color 150ms ease-in-out;
+    }
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
   }
 }

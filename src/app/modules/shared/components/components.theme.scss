@@ -5,6 +5,7 @@
 
 @use '../billing/components/billing.theme' as billing-components;
 @use '../unit/components/unit.theme' as unit-components;
+@use '../events/components/unit-events-card/unit-events-card.theme' as events-card-theme;
 @use '../access/components/access.theme' as access-components;
 @use './mini-profile/mini-profile.theme' as mini-profile;
 @use './circle-button/circle-button.theme' as circle-button;
@@ -33,6 +34,7 @@
   @include action-card.theme($theme, false);
   @include loading-shade.theme($theme, false);
   @include unit-map.theme($theme, false);
+  @include events-card-theme.theme($theme, false);
 }
 
 @mixin dark-components-theme($theme) {
@@ -52,4 +54,5 @@
   @include action-card.theme($theme, true);
   @include loading-shade.theme($theme, true);
   @include unit-map.theme($theme, true);
+  @include events-card-theme.theme($theme, true);
 }

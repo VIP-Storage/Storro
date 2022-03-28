@@ -1,0 +1,30 @@
+@use 'node_modules/@angular/material' as mat;
+
+:host {
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  padding: 2em 2.8em;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  align-self: stretch;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include mat.elevation-transition();
+
+  &.show-borders {
+    border-width: 2px;
+    border-style: solid;
+  }
+}
+
+.title {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.event-list {
+  flex: 1;
+}

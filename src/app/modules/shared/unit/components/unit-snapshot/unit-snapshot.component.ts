@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
 import {Unit} from "../../../../../data";
-import {UnitsService} from "../../../../../api/backend/services/units.service";
 import {BehaviorSubject, interval, Subject, take} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {takeUntil} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
 import {SnapshotUrlComponent} from "../../../../admin/dialogs/snapshot-url/snapshot-url.component";
+import {UnitSnapshotsService} from "../../../../../api/backend/services/unit-snapshots.service";
 
 @Component({
   selector: 'app-unit-snapshot',
@@ -22,6 +22,7 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  imageLoaded: boolean = false;
   snapshotURL = new BehaviorSubject<string>('');
 
   @Input()
@@ -33,7 +34,7 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
   private destroyed = new Subject<boolean>();
   private _unit?: Unit;
 
-  constructor(private unitsService: UnitsService,
+  constructor(private unitSnapshotsService: UnitSnapshotsService,
               private matDialog: MatDialog,
               private domSanitizer: DomSanitizer) {
   }
@@ -52,7 +53,7 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
 
   private updateSnapshot() {
     if (!!this._unit) {
-      this.unitsService.getUnitSnapshotURL(this._unit, this.domSanitizer).subscribe(url => {
+      this.unitSnapshotsService.getUnitSnapshotURL(this._unit, this.domSanitizer).subscribe(url => {
         this.snapshotURL.next(url);
       })
     }
@@ -65,7 +66,6 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
   goToSettings() {
     this.matDialog.open(SnapshotUrlComponent, {
       panelClass: SnapshotUrlComponent.panelClass,
-      disableClose: true,
       data: this._unit
     });
   }
@@ -73,11 +73,15 @@ export class UnitSnapshotComponent implements AfterViewInit, OnDestroy {
 
   downloadImage() {
     if (!!this._unit) {
-      return this.unitsService.saveSnapshot(this._unit.id).pipe(
+      return this.unitSnapshotsService.saveSnapshot(this._unit.id).pipe(
         take(1),
       ).subscribe();
     }
 
     return null;
+  }
+
+  didLoad() {
+    this.imageLoaded = true;
   }
 }

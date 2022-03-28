@@ -37,6 +37,7 @@ import {HighlightGlobalSearchPipe, RolePipe} from "./pipes";
 import {DateInputDirective} from './directives/date-input.directive';
 import {AlertWrapperComponent} from "./components/alert-wrapper/alert-wrapper.component";
 import {MtxAlertModule} from "@ng-matero/extensions/alert";
+import {EventsModule} from "./events/events.module";
 
 
 @NgModule({
@@ -103,6 +104,7 @@ import {MtxAlertModule} from "@ng-matero/extensions/alert";
     MatInputModule,
     MatCardModule,
     MtxAlertModule,
+    EventsModule
   ],
   providers: [
     HttpClient

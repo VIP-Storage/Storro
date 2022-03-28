@@ -22,6 +22,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {AdminComponentsModule} from "../admin-components/admin-components.module";
 import {LayoutModule} from "../../layout/layout.module";
 import {MatRippleModule} from "@angular/material/core";
+import {EventsModule} from "../../shared/events/events.module";
 
 const routes: Routes = [
   {
@@ -55,28 +56,29 @@ const routes: Routes = [
   declarations: [
     AdminUnitComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatGridListModule,
-    MatTooltipModule,
-    SharedModule,
-    UnitModule,
-    AccessModule,
-    MatListModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatToolbarModule,
-    AdminComponentsModule,
-    LayoutModule,
-    MatRippleModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatGridListModule,
+        MatTooltipModule,
+        SharedModule,
+        UnitModule,
+        AccessModule,
+        MatListModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatToolbarModule,
+        AdminComponentsModule,
+        LayoutModule,
+        MatRippleModule,
+        EventsModule
+    ]
 })
 export class AdminUnitModule {
 }

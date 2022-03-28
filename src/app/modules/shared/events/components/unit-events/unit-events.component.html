@@ -1,0 +1,16 @@
+<mat-select [(ngModel)]="mode">
+  <mat-option [value]="'door'">
+    Door
+  </mat-option>
+  <mat-option [value]="'motion'">
+    Motion
+  </mat-option>
+</mat-select>
+
+<div class="motion-events" *ngIf="showMotionEvents">
+  <app-unit-event *ngFor="let event of motionEvents|async" [event]="event"></app-unit-event>
+</div>
+
+<div class="door-events" *ngIf="showDoorEvents">
+  <app-unit-event *ngFor="let event of doorEvents|async" [event]="event"></app-unit-event>
+</div>
